@@ -16,7 +16,7 @@ namespace xIMU_GUI
     /// 3D cuboid class.
     /// </summary>
     /// <remarks>
-    /// Requires Tao Framework 2.1.0 to be installed.
+    /// Requires Tao Framework 2.1.0 resources: Tao.OpenGl.dll and Tao.Platform.WIndows.dll.
     /// </remarks>
     class Cuboid3D
     {

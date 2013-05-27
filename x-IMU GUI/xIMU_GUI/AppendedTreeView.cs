@@ -116,7 +116,7 @@ namespace xIMU_GUI
         /// <summary>
         /// Removes appended control from selected tree node.
         /// </summary>
-        void RemoveAppendedControlFromSelectedNode()
+        private void RemoveAppendedControlFromSelectedNode()
         {
             if (this.SelectedNode is AppendedTreeNode)
             {
@@ -139,7 +139,7 @@ namespace xIMU_GUI
         /// <param name="e">
         /// A EventArgs that contains the event data.
         /// </param> 
-        void AppendedComboBox_DropDownClosed(object sender, EventArgs e)
+        private void AppendedComboBox_DropDownClosed(object sender, EventArgs e)
         {
             RemoveAppendedControl((Control)sender);
         }
@@ -150,7 +150,7 @@ namespace xIMU_GUI
         /// <param name="e">
         /// A EventArgs that contains the event data.
         /// </param> 
-        void AppendedTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void AppendedTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '\r') RemoveAppendedControl((Control)sender);
         }
@@ -161,7 +161,7 @@ namespace xIMU_GUI
         /// <param name="e">
         /// A EventArgs that contains the event data.
         /// </param> 
-        void AppendedControl_Leave(object sender, EventArgs e)
+        private void AppendedControl_Leave(object sender, EventArgs e)
         {
             RemoveAppendedControl((Control)sender);
         }
@@ -172,7 +172,7 @@ namespace xIMU_GUI
         /// <param name="appendedControl">
         /// Appended control to be removed.
         /// </param>
-        void RemoveAppendedControl(Control appendedControl)
+        private void RemoveAppendedControl(Control appendedControl)
         {
             if (appendedControl is ComboBox)
             {

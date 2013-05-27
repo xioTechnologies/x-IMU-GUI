@@ -1392,18 +1392,23 @@
         private System.Windows.Forms.Label label_phi;
         private System.Windows.Forms.Label label_eulerLegend;
         private System.Windows.Forms.Button button_showEulerAngleGraph;
-        private System.Windows.Forms.GroupBox groupBox_sensorCalibration;
         private System.Windows.Forms.TabPage tabPage_commands;
+        private System.Windows.Forms.GroupBox groupBox_general;
+        private System.Windows.Forms.Button button_resetDevice;
+        private System.Windows.Forms.Button button_sleep;
+        private System.Windows.Forms.Button button_resetSleepTimer;
+        private System.Windows.Forms.GroupBox groupBox_sensorCalibration;
         private System.Windows.Forms.Button button_sampleGyroBiasAtT1;
         private System.Windows.Forms.Button button_sampleGyroBiasAtT2;
         private System.Windows.Forms.Button button_calcGyroBiasParams;
-        private System.Windows.Forms.Button button_measMagParameters;
         private System.Windows.Forms.Button button_lookupAccelBiasAndSens;
-        private System.Windows.Forms.GroupBox groupBox_general;
-        private System.Windows.Forms.Button button_resetDevice;
+        private System.Windows.Forms.Button button_measMagParameters;
         private System.Windows.Forms.GroupBox groupBox_algorithm;
-        private System.Windows.Forms.Button button_tare;
         private System.Windows.Forms.Button button_resetAlgorithm;
+        private System.Windows.Forms.Button button_tare;
+        private System.Windows.Forms.Button button_clearTare;
+        private System.Windows.Forms.GroupBox groupBox_receivedCommandMessages;
+        private System.Windows.Forms.CheckBox checkBox_displayReceivedCommandMessages;
         private System.Windows.Forms.TabPage tabPage_hardIronCalibration;
         private System.Windows.Forms.GroupBox groupBox_hardIronCalibrationAlgorithm;
         private System.Windows.Forms.Button button_hardIronCalBrowse;
@@ -1414,10 +1419,6 @@
         private System.Windows.Forms.TextBox textBox_packetsSent;
         private System.Windows.Forms.TextBox textBox_packetsReceived;
         private System.Windows.Forms.Label label_packetsReceived;
-        private System.Windows.Forms.Button button_sleep;
-        private System.Windows.Forms.Button button_clearTare;
-        private System.Windows.Forms.GroupBox groupBox_receivedCommandMessages;
-        private System.Windows.Forms.CheckBox checkBox_displayReceivedCommandMessages;
         private System.Windows.Forms.TabPage tabPage_dateTime;
         private System.Windows.Forms.GroupBox groupBox_dateTime;
         private System.Windows.Forms.TextBox textBox_receivedDataTime;
@@ -1843,6 +1844,5 @@
         private System.Windows.Forms.TreeNode treeNode_auxiliaryPort;
 
         #endregion
-        private System.Windows.Forms.Button button_resetSleepTimer;
     }
 }

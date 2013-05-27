@@ -149,7 +149,7 @@ namespace xIMU_GUI
         /// <summary>
         /// Timer tick event to update form controls.
         /// </summary>
-        void timer_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
             #region Indicate direction
 
@@ -181,7 +181,7 @@ namespace xIMU_GUI
         /// <summary>
         /// Form closing event to minimise form instead of close.
         /// </summary>
-        void form_FormClosing(object sender, FormClosingEventArgs e)
+        private void form_FormClosing(object sender, FormClosingEventArgs e)
         {
             form.WindowState = FormWindowState.Minimized;
             e.Cancel = true;
@@ -194,7 +194,7 @@ namespace xIMU_GUI
         /// <summary>
         /// Check box state changed event to update property parse data to parent.
         /// </summary>
-        void checkBox_CheckStateChanged(object sender, EventArgs e)
+        private void checkBox_CheckStateChanged(object sender, EventArgs e)
         {
             if (((CheckBox)sender).Enabled == true)
             {
