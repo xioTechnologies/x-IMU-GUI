@@ -241,7 +241,7 @@ namespace x_IMU_GUI
                     }
                     catch
                     {
-                        PassiveMessageBox.Show("Invalid register address (0x" + string.Format("{0:X4}", registerDataBuffer[i].Address) + ") and/or value (0x" + string.Format("{0:X4}", registerDataBuffer[i].Value) + ")", "Error", MessageBoxIcon.Error);
+                        PassiveMessageBox.Show("Register data received for address \"" + registerDataBuffer[i].Address.ToString() + "\" is invalid.", "Error", MessageBoxIcon.Error);
                     }
                     registerDataBuffer[i] = null;
                 }
@@ -583,11 +583,18 @@ namespace x_IMU_GUI
         /// </summary>
         private void xIMUserial_RegisterDataReceived(object sender, x_IMU_API.RegisterData e)
         {
-            registerDataBuffer[(int)e.Address] = e;
-            if ((e.Address == x_IMU_API.RegisterAddresses.FirmwareVersionMajorNum) && (!Enum.IsDefined(typeof(x_IMU_API.CompatibleFirmwareVersions), (int)e.Value)))
+            if (!Enum.IsDefined(typeof(x_IMU_API.RegisterAddresses), (int)e.Address))
             {
-                PassiveMessageBox.Show("The detected x-IMU firmware version is not fully compatible with this version of the x-IMU GUI and API." + Environment.NewLine + Environment.NewLine +
-                                       "Please download and install the latest x-IMU software and firmware available from www.x-io.co.uk.", "Warning", MessageBoxIcon.Warning);
+                PassiveMessageBox.Show("Register data received with unknown address 0x" + string.Format("{0:X4}", (ushort)e.Address) + ".", "Error", MessageBoxIcon.Error);
+            }
+            else
+            {
+                registerDataBuffer[(int)e.Address] = e;
+                if ((e.Address == x_IMU_API.RegisterAddresses.FirmwareVersionMajorNum) && (!Enum.IsDefined(typeof(x_IMU_API.CompatibleFirmwareVersions), (int)e.Value)))
+                {
+                    PassiveMessageBox.Show("The detected x-IMU firmware version is not fully compatible with this version of the x-IMU GUI and API." + Environment.NewLine + Environment.NewLine +
+                                           "Please download and install the latest x-IMU software and firmware available from www.x-io.co.uk.", "Warning", MessageBoxIcon.Warning);
+                }
             }
         }
 
@@ -1125,7 +1132,7 @@ namespace x_IMU_GUI
         /// </summary>
         private void textBox_collectHardIronCalDatasetFilePath_TextChanged(object sender, EventArgs e)
         {
-            textBox_hardIronCalFilePath.Text = textBox_collectHardIronCalDatasetFilePath.Text + "_CalInertialMagnetic.csv";
+            textBox_hardIronCalFilePath.Text = textBox_collectHardIronCalDatasetFilePath.Text + "_CalInertialAndMag.csv";
         }
 
         /// <summary>
@@ -1190,7 +1197,7 @@ namespace x_IMU_GUI
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Select File";
-            openFileDialog.Filter = "x-IMU Calibrated Inertial/Magnetic CSV Files|*_CalInertialMagnetic.csv";
+            openFileDialog.Filter = "x-IMU CSV File|*_CalInertialAndMagnetic.csv";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 textBox_hardIronCalFilePath.Text = openFileDialog.FileName.ToString();
@@ -1317,9 +1324,8 @@ namespace x_IMU_GUI
             bool reopenPort = false;
             if (xIMUserial.IsOpen)
             {
-                ClosePort();
+                xIMUserial.Close();
                 reopenPort = true;
-
             }
 
             // Perform firmware upload procedure
@@ -1353,7 +1359,7 @@ namespace x_IMU_GUI
             // Re-open port if was closed prior to bootload
             if (reopenPort)
             {
-                OpenPort();
+                xIMUserial.Open();
             }
         }
 

@@ -1993,7 +1993,7 @@
             registerTreeNodeComboBox_algorithmMode.ComboBox.Items.Add("IMU");
             registerTreeNodeComboBox_algorithmMode.ComboBox.Items.Add("AHRS");
             registerTreeNodeTextBox_algorithmGainKp = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmKp, "Kp:");
-            registerTreeNodeTextBox_algorithmGainKi = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmKi, "Ki (1/1000):");
+            registerTreeNodeTextBox_algorithmGainKi = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmKi, "Ki (1/1024):");
             System.Windows.Forms.TreeNode treeNode_algorithmGains = new System.Windows.Forms.TreeNode("Algorithm Gains", new System.Windows.Forms.TreeNode[] {
             registerTreeNodeTextBox_algorithmGainKp,
             registerTreeNodeTextBox_algorithmGainKi});
@@ -2044,6 +2044,7 @@
             registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.Items.Add("64 Hz");
             registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.Items.Add("128 Hz");
             registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.Items.Add("256 Hz");
+            registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.Items.Add("512 Hz");
             registerTreeNodeComboBox_batteryAndThermometerDataRate = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.BatteryAndThermometerDataRate, "Battery And Thermometer Data Rate:");
             registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Width = 80;
@@ -2057,6 +2058,7 @@
             registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Items.Add("64 Hz");
             registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Items.Add("128 Hz");
             registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Items.Add("256 Hz");
+            registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Items.Add("512 Hz");
             registerTreeNodeComboBox_inertialAndMagneticDataRate = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.InertialAndMagneticDataRate, "Inertial And Magnetic Data Rate:");
             registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Width = 80;
@@ -2070,6 +2072,7 @@
             registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Items.Add("64 Hz");
             registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Items.Add("128 Hz");
             registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Items.Add("256 Hz");
+            registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Items.Add("512 Hz");
             registerTreeNodeComboBox_quaternionDataRate = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.QuaternionDataRate, "Quaternion Data Rate:");
             registerTreeNodeComboBox_quaternionDataRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             registerTreeNodeComboBox_quaternionDataRate.ComboBox.Width = 80;
@@ -2083,6 +2086,7 @@
             registerTreeNodeComboBox_quaternionDataRate.ComboBox.Items.Add("64 Hz");
             registerTreeNodeComboBox_quaternionDataRate.ComboBox.Items.Add("128 Hz");
             registerTreeNodeComboBox_quaternionDataRate.ComboBox.Items.Add("256 Hz");
+            registerTreeNodeComboBox_quaternionDataRate.ComboBox.Items.Add("512 Hz");
             treeNode_dataOutputRate = new System.Windows.Forms.TreeNode("Data Output Settings", new System.Windows.Forms.TreeNode[] {
             registerTreeNodeComboBox_sensorDataMode,
             registerTreeNodeComboBox_dateTimeDateTimeDataRate,
@@ -2133,6 +2137,7 @@
             registerTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("Analogue input");
             registerTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("PWM output");
             registerTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("ADXL345 bus");
+            registerTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("UART");
 
             #region Digital I/O
 
@@ -2140,13 +2145,13 @@
             registerTreeNodeComboBox_digitalIOdirection.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             registerTreeNodeComboBox_digitalIOdirection.ComboBox.Width = 210;
             registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3,4,5,6,7");
-            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3,4,5,6, Ouput = AX7");
-            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3,4,5, Ouput = AX6,7");
-            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3,4, Ouput = AX5,6,7");
-            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3, Ouput = AX4,5,6,7");
-            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2, Ouput = AX3,4,5,6,7");
-            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1, Ouput = AX2,3,4,5,6,7");
-            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0, Ouput = AX1,2,3,4,5,6,7");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3,4,5,6, Ouputs = AX7");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3,4,5, Ouputs = AX6,7");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3,4, Ouputs = AX5,6,7");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3, Ouputs = AX4,5,6,7");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2, Ouputs = AX3,4,5,6,7");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1, Ouputs = AX2,3,4,5,6,7");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0, Ouputs = AX1,2,3,4,5,6,7");
             registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Outputs = AX0,1,2,3,4,5,6,7");
             registerTreeNodeComboBox_digitalIOdataRate = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.DigitalIOdataRate, "Data Rate:");
             registerTreeNodeComboBox_digitalIOdataRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -2161,6 +2166,7 @@
             registerTreeNodeComboBox_digitalIOdataRate.ComboBox.Items.Add("64 Hz");
             registerTreeNodeComboBox_digitalIOdataRate.ComboBox.Items.Add("128 Hz");
             registerTreeNodeComboBox_digitalIOdataRate.ComboBox.Items.Add("256 Hz");
+            registerTreeNodeComboBox_digitalIOdataRate.ComboBox.Items.Add("512 Hz");
             treeNode_digitalIO = new System.Windows.Forms.TreeNode("Digital I/O", new RegisterTreeNode[] {
             registerTreeNodeComboBox_digitalIOdirection,
             registerTreeNodeComboBox_digitalIOdataRate});
@@ -2184,6 +2190,7 @@
             registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("64 Hz");
             registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("128 Hz");
             registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("256 Hz");
+            registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("512 Hz");
             registerTreeNodeComboBox_analogueInputDataRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Width = 80;
             registerTreeNodeTextBox_analogueInputSensitivity = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AnalogueInputSensitivity, "Sensitivity:");
@@ -2225,6 +2232,7 @@
             registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("64 Hz");
             registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("128 Hz");
             registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("256 Hz");
+            registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("512 Hz");
 
             #region ADXL345 A
 
@@ -2326,12 +2334,41 @@
 
             #endregion
 
+            #region UART
+
+            registerTreeNodeComboBox_UARTbaudRate = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.UARTbaudRate, "Baud Rate:");
+            registerTreeNodeComboBox_UARTbaudRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Width = 75;
+            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("2400");
+            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("4800");
+            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("7200");
+            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("9600");
+            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("14400");
+            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("19200");
+            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("38400");
+            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("57600");
+            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("115200");
+            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("23400");
+            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("460800");
+            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("921600");
+            registerTreeNodeComboBox_UARThardwareFlowControl = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.UARThardwareFlowControl, "Hardware Flow Control:");
+            registerTreeNodeComboBox_UARThardwareFlowControl.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_UARThardwareFlowControl.ComboBox.Width = 50;
+            registerTreeNodeComboBox_UARThardwareFlowControl.ComboBox.Items.Add("Off");
+            registerTreeNodeComboBox_UARThardwareFlowControl.ComboBox.Items.Add("On");
+            treeNode_UART = new System.Windows.Forms.TreeNode("UART", new RegisterTreeNode[] {
+            registerTreeNodeComboBox_UARTbaudRate,
+            registerTreeNodeComboBox_UARThardwareFlowControl});
+
+            #endregion
+
             treeNode_auxiliaryPort = new System.Windows.Forms.TreeNode("Auxiliary Port", new System.Windows.Forms.TreeNode[] {
             registerTreeNodeComboBox_auxiliaryPortMode,
             treeNode_digitalIO,
             treeNode_analogueInput,
             treeNode_PWMoutput,
-            treeNode_ADXL345});
+            treeNode_ADXL345,
+            treeNode_UART});
 
             #endregion
 
@@ -2706,6 +2743,14 @@
         private System.Windows.Forms.TreeNode treeNode_ADXL345D;
         private System.Windows.Forms.TreeNode treeNode_ADXL345busCalibrationParameters;
         private System.Windows.Forms.TreeNode treeNode_ADXL345;
+
+        #endregion
+
+        #region UART
+
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_UARTbaudRate;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_UARThardwareFlowControl;
+        private System.Windows.Forms.TreeNode treeNode_UART;
 
         #endregion
 
