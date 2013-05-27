@@ -275,15 +275,23 @@ namespace xIMU_GUI
             {
                 try
                 {
-                    xIMUserial.PortName = comboBox_portName.Text;
-                    xIMUserial.Open();
                     comboBox_portName.Enabled = false;
                     button_refreshList.Enabled = false;
+                    button_openPort.Enabled = false;
+                    button_openPort.Text = "Opening...";
+                    this.Update();
+                    xIMUserial.PortName = comboBox_portName.Text;
+                    xIMUserial.Open();
                     button_openPort.Text = "Close Port";
+                    button_openPort.Enabled = true;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Error");
+                    button_openPort.Text = "Open Port";
+                    comboBox_portName.Enabled = true;
+                    button_refreshList.Enabled = true;
+                    button_openPort.Enabled = true;
                 }
             }
             else if (button_openPort.Text == "Close Port")
@@ -969,7 +977,7 @@ namespace xIMU_GUI
         /// </summary>
         private void button_resetDevice_Click(object sender, EventArgs e)
         {
-            SendCommandPacket(xIMU_API.CommandCodes.Reset);
+            SendCommandPacket(xIMU_API.CommandCodes.ResetDevice);
         }
 
         /// <summary>
@@ -978,6 +986,14 @@ namespace xIMU_GUI
         private void button_sleep_Click(object sender, EventArgs e)
         {
             SendCommandPacket(xIMU_API.CommandCodes.Sleep);
+        }
+
+        /// <summary>
+        /// Sends command packet to reset sleep timer.
+        /// </summary>
+        private void button_resetSleepTimer_Click(object sender, EventArgs e)
+        {
+            SendCommandPacket(xIMU_API.CommandCodes.ResetSleepTimer);
         }
 
         /// <summary>
@@ -2024,7 +2040,7 @@ namespace xIMU_GUI
 
                 xIMU_API.xIMUserial tempxIMUserial = new xIMU_API.xIMUserial(comboBox_portName.Text);
                 tempxIMUserial.Open();
-                tempxIMUserial.SendCommandPacket(xIMU_API.CommandCodes.Reset);
+                tempxIMUserial.SendCommandPacket(xIMU_API.CommandCodes.ResetDevice);
                 tempxIMUserial.Close();
 
                 #endregion

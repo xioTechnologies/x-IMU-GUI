@@ -133,6 +133,7 @@
             this.label_compatibleFirmwareVersions = new System.Windows.Forms.Label();
             this.label_APIversion = new System.Windows.Forms.Label();
             this.label_GUIversion = new System.Windows.Forms.Label();
+            this.button_resetSleepTimer = new System.Windows.Forms.Button();
             this.tabControl_main.SuspendLayout();
             this.tabPage_serialPort.SuspendLayout();
             this.groupBox_packetCounts.SuspendLayout();
@@ -536,6 +537,7 @@
             // 
             // groupBox_general
             // 
+            this.groupBox_general.Controls.Add(this.button_resetSleepTimer);
             this.groupBox_general.Controls.Add(this.button_sleep);
             this.groupBox_general.Controls.Add(this.button_resetDevice);
             this.groupBox_general.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1289,6 +1291,16 @@
             this.label_GUIversion.TabIndex = 23;
             this.label_GUIversion.Text = "GUI version:";
             // 
+            // button_resetSleepTimer
+            // 
+            this.button_resetSleepTimer.Location = new System.Drawing.Point(316, 20);
+            this.button_resetSleepTimer.Name = "button_resetSleepTimer";
+            this.button_resetSleepTimer.Size = new System.Drawing.Size(147, 23);
+            this.button_resetSleepTimer.TabIndex = 2;
+            this.button_resetSleepTimer.Text = "Reset Sleep Timer";
+            this.button_resetSleepTimer.UseVisualStyleBackColor = true;
+            this.button_resetSleepTimer.Click += new System.EventHandler(this.button_resetSleepTimer_Click);
+            // 
             // Form_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1463,6 +1475,7 @@
             appendedTextBoxTreeNode_DeviceID.TextBox.ReadOnly = true;
             appendedComboBoxTreeNode_buttonMode = new AppendedTreeNodeComboBox("Button Mode:");
             appendedComboBoxTreeNode_buttonMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            appendedComboBoxTreeNode_buttonMode.ComboBox.Items.Add("Disabled");
             appendedComboBoxTreeNode_buttonMode.ComboBox.Items.Add("Reset device");
             appendedComboBoxTreeNode_buttonMode.ComboBox.Items.Add("Sleep/wake");
             appendedComboBoxTreeNode_buttonMode.ComboBox.Items.Add("Reset algorithm");
@@ -1830,5 +1843,6 @@
         private System.Windows.Forms.TreeNode treeNode_auxiliaryPort;
 
         #endregion
+        private System.Windows.Forms.Button button_resetSleepTimer;
     }
 }
