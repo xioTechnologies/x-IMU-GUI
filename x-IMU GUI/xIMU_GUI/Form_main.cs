@@ -127,8 +127,8 @@ namespace xIMU_GUI
             // Create x-IMU serial object
             xIMUserial = new xIMU_API.xIMUserial();
             xIMUserial.xIMUdataReceived += new xIMU_API.xIMUserial.onxIMUdataReceived(xIMUserial_xIMUdataReceived);
-            xIMUserial.ErrorMessageReceived += new xIMU_API.xIMUserial.onErrorMessageReceived(xIMUserial_ErrorMessageReceived);
-            xIMUserial.CommandMessageReceived += new xIMU_API.xIMUserial.onCommandMessageReceived(xIMUserial_CommandMessageReceived);
+            xIMUserial.ErrorDataReceived += new xIMU_API.xIMUserial.onErrorDataReceived(xIMUserial_ErrorDataReceived);
+            xIMUserial.CommandDataReceived += new xIMU_API.xIMUserial.onCommandDataReceived(xIMUserial_CommandDataReceived);
             xIMUserial.RegisterDataReceived += new xIMU_API.xIMUserial.onRegisterDataReceived(xIMUserial_RegisterDataReceived);
             xIMUserial.DateTimeDataReceived += new xIMU_API.xIMUserial.onDateTimeDataReceived(xIMUserial_DateTimeDataReceived);
             xIMUserial.RawBattThermDataReceived += new xIMU_API.xIMUserial.onRawBattThermDataReceived(xIMUserial_RawBattThermDataReceived);
@@ -201,16 +201,16 @@ namespace xIMU_GUI
             bool needToRefresh = false;
             for (int i = 0; i < (int)xIMU_API.RegisterAddresses.NumRegisters; i++)
             {
-                if (treeViewRegisterDataBuffer[i] != null)                                // non-null data class indicates new data
+                if (treeViewRegisterDataBuffer[i] != null)                              // non-null data class indicates new data
                 {
                     RegisterDataToTreeNode(treeViewRegisterDataBuffer[i]);
-                    treeViewRegisterDataBuffer[i] = null;                                 // flag data class as up-to-date
+                    treeViewRegisterDataBuffer[i] = null;                               // flag data class as up-to-date
                     needToRefresh = true;
                 }
             }
             if (needToRefresh)
             {
-                appendedTreeView_registers.Refresh();                               // refresh only once per timer tick
+                appendedTreeView_registers.Refresh();                                   // refresh only once per timer tick
             }
 
             // Update received date/time text box
@@ -335,8 +335,8 @@ namespace xIMU_GUI
 
             // Create port scanner
             xIMU_API.PortScanner portScanner = new xIMU_API.PortScanner();
-            portScanner.ProgressChanged += new xIMU_API.PortScanner.onProgressChanged(portScanner_ProgressChanged);
-            portScanner.Completed += new xIMU_API.PortScanner.onCompleted(portScanner_Completed);
+            portScanner.AsyncScanProgressChanged += new xIMU_API.PortScanner.onAsyncScanProgressChanged(portScanner_AsyncScanProgressChanged);
+            portScanner.AsyncScanCompleted += new xIMU_API.PortScanner.onAsyncScanCompleted(portScanner_AsyncScanCompleted);
             portScanner.DontGiveUp = true;
             portScanner.FirstResultOnly = true;
             portScanner.RunAsynsScan();
@@ -345,7 +345,7 @@ namespace xIMU_GUI
         /// <summary>
         /// Port scanner progress change event to update progress dialog and poll user cancel.
         /// </summary>
-        private void portScanner_ProgressChanged(object sender, xIMU_API.ScanProgressChangedEventArgs e)
+        private void portScanner_AsyncScanProgressChanged(object sender, xIMU_API.AsyncScanProgressChangedEventArgs e)
         {
             this.EndInvoke(this.BeginInvoke(new MethodInvoker(delegate
             {
@@ -363,7 +363,7 @@ namespace xIMU_GUI
         /// <summary>
         /// PortScanner complete event to set form control states and open serial port if successful.
         /// </summary>
-        private void portScanner_Completed(object sender, xIMU_API.RunScanCompletedEventArgs e)
+        private void portScanner_AsyncScanCompleted(object sender, xIMU_API.AsyncScanCompletedEventArgs e)
         {
             try
             {
@@ -396,7 +396,7 @@ namespace xIMU_GUI
         /// <summary>
         /// Error message received event to display error message in message box.
         /// </summary>
-        private void xIMUserial_ErrorMessageReceived(object sender, xIMU_API.ErrorData e)
+        private void xIMUserial_ErrorDataReceived(object sender, xIMU_API.ErrorData e)
         {
             PassiveMessageBox.Show("Error: " + e.GetMessage(), "Message From x-IMU", MessageBoxIcon.Error);
         }
@@ -1175,7 +1175,7 @@ namespace xIMU_GUI
         /// <summary>
         /// Command message received event to display message in message box.
         /// </summary>
-        private void xIMUserial_CommandMessageReceived(object sender, xIMU_API.CommandData e)
+        private void xIMUserial_CommandDataReceived(object sender, xIMU_API.CommandData e)
         {
             if (checkBox_displayCommandConfirmations.Checked)
             {
@@ -1313,7 +1313,7 @@ namespace xIMU_GUI
         #region Sensor data received events
 
         /// <summary>
-        /// Raw battery and thermometer data received event to write data to graph and file.
+        /// Raw battery and thermometer data received event to update oscilloscope.
         /// </summary>
         private void xIMUserial_RawBattThermDataReceived(object sender, xIMU_API.RawBattThermData e)
         {
@@ -1322,7 +1322,7 @@ namespace xIMU_GUI
         }
 
         /// <summary>
-        /// Calibrated battery and thermometer data received event to write data to graph and file.
+        /// Calibrated battery and thermometer data received event to update oscilloscope..
         /// </summary>
         private void xIMUserial_CalBattThermDataReceived(object sender, xIMU_API.CalBattThermData e)
         {
@@ -1331,7 +1331,7 @@ namespace xIMU_GUI
         }
 
         /// <summary>
-        /// Raw inertial and magnetic data received event to write data to graph and file.
+        /// Raw inertial and magnetic data received event to update oscilloscope.
         /// </summary>
         private void xIMUserial_RawInertialMagDataReceived(object sender, xIMU_API.RawInertialMagData e)
         {
@@ -1341,25 +1341,17 @@ namespace xIMU_GUI
         }
 
         /// <summary>
-        /// Calibrated inertial and magnetic data received event to write data to graph and files.
+        /// Calibrated inertial and magnetic data received event to update oscilloscope.
         /// </summary>
         private void xIMUserial_CalInertialMagDataReceived(object sender, xIMU_API.CalInertialMagData e)
         {
             gyroOscilloscope.AddScopeData(e.Gyroscope[0], e.Gyroscope[1], e.Gyroscope[2]);
             accelOscilloscope.AddScopeData(e.Accelerometer[0], e.Accelerometer[1], e.Accelerometer[2]);
             magOscilloscope.AddScopeData(e.Magnetometer[0], e.Magnetometer[1], e.Magnetometer[2]);
-            if (hardIronCalDataFiles != null)
-            {
-                try
-                {
-                    hardIronCalDataFiles.WriteCalInertialMagData(e);
-                }
-                catch { }
-            }
         }
 
         /// <summary>
-        /// Quaternion data received event to write data to graph and file.
+        /// Quaternion data received event to update oscilloscope and 3D graphics.
         /// </summary>
         private void xIMUserial_QuaternionDataReceived(object sender, xIMU_API.QuaternionData e)
         {
@@ -1396,7 +1388,7 @@ namespace xIMU_GUI
         /// <summary>
         /// Digital I/O panel state changed event to send digital I/O packet to x-IMU. Exceptions shown message box.
         /// </summary>
-        private void digitalIOpanel_StateChanged(object sender, xIMU_API.DigitalIOdata.PortData e)
+        private void digitalIOpanel_StateChanged(object sender, xIMU_API.DigitalPortBits e)
         {
             try
             {
@@ -1482,6 +1474,14 @@ namespace xIMU_GUI
                 try
                 {
                     dataLoggerFiles.WriteData(e);
+                }
+                catch { }
+            }
+            if ((hardIronCalDataFiles != null) && (e is xIMU_API.CalInertialMagData))
+            {
+                try
+                {
+                    hardIronCalDataFiles.WriteCalInertialMagData((xIMU_API.CalInertialMagData)e);
                 }
                 catch { }
             }
@@ -1775,7 +1775,7 @@ namespace xIMU_GUI
             try
             {
                 // Run hard-iron calibration bootloader process
-                string resultPath = Path.GetDirectoryName(textBox_hardIronCalFilePath.Text) + "\\" + "HardIronCal_result.csv";
+                string resultPath = Path.GetDirectoryName(textBox_hardIronCalFilePath.Text) + "\\" + "HardIronCal_Result.csv";
                 ProcessStartInfo processInfo = new ProcessStartInfo("HardIronCal\\HardIronCal.exe");
                 processInfo.Arguments = " -src " + "\"" + textBox_hardIronCalFilePath.Text + "\"" +
                                         " -des " + "\"" + resultPath + "\"" +

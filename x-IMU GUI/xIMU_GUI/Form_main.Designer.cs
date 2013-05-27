@@ -44,6 +44,7 @@
             this.groupBox_OpenClosePort = new System.Windows.Forms.GroupBox();
             this.button_refreshList = new System.Windows.Forms.Button();
             this.tabPage_registers = new System.Windows.Forms.TabPage();
+            this.appendedTreeView_registers = new xIMU_GUI.AppendedTreeView();
             this.tabPage_dateTime = new System.Windows.Forms.TabPage();
             this.groupBox_dateTime = new System.Windows.Forms.GroupBox();
             this.button_setDateTime = new System.Windows.Forms.Button();
@@ -133,7 +134,6 @@
             this.label_compatibleFirmwareVersions = new System.Windows.Forms.Label();
             this.label_APIversion = new System.Windows.Forms.Label();
             this.label_GUIversion = new System.Windows.Forms.Label();
-            this.appendedTreeView_registers = new xIMU_GUI.AppendedTreeView();
             this.tabControl_main.SuspendLayout();
             this.tabPage_serialPort.SuspendLayout();
             this.groupBox_packetCounts.SuspendLayout();
@@ -307,10 +307,20 @@
             this.tabPage_registers.Location = new System.Drawing.Point(4, 22);
             this.tabPage_registers.Name = "tabPage_registers";
             this.tabPage_registers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_registers.Size = new System.Drawing.Size(870, 479);
+            this.tabPage_registers.Size = new System.Drawing.Size(870, 454);
             this.tabPage_registers.TabIndex = 6;
             this.tabPage_registers.Text = "Registers";
             this.tabPage_registers.UseVisualStyleBackColor = true;
+            // 
+            // appendedTreeView_registers
+            // 
+            this.appendedTreeView_registers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.appendedTreeView_registers.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.appendedTreeView_registers.Location = new System.Drawing.Point(3, 3);
+            this.appendedTreeView_registers.Name = "appendedTreeView_registers";
+            this.appendedTreeView_registers.Size = new System.Drawing.Size(864, 473);
+            this.appendedTreeView_registers.TabIndex = 0;
+            this.appendedTreeView_registers.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.appendedTreeView_registers_NodeMouseClick);
             // 
             // tabPage_dateTime
             // 
@@ -318,7 +328,7 @@
             this.tabPage_dateTime.Location = new System.Drawing.Point(4, 22);
             this.tabPage_dateTime.Name = "tabPage_dateTime";
             this.tabPage_dateTime.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_dateTime.Size = new System.Drawing.Size(870, 479);
+            this.tabPage_dateTime.Size = new System.Drawing.Size(870, 454);
             this.tabPage_dateTime.TabIndex = 11;
             this.tabPage_dateTime.Text = "Date/Time";
             this.tabPage_dateTime.UseVisualStyleBackColor = true;
@@ -388,7 +398,7 @@
             this.tabPage_commands.Location = new System.Drawing.Point(4, 22);
             this.tabPage_commands.Name = "tabPage_commands";
             this.tabPage_commands.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_commands.Size = new System.Drawing.Size(870, 479);
+            this.tabPage_commands.Size = new System.Drawing.Size(870, 454);
             this.tabPage_commands.TabIndex = 9;
             this.tabPage_commands.Text = "Commands";
             this.tabPage_commands.UseVisualStyleBackColor = true;
@@ -489,7 +499,7 @@
             this.button_sampleGyroBiasAtT2.Location = new System.Drawing.Point(163, 20);
             this.button_sampleGyroBiasAtT2.Name = "button_sampleGyroBiasAtT2";
             this.button_sampleGyroBiasAtT2.Size = new System.Drawing.Size(147, 23);
-            this.button_sampleGyroBiasAtT2.TabIndex = 3;
+            this.button_sampleGyroBiasAtT2.TabIndex = 1;
             this.button_sampleGyroBiasAtT2.Text = "Sample Gyro. Bias @ T2";
             this.button_sampleGyroBiasAtT2.UseVisualStyleBackColor = true;
             this.button_sampleGyroBiasAtT2.Click += new System.EventHandler(this.button_sampleGyroBiasAtT2_Click);
@@ -499,7 +509,7 @@
             this.button_lookupAccelBiasAndSens.Location = new System.Drawing.Point(316, 20);
             this.button_lookupAccelBiasAndSens.Name = "button_lookupAccelBiasAndSens";
             this.button_lookupAccelBiasAndSens.Size = new System.Drawing.Size(147, 23);
-            this.button_lookupAccelBiasAndSens.TabIndex = 1;
+            this.button_lookupAccelBiasAndSens.TabIndex = 2;
             this.button_lookupAccelBiasAndSens.Text = "Lookup Accel. Bias/Sens.";
             this.button_lookupAccelBiasAndSens.UseVisualStyleBackColor = true;
             this.button_lookupAccelBiasAndSens.Click += new System.EventHandler(this.button_lookupAccelSensitivity_Click);
@@ -509,7 +519,7 @@
             this.button_measMagParameters.Location = new System.Drawing.Point(469, 20);
             this.button_measMagParameters.Name = "button_measMagParameters";
             this.button_measMagParameters.Size = new System.Drawing.Size(147, 23);
-            this.button_measMagParameters.TabIndex = 2;
+            this.button_measMagParameters.TabIndex = 3;
             this.button_measMagParameters.Text = "Measure Mag. Bias/Sens.";
             this.button_measMagParameters.UseVisualStyleBackColor = true;
             this.button_measMagParameters.Click += new System.EventHandler(this.button_measMagBiasSens_Click);
@@ -576,7 +586,7 @@
             this.tabPage_ViewSensorData.Location = new System.Drawing.Point(4, 22);
             this.tabPage_ViewSensorData.Name = "tabPage_ViewSensorData";
             this.tabPage_ViewSensorData.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_ViewSensorData.Size = new System.Drawing.Size(870, 479);
+            this.tabPage_ViewSensorData.Size = new System.Drawing.Size(870, 454);
             this.tabPage_ViewSensorData.TabIndex = 3;
             this.tabPage_ViewSensorData.Text = "View Sensor Data";
             this.tabPage_ViewSensorData.UseVisualStyleBackColor = true;
@@ -788,7 +798,7 @@
             this.tabPage_auxillaryPort.Location = new System.Drawing.Point(4, 22);
             this.tabPage_auxillaryPort.Name = "tabPage_auxillaryPort";
             this.tabPage_auxillaryPort.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_auxillaryPort.Size = new System.Drawing.Size(870, 479);
+            this.tabPage_auxillaryPort.Size = new System.Drawing.Size(870, 454);
             this.tabPage_auxillaryPort.TabIndex = 14;
             this.tabPage_auxillaryPort.Text = "Auxillary Port";
             this.tabPage_auxillaryPort.UseVisualStyleBackColor = true;
@@ -809,7 +819,7 @@
             this.button_showDigitalIOpanel.Location = new System.Drawing.Point(10, 20);
             this.button_showDigitalIOpanel.Name = "button_showDigitalIOpanel";
             this.button_showDigitalIOpanel.Size = new System.Drawing.Size(147, 23);
-            this.button_showDigitalIOpanel.TabIndex = 41;
+            this.button_showDigitalIOpanel.TabIndex = 0;
             this.button_showDigitalIOpanel.Text = "Show Digital I/O Panel";
             this.button_showDigitalIOpanel.UseVisualStyleBackColor = true;
             this.button_showDigitalIOpanel.Click += new System.EventHandler(this.button_showDigitalIOpanel_Click);
@@ -820,7 +830,7 @@
             this.tabPage_dataLogger.Location = new System.Drawing.Point(4, 22);
             this.tabPage_dataLogger.Name = "tabPage_dataLogger";
             this.tabPage_dataLogger.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_dataLogger.Size = new System.Drawing.Size(870, 479);
+            this.tabPage_dataLogger.Size = new System.Drawing.Size(870, 454);
             this.tabPage_dataLogger.TabIndex = 13;
             this.tabPage_dataLogger.Text = "Data Logger";
             this.tabPage_dataLogger.UseVisualStyleBackColor = true;
@@ -885,7 +895,7 @@
             this.tabPage_SDcard.Location = new System.Drawing.Point(4, 22);
             this.tabPage_SDcard.Name = "tabPage_SDcard";
             this.tabPage_SDcard.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_SDcard.Size = new System.Drawing.Size(870, 479);
+            this.tabPage_SDcard.Size = new System.Drawing.Size(870, 454);
             this.tabPage_SDcard.TabIndex = 12;
             this.tabPage_SDcard.Text = "SD Card";
             this.tabPage_SDcard.UseVisualStyleBackColor = true;
@@ -952,7 +962,7 @@
             this.tabPage_hardIronCalibration.Location = new System.Drawing.Point(4, 22);
             this.tabPage_hardIronCalibration.Name = "tabPage_hardIronCalibration";
             this.tabPage_hardIronCalibration.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_hardIronCalibration.Size = new System.Drawing.Size(870, 479);
+            this.tabPage_hardIronCalibration.Size = new System.Drawing.Size(870, 454);
             this.tabPage_hardIronCalibration.TabIndex = 10;
             this.tabPage_hardIronCalibration.Text = "Hard-Iron Calibration";
             this.tabPage_hardIronCalibration.UseVisualStyleBackColor = true;
@@ -967,7 +977,7 @@
             this.groupBox_hardIronCalibrationAlgorithm.Location = new System.Drawing.Point(3, 123);
             this.groupBox_hardIronCalibrationAlgorithm.Name = "groupBox_hardIronCalibrationAlgorithm";
             this.groupBox_hardIronCalibrationAlgorithm.Size = new System.Drawing.Size(864, 60);
-            this.groupBox_hardIronCalibrationAlgorithm.TabIndex = 0;
+            this.groupBox_hardIronCalibrationAlgorithm.TabIndex = 2;
             this.groupBox_hardIronCalibrationAlgorithm.TabStop = false;
             this.groupBox_hardIronCalibrationAlgorithm.Text = "Step 3 - Run Hard-Iron Calibration Algorithm";
             // 
@@ -1021,7 +1031,7 @@
             this.groupBox_step2collectHardIronCalibrationDataSet.Location = new System.Drawing.Point(3, 63);
             this.groupBox_step2collectHardIronCalibrationDataSet.Name = "groupBox_step2collectHardIronCalibrationDataSet";
             this.groupBox_step2collectHardIronCalibrationDataSet.Size = new System.Drawing.Size(864, 60);
-            this.groupBox_step2collectHardIronCalibrationDataSet.TabIndex = 2;
+            this.groupBox_step2collectHardIronCalibrationDataSet.TabIndex = 1;
             this.groupBox_step2collectHardIronCalibrationDataSet.TabStop = false;
             this.groupBox_step2collectHardIronCalibrationDataSet.Text = "Step 2 - Collect Hard-Iron Calibration Dataset";
             // 
@@ -1031,7 +1041,7 @@
             this.button_collectHardIronCalDatasetBrowse.Location = new System.Drawing.Point(662, 22);
             this.button_collectHardIronCalDatasetBrowse.Name = "button_collectHardIronCalDatasetBrowse";
             this.button_collectHardIronCalDatasetBrowse.Size = new System.Drawing.Size(95, 23);
-            this.button_collectHardIronCalDatasetBrowse.TabIndex = 49;
+            this.button_collectHardIronCalDatasetBrowse.TabIndex = 1;
             this.button_collectHardIronCalDatasetBrowse.Text = "Browse...";
             this.button_collectHardIronCalDatasetBrowse.UseVisualStyleBackColor = true;
             this.button_collectHardIronCalDatasetBrowse.Click += new System.EventHandler(this.buttonCollectHardIronCalDatasetBrowse_Click);
@@ -1052,7 +1062,7 @@
             this.textBox_collectHardIronCalDatasetFilePath.Location = new System.Drawing.Point(63, 24);
             this.textBox_collectHardIronCalDatasetFilePath.Name = "textBox_collectHardIronCalDatasetFilePath";
             this.textBox_collectHardIronCalDatasetFilePath.Size = new System.Drawing.Size(592, 20);
-            this.textBox_collectHardIronCalDatasetFilePath.TabIndex = 48;
+            this.textBox_collectHardIronCalDatasetFilePath.TabIndex = 0;
             this.textBox_collectHardIronCalDatasetFilePath.TextChanged += new System.EventHandler(this.textBox_collectHardIronCalDatasetFilePath_TextChanged);
             // 
             // button_collectHardIronCalDatasetStartLogging
@@ -1061,7 +1071,7 @@
             this.button_collectHardIronCalDatasetStartLogging.Location = new System.Drawing.Point(763, 22);
             this.button_collectHardIronCalDatasetStartLogging.Name = "button_collectHardIronCalDatasetStartLogging";
             this.button_collectHardIronCalDatasetStartLogging.Size = new System.Drawing.Size(95, 23);
-            this.button_collectHardIronCalDatasetStartLogging.TabIndex = 50;
+            this.button_collectHardIronCalDatasetStartLogging.TabIndex = 2;
             this.button_collectHardIronCalDatasetStartLogging.Text = "Start Logging";
             this.button_collectHardIronCalDatasetStartLogging.UseVisualStyleBackColor = true;
             this.button_collectHardIronCalDatasetStartLogging.Click += new System.EventHandler(this.button_collectHardIronCalDatasetStartLogging_Click);
@@ -1073,7 +1083,7 @@
             this.groupBox_step1ClearHardIronBiasRegisters.Location = new System.Drawing.Point(3, 3);
             this.groupBox_step1ClearHardIronBiasRegisters.Name = "groupBox_step1ClearHardIronBiasRegisters";
             this.groupBox_step1ClearHardIronBiasRegisters.Size = new System.Drawing.Size(864, 60);
-            this.groupBox_step1ClearHardIronBiasRegisters.TabIndex = 1;
+            this.groupBox_step1ClearHardIronBiasRegisters.TabIndex = 0;
             this.groupBox_step1ClearHardIronBiasRegisters.TabStop = false;
             this.groupBox_step1ClearHardIronBiasRegisters.Text = "Step 1 - Clear Hard-Iron Bias Registers";
             // 
@@ -1082,7 +1092,7 @@
             this.button_clearHardIronRegisters.Location = new System.Drawing.Point(11, 22);
             this.button_clearHardIronRegisters.Name = "button_clearHardIronRegisters";
             this.button_clearHardIronRegisters.Size = new System.Drawing.Size(147, 23);
-            this.button_clearHardIronRegisters.TabIndex = 3;
+            this.button_clearHardIronRegisters.TabIndex = 0;
             this.button_clearHardIronRegisters.Text = "Clear Hard-Iron Regsiters";
             this.button_clearHardIronRegisters.UseVisualStyleBackColor = true;
             this.button_clearHardIronRegisters.Click += new System.EventHandler(this.button_clearHardIronRegisters_Click);
@@ -1094,7 +1104,7 @@
             this.tabPage_uploadFirmware.Location = new System.Drawing.Point(4, 22);
             this.tabPage_uploadFirmware.Name = "tabPage_uploadFirmware";
             this.tabPage_uploadFirmware.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_uploadFirmware.Size = new System.Drawing.Size(870, 479);
+            this.tabPage_uploadFirmware.Size = new System.Drawing.Size(870, 454);
             this.tabPage_uploadFirmware.TabIndex = 5;
             this.tabPage_uploadFirmware.Text = "Upload Firmware";
             this.tabPage_uploadFirmware.UseVisualStyleBackColor = true;
@@ -1171,7 +1181,7 @@
             this.tabPage_about.Location = new System.Drawing.Point(4, 22);
             this.tabPage_about.Name = "tabPage_about";
             this.tabPage_about.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_about.Size = new System.Drawing.Size(870, 479);
+            this.tabPage_about.Size = new System.Drawing.Size(870, 454);
             this.tabPage_about.TabIndex = 2;
             this.tabPage_about.Text = "About";
             this.tabPage_about.UseVisualStyleBackColor = true;
@@ -1290,16 +1300,6 @@
             this.label_GUIversion.Size = new System.Drawing.Size(66, 13);
             this.label_GUIversion.TabIndex = 23;
             this.label_GUIversion.Text = "GUI version:";
-            // 
-            // appendedTreeView_registers
-            // 
-            this.appendedTreeView_registers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.appendedTreeView_registers.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.appendedTreeView_registers.Location = new System.Drawing.Point(3, 3);
-            this.appendedTreeView_registers.Name = "appendedTreeView_registers";
-            this.appendedTreeView_registers.Size = new System.Drawing.Size(864, 473);
-            this.appendedTreeView_registers.TabIndex = 0;
-            this.appendedTreeView_registers.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.appendedTreeView_registers_NodeMouseClick);
             // 
             // Form_main
             // 
@@ -1966,6 +1966,9 @@
         private System.Windows.Forms.TreeNode treeNode_auxiliaryPort;
 
         #endregion
+
+
+
 
 
         #endregion

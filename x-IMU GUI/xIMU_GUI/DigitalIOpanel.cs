@@ -33,7 +33,7 @@ namespace xIMU_GUI
         /// <summary>
         /// Gets or sets the digital I/O directions.
         /// </summary>
-        public xIMU_API.DigitalIOdata.PortData Direction { get; set; }
+        public xIMU_API.DigitalPortBits Direction { get; set; }
 
         /// <summary>
         /// Gets or sets the digital I/O states.
@@ -41,7 +41,7 @@ namespace xIMU_GUI
         /// <remarks>
         /// Will not apply states if channel is not an input.
         /// </remarks>
-        public xIMU_API.DigitalIOdata.PortData State { get; set; }
+        public xIMU_API.DigitalPortBits State { get; set; }
 
         #endregion
 
@@ -118,8 +118,8 @@ namespace xIMU_GUI
 
             #region Create properties
 
-            Direction = new xIMU_API.DigitalIOdata.PortData();
-            State = new xIMU_API.DigitalIOdata.PortData();
+            Direction = new xIMU_API.DigitalPortBits();
+            State = new xIMU_API.DigitalPortBits();
 
             #endregion
         }
@@ -210,9 +210,9 @@ namespace xIMU_GUI
             }
         }
 
-        public delegate void onStateChanged(object sender, xIMU_API.DigitalIOdata.PortData e);
+        public delegate void onStateChanged(object sender, xIMU_API.DigitalPortBits e);
         public event onStateChanged StateChanged;
-        protected virtual void OnStateChanged(xIMU_API.DigitalIOdata.PortData e) { if (StateChanged != null) StateChanged(this, e); }
+        protected virtual void OnStateChanged(xIMU_API.DigitalPortBits e) { if (StateChanged != null) StateChanged(this, e); }
 
         #endregion
     }
