@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ASCIIdataFiles.cs" />
+    <Compile Include="CSVfileWriter.cs" />
     <Compile Include="CalBattThermData.cs" />
     <Compile Include="CalInertialMagData.cs" />
     <Compile Include="CommandData.cs" />

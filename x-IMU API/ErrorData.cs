@@ -88,10 +88,10 @@ namespace xIMU_API
             {
                 case ((int)ErrorCodes.NoError): message = "No error."; break;
                 case ((int)ErrorCodes.LowBattery): message = "Low battery."; break;
-                case ((int)ErrorCodes.USBreceiveBufferOvun): message = "USB receive buffer overrun."; break;
-                case ((int)ErrorCodes.USBtransmitBufferOvun): message = "USB transmit buffer overrun."; break;
-                case ((int)ErrorCodes.BluetoothReceiveBufferOvun): message = "Bluetooth receive buffer overrun."; break;
-                case ((int)ErrorCodes.BluetoothTransmitBufferOvun): message = "Bluetooth transmit buffer overrun."; break;
+                case ((int)ErrorCodes.USBreceiveBufferOverrun): message = "USB receive buffer overrun."; break;
+                case ((int)ErrorCodes.USBtransmitBufferOverrun): message = "USB transmit buffer overrun."; break;
+                case ((int)ErrorCodes.BluetoothReceiveBufferOverrun): message = "Bluetooth receive buffer overrun."; break;
+                case ((int)ErrorCodes.BluetoothTransmitBufferOverrun): message = "Bluetooth transmit buffer overrun."; break;
                 case ((int)ErrorCodes.SDcardWriteBufferOverrun): message = "SD card write buffer overrun."; break;
                 case ((int)ErrorCodes.TooFewBytesInPacket): message = "Too few bytes in packet."; break;
                 case ((int)ErrorCodes.TooManyBytesInPacket): message = "Too many bytes in packet."; break;
