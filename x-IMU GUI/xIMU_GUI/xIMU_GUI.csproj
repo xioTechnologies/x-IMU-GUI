@@ -25,11 +25,10 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <SupportUrl>http://www.x-io.co.uk</SupportUrl>
-    <ErrorReportUrl>http://www.x-io.co.uk</ErrorReportUrl>
     <ProductName>x-IMU GUI</ProductName>
     <PublisherName>x-io Technologies</PublisherName>
-    <ApplicationRevision>11</ApplicationRevision>
-    <ApplicationVersion>5.1.0.11</ApplicationVersion>
+    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationVersion>5.2.0.12</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>

@@ -173,7 +173,7 @@ namespace xIMU_GUI
         /// </summary>
         private void Form_main_FormClosed(object sender, FormClosedEventArgs e)
         {
-            xIMUserial.Close();
+            ClosePort();
             dataLoggerFiles.CloseFiles();
             convertedBinaryFiles.CloseFiles();
             hardIronCalDataFiles.CloseFiles();
@@ -304,6 +304,7 @@ namespace xIMU_GUI
             catch { }
             comboBox_portName.Enabled = true;
             button_refreshList.Enabled = true;
+            button_openPort.Enabled = true;
             button_openPort.Text = "Open Port";
         }
 
