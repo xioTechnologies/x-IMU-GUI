@@ -26,8 +26,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>x-IMU GUI</ProductName>
     <PublisherName>x-io Technologies</PublisherName>
-    <ApplicationRevision>22</ApplicationRevision>
-    <ApplicationVersion>12.2.0.22</ApplicationVersion>
+    <ApplicationRevision>23</ApplicationRevision>
+    <ApplicationVersion>12.3.0.23</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -53,10 +53,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>9B3BD808C787E264E635536D7D2992C4DEBE5E83</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>097D82D25F89073267BEB85CD5E987E2544387F9</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>x-IMU GUI_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>x-IMU GUI_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -245,7 +245,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="x-IMU GUI_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bootloader\16-Bit Flash Programmer.exe">

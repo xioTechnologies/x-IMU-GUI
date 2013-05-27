@@ -701,9 +701,6 @@ namespace x_IMU_GUI
         /// </summary>
         private void commandButton_Click(object sender, EventArgs e)
         {
-            if ((sender == commandButton_factoryReset) && (MessageBox.Show("Factory reset will set all registers on the x-IMU to default values and all current calibration parameters will be lost." + Environment.NewLine + Environment.NewLine +
-                                                                           "Press button on x-IMU within 3 seconds of sending this command to confirm.", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != System.Windows.Forms.DialogResult.OK))
-                return;
             try
             {
                 xIMUserial.SendCommandPacket((sender as CommandButton).CommandCode);
