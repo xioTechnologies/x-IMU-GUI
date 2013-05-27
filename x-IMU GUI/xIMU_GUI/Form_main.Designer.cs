@@ -44,7 +44,6 @@
             this.groupBox_OpenClosePort = new System.Windows.Forms.GroupBox();
             this.button_refreshList = new System.Windows.Forms.Button();
             this.tabPage_registers = new System.Windows.Forms.TabPage();
-            this.appendedTreeView_registers = new xIMU_GUI.AppendedTreeView();
             this.tabPage_dateTime = new System.Windows.Forms.TabPage();
             this.groupBox_dateTime = new System.Windows.Forms.GroupBox();
             this.button_setDateTime = new System.Windows.Forms.Button();
@@ -55,9 +54,10 @@
             this.groupBox_receivedCommandMessages = new System.Windows.Forms.GroupBox();
             this.checkBox_displayCommandConfirmations = new System.Windows.Forms.CheckBox();
             this.groupBox_algorithm = new System.Windows.Forms.GroupBox();
+            this.button_initialiseThenTare = new System.Windows.Forms.Button();
             this.button_clearTare = new System.Windows.Forms.Button();
             this.button_tare = new System.Windows.Forms.Button();
-            this.button_resetAlgorithm = new System.Windows.Forms.Button();
+            this.button_initialise = new System.Windows.Forms.Button();
             this.groupBox_sensorCalibration = new System.Windows.Forms.GroupBox();
             this.button_sampleGyroBiasAtT2 = new System.Windows.Forms.Button();
             this.button_lookupAccelBiasAndSens = new System.Windows.Forms.Button();
@@ -66,7 +66,7 @@
             this.groupBox_general = new System.Windows.Forms.GroupBox();
             this.button_resetSleepTimer = new System.Windows.Forms.Button();
             this.button_sleep = new System.Windows.Forms.Button();
-            this.button_resetDevice = new System.Windows.Forms.Button();
+            this.button_reset = new System.Windows.Forms.Button();
             this.tabPage_ViewSensorData = new System.Windows.Forms.TabPage();
             this.groupBox_orienData = new System.Windows.Forms.GroupBox();
             this.label_psi = new System.Windows.Forms.Label();
@@ -114,8 +114,8 @@
             this.button_collectHardIronCalDatasetStartLogging = new System.Windows.Forms.Button();
             this.groupBox_step1ClearHardIronBiasRegisters = new System.Windows.Forms.GroupBox();
             this.button_clearHardIronRegisters = new System.Windows.Forms.Button();
-            this.tabPage_bootloader = new System.Windows.Forms.TabPage();
-            this.groupBox_uploadFirmware = new System.Windows.Forms.GroupBox();
+            this.tabPage_uploadFirmware = new System.Windows.Forms.TabPage();
+            this.groupBox_bootloader = new System.Windows.Forms.GroupBox();
             this.button_bootloaderBrowse = new System.Windows.Forms.Button();
             this.label_bootloaderFilePath = new System.Windows.Forms.Label();
             this.textBox_bootloaderFilePath = new System.Windows.Forms.TextBox();
@@ -133,6 +133,7 @@
             this.label_compatibleFirmwareVersions = new System.Windows.Forms.Label();
             this.label_APIversion = new System.Windows.Forms.Label();
             this.label_GUIversion = new System.Windows.Forms.Label();
+            this.appendedTreeView_registers = new xIMU_GUI.AppendedTreeView();
             this.tabControl_main.SuspendLayout();
             this.tabPage_serialPort.SuspendLayout();
             this.groupBox_packetCounts.SuspendLayout();
@@ -159,15 +160,15 @@
             this.groupBox_hardIronCalibrationAlgorithm.SuspendLayout();
             this.groupBox_step2collectHardIronCalibrationDataSet.SuspendLayout();
             this.groupBox_step1ClearHardIronBiasRegisters.SuspendLayout();
-            this.tabPage_bootloader.SuspendLayout();
-            this.groupBox_uploadFirmware.SuspendLayout();
+            this.tabPage_uploadFirmware.SuspendLayout();
+            this.groupBox_bootloader.SuspendLayout();
             this.tabPage_about.SuspendLayout();
             this.SuspendLayout();
             // 
             // button_openPort
             // 
             this.button_openPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_openPort.Location = new System.Drawing.Point(692, 20);
+            this.button_openPort.Location = new System.Drawing.Point(758, 20);
             this.button_openPort.Name = "button_openPort";
             this.button_openPort.Size = new System.Drawing.Size(100, 23);
             this.button_openPort.TabIndex = 2;
@@ -203,13 +204,13 @@
             this.tabControl_main.Controls.Add(this.tabPage_dataLogger);
             this.tabControl_main.Controls.Add(this.tabPage_SDcard);
             this.tabControl_main.Controls.Add(this.tabPage_hardIronCalibration);
-            this.tabControl_main.Controls.Add(this.tabPage_bootloader);
+            this.tabControl_main.Controls.Add(this.tabPage_uploadFirmware);
             this.tabControl_main.Controls.Add(this.tabPage_about);
             this.tabControl_main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl_main.Location = new System.Drawing.Point(0, 0);
             this.tabControl_main.Name = "tabControl_main";
             this.tabControl_main.SelectedIndex = 0;
-            this.tabControl_main.Size = new System.Drawing.Size(812, 490);
+            this.tabControl_main.Size = new System.Drawing.Size(878, 505);
             this.tabControl_main.TabIndex = 10;
             // 
             // tabPage_serialPort
@@ -220,7 +221,7 @@
             this.tabPage_serialPort.Location = new System.Drawing.Point(4, 22);
             this.tabPage_serialPort.Name = "tabPage_serialPort";
             this.tabPage_serialPort.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_serialPort.Size = new System.Drawing.Size(804, 464);
+            this.tabPage_serialPort.Size = new System.Drawing.Size(870, 479);
             this.tabPage_serialPort.TabIndex = 0;
             this.tabPage_serialPort.Text = "Serial Port";
             this.tabPage_serialPort.UseVisualStyleBackColor = true;
@@ -234,7 +235,7 @@
             this.groupBox_packetCounts.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_packetCounts.Location = new System.Drawing.Point(3, 62);
             this.groupBox_packetCounts.Name = "groupBox_packetCounts";
-            this.groupBox_packetCounts.Size = new System.Drawing.Size(798, 84);
+            this.groupBox_packetCounts.Size = new System.Drawing.Size(864, 84);
             this.groupBox_packetCounts.TabIndex = 1;
             this.groupBox_packetCounts.TabStop = false;
             this.groupBox_packetCounts.Text = "Packet Counts";
@@ -284,7 +285,7 @@
             this.groupBox_OpenClosePort.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_OpenClosePort.Location = new System.Drawing.Point(3, 3);
             this.groupBox_OpenClosePort.Name = "groupBox_OpenClosePort";
-            this.groupBox_OpenClosePort.Size = new System.Drawing.Size(798, 59);
+            this.groupBox_OpenClosePort.Size = new System.Drawing.Size(864, 59);
             this.groupBox_OpenClosePort.TabIndex = 0;
             this.groupBox_OpenClosePort.TabStop = false;
             this.groupBox_OpenClosePort.Text = "Open/Close Port";
@@ -292,7 +293,7 @@
             // button_refreshList
             // 
             this.button_refreshList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_refreshList.Location = new System.Drawing.Point(586, 20);
+            this.button_refreshList.Location = new System.Drawing.Point(652, 20);
             this.button_refreshList.Name = "button_refreshList";
             this.button_refreshList.Size = new System.Drawing.Size(100, 23);
             this.button_refreshList.TabIndex = 1;
@@ -306,20 +307,10 @@
             this.tabPage_registers.Location = new System.Drawing.Point(4, 22);
             this.tabPage_registers.Name = "tabPage_registers";
             this.tabPage_registers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_registers.Size = new System.Drawing.Size(804, 464);
+            this.tabPage_registers.Size = new System.Drawing.Size(870, 479);
             this.tabPage_registers.TabIndex = 6;
             this.tabPage_registers.Text = "Registers";
             this.tabPage_registers.UseVisualStyleBackColor = true;
-            // 
-            // appendedTreeView_registers
-            // 
-            this.appendedTreeView_registers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.appendedTreeView_registers.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.appendedTreeView_registers.Location = new System.Drawing.Point(3, 3);
-            this.appendedTreeView_registers.Name = "appendedTreeView_registers";
-            this.appendedTreeView_registers.Size = new System.Drawing.Size(798, 458);
-            this.appendedTreeView_registers.TabIndex = 0;
-            this.appendedTreeView_registers.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.appendedTreeView_registers_NodeMouseClick);
             // 
             // tabPage_dateTime
             // 
@@ -327,7 +318,7 @@
             this.tabPage_dateTime.Location = new System.Drawing.Point(4, 22);
             this.tabPage_dateTime.Name = "tabPage_dateTime";
             this.tabPage_dateTime.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_dateTime.Size = new System.Drawing.Size(804, 464);
+            this.tabPage_dateTime.Size = new System.Drawing.Size(870, 479);
             this.tabPage_dateTime.TabIndex = 11;
             this.tabPage_dateTime.Text = "Date/Time";
             this.tabPage_dateTime.UseVisualStyleBackColor = true;
@@ -341,7 +332,7 @@
             this.groupBox_dateTime.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_dateTime.Location = new System.Drawing.Point(3, 3);
             this.groupBox_dateTime.Name = "groupBox_dateTime";
-            this.groupBox_dateTime.Size = new System.Drawing.Size(798, 59);
+            this.groupBox_dateTime.Size = new System.Drawing.Size(864, 59);
             this.groupBox_dateTime.TabIndex = 0;
             this.groupBox_dateTime.TabStop = false;
             this.groupBox_dateTime.Text = "Date/Time";
@@ -349,7 +340,7 @@
             // button_setDateTime
             // 
             this.button_setDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_setDateTime.Location = new System.Drawing.Point(665, 20);
+            this.button_setDateTime.Location = new System.Drawing.Point(731, 20);
             this.button_setDateTime.Name = "button_setDateTime";
             this.button_setDateTime.Size = new System.Drawing.Size(125, 23);
             this.button_setDateTime.TabIndex = 2;
@@ -360,7 +351,7 @@
             // button_readDateTime
             // 
             this.button_readDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_readDateTime.Location = new System.Drawing.Point(534, 20);
+            this.button_readDateTime.Location = new System.Drawing.Point(600, 20);
             this.button_readDateTime.Name = "button_readDateTime";
             this.button_readDateTime.Size = new System.Drawing.Size(125, 23);
             this.button_readDateTime.TabIndex = 1;
@@ -375,7 +366,7 @@
             this.textBox_receivedDataTime.Enabled = false;
             this.textBox_receivedDataTime.Location = new System.Drawing.Point(116, 22);
             this.textBox_receivedDataTime.Name = "textBox_receivedDataTime";
-            this.textBox_receivedDataTime.Size = new System.Drawing.Size(412, 20);
+            this.textBox_receivedDataTime.Size = new System.Drawing.Size(478, 20);
             this.textBox_receivedDataTime.TabIndex = 0;
             this.textBox_receivedDataTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -397,7 +388,7 @@
             this.tabPage_commands.Location = new System.Drawing.Point(4, 22);
             this.tabPage_commands.Name = "tabPage_commands";
             this.tabPage_commands.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_commands.Size = new System.Drawing.Size(804, 464);
+            this.tabPage_commands.Size = new System.Drawing.Size(870, 479);
             this.tabPage_commands.TabIndex = 9;
             this.tabPage_commands.Text = "Commands";
             this.tabPage_commands.UseVisualStyleBackColor = true;
@@ -408,7 +399,7 @@
             this.groupBox_receivedCommandMessages.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_receivedCommandMessages.Location = new System.Drawing.Point(3, 180);
             this.groupBox_receivedCommandMessages.Name = "groupBox_receivedCommandMessages";
-            this.groupBox_receivedCommandMessages.Size = new System.Drawing.Size(798, 59);
+            this.groupBox_receivedCommandMessages.Size = new System.Drawing.Size(864, 59);
             this.groupBox_receivedCommandMessages.TabIndex = 3;
             this.groupBox_receivedCommandMessages.TabStop = false;
             this.groupBox_receivedCommandMessages.Text = "Received Command Messages";
@@ -427,16 +418,27 @@
             // 
             // groupBox_algorithm
             // 
+            this.groupBox_algorithm.Controls.Add(this.button_initialiseThenTare);
             this.groupBox_algorithm.Controls.Add(this.button_clearTare);
             this.groupBox_algorithm.Controls.Add(this.button_tare);
-            this.groupBox_algorithm.Controls.Add(this.button_resetAlgorithm);
+            this.groupBox_algorithm.Controls.Add(this.button_initialise);
             this.groupBox_algorithm.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_algorithm.Location = new System.Drawing.Point(3, 121);
             this.groupBox_algorithm.Name = "groupBox_algorithm";
-            this.groupBox_algorithm.Size = new System.Drawing.Size(798, 59);
+            this.groupBox_algorithm.Size = new System.Drawing.Size(864, 59);
             this.groupBox_algorithm.TabIndex = 2;
             this.groupBox_algorithm.TabStop = false;
             this.groupBox_algorithm.Text = "Algorithm";
+            // 
+            // button_initialiseThenTare
+            // 
+            this.button_initialiseThenTare.Location = new System.Drawing.Point(469, 20);
+            this.button_initialiseThenTare.Name = "button_initialiseThenTare";
+            this.button_initialiseThenTare.Size = new System.Drawing.Size(147, 23);
+            this.button_initialiseThenTare.TabIndex = 3;
+            this.button_initialiseThenTare.Text = "Initialise Then Tare";
+            this.button_initialiseThenTare.UseVisualStyleBackColor = true;
+            this.button_initialiseThenTare.Click += new System.EventHandler(this.button_initialiseThenTare_Click);
             // 
             // button_clearTare
             // 
@@ -458,15 +460,15 @@
             this.button_tare.UseVisualStyleBackColor = true;
             this.button_tare.Click += new System.EventHandler(this.button_tare_Click);
             // 
-            // button_resetAlgorithm
+            // button_initialise
             // 
-            this.button_resetAlgorithm.Location = new System.Drawing.Point(10, 20);
-            this.button_resetAlgorithm.Name = "button_resetAlgorithm";
-            this.button_resetAlgorithm.Size = new System.Drawing.Size(147, 23);
-            this.button_resetAlgorithm.TabIndex = 0;
-            this.button_resetAlgorithm.Text = "Reset Algorithm";
-            this.button_resetAlgorithm.UseVisualStyleBackColor = true;
-            this.button_resetAlgorithm.Click += new System.EventHandler(this.button_resetAlgorithm_Click);
+            this.button_initialise.Location = new System.Drawing.Point(10, 20);
+            this.button_initialise.Name = "button_initialise";
+            this.button_initialise.Size = new System.Drawing.Size(147, 23);
+            this.button_initialise.TabIndex = 0;
+            this.button_initialise.Text = "Initialise";
+            this.button_initialise.UseVisualStyleBackColor = true;
+            this.button_initialise.Click += new System.EventHandler(this.button_initialise_Click);
             // 
             // groupBox_sensorCalibration
             // 
@@ -477,7 +479,7 @@
             this.groupBox_sensorCalibration.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_sensorCalibration.Location = new System.Drawing.Point(3, 62);
             this.groupBox_sensorCalibration.Name = "groupBox_sensorCalibration";
-            this.groupBox_sensorCalibration.Size = new System.Drawing.Size(798, 59);
+            this.groupBox_sensorCalibration.Size = new System.Drawing.Size(864, 59);
             this.groupBox_sensorCalibration.TabIndex = 1;
             this.groupBox_sensorCalibration.TabStop = false;
             this.groupBox_sensorCalibration.Text = "Sensor Calibration";
@@ -526,11 +528,11 @@
             // 
             this.groupBox_general.Controls.Add(this.button_resetSleepTimer);
             this.groupBox_general.Controls.Add(this.button_sleep);
-            this.groupBox_general.Controls.Add(this.button_resetDevice);
+            this.groupBox_general.Controls.Add(this.button_reset);
             this.groupBox_general.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_general.Location = new System.Drawing.Point(3, 3);
             this.groupBox_general.Name = "groupBox_general";
-            this.groupBox_general.Size = new System.Drawing.Size(798, 59);
+            this.groupBox_general.Size = new System.Drawing.Size(864, 59);
             this.groupBox_general.TabIndex = 0;
             this.groupBox_general.TabStop = false;
             this.groupBox_general.Text = "General";
@@ -555,15 +557,15 @@
             this.button_sleep.UseVisualStyleBackColor = true;
             this.button_sleep.Click += new System.EventHandler(this.button_sleep_Click);
             // 
-            // button_resetDevice
+            // button_reset
             // 
-            this.button_resetDevice.Location = new System.Drawing.Point(10, 20);
-            this.button_resetDevice.Name = "button_resetDevice";
-            this.button_resetDevice.Size = new System.Drawing.Size(147, 23);
-            this.button_resetDevice.TabIndex = 0;
-            this.button_resetDevice.Text = "Reset Device";
-            this.button_resetDevice.UseVisualStyleBackColor = true;
-            this.button_resetDevice.Click += new System.EventHandler(this.button_resetDevice_Click);
+            this.button_reset.Location = new System.Drawing.Point(10, 20);
+            this.button_reset.Name = "button_reset";
+            this.button_reset.Size = new System.Drawing.Size(147, 23);
+            this.button_reset.TabIndex = 0;
+            this.button_reset.Text = "Reset";
+            this.button_reset.UseVisualStyleBackColor = true;
+            this.button_reset.Click += new System.EventHandler(this.button_reset_Click);
             // 
             // tabPage_ViewSensorData
             // 
@@ -574,7 +576,7 @@
             this.tabPage_ViewSensorData.Location = new System.Drawing.Point(4, 22);
             this.tabPage_ViewSensorData.Name = "tabPage_ViewSensorData";
             this.tabPage_ViewSensorData.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_ViewSensorData.Size = new System.Drawing.Size(804, 464);
+            this.tabPage_ViewSensorData.Size = new System.Drawing.Size(870, 479);
             this.tabPage_ViewSensorData.TabIndex = 3;
             this.tabPage_ViewSensorData.Text = "View Sensor Data";
             this.tabPage_ViewSensorData.UseVisualStyleBackColor = true;
@@ -590,7 +592,7 @@
             this.groupBox_orienData.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_orienData.Location = new System.Drawing.Point(3, 121);
             this.groupBox_orienData.Name = "groupBox_orienData";
-            this.groupBox_orienData.Size = new System.Drawing.Size(798, 59);
+            this.groupBox_orienData.Size = new System.Drawing.Size(864, 59);
             this.groupBox_orienData.TabIndex = 2;
             this.groupBox_orienData.TabStop = false;
             this.groupBox_orienData.Text = "Orientation Data";
@@ -600,7 +602,7 @@
             this.label_psi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_psi.AutoSize = true;
             this.label_psi.ForeColor = System.Drawing.Color.Blue;
-            this.label_psi.Location = new System.Drawing.Point(773, 24);
+            this.label_psi.Location = new System.Drawing.Point(839, 24);
             this.label_psi.Name = "label_psi";
             this.label_psi.Size = new System.Drawing.Size(15, 13);
             this.label_psi.TabIndex = 45;
@@ -611,7 +613,7 @@
             this.label_theta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_theta.AutoSize = true;
             this.label_theta.ForeColor = System.Drawing.Color.Lime;
-            this.label_theta.Location = new System.Drawing.Point(754, 24);
+            this.label_theta.Location = new System.Drawing.Point(820, 24);
             this.label_theta.Name = "label_theta";
             this.label_theta.Size = new System.Drawing.Size(13, 13);
             this.label_theta.TabIndex = 44;
@@ -622,7 +624,7 @@
             this.label_phi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_phi.AutoSize = true;
             this.label_phi.ForeColor = System.Drawing.Color.Red;
-            this.label_phi.Location = new System.Drawing.Point(733, 24);
+            this.label_phi.Location = new System.Drawing.Point(799, 24);
             this.label_phi.Name = "label_phi";
             this.label_phi.Size = new System.Drawing.Size(15, 13);
             this.label_phi.TabIndex = 43;
@@ -632,7 +634,7 @@
             // 
             this.label_eulerLegend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_eulerLegend.AutoSize = true;
-            this.label_eulerLegend.Location = new System.Drawing.Point(681, 24);
+            this.label_eulerLegend.Location = new System.Drawing.Point(747, 24);
             this.label_eulerLegend.Name = "label_eulerLegend";
             this.label_eulerLegend.Size = new System.Drawing.Size(46, 13);
             this.label_eulerLegend.TabIndex = 42;
@@ -670,7 +672,7 @@
             this.groupBox_sensorData.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_sensorData.Location = new System.Drawing.Point(3, 62);
             this.groupBox_sensorData.Name = "groupBox_sensorData";
-            this.groupBox_sensorData.Size = new System.Drawing.Size(798, 59);
+            this.groupBox_sensorData.Size = new System.Drawing.Size(864, 59);
             this.groupBox_sensorData.TabIndex = 1;
             this.groupBox_sensorData.TabStop = false;
             this.groupBox_sensorData.Text = "Inertial/Magnetic Sensor Data";
@@ -680,7 +682,7 @@
             this.label_legendZ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_legendZ.AutoSize = true;
             this.label_legendZ.ForeColor = System.Drawing.Color.Blue;
-            this.label_legendZ.Location = new System.Drawing.Point(774, 25);
+            this.label_legendZ.Location = new System.Drawing.Point(840, 25);
             this.label_legendZ.Name = "label_legendZ";
             this.label_legendZ.Size = new System.Drawing.Size(14, 13);
             this.label_legendZ.TabIndex = 41;
@@ -691,7 +693,7 @@
             this.label_legendY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_legendY.AutoSize = true;
             this.label_legendY.ForeColor = System.Drawing.Color.Lime;
-            this.label_legendY.Location = new System.Drawing.Point(754, 25);
+            this.label_legendY.Location = new System.Drawing.Point(820, 25);
             this.label_legendY.Name = "label_legendY";
             this.label_legendY.Size = new System.Drawing.Size(14, 13);
             this.label_legendY.TabIndex = 40;
@@ -702,7 +704,7 @@
             this.label_legendX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_legendX.AutoSize = true;
             this.label_legendX.ForeColor = System.Drawing.Color.Red;
-            this.label_legendX.Location = new System.Drawing.Point(734, 25);
+            this.label_legendX.Location = new System.Drawing.Point(800, 25);
             this.label_legendX.Name = "label_legendX";
             this.label_legendX.Size = new System.Drawing.Size(14, 13);
             this.label_legendX.TabIndex = 39;
@@ -712,7 +714,7 @@
             // 
             this.label_sensorLegend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_sensorLegend.AutoSize = true;
-            this.label_sensorLegend.Location = new System.Drawing.Point(682, 25);
+            this.label_sensorLegend.Location = new System.Drawing.Point(748, 25);
             this.label_sensorLegend.Name = "label_sensorLegend";
             this.label_sensorLegend.Size = new System.Drawing.Size(46, 13);
             this.label_sensorLegend.TabIndex = 38;
@@ -755,7 +757,7 @@
             this.groupBox_battThermData.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_battThermData.Location = new System.Drawing.Point(3, 3);
             this.groupBox_battThermData.Name = "groupBox_battThermData";
-            this.groupBox_battThermData.Size = new System.Drawing.Size(798, 59);
+            this.groupBox_battThermData.Size = new System.Drawing.Size(864, 59);
             this.groupBox_battThermData.TabIndex = 0;
             this.groupBox_battThermData.TabStop = false;
             this.groupBox_battThermData.Text = "Battery And Thermometer Data";
@@ -786,7 +788,7 @@
             this.tabPage_auxillaryPort.Location = new System.Drawing.Point(4, 22);
             this.tabPage_auxillaryPort.Name = "tabPage_auxillaryPort";
             this.tabPage_auxillaryPort.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_auxillaryPort.Size = new System.Drawing.Size(804, 464);
+            this.tabPage_auxillaryPort.Size = new System.Drawing.Size(870, 479);
             this.tabPage_auxillaryPort.TabIndex = 14;
             this.tabPage_auxillaryPort.Text = "Auxillary Port";
             this.tabPage_auxillaryPort.UseVisualStyleBackColor = true;
@@ -797,7 +799,7 @@
             this.groupBox_digitalIO.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_digitalIO.Location = new System.Drawing.Point(3, 3);
             this.groupBox_digitalIO.Name = "groupBox_digitalIO";
-            this.groupBox_digitalIO.Size = new System.Drawing.Size(798, 59);
+            this.groupBox_digitalIO.Size = new System.Drawing.Size(864, 59);
             this.groupBox_digitalIO.TabIndex = 0;
             this.groupBox_digitalIO.TabStop = false;
             this.groupBox_digitalIO.Text = "Digital I/O";
@@ -818,7 +820,7 @@
             this.tabPage_dataLogger.Location = new System.Drawing.Point(4, 22);
             this.tabPage_dataLogger.Name = "tabPage_dataLogger";
             this.tabPage_dataLogger.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_dataLogger.Size = new System.Drawing.Size(804, 464);
+            this.tabPage_dataLogger.Size = new System.Drawing.Size(870, 479);
             this.tabPage_dataLogger.TabIndex = 13;
             this.tabPage_dataLogger.Text = "Data Logger";
             this.tabPage_dataLogger.UseVisualStyleBackColor = true;
@@ -832,7 +834,7 @@
             this.groupBox_logReceivedDataToFile.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_logReceivedDataToFile.Location = new System.Drawing.Point(3, 3);
             this.groupBox_logReceivedDataToFile.Name = "groupBox_logReceivedDataToFile";
-            this.groupBox_logReceivedDataToFile.Size = new System.Drawing.Size(798, 59);
+            this.groupBox_logReceivedDataToFile.Size = new System.Drawing.Size(864, 60);
             this.groupBox_logReceivedDataToFile.TabIndex = 0;
             this.groupBox_logReceivedDataToFile.TabStop = false;
             this.groupBox_logReceivedDataToFile.Text = "Log Received Data To File";
@@ -840,7 +842,7 @@
             // button_dataLoggerFilePathBrowse
             // 
             this.button_dataLoggerFilePathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_dataLoggerFilePathBrowse.Location = new System.Drawing.Point(596, 22);
+            this.button_dataLoggerFilePathBrowse.Location = new System.Drawing.Point(662, 22);
             this.button_dataLoggerFilePathBrowse.Name = "button_dataLoggerFilePathBrowse";
             this.button_dataLoggerFilePathBrowse.Size = new System.Drawing.Size(95, 23);
             this.button_dataLoggerFilePathBrowse.TabIndex = 1;
@@ -863,13 +865,13 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_dataLoggerFilePath.Location = new System.Drawing.Point(64, 24);
             this.textBox_dataLoggerFilePath.Name = "textBox_dataLoggerFilePath";
-            this.textBox_dataLoggerFilePath.Size = new System.Drawing.Size(526, 20);
+            this.textBox_dataLoggerFilePath.Size = new System.Drawing.Size(592, 20);
             this.textBox_dataLoggerFilePath.TabIndex = 0;
             // 
             // button_dataLoggerStart
             // 
             this.button_dataLoggerStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_dataLoggerStart.Location = new System.Drawing.Point(697, 22);
+            this.button_dataLoggerStart.Location = new System.Drawing.Point(763, 22);
             this.button_dataLoggerStart.Name = "button_dataLoggerStart";
             this.button_dataLoggerStart.Size = new System.Drawing.Size(95, 23);
             this.button_dataLoggerStart.TabIndex = 2;
@@ -883,7 +885,7 @@
             this.tabPage_SDcard.Location = new System.Drawing.Point(4, 22);
             this.tabPage_SDcard.Name = "tabPage_SDcard";
             this.tabPage_SDcard.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_SDcard.Size = new System.Drawing.Size(804, 464);
+            this.tabPage_SDcard.Size = new System.Drawing.Size(870, 479);
             this.tabPage_SDcard.TabIndex = 12;
             this.tabPage_SDcard.Text = "SD Card";
             this.tabPage_SDcard.UseVisualStyleBackColor = true;
@@ -897,7 +899,7 @@
             this.groupBox_convertBinaryFile.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_convertBinaryFile.Location = new System.Drawing.Point(3, 3);
             this.groupBox_convertBinaryFile.Name = "groupBox_convertBinaryFile";
-            this.groupBox_convertBinaryFile.Size = new System.Drawing.Size(798, 60);
+            this.groupBox_convertBinaryFile.Size = new System.Drawing.Size(864, 60);
             this.groupBox_convertBinaryFile.TabIndex = 0;
             this.groupBox_convertBinaryFile.TabStop = false;
             this.groupBox_convertBinaryFile.Text = "Convert Binary File";
@@ -905,7 +907,7 @@
             // button_convertBinaryFileConvertBrowse
             // 
             this.button_convertBinaryFileConvertBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_convertBinaryFileConvertBrowse.Location = new System.Drawing.Point(596, 22);
+            this.button_convertBinaryFileConvertBrowse.Location = new System.Drawing.Point(662, 22);
             this.button_convertBinaryFileConvertBrowse.Name = "button_convertBinaryFileConvertBrowse";
             this.button_convertBinaryFileConvertBrowse.Size = new System.Drawing.Size(95, 23);
             this.button_convertBinaryFileConvertBrowse.TabIndex = 1;
@@ -928,13 +930,13 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_convertBinaryFileFilePath.Location = new System.Drawing.Point(64, 24);
             this.textBox_convertBinaryFileFilePath.Name = "textBox_convertBinaryFileFilePath";
-            this.textBox_convertBinaryFileFilePath.Size = new System.Drawing.Size(526, 20);
+            this.textBox_convertBinaryFileFilePath.Size = new System.Drawing.Size(592, 20);
             this.textBox_convertBinaryFileFilePath.TabIndex = 0;
             // 
             // button_convertBinaryFileConvert
             // 
             this.button_convertBinaryFileConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_convertBinaryFileConvert.Location = new System.Drawing.Point(697, 22);
+            this.button_convertBinaryFileConvert.Location = new System.Drawing.Point(763, 22);
             this.button_convertBinaryFileConvert.Name = "button_convertBinaryFileConvert";
             this.button_convertBinaryFileConvert.Size = new System.Drawing.Size(95, 23);
             this.button_convertBinaryFileConvert.TabIndex = 2;
@@ -950,7 +952,7 @@
             this.tabPage_hardIronCalibration.Location = new System.Drawing.Point(4, 22);
             this.tabPage_hardIronCalibration.Name = "tabPage_hardIronCalibration";
             this.tabPage_hardIronCalibration.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_hardIronCalibration.Size = new System.Drawing.Size(804, 464);
+            this.tabPage_hardIronCalibration.Size = new System.Drawing.Size(870, 479);
             this.tabPage_hardIronCalibration.TabIndex = 10;
             this.tabPage_hardIronCalibration.Text = "Hard-Iron Calibration";
             this.tabPage_hardIronCalibration.UseVisualStyleBackColor = true;
@@ -964,7 +966,7 @@
             this.groupBox_hardIronCalibrationAlgorithm.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_hardIronCalibrationAlgorithm.Location = new System.Drawing.Point(3, 123);
             this.groupBox_hardIronCalibrationAlgorithm.Name = "groupBox_hardIronCalibrationAlgorithm";
-            this.groupBox_hardIronCalibrationAlgorithm.Size = new System.Drawing.Size(798, 60);
+            this.groupBox_hardIronCalibrationAlgorithm.Size = new System.Drawing.Size(864, 60);
             this.groupBox_hardIronCalibrationAlgorithm.TabIndex = 0;
             this.groupBox_hardIronCalibrationAlgorithm.TabStop = false;
             this.groupBox_hardIronCalibrationAlgorithm.Text = "Step 3 - Run Hard-Iron Calibration Algorithm";
@@ -972,7 +974,7 @@
             // button_hardIronCalBrowse
             // 
             this.button_hardIronCalBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_hardIronCalBrowse.Location = new System.Drawing.Point(596, 22);
+            this.button_hardIronCalBrowse.Location = new System.Drawing.Point(662, 22);
             this.button_hardIronCalBrowse.Name = "button_hardIronCalBrowse";
             this.button_hardIronCalBrowse.Size = new System.Drawing.Size(95, 23);
             this.button_hardIronCalBrowse.TabIndex = 1;
@@ -995,13 +997,13 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_hardIronCalFilePath.Location = new System.Drawing.Point(64, 24);
             this.textBox_hardIronCalFilePath.Name = "textBox_hardIronCalFilePath";
-            this.textBox_hardIronCalFilePath.Size = new System.Drawing.Size(526, 20);
+            this.textBox_hardIronCalFilePath.Size = new System.Drawing.Size(592, 20);
             this.textBox_hardIronCalFilePath.TabIndex = 0;
             // 
             // button_hardIronCalRun
             // 
             this.button_hardIronCalRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_hardIronCalRun.Location = new System.Drawing.Point(697, 22);
+            this.button_hardIronCalRun.Location = new System.Drawing.Point(763, 22);
             this.button_hardIronCalRun.Name = "button_hardIronCalRun";
             this.button_hardIronCalRun.Size = new System.Drawing.Size(95, 23);
             this.button_hardIronCalRun.TabIndex = 2;
@@ -1018,7 +1020,7 @@
             this.groupBox_step2collectHardIronCalibrationDataSet.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_step2collectHardIronCalibrationDataSet.Location = new System.Drawing.Point(3, 63);
             this.groupBox_step2collectHardIronCalibrationDataSet.Name = "groupBox_step2collectHardIronCalibrationDataSet";
-            this.groupBox_step2collectHardIronCalibrationDataSet.Size = new System.Drawing.Size(798, 60);
+            this.groupBox_step2collectHardIronCalibrationDataSet.Size = new System.Drawing.Size(864, 60);
             this.groupBox_step2collectHardIronCalibrationDataSet.TabIndex = 2;
             this.groupBox_step2collectHardIronCalibrationDataSet.TabStop = false;
             this.groupBox_step2collectHardIronCalibrationDataSet.Text = "Step 2 - Collect Hard-Iron Calibration Dataset";
@@ -1026,7 +1028,7 @@
             // button_collectHardIronCalDatasetBrowse
             // 
             this.button_collectHardIronCalDatasetBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_collectHardIronCalDatasetBrowse.Location = new System.Drawing.Point(596, 22);
+            this.button_collectHardIronCalDatasetBrowse.Location = new System.Drawing.Point(662, 22);
             this.button_collectHardIronCalDatasetBrowse.Name = "button_collectHardIronCalDatasetBrowse";
             this.button_collectHardIronCalDatasetBrowse.Size = new System.Drawing.Size(95, 23);
             this.button_collectHardIronCalDatasetBrowse.TabIndex = 49;
@@ -1049,14 +1051,14 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_collectHardIronCalDatasetFilePath.Location = new System.Drawing.Point(63, 24);
             this.textBox_collectHardIronCalDatasetFilePath.Name = "textBox_collectHardIronCalDatasetFilePath";
-            this.textBox_collectHardIronCalDatasetFilePath.Size = new System.Drawing.Size(526, 20);
+            this.textBox_collectHardIronCalDatasetFilePath.Size = new System.Drawing.Size(592, 20);
             this.textBox_collectHardIronCalDatasetFilePath.TabIndex = 48;
             this.textBox_collectHardIronCalDatasetFilePath.TextChanged += new System.EventHandler(this.textBox_collectHardIronCalDatasetFilePath_TextChanged);
             // 
             // button_collectHardIronCalDatasetStartLogging
             // 
             this.button_collectHardIronCalDatasetStartLogging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_collectHardIronCalDatasetStartLogging.Location = new System.Drawing.Point(697, 22);
+            this.button_collectHardIronCalDatasetStartLogging.Location = new System.Drawing.Point(763, 22);
             this.button_collectHardIronCalDatasetStartLogging.Name = "button_collectHardIronCalDatasetStartLogging";
             this.button_collectHardIronCalDatasetStartLogging.Size = new System.Drawing.Size(95, 23);
             this.button_collectHardIronCalDatasetStartLogging.TabIndex = 50;
@@ -1070,7 +1072,7 @@
             this.groupBox_step1ClearHardIronBiasRegisters.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_step1ClearHardIronBiasRegisters.Location = new System.Drawing.Point(3, 3);
             this.groupBox_step1ClearHardIronBiasRegisters.Name = "groupBox_step1ClearHardIronBiasRegisters";
-            this.groupBox_step1ClearHardIronBiasRegisters.Size = new System.Drawing.Size(798, 60);
+            this.groupBox_step1ClearHardIronBiasRegisters.Size = new System.Drawing.Size(864, 60);
             this.groupBox_step1ClearHardIronBiasRegisters.TabIndex = 1;
             this.groupBox_step1ClearHardIronBiasRegisters.TabStop = false;
             this.groupBox_step1ClearHardIronBiasRegisters.Text = "Step 1 - Clear Hard-Iron Bias Registers";
@@ -1085,36 +1087,36 @@
             this.button_clearHardIronRegisters.UseVisualStyleBackColor = true;
             this.button_clearHardIronRegisters.Click += new System.EventHandler(this.button_clearHardIronRegisters_Click);
             // 
-            // tabPage_bootloader
+            // tabPage_uploadFirmware
             // 
-            this.tabPage_bootloader.AutoScroll = true;
-            this.tabPage_bootloader.Controls.Add(this.groupBox_uploadFirmware);
-            this.tabPage_bootloader.Location = new System.Drawing.Point(4, 22);
-            this.tabPage_bootloader.Name = "tabPage_bootloader";
-            this.tabPage_bootloader.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_bootloader.Size = new System.Drawing.Size(804, 464);
-            this.tabPage_bootloader.TabIndex = 5;
-            this.tabPage_bootloader.Text = "Bootloader";
-            this.tabPage_bootloader.UseVisualStyleBackColor = true;
+            this.tabPage_uploadFirmware.AutoScroll = true;
+            this.tabPage_uploadFirmware.Controls.Add(this.groupBox_bootloader);
+            this.tabPage_uploadFirmware.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_uploadFirmware.Name = "tabPage_uploadFirmware";
+            this.tabPage_uploadFirmware.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_uploadFirmware.Size = new System.Drawing.Size(870, 479);
+            this.tabPage_uploadFirmware.TabIndex = 5;
+            this.tabPage_uploadFirmware.Text = "Upload Firmware";
+            this.tabPage_uploadFirmware.UseVisualStyleBackColor = true;
             // 
-            // groupBox_uploadFirmware
+            // groupBox_bootloader
             // 
-            this.groupBox_uploadFirmware.Controls.Add(this.button_bootloaderBrowse);
-            this.groupBox_uploadFirmware.Controls.Add(this.label_bootloaderFilePath);
-            this.groupBox_uploadFirmware.Controls.Add(this.textBox_bootloaderFilePath);
-            this.groupBox_uploadFirmware.Controls.Add(this.button_bootloaderUpload);
-            this.groupBox_uploadFirmware.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox_uploadFirmware.Location = new System.Drawing.Point(3, 3);
-            this.groupBox_uploadFirmware.Name = "groupBox_uploadFirmware";
-            this.groupBox_uploadFirmware.Size = new System.Drawing.Size(798, 60);
-            this.groupBox_uploadFirmware.TabIndex = 0;
-            this.groupBox_uploadFirmware.TabStop = false;
-            this.groupBox_uploadFirmware.Text = "Upload Firmware";
+            this.groupBox_bootloader.Controls.Add(this.button_bootloaderBrowse);
+            this.groupBox_bootloader.Controls.Add(this.label_bootloaderFilePath);
+            this.groupBox_bootloader.Controls.Add(this.textBox_bootloaderFilePath);
+            this.groupBox_bootloader.Controls.Add(this.button_bootloaderUpload);
+            this.groupBox_bootloader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox_bootloader.Location = new System.Drawing.Point(3, 3);
+            this.groupBox_bootloader.Name = "groupBox_bootloader";
+            this.groupBox_bootloader.Size = new System.Drawing.Size(864, 60);
+            this.groupBox_bootloader.TabIndex = 0;
+            this.groupBox_bootloader.TabStop = false;
+            this.groupBox_bootloader.Text = "Bootloader";
             // 
             // button_bootloaderBrowse
             // 
             this.button_bootloaderBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_bootloaderBrowse.Location = new System.Drawing.Point(596, 22);
+            this.button_bootloaderBrowse.Location = new System.Drawing.Point(662, 22);
             this.button_bootloaderBrowse.Name = "button_bootloaderBrowse";
             this.button_bootloaderBrowse.Size = new System.Drawing.Size(95, 23);
             this.button_bootloaderBrowse.TabIndex = 1;
@@ -1137,13 +1139,13 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_bootloaderFilePath.Location = new System.Drawing.Point(64, 24);
             this.textBox_bootloaderFilePath.Name = "textBox_bootloaderFilePath";
-            this.textBox_bootloaderFilePath.Size = new System.Drawing.Size(526, 20);
+            this.textBox_bootloaderFilePath.Size = new System.Drawing.Size(592, 20);
             this.textBox_bootloaderFilePath.TabIndex = 0;
             // 
             // button_bootloaderUpload
             // 
             this.button_bootloaderUpload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_bootloaderUpload.Location = new System.Drawing.Point(697, 22);
+            this.button_bootloaderUpload.Location = new System.Drawing.Point(763, 22);
             this.button_bootloaderUpload.Name = "button_bootloaderUpload";
             this.button_bootloaderUpload.Size = new System.Drawing.Size(95, 23);
             this.button_bootloaderUpload.TabIndex = 2;
@@ -1169,7 +1171,7 @@
             this.tabPage_about.Location = new System.Drawing.Point(4, 22);
             this.tabPage_about.Name = "tabPage_about";
             this.tabPage_about.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_about.Size = new System.Drawing.Size(804, 464);
+            this.tabPage_about.Size = new System.Drawing.Size(870, 479);
             this.tabPage_about.TabIndex = 2;
             this.tabPage_about.Text = "About";
             this.tabPage_about.UseVisualStyleBackColor = true;
@@ -1289,11 +1291,21 @@
             this.label_GUIversion.TabIndex = 23;
             this.label_GUIversion.Text = "GUI version:";
             // 
+            // appendedTreeView_registers
+            // 
+            this.appendedTreeView_registers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.appendedTreeView_registers.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.appendedTreeView_registers.Location = new System.Drawing.Point(3, 3);
+            this.appendedTreeView_registers.Name = "appendedTreeView_registers";
+            this.appendedTreeView_registers.Size = new System.Drawing.Size(864, 473);
+            this.appendedTreeView_registers.TabIndex = 0;
+            this.appendedTreeView_registers.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.appendedTreeView_registers_NodeMouseClick);
+            // 
             // Form_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(812, 490);
+            this.ClientSize = new System.Drawing.Size(878, 505);
             this.Controls.Add(this.tabControl_main);
             this.Name = "Form_main";
             this.Text = "x-IMU GUI";
@@ -1334,9 +1346,9 @@
             this.groupBox_step2collectHardIronCalibrationDataSet.ResumeLayout(false);
             this.groupBox_step2collectHardIronCalibrationDataSet.PerformLayout();
             this.groupBox_step1ClearHardIronBiasRegisters.ResumeLayout(false);
-            this.tabPage_bootloader.ResumeLayout(false);
-            this.groupBox_uploadFirmware.ResumeLayout(false);
-            this.groupBox_uploadFirmware.PerformLayout();
+            this.tabPage_uploadFirmware.ResumeLayout(false);
+            this.groupBox_bootloader.ResumeLayout(false);
+            this.groupBox_bootloader.PerformLayout();
             this.tabPage_about.ResumeLayout(false);
             this.tabPage_about.PerformLayout();
             this.ResumeLayout(false);
@@ -1352,7 +1364,7 @@
         private System.Windows.Forms.TabPage tabPage_serialPort;
         private System.Windows.Forms.TabPage tabPage_about;
         private System.Windows.Forms.TabPage tabPage_ViewSensorData;
-        private System.Windows.Forms.TabPage tabPage_bootloader;
+        private System.Windows.Forms.TabPage tabPage_uploadFirmware;
         private System.Windows.Forms.Button button_refreshList;
         private System.Windows.Forms.GroupBox groupBox_battThermData;
         private System.Windows.Forms.GroupBox groupBox_sensorData;
@@ -1363,7 +1375,7 @@
         private System.Windows.Forms.Button button_showAccelGraph;
         private System.Windows.Forms.Button button_showGyroGraph;
         private System.Windows.Forms.Button button_show3Dcuboid;
-        private System.Windows.Forms.GroupBox groupBox_uploadFirmware;
+        private System.Windows.Forms.GroupBox groupBox_bootloader;
         private System.Windows.Forms.Button button_bootloaderBrowse;
         private System.Windows.Forms.Label label_bootloaderFilePath;
         private System.Windows.Forms.TextBox textBox_bootloaderFilePath;
@@ -1382,7 +1394,7 @@
         private System.Windows.Forms.Button button_showEulerAngleGraph;
         private System.Windows.Forms.TabPage tabPage_commands;
         private System.Windows.Forms.GroupBox groupBox_general;
-        private System.Windows.Forms.Button button_resetDevice;
+        private System.Windows.Forms.Button button_reset;
         private System.Windows.Forms.Button button_sleep;
         private System.Windows.Forms.Button button_resetSleepTimer;
         private System.Windows.Forms.GroupBox groupBox_sensorCalibration;
@@ -1391,9 +1403,10 @@
         private System.Windows.Forms.Button button_lookupAccelBiasAndSens;
         private System.Windows.Forms.Button button_measMagParameters;
         private System.Windows.Forms.GroupBox groupBox_algorithm;
-        private System.Windows.Forms.Button button_resetAlgorithm;
+        private System.Windows.Forms.Button button_initialise;
         private System.Windows.Forms.Button button_tare;
         private System.Windows.Forms.Button button_clearTare;
+        private System.Windows.Forms.Button button_initialiseThenTare;
         private System.Windows.Forms.GroupBox groupBox_receivedCommandMessages;
         private System.Windows.Forms.CheckBox checkBox_displayCommandConfirmations;
         private System.Windows.Forms.TabPage tabPage_hardIronCalibration;
@@ -1466,11 +1479,13 @@
             appendedTextBoxTreeNode_DeviceID.TextBox.ReadOnly = true;
             appendedComboBoxTreeNode_buttonMode = new AppendedTreeNodeComboBox("Button Mode:");
             appendedComboBoxTreeNode_buttonMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            appendedComboBoxTreeNode_buttonMode.ComboBox.Width = 150;
             appendedComboBoxTreeNode_buttonMode.ComboBox.Items.Add("Disabled");
-            appendedComboBoxTreeNode_buttonMode.ComboBox.Items.Add("Reset device");
+            appendedComboBoxTreeNode_buttonMode.ComboBox.Items.Add("Reset");
             appendedComboBoxTreeNode_buttonMode.ComboBox.Items.Add("Sleep/wake");
-            appendedComboBoxTreeNode_buttonMode.ComboBox.Items.Add("Reset algorithm");
-            appendedComboBoxTreeNode_buttonMode.ComboBox.Items.Add("Tare");
+            appendedComboBoxTreeNode_buttonMode.ComboBox.Items.Add("Algorithm initialise");
+            appendedComboBoxTreeNode_buttonMode.ComboBox.Items.Add("Algorithm tare");
+            appendedComboBoxTreeNode_buttonMode.ComboBox.Items.Add("Algorithm initialise then tare");
             treeNodeGeneral = new System.Windows.Forms.TreeNode("General", new System.Windows.Forms.TreeNode[] {
             appendedTextBoxTreeNode_FirmwareVersion,
             appendedTextBoxTreeNode_DeviceID,

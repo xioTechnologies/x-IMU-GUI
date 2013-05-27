@@ -33,7 +33,7 @@ namespace xIMU_GUI
         /// <summary>
         /// Gets or sets the digital I/O directions.
         /// </summary>
-        public xIMU_API.DigitalIOdata.PortData IsInput { get; set; }
+        public xIMU_API.DigitalIOdata.PortData Direction { get; set; }
 
         /// <summary>
         /// Gets or sets the digital I/O states.
@@ -118,7 +118,7 @@ namespace xIMU_GUI
 
             #region Create properties
 
-            IsInput = new xIMU_API.DigitalIOdata.PortData();
+            Direction = new xIMU_API.DigitalIOdata.PortData();
             State = new xIMU_API.DigitalIOdata.PortData();
 
             #endregion
@@ -153,27 +153,27 @@ namespace xIMU_GUI
         {
             #region Indicate direction
 
-            checkBox_AX0.Enabled = !IsInput.AX0;
-            checkBox_AX1.Enabled = !IsInput.AX1;
-            checkBox_AX2.Enabled = !IsInput.AX2;
-            checkBox_AX3.Enabled = !IsInput.AX3;
-            checkBox_AX4.Enabled = !IsInput.AX4;
-            checkBox_AX5.Enabled = !IsInput.AX5;
-            checkBox_AX6.Enabled = !IsInput.AX6;
-            checkBox_AX7.Enabled = !IsInput.AX7;
+            checkBox_AX0.Enabled = !Direction.AX0;
+            checkBox_AX1.Enabled = !Direction.AX1;
+            checkBox_AX2.Enabled = !Direction.AX2;
+            checkBox_AX3.Enabled = !Direction.AX3;
+            checkBox_AX4.Enabled = !Direction.AX4;
+            checkBox_AX5.Enabled = !Direction.AX5;
+            checkBox_AX6.Enabled = !Direction.AX6;
+            checkBox_AX7.Enabled = !Direction.AX7;
 
             #endregion
 
             #region Indicate state
 
-            if (IsInput.AX0) checkBox_AX0.Checked = State.AX0;  // do not adjust outputs as out-of-date incoming data may cancel out user action
-            if (IsInput.AX1) checkBox_AX1.Checked = State.AX1;
-            if (IsInput.AX2) checkBox_AX2.Checked = State.AX2;
-            if (IsInput.AX3) checkBox_AX3.Checked = State.AX3;
-            if (IsInput.AX4) checkBox_AX4.Checked = State.AX4;
-            if (IsInput.AX5) checkBox_AX5.Checked = State.AX5;
-            if (IsInput.AX6) checkBox_AX6.Checked = State.AX6;
-            if (IsInput.AX7) checkBox_AX7.Checked = State.AX7;
+            if (Direction.AX0) checkBox_AX0.Checked = State.AX0;  // do not adjust outputs as out-of-date incoming data may cancel out user action
+            if (Direction.AX1) checkBox_AX1.Checked = State.AX1;
+            if (Direction.AX2) checkBox_AX2.Checked = State.AX2;
+            if (Direction.AX3) checkBox_AX3.Checked = State.AX3;
+            if (Direction.AX4) checkBox_AX4.Checked = State.AX4;
+            if (Direction.AX5) checkBox_AX5.Checked = State.AX5;
+            if (Direction.AX6) checkBox_AX6.Checked = State.AX6;
+            if (Direction.AX7) checkBox_AX7.Checked = State.AX7;
 
             #endregion
         }

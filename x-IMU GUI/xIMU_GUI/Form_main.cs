@@ -61,7 +61,7 @@ namespace xIMU_GUI
         private DigitalIOpanel digitalIOpanel;
 
         /// <summary>
-        /// ASCII files object for data logger.
+        /// CSV files object for data logger.
         /// </summary>
         private xIMU_API.CSVfileWriter dataLoggerFiles;
 
@@ -71,12 +71,17 @@ namespace xIMU_GUI
         private xIMU_API.PacketCount dataLoggerStartPacketCount;
 
         /// <summary>
-        /// ASCII files object for converted binary files.
+        /// CSV files object for converted binary files.
         /// </summary>
         private xIMU_API.CSVfileWriter convertedBinaryFiles;
 
         /// <summary>
-        /// ASCII files object for hard-iron calibration dataset logging.
+        /// Progress dialog used to display and enable cancellation of asynchronous file read process.
+        /// </summary>
+        private ProgressDialog binaryFileConverterProgressDialog;
+
+        /// <summary>
+        /// CSV files object for hard-iron calibration dataset logging.
         /// </summary>
         private xIMU_API.CSVfileWriter hardIronCalDataFiles;
 
@@ -134,7 +139,7 @@ namespace xIMU_GUI
             xIMUserial.DigitalIODataReceived += new xIMU_API.xIMUserial.onDigitalIODataReceived(xIMUserial_DigitalIODataReceived);
 
             // Create register data buffer and tool tip
-            treeViewRegisterDataBuffer = new xIMU_API.RegisterData[(int)xIMU_API.RegisterAddresses.numRegisters];
+            treeViewRegisterDataBuffer = new xIMU_API.RegisterData[(int)xIMU_API.RegisterAddresses.NumRegisters];
             ToolTip toolTip = new ToolTip();
             toolTip.ToolTipTitle = "Tip:";
             toolTip.SetToolTip(appendedTreeView_registers, "Right-click for action menu");
@@ -194,7 +199,7 @@ namespace xIMU_GUI
 
             // Apply new register data to tree view
             bool needToRefresh = false;
-            for (int i = 0; i < (int)xIMU_API.RegisterAddresses.numRegisters; i++)
+            for (int i = 0; i < (int)xIMU_API.RegisterAddresses.NumRegisters; i++)
             {
                 if (treeViewRegisterDataBuffer[i] != null)                                // non-null data class indicates new data
                 {
@@ -372,7 +377,7 @@ namespace xIMU_GUI
                     OpenPort();
                     autoConnectProgressDialog.CloseDialog();
                 })));
-                PassiveMessageBox.Show("Connected to x-IMU " + e.PortAssignments[0].DeviceID + " on " + e.PortAssignments[0].PortName + ".", "Message", MessageBoxIcon.Information);
+                PassiveMessageBox.Show("Connected to x-IMU " + e.PortAssignments[0].DeviceID + " on " + e.PortAssignments[0].PortName + ".", "Information", MessageBoxIcon.Information);
             }
             catch
             {
@@ -1064,9 +1069,9 @@ namespace xIMU_GUI
         /// <summary>
         /// Sends command packet to reset device.
         /// </summary>
-        private void button_resetDevice_Click(object sender, EventArgs e)
+        private void button_reset_Click(object sender, EventArgs e)
         {
-            SendCommandPacket(xIMU_API.CommandCodes.ResetDevice);
+            SendCommandPacket(xIMU_API.CommandCodes.Reset);
         }
 
         /// <summary>
@@ -1120,9 +1125,9 @@ namespace xIMU_GUI
         /// <summary>
         /// Sends command packet to reset algorithm.
         /// </summary>
-        private void button_resetAlgorithm_Click(object sender, EventArgs e)
+        private void button_initialise_Click(object sender, EventArgs e)
         {
-            SendCommandPacket(xIMU_API.CommandCodes.ResetAlgorithm);
+            SendCommandPacket(xIMU_API.CommandCodes.AlgorithmInit);
         }
 
         /// <summary>
@@ -1130,7 +1135,7 @@ namespace xIMU_GUI
         /// </summary>
         private void button_tare_Click(object sender, EventArgs e)
         {
-            SendCommandPacket(xIMU_API.CommandCodes.Tare);
+            SendCommandPacket(xIMU_API.CommandCodes.AlgorithmTare);
         }
 
         /// <summary>
@@ -1138,7 +1143,15 @@ namespace xIMU_GUI
         /// </summary>
         private void button_clearTare_Click(object sender, EventArgs e)
         {
-            SendCommandPacket(xIMU_API.CommandCodes.ClearTare);
+            SendCommandPacket(xIMU_API.CommandCodes.AlgorithmClearTare);
+        }
+
+        /// <summary>
+        /// Sends command packet to clear initialise then tare.
+        /// </summary>
+        private void button_initialiseThenTare_Click(object sender, EventArgs e)
+        {
+            SendCommandPacket(xIMU_API.CommandCodes.AlgorithmInitThenTare);
         }
 
         /// <summary>
@@ -1396,11 +1409,11 @@ namespace xIMU_GUI
         }
 
         /// <summary>
-        /// Digital I/O data received event to display data in form and write to file.
+        /// Digital I/O data received event to display data in form.
         /// </summary>
         private void xIMUserial_DigitalIODataReceived(object sender, xIMU_API.DigitalIOdata e)
         {
-            digitalIOpanel.IsInput = e.IsInput;
+            digitalIOpanel.Direction = e.Direction;
             digitalIOpanel.State = e.State;
         }
 
@@ -1460,7 +1473,7 @@ namespace xIMU_GUI
         }
 
         /// <summary>
-        /// x-IMU data receive event to write data to ASCII files if data logging.
+        /// x-IMU data receive event to write data to CSV files if data logging.
         /// </summary>
         void xIMUserial_xIMUdataReceived(object sender, xIMU_API.xIMUdata e)
         {
@@ -1501,6 +1514,7 @@ namespace xIMU_GUI
                                    "Packet read errors:\t\t\t\t" + Convert.ToString(packetCount.PacketsReadErrors) + "\r" +
                                    "Error packets read:\t\t\t\t" + Convert.ToString(packetCount.ErrorPacketsRead) + "\r" +
                                    "Command packets read:\t\t\t" + Convert.ToString(packetCount.CommandPacketsRead) + "\r" +
+                                   "Register data packets read:\t\t\t" + Convert.ToString(packetCount.RegisterDataPacketsRead) + "\r" +
                                    "Date/time packets read:\t\t\t" + Convert.ToString(packetCount.DateTimeDataPacketsRead) + "\r" +
                                    "Raw battery and thermometer packets read:\t" + Convert.ToString(packetCount.RawBattThermDataPacketsRead) + "\r" +
                                    "Calibrated battery and thermometer packets read:\t" + Convert.ToString(packetCount.CalBattThermDataPacketsRead) + "\r" +
@@ -1526,7 +1540,6 @@ namespace xIMU_GUI
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Select File";
             openFileDialog.Filter = "binary files (*.bin)|*.bin|All files (*.*)|*.*";
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 textBox_convertBinaryFileFilePath.Text = openFileDialog.FileName.ToString();
@@ -1551,36 +1564,66 @@ namespace xIMU_GUI
             button_convertBinaryFileConvert.Enabled = false;
             button_convertBinaryFileConvert.Text = "Converting...";
 
-            // Perform conversion in new thread (Re-enable SD card form controls when complete)
-            var thread = new Thread(
-              () =>
-              {
-                  try
-                  {
-                      convertedBinaryFiles = new xIMU_API.CSVfileWriter(Path.GetDirectoryName(textBox_convertBinaryFileFilePath.Text) + "\\" + Path.GetFileNameWithoutExtension(textBox_convertBinaryFileFilePath.Text));
-                      xIMU_API.xIMUfile xIMUfile = new xIMU_API.xIMUfile(textBox_convertBinaryFileFilePath.Text);
-                      xIMUfile.xIMUdataRead += new xIMU_API.xIMUfile.onxIMUdataRead(xIMUfile_xIMUdataRead);
-                      xIMUfile.Read();
-                      xIMUfile.Close();
-                      ShowDataLoggerReport(xIMUfile.PacketCounter, convertedBinaryFiles.CloseFiles(), "Conversion Report");
-                  }
-                  catch (Exception ex)
-                  {
-                      MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                  }
-                  this.EndInvoke(this.BeginInvoke(new MethodInvoker(delegate
-                  {
-                      button_convertBinaryFileConvert.Text = "Convert";
-                      textBox_convertBinaryFileFilePath.Enabled = true;
-                      button_convertBinaryFileConvert.Enabled = true;
-                      button_convertBinaryFileConvertBrowse.Enabled = true;
-                  })));
-              });
-            thread.Start();
+            // Create process dialog
+            binaryFileConverterProgressDialog = new ProgressDialog(this.Handle);
+            binaryFileConverterProgressDialog.Title = "Converting Binary File";
+            binaryFileConverterProgressDialog.CancelMessage = "Cancelling...";
+            binaryFileConverterProgressDialog.Line1 = "Converting to binary file to CSV files";
+            binaryFileConverterProgressDialog.Line3 = "Initialising x-IMU file reader.";
+            binaryFileConverterProgressDialog.ShowDialog();
+            binaryFileConverterProgressDialog.Value = 0;
+
+            // Create file converter objects
+            convertedBinaryFiles = new xIMU_API.CSVfileWriter(Path.GetDirectoryName(textBox_convertBinaryFileFilePath.Text) + "\\" + Path.GetFileNameWithoutExtension(textBox_convertBinaryFileFilePath.Text));
+            xIMU_API.xIMUfile xIMUfile = new xIMU_API.xIMUfile(textBox_convertBinaryFileFilePath.Text);
+            xIMUfile.xIMUdataRead += new xIMU_API.xIMUfile.onxIMUdataRead(xIMUfile_xIMUdataRead);
+            xIMUfile.AsyncReadProgressChanged += new xIMU_API.xIMUfile.onAsyncReadProgressChanged(xIMUfile_AsyncReadProgressChanged);
+            xIMUfile.AsyncReadCompleted += new xIMU_API.xIMUfile.onAsyncReadCompleted(xIMUfile_AsyncReadCompleted);
+            xIMUfile.RunAnsycRead();
         }
 
         /// <summary>
-        /// x-IMU data read event to write data to ASCII files.
+        /// Asynchronous read progress change event to update progress dialog and poll user cancel.
+        /// </summary>
+        void xIMUfile_AsyncReadProgressChanged(object sender, xIMU_API.AsyncReadProgressChangedEventArgs e)
+        {
+            this.EndInvoke(this.BeginInvoke(new MethodInvoker(delegate
+            {
+                if (binaryFileConverterProgressDialog.HasUserCancelled)
+                {
+                    ((xIMU_API.xIMUfile)sender).CancelAnsycRead();
+                }
+                else
+                {
+                    binaryFileConverterProgressDialog.Value = (uint)e.ProgressPercentage;
+                    binaryFileConverterProgressDialog.Line3 = e.ProgressMessage;
+                }
+            })));
+        }
+
+        /// <summary>
+        /// Asynchronous read complete event to set form control states and open serial port if successful.
+        /// </summary>
+        void xIMUfile_AsyncReadCompleted(object sender, xIMU_API.AsyncReadCompletedEventArgs e)
+        {
+            string[] fileNames = convertedBinaryFiles.CloseFiles();
+            ((xIMU_API.xIMUfile)sender).Close();
+            if (!e.Cancelled)
+            {
+                ShowDataLoggerReport(e.PacketCounter, fileNames, "Conversion Report");
+            }
+            this.EndInvoke(this.BeginInvoke(new MethodInvoker(delegate
+            {
+                button_convertBinaryFileConvert.Text = "Convert";
+                textBox_convertBinaryFileFilePath.Enabled = true;
+                button_convertBinaryFileConvert.Enabled = true;
+                button_convertBinaryFileConvertBrowse.Enabled = true;
+                binaryFileConverterProgressDialog.CloseDialog();
+            })));
+        }
+
+        /// <summary>
+        /// x-IMU data read event to write data to CSV files.
         /// </summary>
         void xIMUfile_xIMUdataRead(object sender, xIMU_API.xIMUdata e)
         {
@@ -1679,12 +1722,12 @@ namespace xIMU_GUI
                 hardIronCalDataFiles = null;;
                 if (numPackets == 0)
                 {
-                    PassiveMessageBox.Show("No calibrated inertial/magnetic data packets were received.  File not created.", "Message", MessageBoxIcon.Warning);
+                    PassiveMessageBox.Show("No calibrated inertial/magnetic data packets were received.  File not created.", "Information", MessageBoxIcon.Warning);
                 }
                 else
                 {
                     PassiveMessageBox.Show("Calibrated inertial/magnetic packets received: " + Convert.ToString(numPackets) + ".\r"+
-                                          "File created: " + fileNames[0], "Message", MessageBoxIcon.Information);
+                                          "File created: " + fileNames[0], "Information", MessageBoxIcon.Information);
                 }
                 button_collectHardIronCalDatasetBrowse.Enabled = true;
                 textBox_collectHardIronCalDatasetFilePath.Enabled = true;
@@ -1765,7 +1808,7 @@ namespace xIMU_GUI
                 {
                     throw new Exception("Port is closed.");
                 }
-                PassiveMessageBox.Show("Hard-iron calibration complete.  The magnetometer hard-iron bias registers have been updated.", "Message", MessageBoxIcon.Information);
+                PassiveMessageBox.Show("Hard-iron calibration complete.  The magnetometer hard-iron bias registers have been updated.", "Information", MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -1848,7 +1891,7 @@ namespace xIMU_GUI
                 // Reset device
                 xIMU_API.xIMUserial tempxIMUserial = new xIMU_API.xIMUserial(comboBox_portName.Text);
                 tempxIMUserial.Open();
-                tempxIMUserial.SendCommandPacket(xIMU_API.CommandCodes.ResetDevice);
+                tempxIMUserial.SendCommandPacket(xIMU_API.CommandCodes.Reset);
                 tempxIMUserial.Close();
 
                 // Run external bootloader process
