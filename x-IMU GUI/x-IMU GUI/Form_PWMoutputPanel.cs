@@ -25,24 +25,9 @@ namespace x_IMU_GUI
         private bool trackBarsChanged = false;
 
         /// <summary>
-        /// Gets or sets the AX0 duty cycle displayed in the TextBox.
+        /// Gets or sets the displayed <see cref="PWMoutputData"/>.
         /// </summary>
-        public float AX0 { get; set; }
-
-        /// <summary>
-        /// Gets or sets the AX2 duty cycle displayed in the TextBox.
-        /// </summary>
-        public float AX2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets the AX4 duty cycle displayed in the TextBox.
-        /// </summary>
-        public float AX4 { get; set; }
-
-        /// <summary>
-        /// Gets or sets the AX6 duty cycle displayed in the TextBox.
-        /// </summary>
-        public float AX6 { get; set; }
+        public x_IMU_API.PWMoutputData PWMoutputData { get; set; }
 
         /// <summary>
         /// Initialises a new instance of the <see cref="Form_PWMoutputPanel"/> class.
@@ -50,31 +35,29 @@ namespace x_IMU_GUI
         public Form_PWMoutputPanel()
         {
             InitializeComponent();
-            AX0 = 0.0f;
-            AX2 = 0.0f;
-            AX4 = 0.0f;
-            AX6 = 0.0f;
+            PWMoutputData = new x_IMU_API.PWMoutputData();
             formUpdateTimer = new Timer();
             formUpdateTimer.Interval = 20;
             formUpdateTimer.Tick += new EventHandler(formUpdateTimer_Tick);
         }
 
         /// <summary>
-        /// Visible changed event to start/stop form update formUpdateTimer.
+        /// Form VisibleChanged event starts/stops formUpdateTimer.
         /// </summary>
         private void Form_PWMoutputPanel_VisibleChanged(object sender, EventArgs e)
         {
-             if(this.Visible) {
-                 formUpdateTimer.Start();
-             }
-             else
-             {
-                 formUpdateTimer.Stop();
-             }
+            if (this.Visible)
+            {
+                formUpdateTimer.Start();
+            }
+            else
+            {
+                formUpdateTimer.Stop();
+            }
         }
 
         /// <summary>
-        /// Form closing event to minimise form instead of close.
+        /// FormClosing event minimises form instead of close.
         /// </summary>
         private void Form_PWMoutputPanel_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -83,7 +66,7 @@ namespace x_IMU_GUI
         }
 
         /// <summary>
-        /// TrackBar Scroll event to set flag.
+        /// TrackBar Scroll event set flags.
         /// </summary>
         private void trackBar_Scroll(object sender, EventArgs e)
         {
@@ -91,18 +74,18 @@ namespace x_IMU_GUI
         }
 
         /// <summary>
-        /// Timer tick event to update form controls and parse TrackBar values if have changed.
+        /// Timer Tick event updates form controls and parse TrackBar values if have changed.
         /// </summary>
         private void formUpdateTimer_Tick(object sender, EventArgs e)
         {
-            textBox_AX0.Text = String.Format("{0:0.000}", AX0);
-            textBox_AX2.Text = String.Format("{0:0.000}", AX2);
-            textBox_AX4.Text = String.Format("{0:0.000}", AX4);
-            textBox_AX6.Text = String.Format("{0:0.000}", AX6);
+            textBox_AX0.Text = PWMoutputData.AX0.ToString();
+            textBox_AX2.Text = PWMoutputData.AX2.ToString();
+            textBox_AX4.Text = PWMoutputData.AX4.ToString();
+            textBox_AX6.Text = PWMoutputData.AX6.ToString();
             if (trackBarsChanged)
             {
                 trackBarsChanged = false;
-                OnValuesChanged(new x_IMU_API.PWMoutputData(((float)trackBar_AX0.Value) / 1000.0f, ((float)trackBar_AX2.Value) / 1000.0f, ((float)trackBar_AX4.Value) / 1000.0f, ((float)trackBar_AX6.Value) / 1000.0f));
+                OnValuesChanged(new x_IMU_API.PWMoutputData((ushort)trackBar_AX0.Value, (ushort)trackBar_AX2.Value, (ushort)trackBar_AX4.Value, (ushort)trackBar_AX6.Value));
             }
         }
 

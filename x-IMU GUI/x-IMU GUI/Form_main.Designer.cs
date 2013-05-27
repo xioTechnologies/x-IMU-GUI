@@ -31,19 +31,20 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_main));
-            this.button_openPort = new System.Windows.Forms.Button();
             this.label_portName = new System.Windows.Forms.Label();
             this.comboBox_portName = new System.Windows.Forms.ComboBox();
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_serialPort = new System.Windows.Forms.TabPage();
-            this.groupBox_packetCounts = new System.Windows.Forms.GroupBox();
+            this.groupBox_packetCounters = new System.Windows.Forms.GroupBox();
             this.label_packetsSent = new System.Windows.Forms.Label();
             this.textBox_packetsSent = new System.Windows.Forms.TextBox();
             this.textBox_packetsReceived = new System.Windows.Forms.TextBox();
             this.label_packetsReceived = new System.Windows.Forms.Label();
-            this.groupBox_OpenClosePort = new System.Windows.Forms.GroupBox();
+            this.groupBox_openClosePort = new System.Windows.Forms.GroupBox();
+            this.toggleButton_openClosePort = new x_IMU_GUI.ToggleButton();
             this.button_refreshList = new System.Windows.Forms.Button();
             this.tabPage_registers = new System.Windows.Forms.TabPage();
+            this.registerTreeView = new x_IMU_GUI.RegisterTreeView();
             this.tabPage_dateTime = new System.Windows.Forms.TabPage();
             this.groupBox_dateTime = new System.Windows.Forms.GroupBox();
             this.button_setDateTime = new System.Windows.Forms.Button();
@@ -54,70 +55,77 @@
             this.groupBox_receivedCommandMessages = new System.Windows.Forms.GroupBox();
             this.checkBox_displayCommandConfirmations = new System.Windows.Forms.CheckBox();
             this.groupBox_algorithm = new System.Windows.Forms.GroupBox();
-            this.button_initialiseThenTare = new System.Windows.Forms.Button();
-            this.button_clearTare = new System.Windows.Forms.Button();
-            this.button_tare = new System.Windows.Forms.Button();
-            this.button_initialise = new System.Windows.Forms.Button();
+            this.commandButton_initialiseThenTare = new x_IMU_GUI.CommandButton();
+            this.commandButton_initialise = new x_IMU_GUI.CommandButton();
+            this.commandButton_clearTare = new x_IMU_GUI.CommandButton();
+            this.commandButton_tare = new x_IMU_GUI.CommandButton();
             this.groupBox_magnetometerCalibration = new System.Windows.Forms.GroupBox();
-            this.button_measMagBiasSens = new System.Windows.Forms.Button();
+            this.commandButton_measMagBiasSens = new x_IMU_GUI.CommandButton();
             this.groupBox_accelerometerCalibration = new System.Windows.Forms.GroupBox();
-            this.button_sampleAccelAxisAt1g = new System.Windows.Forms.Button();
-            this.button_calcAccelBiasSens = new System.Windows.Forms.Button();
+            this.commandButton_calcAccelBiasSens = new x_IMU_GUI.CommandButton();
+            this.commandButton_sampleAccelAxisAt1g = new x_IMU_GUI.CommandButton();
             this.groupBox_gyroscopeCalibration = new System.Windows.Forms.GroupBox();
-            this.button_calcGyroBiasParameters = new System.Windows.Forms.Button();
-            this.button_calculateGyroSensitivity = new System.Windows.Forms.Button();
-            this.button_sampleGyroAt200dps = new System.Windows.Forms.Button();
-            this.button_sampleGyroBiasAtT2 = new System.Windows.Forms.Button();
-            this.button_sampleGyroBiasAtT1 = new System.Windows.Forms.Button();
+            this.commandButton_calcGyroBiasParameters = new x_IMU_GUI.CommandButton();
+            this.commandButton_sampleGyroAt200dps = new x_IMU_GUI.CommandButton();
+            this.commandButton_sampleGyroBiasAtT2 = new x_IMU_GUI.CommandButton();
+            this.commandButton_calculateGyroSensitivity = new x_IMU_GUI.CommandButton();
+            this.commandButtonbutton_sampleGyroBiasAtT1 = new x_IMU_GUI.CommandButton();
             this.groupBox_general = new System.Windows.Forms.GroupBox();
-            this.button_factoryReset = new System.Windows.Forms.Button();
-            this.button_resetSleepTimer = new System.Windows.Forms.Button();
-            this.button_sleep = new System.Windows.Forms.Button();
-            this.button_reset = new System.Windows.Forms.Button();
-            this.tabPage_ViewSensorData = new System.Windows.Forms.TabPage();
-            this.groupBox_orienData = new System.Windows.Forms.GroupBox();
-            this.label_psi = new System.Windows.Forms.Label();
-            this.label_theta = new System.Windows.Forms.Label();
-            this.label_phi = new System.Windows.Forms.Label();
-            this.label_eulerLegend = new System.Windows.Forms.Label();
-            this.button_showEulerAngleGraph = new System.Windows.Forms.Button();
-            this.button_show3Dcuboid = new System.Windows.Forms.Button();
-            this.groupBox_sensorData = new System.Windows.Forms.GroupBox();
-            this.label_legendZ = new System.Windows.Forms.Label();
-            this.label_legendY = new System.Windows.Forms.Label();
-            this.label_legendX = new System.Windows.Forms.Label();
-            this.label_sensorLegend = new System.Windows.Forms.Label();
-            this.button_showMagGraph = new System.Windows.Forms.Button();
-            this.button_showAccelGraph = new System.Windows.Forms.Button();
-            this.button_showGyroGraph = new System.Windows.Forms.Button();
-            this.groupBox_battThermData = new System.Windows.Forms.GroupBox();
-            this.button_showBatteryGraph = new System.Windows.Forms.Button();
-            this.button_showThermGraph = new System.Windows.Forms.Button();
+            this.commandButton_resetSleepTimer = new x_IMU_GUI.CommandButton();
+            this.commandButton_sleep = new x_IMU_GUI.CommandButton();
+            this.commandButton_reset = new x_IMU_GUI.CommandButton();
+            this.commandButton_factoryReset = new x_IMU_GUI.CommandButton();
+            this.tabPage_viewSensorData = new System.Windows.Forms.TabPage();
+            this.groupBox_orientationData = new System.Windows.Forms.GroupBox();
+            this.showHideButton_eulerAnglesGraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_3Dcuboid = new x_IMU_GUI.ShowHideButton();
+            this.label_orientationDataLegendPsi = new System.Windows.Forms.Label();
+            this.label_orientationDataLegendTheta = new System.Windows.Forms.Label();
+            this.label_orientationDataLegendPhi = new System.Windows.Forms.Label();
+            this.label_orientationDataLegend = new System.Windows.Forms.Label();
+            this.groupBox_inertialAndMagneticData = new System.Windows.Forms.GroupBox();
+            this.showHideButton_magnetometerGraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_accelerometerGraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_gyroscopeGraph = new x_IMU_GUI.ShowHideButton();
+            this.label_inertialAndMagneticDataZ = new System.Windows.Forms.Label();
+            this.label_inertialAndMagneticDataY = new System.Windows.Forms.Label();
+            this.label_inertialAndMagneticDataX = new System.Windows.Forms.Label();
+            this.label_inertialAndMagneticDataLegend = new System.Windows.Forms.Label();
+            this.groupBox_batteryAndThermometerData = new System.Windows.Forms.GroupBox();
+            this.showHideButton_thermometerGraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_batteryGraph = new x_IMU_GUI.ShowHideButton();
             this.tabPage_auxillaryPort = new System.Windows.Forms.TabPage();
             this.groupBox_ADXL345bus = new System.Windows.Forms.GroupBox();
-            this.button_showADXL345Dgraph = new System.Windows.Forms.Button();
-            this.button_showADXL345Cgraph = new System.Windows.Forms.Button();
-            this.button_showADXL345Bgraph = new System.Windows.Forms.Button();
-            this.button_showADXL345Agraph = new System.Windows.Forms.Button();
-            this.groupBox_pwmOutput = new System.Windows.Forms.GroupBox();
-            this.button_showPWMoutputPanel = new System.Windows.Forms.Button();
+            this.label_ADXL345busZ = new System.Windows.Forms.Label();
+            this.label_ADXL345busY = new System.Windows.Forms.Label();
+            this.label_ADXL345busX = new System.Windows.Forms.Label();
+            this.label_ADXL345busLegend = new System.Windows.Forms.Label();
+            this.showHideButton_ADXL345Dgraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_ADXL345Agraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_ADXL345Bgraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_ADXL345Cgraph = new x_IMU_GUI.ShowHideButton();
+            this.groupBox_PWMoutput = new System.Windows.Forms.GroupBox();
+            this.showHideButton_PWMoutputPanel = new x_IMU_GUI.ShowHideButton();
             this.groupBox_analogueInput = new System.Windows.Forms.GroupBox();
-            this.button_showAX6andAX7graph = new System.Windows.Forms.Button();
-            this.button_showAX4andAX5graph = new System.Windows.Forms.Button();
-            this.button_showAX2andAX3graph = new System.Windows.Forms.Button();
-            this.button_showAX0andAX1graph = new System.Windows.Forms.Button();
+            this.label_analogueInputAX0246 = new System.Windows.Forms.Label();
+            this.label_analogueInputAX1357 = new System.Windows.Forms.Label();
+            this.label_analogueInputLegend = new System.Windows.Forms.Label();
+            this.showHideButton_AX6andAX7graph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_AX0andAX1graph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_AX4andAX5graph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_AX2andAX3graph = new x_IMU_GUI.ShowHideButton();
             this.groupBox_digitalIO = new System.Windows.Forms.GroupBox();
-            this.button_showDigitalIOpanel = new System.Windows.Forms.Button();
+            this.showHideButton_digitalIOpanel = new x_IMU_GUI.ShowHideButton();
             this.tabPage_dataLogger = new System.Windows.Forms.TabPage();
             this.groupBox_logReceivedDataToFile = new System.Windows.Forms.GroupBox();
-            this.button_dataLoggerFilePathBrowse = new System.Windows.Forms.Button();
+            this.toggleButton_dataLoggerStartStopLogging = new x_IMU_GUI.ToggleButton();
+            this.button_dataLoggerBrowse = new System.Windows.Forms.Button();
             this.label_dataLoggerFilePath = new System.Windows.Forms.Label();
             this.textBox_dataLoggerFilePath = new System.Windows.Forms.TextBox();
-            this.button_dataLoggerStart = new System.Windows.Forms.Button();
             this.tabPage_SDcard = new System.Windows.Forms.TabPage();
-            this.groupBox_convertBinaryFile = new System.Windows.Forms.GroupBox();
-            this.button_convertBinaryFileConvertBrowse = new System.Windows.Forms.Button();
-            this.labelconvertBinaryFileFilePath = new System.Windows.Forms.Label();
+            this.groupBox_binaryFileConverter = new System.Windows.Forms.GroupBox();
+            this.button_convertBinaryFileBrowse = new System.Windows.Forms.Button();
+            this.label_convertBinaryFileFilePath = new System.Windows.Forms.Label();
             this.textBox_convertBinaryFileFilePath = new System.Windows.Forms.TextBox();
             this.button_convertBinaryFileConvert = new System.Windows.Forms.Button();
             this.tabPage_hardIronCalibration = new System.Windows.Forms.TabPage();
@@ -127,10 +135,10 @@
             this.textBox_hardIronCalFilePath = new System.Windows.Forms.TextBox();
             this.button_hardIronCalRun = new System.Windows.Forms.Button();
             this.groupBox_step2collectHardIronCalibrationDataSet = new System.Windows.Forms.GroupBox();
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging = new x_IMU_GUI.ToggleButton();
             this.button_collectHardIronCalDatasetBrowse = new System.Windows.Forms.Button();
             this.label_collectHardIronCalDatasetFilePath = new System.Windows.Forms.Label();
             this.textBox_collectHardIronCalDatasetFilePath = new System.Windows.Forms.TextBox();
-            this.button_collectHardIronCalDatasetStartLogging = new System.Windows.Forms.Button();
             this.groupBox_step1ClearHardIronBiasRegisters = new System.Windows.Forms.GroupBox();
             this.button_clearHardIronRegisters = new System.Windows.Forms.Button();
             this.tabPage_uploadFirmware = new System.Windows.Forms.TabPage();
@@ -150,11 +158,10 @@
             this.label_compatibleFirmwareVersions = new System.Windows.Forms.Label();
             this.label_APIversion = new System.Windows.Forms.Label();
             this.label_GUIversion = new System.Windows.Forms.Label();
-            this.appendedTreeView_registers = new x_IMU_GUI.AppendedTreeView();
             this.tabControl_main.SuspendLayout();
             this.tabPage_serialPort.SuspendLayout();
-            this.groupBox_packetCounts.SuspendLayout();
-            this.groupBox_OpenClosePort.SuspendLayout();
+            this.groupBox_packetCounters.SuspendLayout();
+            this.groupBox_openClosePort.SuspendLayout();
             this.tabPage_registers.SuspendLayout();
             this.tabPage_dateTime.SuspendLayout();
             this.groupBox_dateTime.SuspendLayout();
@@ -165,19 +172,19 @@
             this.groupBox_accelerometerCalibration.SuspendLayout();
             this.groupBox_gyroscopeCalibration.SuspendLayout();
             this.groupBox_general.SuspendLayout();
-            this.tabPage_ViewSensorData.SuspendLayout();
-            this.groupBox_orienData.SuspendLayout();
-            this.groupBox_sensorData.SuspendLayout();
-            this.groupBox_battThermData.SuspendLayout();
+            this.tabPage_viewSensorData.SuspendLayout();
+            this.groupBox_orientationData.SuspendLayout();
+            this.groupBox_inertialAndMagneticData.SuspendLayout();
+            this.groupBox_batteryAndThermometerData.SuspendLayout();
             this.tabPage_auxillaryPort.SuspendLayout();
             this.groupBox_ADXL345bus.SuspendLayout();
-            this.groupBox_pwmOutput.SuspendLayout();
+            this.groupBox_PWMoutput.SuspendLayout();
             this.groupBox_analogueInput.SuspendLayout();
             this.groupBox_digitalIO.SuspendLayout();
             this.tabPage_dataLogger.SuspendLayout();
             this.groupBox_logReceivedDataToFile.SuspendLayout();
             this.tabPage_SDcard.SuspendLayout();
-            this.groupBox_convertBinaryFile.SuspendLayout();
+            this.groupBox_binaryFileConverter.SuspendLayout();
             this.tabPage_hardIronCalibration.SuspendLayout();
             this.groupBox_step3hardIronCalibrationAlgorithm.SuspendLayout();
             this.groupBox_step2collectHardIronCalibrationDataSet.SuspendLayout();
@@ -187,17 +194,6 @@
             this.tabPage_about.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_logo)).BeginInit();
             this.SuspendLayout();
-            // 
-            // button_openPort
-            // 
-            this.button_openPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_openPort.Location = new System.Drawing.Point(720, 20);
-            this.button_openPort.Name = "button_openPort";
-            this.button_openPort.Size = new System.Drawing.Size(100, 23);
-            this.button_openPort.TabIndex = 2;
-            this.button_openPort.Text = "Open Port";
-            this.button_openPort.UseVisualStyleBackColor = true;
-            this.button_openPort.Click += new System.EventHandler(this.button_openPort_Click);
             // 
             // label_portName
             // 
@@ -222,7 +218,7 @@
             this.tabControl_main.Controls.Add(this.tabPage_registers);
             this.tabControl_main.Controls.Add(this.tabPage_dateTime);
             this.tabControl_main.Controls.Add(this.tabPage_commands);
-            this.tabControl_main.Controls.Add(this.tabPage_ViewSensorData);
+            this.tabControl_main.Controls.Add(this.tabPage_viewSensorData);
             this.tabControl_main.Controls.Add(this.tabPage_auxillaryPort);
             this.tabControl_main.Controls.Add(this.tabPage_dataLogger);
             this.tabControl_main.Controls.Add(this.tabPage_SDcard);
@@ -239,8 +235,8 @@
             // tabPage_serialPort
             // 
             this.tabPage_serialPort.AutoScroll = true;
-            this.tabPage_serialPort.Controls.Add(this.groupBox_packetCounts);
-            this.tabPage_serialPort.Controls.Add(this.groupBox_OpenClosePort);
+            this.tabPage_serialPort.Controls.Add(this.groupBox_packetCounters);
+            this.tabPage_serialPort.Controls.Add(this.groupBox_openClosePort);
             this.tabPage_serialPort.Location = new System.Drawing.Point(4, 22);
             this.tabPage_serialPort.Name = "tabPage_serialPort";
             this.tabPage_serialPort.Padding = new System.Windows.Forms.Padding(3);
@@ -249,19 +245,19 @@
             this.tabPage_serialPort.Text = "Serial Port";
             this.tabPage_serialPort.UseVisualStyleBackColor = true;
             // 
-            // groupBox_packetCounts
+            // groupBox_packetCounters
             // 
-            this.groupBox_packetCounts.Controls.Add(this.label_packetsSent);
-            this.groupBox_packetCounts.Controls.Add(this.textBox_packetsSent);
-            this.groupBox_packetCounts.Controls.Add(this.textBox_packetsReceived);
-            this.groupBox_packetCounts.Controls.Add(this.label_packetsReceived);
-            this.groupBox_packetCounts.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox_packetCounts.Location = new System.Drawing.Point(3, 62);
-            this.groupBox_packetCounts.Name = "groupBox_packetCounts";
-            this.groupBox_packetCounts.Size = new System.Drawing.Size(826, 84);
-            this.groupBox_packetCounts.TabIndex = 1;
-            this.groupBox_packetCounts.TabStop = false;
-            this.groupBox_packetCounts.Text = "Packet Counts";
+            this.groupBox_packetCounters.Controls.Add(this.label_packetsSent);
+            this.groupBox_packetCounters.Controls.Add(this.textBox_packetsSent);
+            this.groupBox_packetCounters.Controls.Add(this.textBox_packetsReceived);
+            this.groupBox_packetCounters.Controls.Add(this.label_packetsReceived);
+            this.groupBox_packetCounters.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox_packetCounters.Location = new System.Drawing.Point(3, 62);
+            this.groupBox_packetCounters.Name = "groupBox_packetCounters";
+            this.groupBox_packetCounters.Size = new System.Drawing.Size(826, 84);
+            this.groupBox_packetCounters.TabIndex = 1;
+            this.groupBox_packetCounters.TabStop = false;
+            this.groupBox_packetCounters.Text = "Packet Counters";
             // 
             // label_packetsSent
             // 
@@ -299,19 +295,34 @@
             this.label_packetsReceived.TabIndex = 23;
             this.label_packetsReceived.Text = "Packets received:";
             // 
-            // groupBox_OpenClosePort
+            // groupBox_openClosePort
             // 
-            this.groupBox_OpenClosePort.Controls.Add(this.comboBox_portName);
-            this.groupBox_OpenClosePort.Controls.Add(this.button_refreshList);
-            this.groupBox_OpenClosePort.Controls.Add(this.button_openPort);
-            this.groupBox_OpenClosePort.Controls.Add(this.label_portName);
-            this.groupBox_OpenClosePort.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox_OpenClosePort.Location = new System.Drawing.Point(3, 3);
-            this.groupBox_OpenClosePort.Name = "groupBox_OpenClosePort";
-            this.groupBox_OpenClosePort.Size = new System.Drawing.Size(826, 59);
-            this.groupBox_OpenClosePort.TabIndex = 0;
-            this.groupBox_OpenClosePort.TabStop = false;
-            this.groupBox_OpenClosePort.Text = "Open/Close Port";
+            this.groupBox_openClosePort.Controls.Add(this.toggleButton_openClosePort);
+            this.groupBox_openClosePort.Controls.Add(this.comboBox_portName);
+            this.groupBox_openClosePort.Controls.Add(this.button_refreshList);
+            this.groupBox_openClosePort.Controls.Add(this.label_portName);
+            this.groupBox_openClosePort.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox_openClosePort.Location = new System.Drawing.Point(3, 3);
+            this.groupBox_openClosePort.Name = "groupBox_openClosePort";
+            this.groupBox_openClosePort.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_openClosePort.TabIndex = 0;
+            this.groupBox_openClosePort.TabStop = false;
+            this.groupBox_openClosePort.Text = "Open/Close Port";
+            // 
+            // toggleButton_openClosePort
+            // 
+            this.toggleButton_openClosePort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.toggleButton_openClosePort.FalsePrefixText = "Open ";
+            this.toggleButton_openClosePort.Location = new System.Drawing.Point(720, 20);
+            this.toggleButton_openClosePort.Name = "toggleButton_openClosePort";
+            this.toggleButton_openClosePort.Size = new System.Drawing.Size(100, 23);
+            this.toggleButton_openClosePort.SuffixText = "Port";
+            this.toggleButton_openClosePort.TabIndex = 2;
+            this.toggleButton_openClosePort.Text = "Open Port";
+            this.toggleButton_openClosePort.ToggleState = false;
+            this.toggleButton_openClosePort.TruePrefixText = "Close ";
+            this.toggleButton_openClosePort.UseVisualStyleBackColor = true;
+            this.toggleButton_openClosePort.Click += new System.EventHandler(this.toggleButton_openClosePort_Click);
             // 
             // button_refreshList
             // 
@@ -326,7 +337,7 @@
             // 
             // tabPage_registers
             // 
-            this.tabPage_registers.Controls.Add(this.appendedTreeView_registers);
+            this.tabPage_registers.Controls.Add(this.registerTreeView);
             this.tabPage_registers.Location = new System.Drawing.Point(4, 22);
             this.tabPage_registers.Name = "tabPage_registers";
             this.tabPage_registers.Padding = new System.Windows.Forms.Padding(3);
@@ -334,6 +345,17 @@
             this.tabPage_registers.TabIndex = 6;
             this.tabPage_registers.Text = "Registers";
             this.tabPage_registers.UseVisualStyleBackColor = true;
+            // 
+            // registerTreeView
+            // 
+            this.registerTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.registerTreeView.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.registerTreeView.Location = new System.Drawing.Point(3, 3);
+            this.registerTreeView.Name = "registerTreeView";
+            this.registerTreeView.RefreshPending = false;
+            this.registerTreeView.Size = new System.Drawing.Size(826, 404);
+            this.registerTreeView.TabIndex = 0;
+            this.registerTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.registerTreeView_registers_NodeMouseClick);
             // 
             // tabPage_dateTime
             // 
@@ -443,10 +465,10 @@
             // 
             // groupBox_algorithm
             // 
-            this.groupBox_algorithm.Controls.Add(this.button_initialiseThenTare);
-            this.groupBox_algorithm.Controls.Add(this.button_clearTare);
-            this.groupBox_algorithm.Controls.Add(this.button_tare);
-            this.groupBox_algorithm.Controls.Add(this.button_initialise);
+            this.groupBox_algorithm.Controls.Add(this.commandButton_initialiseThenTare);
+            this.groupBox_algorithm.Controls.Add(this.commandButton_initialise);
+            this.groupBox_algorithm.Controls.Add(this.commandButton_clearTare);
+            this.groupBox_algorithm.Controls.Add(this.commandButton_tare);
             this.groupBox_algorithm.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_algorithm.Location = new System.Drawing.Point(3, 239);
             this.groupBox_algorithm.Name = "groupBox_algorithm";
@@ -455,49 +477,53 @@
             this.groupBox_algorithm.TabStop = false;
             this.groupBox_algorithm.Text = "Algorithm";
             // 
-            // button_initialiseThenTare
+            // commandButton_initialiseThenTare
             // 
-            this.button_initialiseThenTare.Location = new System.Drawing.Point(469, 20);
-            this.button_initialiseThenTare.Name = "button_initialiseThenTare";
-            this.button_initialiseThenTare.Size = new System.Drawing.Size(147, 23);
-            this.button_initialiseThenTare.TabIndex = 3;
-            this.button_initialiseThenTare.Text = "Initialise Then Tare";
-            this.button_initialiseThenTare.UseVisualStyleBackColor = true;
-            this.button_initialiseThenTare.Click += new System.EventHandler(this.button_initialiseThenTare_Click);
+            this.commandButton_initialiseThenTare.CommandCode = x_IMU_API.CommandCodes.AlgorithmInitialiseThenTare;
+            this.commandButton_initialiseThenTare.Location = new System.Drawing.Point(469, 20);
+            this.commandButton_initialiseThenTare.Name = "commandButton_initialiseThenTare";
+            this.commandButton_initialiseThenTare.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_initialiseThenTare.TabIndex = 3;
+            this.commandButton_initialiseThenTare.Text = "Initialise Then Tare";
+            this.commandButton_initialiseThenTare.UseVisualStyleBackColor = true;
+            this.commandButton_initialiseThenTare.Click += new System.EventHandler(this.commandButton_Click);
             // 
-            // button_clearTare
+            // commandButton_initialise
             // 
-            this.button_clearTare.Location = new System.Drawing.Point(316, 20);
-            this.button_clearTare.Name = "button_clearTare";
-            this.button_clearTare.Size = new System.Drawing.Size(147, 23);
-            this.button_clearTare.TabIndex = 2;
-            this.button_clearTare.Text = "Clear Tare";
-            this.button_clearTare.UseVisualStyleBackColor = true;
-            this.button_clearTare.Click += new System.EventHandler(this.button_clearTare_Click);
+            this.commandButton_initialise.CommandCode = x_IMU_API.CommandCodes.AlgorithmInitialise;
+            this.commandButton_initialise.Location = new System.Drawing.Point(10, 20);
+            this.commandButton_initialise.Name = "commandButton_initialise";
+            this.commandButton_initialise.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_initialise.TabIndex = 0;
+            this.commandButton_initialise.Text = "Initialise";
+            this.commandButton_initialise.UseVisualStyleBackColor = true;
+            this.commandButton_initialise.Click += new System.EventHandler(this.commandButton_Click);
             // 
-            // button_tare
+            // commandButton_clearTare
             // 
-            this.button_tare.Location = new System.Drawing.Point(163, 20);
-            this.button_tare.Name = "button_tare";
-            this.button_tare.Size = new System.Drawing.Size(147, 23);
-            this.button_tare.TabIndex = 1;
-            this.button_tare.Text = "Tare";
-            this.button_tare.UseVisualStyleBackColor = true;
-            this.button_tare.Click += new System.EventHandler(this.button_tare_Click);
+            this.commandButton_clearTare.CommandCode = x_IMU_API.CommandCodes.AlgorithmClearTare;
+            this.commandButton_clearTare.Location = new System.Drawing.Point(316, 20);
+            this.commandButton_clearTare.Name = "commandButton_clearTare";
+            this.commandButton_clearTare.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_clearTare.TabIndex = 2;
+            this.commandButton_clearTare.Text = "Clear Tare";
+            this.commandButton_clearTare.UseVisualStyleBackColor = true;
+            this.commandButton_clearTare.Click += new System.EventHandler(this.commandButton_Click);
             // 
-            // button_initialise
+            // commandButton_tare
             // 
-            this.button_initialise.Location = new System.Drawing.Point(10, 20);
-            this.button_initialise.Name = "button_initialise";
-            this.button_initialise.Size = new System.Drawing.Size(147, 23);
-            this.button_initialise.TabIndex = 0;
-            this.button_initialise.Text = "Initialise";
-            this.button_initialise.UseVisualStyleBackColor = true;
-            this.button_initialise.Click += new System.EventHandler(this.button_initialise_Click);
+            this.commandButton_tare.CommandCode = x_IMU_API.CommandCodes.AlgorithmTare;
+            this.commandButton_tare.Location = new System.Drawing.Point(163, 20);
+            this.commandButton_tare.Name = "commandButton_tare";
+            this.commandButton_tare.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_tare.TabIndex = 1;
+            this.commandButton_tare.Text = "Tare";
+            this.commandButton_tare.UseVisualStyleBackColor = true;
+            this.commandButton_tare.Click += new System.EventHandler(this.commandButton_Click);
             // 
             // groupBox_magnetometerCalibration
             // 
-            this.groupBox_magnetometerCalibration.Controls.Add(this.button_measMagBiasSens);
+            this.groupBox_magnetometerCalibration.Controls.Add(this.commandButton_measMagBiasSens);
             this.groupBox_magnetometerCalibration.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_magnetometerCalibration.Location = new System.Drawing.Point(3, 180);
             this.groupBox_magnetometerCalibration.Name = "groupBox_magnetometerCalibration";
@@ -506,20 +532,21 @@
             this.groupBox_magnetometerCalibration.TabStop = false;
             this.groupBox_magnetometerCalibration.Text = "Magnetometer Calibration";
             // 
-            // button_measMagBiasSens
+            // commandButton_measMagBiasSens
             // 
-            this.button_measMagBiasSens.Location = new System.Drawing.Point(10, 20);
-            this.button_measMagBiasSens.Name = "button_measMagBiasSens";
-            this.button_measMagBiasSens.Size = new System.Drawing.Size(147, 23);
-            this.button_measMagBiasSens.TabIndex = 0;
-            this.button_measMagBiasSens.Text = "Measure Mag. Bias/Sens.";
-            this.button_measMagBiasSens.UseVisualStyleBackColor = true;
-            this.button_measMagBiasSens.Click += new System.EventHandler(this.button_measMagBiasSens_Click);
+            this.commandButton_measMagBiasSens.CommandCode = x_IMU_API.CommandCodes.MeasureMagnetometerBiasAndSensitivity;
+            this.commandButton_measMagBiasSens.Location = new System.Drawing.Point(10, 20);
+            this.commandButton_measMagBiasSens.Name = "commandButton_measMagBiasSens";
+            this.commandButton_measMagBiasSens.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_measMagBiasSens.TabIndex = 0;
+            this.commandButton_measMagBiasSens.Text = "Measure Mag. Bias/Sens.";
+            this.commandButton_measMagBiasSens.UseVisualStyleBackColor = true;
+            this.commandButton_measMagBiasSens.Click += new System.EventHandler(this.commandButton_Click);
             // 
             // groupBox_accelerometerCalibration
             // 
-            this.groupBox_accelerometerCalibration.Controls.Add(this.button_sampleAccelAxisAt1g);
-            this.groupBox_accelerometerCalibration.Controls.Add(this.button_calcAccelBiasSens);
+            this.groupBox_accelerometerCalibration.Controls.Add(this.commandButton_calcAccelBiasSens);
+            this.groupBox_accelerometerCalibration.Controls.Add(this.commandButton_sampleAccelAxisAt1g);
             this.groupBox_accelerometerCalibration.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_accelerometerCalibration.Location = new System.Drawing.Point(3, 121);
             this.groupBox_accelerometerCalibration.Name = "groupBox_accelerometerCalibration";
@@ -528,33 +555,35 @@
             this.groupBox_accelerometerCalibration.TabStop = false;
             this.groupBox_accelerometerCalibration.Text = "Accelerometer Calibration";
             // 
-            // button_sampleAccelAxisAt1g
+            // commandButton_calcAccelBiasSens
             // 
-            this.button_sampleAccelAxisAt1g.Location = new System.Drawing.Point(10, 20);
-            this.button_sampleAccelAxisAt1g.Name = "button_sampleAccelAxisAt1g";
-            this.button_sampleAccelAxisAt1g.Size = new System.Drawing.Size(147, 23);
-            this.button_sampleAccelAxisAt1g.TabIndex = 0;
-            this.button_sampleAccelAxisAt1g.Text = "Sample Accel. Axis @ ±1 g";
-            this.button_sampleAccelAxisAt1g.UseVisualStyleBackColor = true;
-            this.button_sampleAccelAxisAt1g.Click += new System.EventHandler(this.button_lookupAccelSensitivity_Click);
+            this.commandButton_calcAccelBiasSens.CommandCode = x_IMU_API.CommandCodes.CalculateAccelerometerBiasAndSensitivity;
+            this.commandButton_calcAccelBiasSens.Location = new System.Drawing.Point(163, 20);
+            this.commandButton_calcAccelBiasSens.Name = "commandButton_calcAccelBiasSens";
+            this.commandButton_calcAccelBiasSens.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_calcAccelBiasSens.TabIndex = 1;
+            this.commandButton_calcAccelBiasSens.Text = "Calc. Accel. Bias/Sens.";
+            this.commandButton_calcAccelBiasSens.UseVisualStyleBackColor = true;
+            this.commandButton_calcAccelBiasSens.Click += new System.EventHandler(this.commandButton_Click);
             // 
-            // button_calcAccelBiasSens
+            // commandButton_sampleAccelAxisAt1g
             // 
-            this.button_calcAccelBiasSens.Location = new System.Drawing.Point(163, 20);
-            this.button_calcAccelBiasSens.Name = "button_calcAccelBiasSens";
-            this.button_calcAccelBiasSens.Size = new System.Drawing.Size(147, 23);
-            this.button_calcAccelBiasSens.TabIndex = 1;
-            this.button_calcAccelBiasSens.Text = "Calc. Accel. Bias/Sens.";
-            this.button_calcAccelBiasSens.UseVisualStyleBackColor = true;
-            this.button_calcAccelBiasSens.Click += new System.EventHandler(this.button_calcAccelBiasSens_Click);
+            this.commandButton_sampleAccelAxisAt1g.CommandCode = x_IMU_API.CommandCodes.SampleAccelerometerAxisAt1g;
+            this.commandButton_sampleAccelAxisAt1g.Location = new System.Drawing.Point(10, 20);
+            this.commandButton_sampleAccelAxisAt1g.Name = "commandButton_sampleAccelAxisAt1g";
+            this.commandButton_sampleAccelAxisAt1g.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_sampleAccelAxisAt1g.TabIndex = 0;
+            this.commandButton_sampleAccelAxisAt1g.Text = "Sample Accel. Axis @ ±1 g";
+            this.commandButton_sampleAccelAxisAt1g.UseVisualStyleBackColor = true;
+            this.commandButton_sampleAccelAxisAt1g.Click += new System.EventHandler(this.commandButton_Click);
             // 
             // groupBox_gyroscopeCalibration
             // 
-            this.groupBox_gyroscopeCalibration.Controls.Add(this.button_calcGyroBiasParameters);
-            this.groupBox_gyroscopeCalibration.Controls.Add(this.button_calculateGyroSensitivity);
-            this.groupBox_gyroscopeCalibration.Controls.Add(this.button_sampleGyroAt200dps);
-            this.groupBox_gyroscopeCalibration.Controls.Add(this.button_sampleGyroBiasAtT2);
-            this.groupBox_gyroscopeCalibration.Controls.Add(this.button_sampleGyroBiasAtT1);
+            this.groupBox_gyroscopeCalibration.Controls.Add(this.commandButton_calcGyroBiasParameters);
+            this.groupBox_gyroscopeCalibration.Controls.Add(this.commandButton_sampleGyroAt200dps);
+            this.groupBox_gyroscopeCalibration.Controls.Add(this.commandButton_sampleGyroBiasAtT2);
+            this.groupBox_gyroscopeCalibration.Controls.Add(this.commandButton_calculateGyroSensitivity);
+            this.groupBox_gyroscopeCalibration.Controls.Add(this.commandButtonbutton_sampleGyroBiasAtT1);
             this.groupBox_gyroscopeCalibration.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_gyroscopeCalibration.Location = new System.Drawing.Point(3, 62);
             this.groupBox_gyroscopeCalibration.Name = "groupBox_gyroscopeCalibration";
@@ -563,62 +592,67 @@
             this.groupBox_gyroscopeCalibration.TabStop = false;
             this.groupBox_gyroscopeCalibration.Text = "Gyroscope Calibration";
             // 
-            // button_calcGyroBiasParameters
+            // commandButton_calcGyroBiasParameters
             // 
-            this.button_calcGyroBiasParameters.Location = new System.Drawing.Point(622, 20);
-            this.button_calcGyroBiasParameters.Name = "button_calcGyroBiasParameters";
-            this.button_calcGyroBiasParameters.Size = new System.Drawing.Size(147, 23);
-            this.button_calcGyroBiasParameters.TabIndex = 4;
-            this.button_calcGyroBiasParameters.Text = "Calc. Gyro. Bias Parameters";
-            this.button_calcGyroBiasParameters.UseVisualStyleBackColor = true;
-            this.button_calcGyroBiasParameters.Click += new System.EventHandler(this.button_calcGyroBiasParameters_Click);
+            this.commandButton_calcGyroBiasParameters.CommandCode = x_IMU_API.CommandCodes.CalculateGyroscopeBiasParameters;
+            this.commandButton_calcGyroBiasParameters.Location = new System.Drawing.Point(622, 20);
+            this.commandButton_calcGyroBiasParameters.Name = "commandButton_calcGyroBiasParameters";
+            this.commandButton_calcGyroBiasParameters.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_calcGyroBiasParameters.TabIndex = 4;
+            this.commandButton_calcGyroBiasParameters.Text = "Calc. Gyro. Bias Parameters";
+            this.commandButton_calcGyroBiasParameters.UseVisualStyleBackColor = true;
+            this.commandButton_calcGyroBiasParameters.Click += new System.EventHandler(this.commandButton_Click);
             // 
-            // button_calculateGyroSensitivity
+            // commandButton_sampleGyroAt200dps
             // 
-            this.button_calculateGyroSensitivity.Location = new System.Drawing.Point(163, 20);
-            this.button_calculateGyroSensitivity.Name = "button_calculateGyroSensitivity";
-            this.button_calculateGyroSensitivity.Size = new System.Drawing.Size(147, 23);
-            this.button_calculateGyroSensitivity.TabIndex = 1;
-            this.button_calculateGyroSensitivity.Text = "Calculate Gyro. Sensitivity";
-            this.button_calculateGyroSensitivity.UseVisualStyleBackColor = true;
-            this.button_calculateGyroSensitivity.Click += new System.EventHandler(this.button_calculateGyroSensitivity_Click);
+            this.commandButton_sampleGyroAt200dps.CommandCode = x_IMU_API.CommandCodes.SampleGyroscopeAxisAt200dps;
+            this.commandButton_sampleGyroAt200dps.Location = new System.Drawing.Point(10, 20);
+            this.commandButton_sampleGyroAt200dps.Name = "commandButton_sampleGyroAt200dps";
+            this.commandButton_sampleGyroAt200dps.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_sampleGyroAt200dps.TabIndex = 0;
+            this.commandButton_sampleGyroAt200dps.Text = "Sample Gyro. @ ±200 ˚/s";
+            this.commandButton_sampleGyroAt200dps.UseVisualStyleBackColor = true;
+            this.commandButton_sampleGyroAt200dps.Click += new System.EventHandler(this.commandButton_Click);
             // 
-            // button_sampleGyroAt200dps
+            // commandButton_sampleGyroBiasAtT2
             // 
-            this.button_sampleGyroAt200dps.Location = new System.Drawing.Point(10, 20);
-            this.button_sampleGyroAt200dps.Name = "button_sampleGyroAt200dps";
-            this.button_sampleGyroAt200dps.Size = new System.Drawing.Size(147, 23);
-            this.button_sampleGyroAt200dps.TabIndex = 0;
-            this.button_sampleGyroAt200dps.Text = "Sample Gyro. @ ±200 ˚/s";
-            this.button_sampleGyroAt200dps.UseVisualStyleBackColor = true;
-            this.button_sampleGyroAt200dps.Click += new System.EventHandler(this.button_sampleGyroAt200dps_Click);
+            this.commandButton_sampleGyroBiasAtT2.CommandCode = x_IMU_API.CommandCodes.SampleGyroscopeBiasTemp2;
+            this.commandButton_sampleGyroBiasAtT2.Location = new System.Drawing.Point(469, 20);
+            this.commandButton_sampleGyroBiasAtT2.Name = "commandButton_sampleGyroBiasAtT2";
+            this.commandButton_sampleGyroBiasAtT2.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_sampleGyroBiasAtT2.TabIndex = 3;
+            this.commandButton_sampleGyroBiasAtT2.Text = "Sample Gyro. Bias @ T2";
+            this.commandButton_sampleGyroBiasAtT2.UseVisualStyleBackColor = true;
+            this.commandButton_sampleGyroBiasAtT2.Click += new System.EventHandler(this.commandButton_Click);
             // 
-            // button_sampleGyroBiasAtT2
+            // commandButton_calculateGyroSensitivity
             // 
-            this.button_sampleGyroBiasAtT2.Location = new System.Drawing.Point(469, 20);
-            this.button_sampleGyroBiasAtT2.Name = "button_sampleGyroBiasAtT2";
-            this.button_sampleGyroBiasAtT2.Size = new System.Drawing.Size(147, 23);
-            this.button_sampleGyroBiasAtT2.TabIndex = 3;
-            this.button_sampleGyroBiasAtT2.Text = "Sample Gyro. Bias @ T2";
-            this.button_sampleGyroBiasAtT2.UseVisualStyleBackColor = true;
-            this.button_sampleGyroBiasAtT2.Click += new System.EventHandler(this.button_sampleGyroBiasAtT2_Click);
+            this.commandButton_calculateGyroSensitivity.CommandCode = x_IMU_API.CommandCodes.CalculateGyroscopeSensitivity;
+            this.commandButton_calculateGyroSensitivity.Location = new System.Drawing.Point(163, 20);
+            this.commandButton_calculateGyroSensitivity.Name = "commandButton_calculateGyroSensitivity";
+            this.commandButton_calculateGyroSensitivity.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_calculateGyroSensitivity.TabIndex = 1;
+            this.commandButton_calculateGyroSensitivity.Text = "Calculate Gyro. Sensitivity";
+            this.commandButton_calculateGyroSensitivity.UseVisualStyleBackColor = true;
+            this.commandButton_calculateGyroSensitivity.Click += new System.EventHandler(this.commandButton_Click);
             // 
-            // button_sampleGyroBiasAtT1
+            // commandButtonbutton_sampleGyroBiasAtT1
             // 
-            this.button_sampleGyroBiasAtT1.Location = new System.Drawing.Point(316, 20);
-            this.button_sampleGyroBiasAtT1.Name = "button_sampleGyroBiasAtT1";
-            this.button_sampleGyroBiasAtT1.Size = new System.Drawing.Size(147, 23);
-            this.button_sampleGyroBiasAtT1.TabIndex = 2;
-            this.button_sampleGyroBiasAtT1.Text = "Sample Gyro. Bias @ T1";
-            this.button_sampleGyroBiasAtT1.UseVisualStyleBackColor = true;
-            this.button_sampleGyroBiasAtT1.Click += new System.EventHandler(this.button_sampleGyroBiasAtT1_Click);
+            this.commandButtonbutton_sampleGyroBiasAtT1.CommandCode = x_IMU_API.CommandCodes.SampleGyroscopeBiasTemp1;
+            this.commandButtonbutton_sampleGyroBiasAtT1.Location = new System.Drawing.Point(316, 20);
+            this.commandButtonbutton_sampleGyroBiasAtT1.Name = "commandButtonbutton_sampleGyroBiasAtT1";
+            this.commandButtonbutton_sampleGyroBiasAtT1.Size = new System.Drawing.Size(147, 23);
+            this.commandButtonbutton_sampleGyroBiasAtT1.TabIndex = 2;
+            this.commandButtonbutton_sampleGyroBiasAtT1.Text = "Sample Gyro. Bias @ T1";
+            this.commandButtonbutton_sampleGyroBiasAtT1.UseVisualStyleBackColor = true;
+            this.commandButtonbutton_sampleGyroBiasAtT1.Click += new System.EventHandler(this.commandButton_Click);
             // 
             // groupBox_general
             // 
-            this.groupBox_general.Controls.Add(this.button_factoryReset);
-            this.groupBox_general.Controls.Add(this.button_resetSleepTimer);
-            this.groupBox_general.Controls.Add(this.button_sleep);
-            this.groupBox_general.Controls.Add(this.button_reset);
+            this.groupBox_general.Controls.Add(this.commandButton_resetSleepTimer);
+            this.groupBox_general.Controls.Add(this.commandButton_sleep);
+            this.groupBox_general.Controls.Add(this.commandButton_reset);
+            this.groupBox_general.Controls.Add(this.commandButton_factoryReset);
             this.groupBox_general.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_general.Location = new System.Drawing.Point(3, 3);
             this.groupBox_general.Name = "groupBox_general";
@@ -627,265 +661,298 @@
             this.groupBox_general.TabStop = false;
             this.groupBox_general.Text = "General";
             // 
-            // button_factoryReset
+            // commandButton_resetSleepTimer
             // 
-            this.button_factoryReset.Location = new System.Drawing.Point(10, 20);
-            this.button_factoryReset.Name = "button_factoryReset";
-            this.button_factoryReset.Size = new System.Drawing.Size(147, 23);
-            this.button_factoryReset.TabIndex = 0;
-            this.button_factoryReset.Text = "Factory Reset";
-            this.button_factoryReset.UseVisualStyleBackColor = true;
-            this.button_factoryReset.Click += new System.EventHandler(this.button_factoryReset_Click);
+            this.commandButton_resetSleepTimer.CommandCode = x_IMU_API.CommandCodes.ResetSleepTimer;
+            this.commandButton_resetSleepTimer.Location = new System.Drawing.Point(469, 20);
+            this.commandButton_resetSleepTimer.Name = "commandButton_resetSleepTimer";
+            this.commandButton_resetSleepTimer.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_resetSleepTimer.TabIndex = 3;
+            this.commandButton_resetSleepTimer.Text = "Reset Sleep Timer";
+            this.commandButton_resetSleepTimer.UseVisualStyleBackColor = true;
+            this.commandButton_resetSleepTimer.Click += new System.EventHandler(this.commandButton_Click);
             // 
-            // button_resetSleepTimer
+            // commandButton_sleep
             // 
-            this.button_resetSleepTimer.Location = new System.Drawing.Point(469, 20);
-            this.button_resetSleepTimer.Name = "button_resetSleepTimer";
-            this.button_resetSleepTimer.Size = new System.Drawing.Size(147, 23);
-            this.button_resetSleepTimer.TabIndex = 3;
-            this.button_resetSleepTimer.Text = "Reset Sleep Timer";
-            this.button_resetSleepTimer.UseVisualStyleBackColor = true;
-            this.button_resetSleepTimer.Click += new System.EventHandler(this.button_resetSleepTimer_Click);
+            this.commandButton_sleep.CommandCode = x_IMU_API.CommandCodes.Sleep;
+            this.commandButton_sleep.Location = new System.Drawing.Point(316, 20);
+            this.commandButton_sleep.Name = "commandButton_sleep";
+            this.commandButton_sleep.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_sleep.TabIndex = 2;
+            this.commandButton_sleep.Text = "Sleep";
+            this.commandButton_sleep.UseVisualStyleBackColor = true;
+            this.commandButton_sleep.Click += new System.EventHandler(this.commandButton_Click);
             // 
-            // button_sleep
+            // commandButton_reset
             // 
-            this.button_sleep.Location = new System.Drawing.Point(316, 20);
-            this.button_sleep.Name = "button_sleep";
-            this.button_sleep.Size = new System.Drawing.Size(147, 23);
-            this.button_sleep.TabIndex = 2;
-            this.button_sleep.Text = "Sleep";
-            this.button_sleep.UseVisualStyleBackColor = true;
-            this.button_sleep.Click += new System.EventHandler(this.button_sleep_Click);
+            this.commandButton_reset.CommandCode = x_IMU_API.CommandCodes.Reset;
+            this.commandButton_reset.Location = new System.Drawing.Point(163, 20);
+            this.commandButton_reset.Name = "commandButton_reset";
+            this.commandButton_reset.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_reset.TabIndex = 1;
+            this.commandButton_reset.Text = "Reset";
+            this.commandButton_reset.UseVisualStyleBackColor = true;
+            this.commandButton_reset.Click += new System.EventHandler(this.commandButton_Click);
+            this.commandButton_reset.MouseClick += new System.Windows.Forms.MouseEventHandler(this.commandButton_Click);
             // 
-            // button_reset
+            // commandButton_factoryReset
             // 
-            this.button_reset.Location = new System.Drawing.Point(163, 20);
-            this.button_reset.Name = "button_reset";
-            this.button_reset.Size = new System.Drawing.Size(147, 23);
-            this.button_reset.TabIndex = 1;
-            this.button_reset.Text = "Reset";
-            this.button_reset.UseVisualStyleBackColor = true;
-            this.button_reset.Click += new System.EventHandler(this.button_reset_Click);
+            this.commandButton_factoryReset.CommandCode = x_IMU_API.CommandCodes.FactoryReset;
+            this.commandButton_factoryReset.Location = new System.Drawing.Point(10, 20);
+            this.commandButton_factoryReset.Name = "commandButton_factoryReset";
+            this.commandButton_factoryReset.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_factoryReset.TabIndex = 0;
+            this.commandButton_factoryReset.Text = "Factory Reset";
+            this.commandButton_factoryReset.UseVisualStyleBackColor = true;
+            this.commandButton_factoryReset.Click += new System.EventHandler(this.commandButton_Click);
             // 
-            // tabPage_ViewSensorData
+            // tabPage_viewSensorData
             // 
-            this.tabPage_ViewSensorData.AutoScroll = true;
-            this.tabPage_ViewSensorData.Controls.Add(this.groupBox_orienData);
-            this.tabPage_ViewSensorData.Controls.Add(this.groupBox_sensorData);
-            this.tabPage_ViewSensorData.Controls.Add(this.groupBox_battThermData);
-            this.tabPage_ViewSensorData.Location = new System.Drawing.Point(4, 22);
-            this.tabPage_ViewSensorData.Name = "tabPage_ViewSensorData";
-            this.tabPage_ViewSensorData.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_ViewSensorData.Size = new System.Drawing.Size(832, 410);
-            this.tabPage_ViewSensorData.TabIndex = 3;
-            this.tabPage_ViewSensorData.Text = "View Sensor Data";
-            this.tabPage_ViewSensorData.UseVisualStyleBackColor = true;
+            this.tabPage_viewSensorData.AutoScroll = true;
+            this.tabPage_viewSensorData.Controls.Add(this.groupBox_orientationData);
+            this.tabPage_viewSensorData.Controls.Add(this.groupBox_inertialAndMagneticData);
+            this.tabPage_viewSensorData.Controls.Add(this.groupBox_batteryAndThermometerData);
+            this.tabPage_viewSensorData.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_viewSensorData.Name = "tabPage_viewSensorData";
+            this.tabPage_viewSensorData.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_viewSensorData.Size = new System.Drawing.Size(832, 410);
+            this.tabPage_viewSensorData.TabIndex = 3;
+            this.tabPage_viewSensorData.Text = "View Sensor Data";
+            this.tabPage_viewSensorData.UseVisualStyleBackColor = true;
             // 
-            // groupBox_orienData
+            // groupBox_orientationData
             // 
-            this.groupBox_orienData.Controls.Add(this.label_psi);
-            this.groupBox_orienData.Controls.Add(this.label_theta);
-            this.groupBox_orienData.Controls.Add(this.label_phi);
-            this.groupBox_orienData.Controls.Add(this.label_eulerLegend);
-            this.groupBox_orienData.Controls.Add(this.button_showEulerAngleGraph);
-            this.groupBox_orienData.Controls.Add(this.button_show3Dcuboid);
-            this.groupBox_orienData.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox_orienData.Location = new System.Drawing.Point(3, 121);
-            this.groupBox_orienData.Name = "groupBox_orienData";
-            this.groupBox_orienData.Size = new System.Drawing.Size(826, 59);
-            this.groupBox_orienData.TabIndex = 2;
-            this.groupBox_orienData.TabStop = false;
-            this.groupBox_orienData.Text = "Orientation Data";
+            this.groupBox_orientationData.Controls.Add(this.showHideButton_eulerAnglesGraph);
+            this.groupBox_orientationData.Controls.Add(this.showHideButton_3Dcuboid);
+            this.groupBox_orientationData.Controls.Add(this.label_orientationDataLegendPsi);
+            this.groupBox_orientationData.Controls.Add(this.label_orientationDataLegendTheta);
+            this.groupBox_orientationData.Controls.Add(this.label_orientationDataLegendPhi);
+            this.groupBox_orientationData.Controls.Add(this.label_orientationDataLegend);
+            this.groupBox_orientationData.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox_orientationData.Location = new System.Drawing.Point(3, 121);
+            this.groupBox_orientationData.Name = "groupBox_orientationData";
+            this.groupBox_orientationData.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_orientationData.TabIndex = 2;
+            this.groupBox_orientationData.TabStop = false;
+            this.groupBox_orientationData.Text = "Orientation Data";
             // 
-            // label_psi
+            // showHideButton_eulerAnglesGraph
             // 
-            this.label_psi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_psi.AutoSize = true;
-            this.label_psi.ForeColor = System.Drawing.Color.Blue;
-            this.label_psi.Location = new System.Drawing.Point(801, 24);
-            this.label_psi.Name = "label_psi";
-            this.label_psi.Size = new System.Drawing.Size(15, 13);
-            this.label_psi.TabIndex = 45;
-            this.label_psi.Text = "ψ";
+            this.showHideButton_eulerAnglesGraph.FalsePrefixText = "Show ";
+            this.showHideButton_eulerAnglesGraph.Location = new System.Drawing.Point(163, 20);
+            this.showHideButton_eulerAnglesGraph.Name = "showHideButton_eulerAnglesGraph";
+            this.showHideButton_eulerAnglesGraph.Object = null;
+            this.showHideButton_eulerAnglesGraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_eulerAnglesGraph.SuffixText = "Euler Anlges Graph";
+            this.showHideButton_eulerAnglesGraph.TabIndex = 1;
+            this.showHideButton_eulerAnglesGraph.Text = "Show Euler Anlges Graph";
+            this.showHideButton_eulerAnglesGraph.ToggleState = false;
+            this.showHideButton_eulerAnglesGraph.TruePrefixText = "Hide ";
+            this.showHideButton_eulerAnglesGraph.UseVisualStyleBackColor = true;
             // 
-            // label_theta
+            // showHideButton_3Dcuboid
             // 
-            this.label_theta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_theta.AutoSize = true;
-            this.label_theta.ForeColor = System.Drawing.Color.Lime;
-            this.label_theta.Location = new System.Drawing.Point(782, 24);
-            this.label_theta.Name = "label_theta";
-            this.label_theta.Size = new System.Drawing.Size(13, 13);
-            this.label_theta.TabIndex = 44;
-            this.label_theta.Text = "θ";
+            this.showHideButton_3Dcuboid.FalsePrefixText = "Show ";
+            this.showHideButton_3Dcuboid.Location = new System.Drawing.Point(10, 20);
+            this.showHideButton_3Dcuboid.Name = "showHideButton_3Dcuboid";
+            this.showHideButton_3Dcuboid.Object = null;
+            this.showHideButton_3Dcuboid.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_3Dcuboid.SuffixText = "3D Cuboid";
+            this.showHideButton_3Dcuboid.TabIndex = 0;
+            this.showHideButton_3Dcuboid.Text = "Show 3D Cuboid";
+            this.showHideButton_3Dcuboid.ToggleState = false;
+            this.showHideButton_3Dcuboid.TruePrefixText = "Hide ";
+            this.showHideButton_3Dcuboid.UseVisualStyleBackColor = true;
             // 
-            // label_phi
+            // label_orientationDataLegendPsi
             // 
-            this.label_phi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_phi.AutoSize = true;
-            this.label_phi.ForeColor = System.Drawing.Color.Red;
-            this.label_phi.Location = new System.Drawing.Point(761, 24);
-            this.label_phi.Name = "label_phi";
-            this.label_phi.Size = new System.Drawing.Size(15, 13);
-            this.label_phi.TabIndex = 43;
-            this.label_phi.Text = "φ";
+            this.label_orientationDataLegendPsi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_orientationDataLegendPsi.AutoSize = true;
+            this.label_orientationDataLegendPsi.ForeColor = System.Drawing.Color.Blue;
+            this.label_orientationDataLegendPsi.Location = new System.Drawing.Point(801, 24);
+            this.label_orientationDataLegendPsi.Name = "label_orientationDataLegendPsi";
+            this.label_orientationDataLegendPsi.Size = new System.Drawing.Size(15, 13);
+            this.label_orientationDataLegendPsi.TabIndex = 45;
+            this.label_orientationDataLegendPsi.Text = "ψ";
             // 
-            // label_eulerLegend
+            // label_orientationDataLegendTheta
             // 
-            this.label_eulerLegend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_eulerLegend.AutoSize = true;
-            this.label_eulerLegend.Location = new System.Drawing.Point(709, 24);
-            this.label_eulerLegend.Name = "label_eulerLegend";
-            this.label_eulerLegend.Size = new System.Drawing.Size(46, 13);
-            this.label_eulerLegend.TabIndex = 42;
-            this.label_eulerLegend.Text = "Legend:";
+            this.label_orientationDataLegendTheta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_orientationDataLegendTheta.AutoSize = true;
+            this.label_orientationDataLegendTheta.ForeColor = System.Drawing.Color.Lime;
+            this.label_orientationDataLegendTheta.Location = new System.Drawing.Point(782, 24);
+            this.label_orientationDataLegendTheta.Name = "label_orientationDataLegendTheta";
+            this.label_orientationDataLegendTheta.Size = new System.Drawing.Size(13, 13);
+            this.label_orientationDataLegendTheta.TabIndex = 44;
+            this.label_orientationDataLegendTheta.Text = "θ";
             // 
-            // button_showEulerAngleGraph
+            // label_orientationDataLegendPhi
             // 
-            this.button_showEulerAngleGraph.Location = new System.Drawing.Point(163, 19);
-            this.button_showEulerAngleGraph.Name = "button_showEulerAngleGraph";
-            this.button_showEulerAngleGraph.Size = new System.Drawing.Size(147, 23);
-            this.button_showEulerAngleGraph.TabIndex = 1;
-            this.button_showEulerAngleGraph.Text = "Show Euler Angle Graph";
-            this.button_showEulerAngleGraph.UseVisualStyleBackColor = true;
-            this.button_showEulerAngleGraph.Click += new System.EventHandler(this.button_showEulerAngleGraph_Click);
+            this.label_orientationDataLegendPhi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_orientationDataLegendPhi.AutoSize = true;
+            this.label_orientationDataLegendPhi.ForeColor = System.Drawing.Color.Red;
+            this.label_orientationDataLegendPhi.Location = new System.Drawing.Point(761, 24);
+            this.label_orientationDataLegendPhi.Name = "label_orientationDataLegendPhi";
+            this.label_orientationDataLegendPhi.Size = new System.Drawing.Size(15, 13);
+            this.label_orientationDataLegendPhi.TabIndex = 43;
+            this.label_orientationDataLegendPhi.Text = "φ";
             // 
-            // button_show3Dcuboid
+            // label_orientationDataLegend
             // 
-            this.button_show3Dcuboid.Location = new System.Drawing.Point(10, 20);
-            this.button_show3Dcuboid.Name = "button_show3Dcuboid";
-            this.button_show3Dcuboid.Size = new System.Drawing.Size(147, 23);
-            this.button_show3Dcuboid.TabIndex = 0;
-            this.button_show3Dcuboid.Text = "Show 3D Cuboid";
-            this.button_show3Dcuboid.UseVisualStyleBackColor = true;
-            this.button_show3Dcuboid.Click += new System.EventHandler(this.button_show3Dcuboid_Click);
+            this.label_orientationDataLegend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_orientationDataLegend.AutoSize = true;
+            this.label_orientationDataLegend.Location = new System.Drawing.Point(709, 24);
+            this.label_orientationDataLegend.Name = "label_orientationDataLegend";
+            this.label_orientationDataLegend.Size = new System.Drawing.Size(46, 13);
+            this.label_orientationDataLegend.TabIndex = 42;
+            this.label_orientationDataLegend.Text = "Legend:";
             // 
-            // groupBox_sensorData
+            // groupBox_inertialAndMagneticData
             // 
-            this.groupBox_sensorData.Controls.Add(this.label_legendZ);
-            this.groupBox_sensorData.Controls.Add(this.label_legendY);
-            this.groupBox_sensorData.Controls.Add(this.label_legendX);
-            this.groupBox_sensorData.Controls.Add(this.label_sensorLegend);
-            this.groupBox_sensorData.Controls.Add(this.button_showMagGraph);
-            this.groupBox_sensorData.Controls.Add(this.button_showAccelGraph);
-            this.groupBox_sensorData.Controls.Add(this.button_showGyroGraph);
-            this.groupBox_sensorData.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox_sensorData.Location = new System.Drawing.Point(3, 62);
-            this.groupBox_sensorData.Name = "groupBox_sensorData";
-            this.groupBox_sensorData.Size = new System.Drawing.Size(826, 59);
-            this.groupBox_sensorData.TabIndex = 1;
-            this.groupBox_sensorData.TabStop = false;
-            this.groupBox_sensorData.Text = "Inertial/Magnetic Sensor Data";
+            this.groupBox_inertialAndMagneticData.Controls.Add(this.showHideButton_magnetometerGraph);
+            this.groupBox_inertialAndMagneticData.Controls.Add(this.showHideButton_accelerometerGraph);
+            this.groupBox_inertialAndMagneticData.Controls.Add(this.showHideButton_gyroscopeGraph);
+            this.groupBox_inertialAndMagneticData.Controls.Add(this.label_inertialAndMagneticDataZ);
+            this.groupBox_inertialAndMagneticData.Controls.Add(this.label_inertialAndMagneticDataY);
+            this.groupBox_inertialAndMagneticData.Controls.Add(this.label_inertialAndMagneticDataX);
+            this.groupBox_inertialAndMagneticData.Controls.Add(this.label_inertialAndMagneticDataLegend);
+            this.groupBox_inertialAndMagneticData.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox_inertialAndMagneticData.Location = new System.Drawing.Point(3, 62);
+            this.groupBox_inertialAndMagneticData.Name = "groupBox_inertialAndMagneticData";
+            this.groupBox_inertialAndMagneticData.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_inertialAndMagneticData.TabIndex = 1;
+            this.groupBox_inertialAndMagneticData.TabStop = false;
+            this.groupBox_inertialAndMagneticData.Text = "Inertial And Magnetic Sensor Data";
             // 
-            // label_legendZ
+            // showHideButton_magnetometerGraph
             // 
-            this.label_legendZ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_legendZ.AutoSize = true;
-            this.label_legendZ.ForeColor = System.Drawing.Color.Blue;
-            this.label_legendZ.Location = new System.Drawing.Point(802, 25);
-            this.label_legendZ.Name = "label_legendZ";
-            this.label_legendZ.Size = new System.Drawing.Size(14, 13);
-            this.label_legendZ.TabIndex = 41;
-            this.label_legendZ.Text = "Z";
+            this.showHideButton_magnetometerGraph.FalsePrefixText = "Show ";
+            this.showHideButton_magnetometerGraph.Location = new System.Drawing.Point(316, 20);
+            this.showHideButton_magnetometerGraph.Name = "showHideButton_magnetometerGraph";
+            this.showHideButton_magnetometerGraph.Object = null;
+            this.showHideButton_magnetometerGraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_magnetometerGraph.SuffixText = "Magnetometer Graph";
+            this.showHideButton_magnetometerGraph.TabIndex = 2;
+            this.showHideButton_magnetometerGraph.Text = "Show Magnetometer Graph";
+            this.showHideButton_magnetometerGraph.ToggleState = false;
+            this.showHideButton_magnetometerGraph.TruePrefixText = "Hide ";
+            this.showHideButton_magnetometerGraph.UseVisualStyleBackColor = true;
             // 
-            // label_legendY
+            // showHideButton_accelerometerGraph
             // 
-            this.label_legendY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_legendY.AutoSize = true;
-            this.label_legendY.ForeColor = System.Drawing.Color.Lime;
-            this.label_legendY.Location = new System.Drawing.Point(782, 25);
-            this.label_legendY.Name = "label_legendY";
-            this.label_legendY.Size = new System.Drawing.Size(14, 13);
-            this.label_legendY.TabIndex = 40;
-            this.label_legendY.Text = "Y";
+            this.showHideButton_accelerometerGraph.FalsePrefixText = "Show ";
+            this.showHideButton_accelerometerGraph.Location = new System.Drawing.Point(163, 20);
+            this.showHideButton_accelerometerGraph.Name = "showHideButton_accelerometerGraph";
+            this.showHideButton_accelerometerGraph.Object = null;
+            this.showHideButton_accelerometerGraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_accelerometerGraph.SuffixText = "Accelerometer Graph";
+            this.showHideButton_accelerometerGraph.TabIndex = 1;
+            this.showHideButton_accelerometerGraph.Text = "Show Accelerometer Graph";
+            this.showHideButton_accelerometerGraph.ToggleState = false;
+            this.showHideButton_accelerometerGraph.TruePrefixText = "Hide ";
+            this.showHideButton_accelerometerGraph.UseVisualStyleBackColor = true;
             // 
-            // label_legendX
+            // showHideButton_gyroscopeGraph
             // 
-            this.label_legendX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_legendX.AutoSize = true;
-            this.label_legendX.ForeColor = System.Drawing.Color.Red;
-            this.label_legendX.Location = new System.Drawing.Point(762, 25);
-            this.label_legendX.Name = "label_legendX";
-            this.label_legendX.Size = new System.Drawing.Size(14, 13);
-            this.label_legendX.TabIndex = 39;
-            this.label_legendX.Text = "X";
+            this.showHideButton_gyroscopeGraph.FalsePrefixText = "Show ";
+            this.showHideButton_gyroscopeGraph.Location = new System.Drawing.Point(10, 20);
+            this.showHideButton_gyroscopeGraph.Name = "showHideButton_gyroscopeGraph";
+            this.showHideButton_gyroscopeGraph.Object = null;
+            this.showHideButton_gyroscopeGraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_gyroscopeGraph.SuffixText = "Gyroscope Graph";
+            this.showHideButton_gyroscopeGraph.TabIndex = 0;
+            this.showHideButton_gyroscopeGraph.Text = "Show Gyroscope Graph";
+            this.showHideButton_gyroscopeGraph.ToggleState = false;
+            this.showHideButton_gyroscopeGraph.TruePrefixText = "Hide ";
+            this.showHideButton_gyroscopeGraph.UseVisualStyleBackColor = true;
             // 
-            // label_sensorLegend
+            // label_inertialAndMagneticDataZ
             // 
-            this.label_sensorLegend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_sensorLegend.AutoSize = true;
-            this.label_sensorLegend.Location = new System.Drawing.Point(710, 25);
-            this.label_sensorLegend.Name = "label_sensorLegend";
-            this.label_sensorLegend.Size = new System.Drawing.Size(46, 13);
-            this.label_sensorLegend.TabIndex = 38;
-            this.label_sensorLegend.Text = "Legend:";
+            this.label_inertialAndMagneticDataZ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_inertialAndMagneticDataZ.AutoSize = true;
+            this.label_inertialAndMagneticDataZ.ForeColor = System.Drawing.Color.Blue;
+            this.label_inertialAndMagneticDataZ.Location = new System.Drawing.Point(802, 25);
+            this.label_inertialAndMagneticDataZ.Name = "label_inertialAndMagneticDataZ";
+            this.label_inertialAndMagneticDataZ.Size = new System.Drawing.Size(14, 13);
+            this.label_inertialAndMagneticDataZ.TabIndex = 41;
+            this.label_inertialAndMagneticDataZ.Text = "Z";
             // 
-            // button_showMagGraph
+            // label_inertialAndMagneticDataY
             // 
-            this.button_showMagGraph.Location = new System.Drawing.Point(316, 20);
-            this.button_showMagGraph.Name = "button_showMagGraph";
-            this.button_showMagGraph.Size = new System.Drawing.Size(147, 23);
-            this.button_showMagGraph.TabIndex = 2;
-            this.button_showMagGraph.Text = "Show Magnetometer Graph";
-            this.button_showMagGraph.UseVisualStyleBackColor = true;
-            this.button_showMagGraph.Click += new System.EventHandler(this.button_showMagGraph_Click);
+            this.label_inertialAndMagneticDataY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_inertialAndMagneticDataY.AutoSize = true;
+            this.label_inertialAndMagneticDataY.ForeColor = System.Drawing.Color.Lime;
+            this.label_inertialAndMagneticDataY.Location = new System.Drawing.Point(782, 25);
+            this.label_inertialAndMagneticDataY.Name = "label_inertialAndMagneticDataY";
+            this.label_inertialAndMagneticDataY.Size = new System.Drawing.Size(14, 13);
+            this.label_inertialAndMagneticDataY.TabIndex = 40;
+            this.label_inertialAndMagneticDataY.Text = "Y";
             // 
-            // button_showAccelGraph
+            // label_inertialAndMagneticDataX
             // 
-            this.button_showAccelGraph.Location = new System.Drawing.Point(163, 20);
-            this.button_showAccelGraph.Name = "button_showAccelGraph";
-            this.button_showAccelGraph.Size = new System.Drawing.Size(147, 23);
-            this.button_showAccelGraph.TabIndex = 1;
-            this.button_showAccelGraph.Text = "Show Accelerometer Graph";
-            this.button_showAccelGraph.UseVisualStyleBackColor = true;
-            this.button_showAccelGraph.Click += new System.EventHandler(this.button_showAccelGraph_Click);
+            this.label_inertialAndMagneticDataX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_inertialAndMagneticDataX.AutoSize = true;
+            this.label_inertialAndMagneticDataX.ForeColor = System.Drawing.Color.Red;
+            this.label_inertialAndMagneticDataX.Location = new System.Drawing.Point(762, 25);
+            this.label_inertialAndMagneticDataX.Name = "label_inertialAndMagneticDataX";
+            this.label_inertialAndMagneticDataX.Size = new System.Drawing.Size(14, 13);
+            this.label_inertialAndMagneticDataX.TabIndex = 39;
+            this.label_inertialAndMagneticDataX.Text = "X";
             // 
-            // button_showGyroGraph
+            // label_inertialAndMagneticDataLegend
             // 
-            this.button_showGyroGraph.Location = new System.Drawing.Point(10, 20);
-            this.button_showGyroGraph.Name = "button_showGyroGraph";
-            this.button_showGyroGraph.Size = new System.Drawing.Size(147, 23);
-            this.button_showGyroGraph.TabIndex = 0;
-            this.button_showGyroGraph.Text = "Show Gyroscope Graph";
-            this.button_showGyroGraph.UseVisualStyleBackColor = true;
-            this.button_showGyroGraph.Click += new System.EventHandler(this.button_showGyroGraph_Click);
+            this.label_inertialAndMagneticDataLegend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_inertialAndMagneticDataLegend.AutoSize = true;
+            this.label_inertialAndMagneticDataLegend.Location = new System.Drawing.Point(710, 25);
+            this.label_inertialAndMagneticDataLegend.Name = "label_inertialAndMagneticDataLegend";
+            this.label_inertialAndMagneticDataLegend.Size = new System.Drawing.Size(46, 13);
+            this.label_inertialAndMagneticDataLegend.TabIndex = 38;
+            this.label_inertialAndMagneticDataLegend.Text = "Legend:";
             // 
-            // groupBox_battThermData
+            // groupBox_batteryAndThermometerData
             // 
-            this.groupBox_battThermData.Controls.Add(this.button_showBatteryGraph);
-            this.groupBox_battThermData.Controls.Add(this.button_showThermGraph);
-            this.groupBox_battThermData.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox_battThermData.Location = new System.Drawing.Point(3, 3);
-            this.groupBox_battThermData.Name = "groupBox_battThermData";
-            this.groupBox_battThermData.Size = new System.Drawing.Size(826, 59);
-            this.groupBox_battThermData.TabIndex = 0;
-            this.groupBox_battThermData.TabStop = false;
-            this.groupBox_battThermData.Text = "Battery And Thermometer Data";
+            this.groupBox_batteryAndThermometerData.Controls.Add(this.showHideButton_thermometerGraph);
+            this.groupBox_batteryAndThermometerData.Controls.Add(this.showHideButton_batteryGraph);
+            this.groupBox_batteryAndThermometerData.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox_batteryAndThermometerData.Location = new System.Drawing.Point(3, 3);
+            this.groupBox_batteryAndThermometerData.Name = "groupBox_batteryAndThermometerData";
+            this.groupBox_batteryAndThermometerData.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_batteryAndThermometerData.TabIndex = 0;
+            this.groupBox_batteryAndThermometerData.TabStop = false;
+            this.groupBox_batteryAndThermometerData.Text = "Battery And Thermometer Data";
             // 
-            // button_showBatteryGraph
+            // showHideButton_thermometerGraph
             // 
-            this.button_showBatteryGraph.Location = new System.Drawing.Point(10, 20);
-            this.button_showBatteryGraph.Name = "button_showBatteryGraph";
-            this.button_showBatteryGraph.Size = new System.Drawing.Size(147, 23);
-            this.button_showBatteryGraph.TabIndex = 0;
-            this.button_showBatteryGraph.Text = "Show Battery Graph";
-            this.button_showBatteryGraph.UseVisualStyleBackColor = true;
-            this.button_showBatteryGraph.Click += new System.EventHandler(this.button_showBatteryGraph_Click);
+            this.showHideButton_thermometerGraph.FalsePrefixText = "Show ";
+            this.showHideButton_thermometerGraph.Location = new System.Drawing.Point(163, 20);
+            this.showHideButton_thermometerGraph.Name = "showHideButton_thermometerGraph";
+            this.showHideButton_thermometerGraph.Object = null;
+            this.showHideButton_thermometerGraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_thermometerGraph.SuffixText = "Thermometer Graph";
+            this.showHideButton_thermometerGraph.TabIndex = 1;
+            this.showHideButton_thermometerGraph.Text = "Show Thermometer Graph";
+            this.showHideButton_thermometerGraph.ToggleState = false;
+            this.showHideButton_thermometerGraph.TruePrefixText = "Hide ";
+            this.showHideButton_thermometerGraph.UseVisualStyleBackColor = true;
             // 
-            // button_showThermGraph
+            // showHideButton_batteryGraph
             // 
-            this.button_showThermGraph.Location = new System.Drawing.Point(163, 20);
-            this.button_showThermGraph.Name = "button_showThermGraph";
-            this.button_showThermGraph.Size = new System.Drawing.Size(147, 23);
-            this.button_showThermGraph.TabIndex = 1;
-            this.button_showThermGraph.Text = "Show Thermometer Graph";
-            this.button_showThermGraph.UseVisualStyleBackColor = true;
-            this.button_showThermGraph.Click += new System.EventHandler(this.button_showThermGraph_Click);
+            this.showHideButton_batteryGraph.FalsePrefixText = "Show ";
+            this.showHideButton_batteryGraph.Location = new System.Drawing.Point(10, 20);
+            this.showHideButton_batteryGraph.Name = "showHideButton_batteryGraph";
+            this.showHideButton_batteryGraph.Object = null;
+            this.showHideButton_batteryGraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_batteryGraph.SuffixText = "Battery Graph";
+            this.showHideButton_batteryGraph.TabIndex = 0;
+            this.showHideButton_batteryGraph.Text = "Show Battery Graph";
+            this.showHideButton_batteryGraph.ToggleState = false;
+            this.showHideButton_batteryGraph.TruePrefixText = "Hide ";
+            this.showHideButton_batteryGraph.UseVisualStyleBackColor = true;
             // 
             // tabPage_auxillaryPort
             // 
             this.tabPage_auxillaryPort.Controls.Add(this.groupBox_ADXL345bus);
-            this.tabPage_auxillaryPort.Controls.Add(this.groupBox_pwmOutput);
+            this.tabPage_auxillaryPort.Controls.Add(this.groupBox_PWMoutput);
             this.tabPage_auxillaryPort.Controls.Add(this.groupBox_analogueInput);
             this.tabPage_auxillaryPort.Controls.Add(this.groupBox_digitalIO);
             this.tabPage_auxillaryPort.Location = new System.Drawing.Point(4, 22);
@@ -898,10 +965,14 @@
             // 
             // groupBox_ADXL345bus
             // 
-            this.groupBox_ADXL345bus.Controls.Add(this.button_showADXL345Dgraph);
-            this.groupBox_ADXL345bus.Controls.Add(this.button_showADXL345Cgraph);
-            this.groupBox_ADXL345bus.Controls.Add(this.button_showADXL345Bgraph);
-            this.groupBox_ADXL345bus.Controls.Add(this.button_showADXL345Agraph);
+            this.groupBox_ADXL345bus.Controls.Add(this.label_ADXL345busZ);
+            this.groupBox_ADXL345bus.Controls.Add(this.label_ADXL345busY);
+            this.groupBox_ADXL345bus.Controls.Add(this.label_ADXL345busX);
+            this.groupBox_ADXL345bus.Controls.Add(this.label_ADXL345busLegend);
+            this.groupBox_ADXL345bus.Controls.Add(this.showHideButton_ADXL345Dgraph);
+            this.groupBox_ADXL345bus.Controls.Add(this.showHideButton_ADXL345Agraph);
+            this.groupBox_ADXL345bus.Controls.Add(this.showHideButton_ADXL345Bgraph);
+            this.groupBox_ADXL345bus.Controls.Add(this.showHideButton_ADXL345Cgraph);
             this.groupBox_ADXL345bus.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_ADXL345bus.Location = new System.Drawing.Point(3, 180);
             this.groupBox_ADXL345bus.Name = "groupBox_ADXL345bus";
@@ -910,73 +981,139 @@
             this.groupBox_ADXL345bus.TabStop = false;
             this.groupBox_ADXL345bus.Text = "AXDL345 Bus";
             // 
-            // button_showADXL345Dgraph
+            // label_ADXL345busZ
             // 
-            this.button_showADXL345Dgraph.Location = new System.Drawing.Point(469, 20);
-            this.button_showADXL345Dgraph.Name = "button_showADXL345Dgraph";
-            this.button_showADXL345Dgraph.Size = new System.Drawing.Size(147, 23);
-            this.button_showADXL345Dgraph.TabIndex = 3;
-            this.button_showADXL345Dgraph.Text = "Show ADXL345 D Graph";
-            this.button_showADXL345Dgraph.UseVisualStyleBackColor = true;
-            this.button_showADXL345Dgraph.Click += new System.EventHandler(this.button_showADXL345Dgraph_Click);
+            this.label_ADXL345busZ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_ADXL345busZ.AutoSize = true;
+            this.label_ADXL345busZ.ForeColor = System.Drawing.Color.Blue;
+            this.label_ADXL345busZ.Location = new System.Drawing.Point(806, 25);
+            this.label_ADXL345busZ.Name = "label_ADXL345busZ";
+            this.label_ADXL345busZ.Size = new System.Drawing.Size(14, 13);
+            this.label_ADXL345busZ.TabIndex = 45;
+            this.label_ADXL345busZ.Text = "Z";
             // 
-            // button_showADXL345Cgraph
+            // label_ADXL345busY
             // 
-            this.button_showADXL345Cgraph.Location = new System.Drawing.Point(316, 20);
-            this.button_showADXL345Cgraph.Name = "button_showADXL345Cgraph";
-            this.button_showADXL345Cgraph.Size = new System.Drawing.Size(147, 23);
-            this.button_showADXL345Cgraph.TabIndex = 2;
-            this.button_showADXL345Cgraph.Text = "Show ADXL345 C Graph";
-            this.button_showADXL345Cgraph.UseVisualStyleBackColor = true;
-            this.button_showADXL345Cgraph.Click += new System.EventHandler(this.button_showADXL345Cgraph_Click);
+            this.label_ADXL345busY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_ADXL345busY.AutoSize = true;
+            this.label_ADXL345busY.ForeColor = System.Drawing.Color.Lime;
+            this.label_ADXL345busY.Location = new System.Drawing.Point(786, 25);
+            this.label_ADXL345busY.Name = "label_ADXL345busY";
+            this.label_ADXL345busY.Size = new System.Drawing.Size(14, 13);
+            this.label_ADXL345busY.TabIndex = 44;
+            this.label_ADXL345busY.Text = "Y";
             // 
-            // button_showADXL345Bgraph
+            // label_ADXL345busX
             // 
-            this.button_showADXL345Bgraph.Location = new System.Drawing.Point(163, 20);
-            this.button_showADXL345Bgraph.Name = "button_showADXL345Bgraph";
-            this.button_showADXL345Bgraph.Size = new System.Drawing.Size(147, 23);
-            this.button_showADXL345Bgraph.TabIndex = 1;
-            this.button_showADXL345Bgraph.Text = "Show ADXL345 B Graph";
-            this.button_showADXL345Bgraph.UseVisualStyleBackColor = true;
-            this.button_showADXL345Bgraph.Click += new System.EventHandler(this.button_showADXL345Bgraph_Click);
+            this.label_ADXL345busX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_ADXL345busX.AutoSize = true;
+            this.label_ADXL345busX.ForeColor = System.Drawing.Color.Red;
+            this.label_ADXL345busX.Location = new System.Drawing.Point(766, 25);
+            this.label_ADXL345busX.Name = "label_ADXL345busX";
+            this.label_ADXL345busX.Size = new System.Drawing.Size(14, 13);
+            this.label_ADXL345busX.TabIndex = 43;
+            this.label_ADXL345busX.Text = "X";
             // 
-            // button_showADXL345Agraph
+            // label_ADXL345busLegend
             // 
-            this.button_showADXL345Agraph.Location = new System.Drawing.Point(10, 20);
-            this.button_showADXL345Agraph.Name = "button_showADXL345Agraph";
-            this.button_showADXL345Agraph.Size = new System.Drawing.Size(147, 23);
-            this.button_showADXL345Agraph.TabIndex = 0;
-            this.button_showADXL345Agraph.Text = "Show ADXL345 A Graph";
-            this.button_showADXL345Agraph.UseVisualStyleBackColor = true;
-            this.button_showADXL345Agraph.Click += new System.EventHandler(this.button_showADXL345Agraph_Click);
+            this.label_ADXL345busLegend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_ADXL345busLegend.AutoSize = true;
+            this.label_ADXL345busLegend.Location = new System.Drawing.Point(714, 25);
+            this.label_ADXL345busLegend.Name = "label_ADXL345busLegend";
+            this.label_ADXL345busLegend.Size = new System.Drawing.Size(46, 13);
+            this.label_ADXL345busLegend.TabIndex = 42;
+            this.label_ADXL345busLegend.Text = "Legend:";
             // 
-            // groupBox_pwmOutput
+            // showHideButton_ADXL345Dgraph
             // 
-            this.groupBox_pwmOutput.Controls.Add(this.button_showPWMoutputPanel);
-            this.groupBox_pwmOutput.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox_pwmOutput.Location = new System.Drawing.Point(3, 121);
-            this.groupBox_pwmOutput.Name = "groupBox_pwmOutput";
-            this.groupBox_pwmOutput.Size = new System.Drawing.Size(826, 59);
-            this.groupBox_pwmOutput.TabIndex = 2;
-            this.groupBox_pwmOutput.TabStop = false;
-            this.groupBox_pwmOutput.Text = "PWM Output";
+            this.showHideButton_ADXL345Dgraph.FalsePrefixText = "Show ";
+            this.showHideButton_ADXL345Dgraph.Location = new System.Drawing.Point(469, 20);
+            this.showHideButton_ADXL345Dgraph.Name = "showHideButton_ADXL345Dgraph";
+            this.showHideButton_ADXL345Dgraph.Object = null;
+            this.showHideButton_ADXL345Dgraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_ADXL345Dgraph.SuffixText = "ADXL345 D Graph";
+            this.showHideButton_ADXL345Dgraph.TabIndex = 11;
+            this.showHideButton_ADXL345Dgraph.Text = "Show ADXL345 D Graph";
+            this.showHideButton_ADXL345Dgraph.ToggleState = false;
+            this.showHideButton_ADXL345Dgraph.TruePrefixText = "Hide ";
+            this.showHideButton_ADXL345Dgraph.UseVisualStyleBackColor = true;
             // 
-            // button_showPWMoutputPanel
+            // showHideButton_ADXL345Agraph
             // 
-            this.button_showPWMoutputPanel.Location = new System.Drawing.Point(10, 20);
-            this.button_showPWMoutputPanel.Name = "button_showPWMoutputPanel";
-            this.button_showPWMoutputPanel.Size = new System.Drawing.Size(147, 23);
-            this.button_showPWMoutputPanel.TabIndex = 0;
-            this.button_showPWMoutputPanel.Text = "Show PWM Output Panel";
-            this.button_showPWMoutputPanel.UseVisualStyleBackColor = true;
-            this.button_showPWMoutputPanel.Click += new System.EventHandler(this.button_showPWMoutputPanel_Click);
+            this.showHideButton_ADXL345Agraph.FalsePrefixText = "Show ";
+            this.showHideButton_ADXL345Agraph.Location = new System.Drawing.Point(10, 20);
+            this.showHideButton_ADXL345Agraph.Name = "showHideButton_ADXL345Agraph";
+            this.showHideButton_ADXL345Agraph.Object = null;
+            this.showHideButton_ADXL345Agraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_ADXL345Agraph.SuffixText = "ADXL345 A Graph";
+            this.showHideButton_ADXL345Agraph.TabIndex = 8;
+            this.showHideButton_ADXL345Agraph.Text = "Show ADXL345 A Graph";
+            this.showHideButton_ADXL345Agraph.ToggleState = false;
+            this.showHideButton_ADXL345Agraph.TruePrefixText = "Hide ";
+            this.showHideButton_ADXL345Agraph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_ADXL345Bgraph
+            // 
+            this.showHideButton_ADXL345Bgraph.FalsePrefixText = "Show ";
+            this.showHideButton_ADXL345Bgraph.Location = new System.Drawing.Point(163, 20);
+            this.showHideButton_ADXL345Bgraph.Name = "showHideButton_ADXL345Bgraph";
+            this.showHideButton_ADXL345Bgraph.Object = null;
+            this.showHideButton_ADXL345Bgraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_ADXL345Bgraph.SuffixText = "ADXL345 B Graph";
+            this.showHideButton_ADXL345Bgraph.TabIndex = 9;
+            this.showHideButton_ADXL345Bgraph.Text = "Show ADXL345 B Graph";
+            this.showHideButton_ADXL345Bgraph.ToggleState = false;
+            this.showHideButton_ADXL345Bgraph.TruePrefixText = "Hide ";
+            this.showHideButton_ADXL345Bgraph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_ADXL345Cgraph
+            // 
+            this.showHideButton_ADXL345Cgraph.FalsePrefixText = "Show ";
+            this.showHideButton_ADXL345Cgraph.Location = new System.Drawing.Point(316, 20);
+            this.showHideButton_ADXL345Cgraph.Name = "showHideButton_ADXL345Cgraph";
+            this.showHideButton_ADXL345Cgraph.Object = null;
+            this.showHideButton_ADXL345Cgraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_ADXL345Cgraph.SuffixText = "ADXL345 C Graph";
+            this.showHideButton_ADXL345Cgraph.TabIndex = 10;
+            this.showHideButton_ADXL345Cgraph.Text = "Show ADXL345 C Graph";
+            this.showHideButton_ADXL345Cgraph.ToggleState = false;
+            this.showHideButton_ADXL345Cgraph.TruePrefixText = "Hide ";
+            this.showHideButton_ADXL345Cgraph.UseVisualStyleBackColor = true;
+            // 
+            // groupBox_PWMoutput
+            // 
+            this.groupBox_PWMoutput.Controls.Add(this.showHideButton_PWMoutputPanel);
+            this.groupBox_PWMoutput.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox_PWMoutput.Location = new System.Drawing.Point(3, 121);
+            this.groupBox_PWMoutput.Name = "groupBox_PWMoutput";
+            this.groupBox_PWMoutput.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_PWMoutput.TabIndex = 2;
+            this.groupBox_PWMoutput.TabStop = false;
+            this.groupBox_PWMoutput.Text = "PWM Output";
+            // 
+            // showHideButton_PWMoutputPanel
+            // 
+            this.showHideButton_PWMoutputPanel.FalsePrefixText = "Show ";
+            this.showHideButton_PWMoutputPanel.Location = new System.Drawing.Point(10, 20);
+            this.showHideButton_PWMoutputPanel.Name = "showHideButton_PWMoutputPanel";
+            this.showHideButton_PWMoutputPanel.Object = null;
+            this.showHideButton_PWMoutputPanel.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_PWMoutputPanel.SuffixText = "PWM Output Panel";
+            this.showHideButton_PWMoutputPanel.TabIndex = 5;
+            this.showHideButton_PWMoutputPanel.Text = "Show PWM Output Panel";
+            this.showHideButton_PWMoutputPanel.ToggleState = false;
+            this.showHideButton_PWMoutputPanel.TruePrefixText = "Hide ";
+            this.showHideButton_PWMoutputPanel.UseVisualStyleBackColor = true;
             // 
             // groupBox_analogueInput
             // 
-            this.groupBox_analogueInput.Controls.Add(this.button_showAX6andAX7graph);
-            this.groupBox_analogueInput.Controls.Add(this.button_showAX4andAX5graph);
-            this.groupBox_analogueInput.Controls.Add(this.button_showAX2andAX3graph);
-            this.groupBox_analogueInput.Controls.Add(this.button_showAX0andAX1graph);
+            this.groupBox_analogueInput.Controls.Add(this.label_analogueInputAX0246);
+            this.groupBox_analogueInput.Controls.Add(this.label_analogueInputAX1357);
+            this.groupBox_analogueInput.Controls.Add(this.label_analogueInputLegend);
+            this.groupBox_analogueInput.Controls.Add(this.showHideButton_AX6andAX7graph);
+            this.groupBox_analogueInput.Controls.Add(this.showHideButton_AX0andAX1graph);
+            this.groupBox_analogueInput.Controls.Add(this.showHideButton_AX4andAX5graph);
+            this.groupBox_analogueInput.Controls.Add(this.showHideButton_AX2andAX3graph);
             this.groupBox_analogueInput.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_analogueInput.Location = new System.Drawing.Point(3, 62);
             this.groupBox_analogueInput.Name = "groupBox_analogueInput";
@@ -985,49 +1122,97 @@
             this.groupBox_analogueInput.TabStop = false;
             this.groupBox_analogueInput.Text = "Analogue Input";
             // 
-            // button_showAX6andAX7graph
+            // label_analogueInputAX0246
             // 
-            this.button_showAX6andAX7graph.Location = new System.Drawing.Point(469, 20);
-            this.button_showAX6andAX7graph.Name = "button_showAX6andAX7graph";
-            this.button_showAX6andAX7graph.Size = new System.Drawing.Size(147, 23);
-            this.button_showAX6andAX7graph.TabIndex = 3;
-            this.button_showAX6andAX7graph.Text = "Show AX6 and AX7 Graph";
-            this.button_showAX6andAX7graph.UseVisualStyleBackColor = true;
-            this.button_showAX6andAX7graph.Click += new System.EventHandler(this.button_showAX6andAX7graph_Click);
+            this.label_analogueInputAX0246.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_analogueInputAX0246.AutoSize = true;
+            this.label_analogueInputAX0246.ForeColor = System.Drawing.Color.Red;
+            this.label_analogueInputAX0246.Location = new System.Drawing.Point(706, 25);
+            this.label_analogueInputAX0246.Name = "label_analogueInputAX0246";
+            this.label_analogueInputAX0246.Size = new System.Drawing.Size(54, 13);
+            this.label_analogueInputAX0246.TabIndex = 48;
+            this.label_analogueInputAX0246.Text = "AX0,2,4,6";
             // 
-            // button_showAX4andAX5graph
+            // label_analogueInputAX1357
             // 
-            this.button_showAX4andAX5graph.Location = new System.Drawing.Point(316, 20);
-            this.button_showAX4andAX5graph.Name = "button_showAX4andAX5graph";
-            this.button_showAX4andAX5graph.Size = new System.Drawing.Size(147, 23);
-            this.button_showAX4andAX5graph.TabIndex = 2;
-            this.button_showAX4andAX5graph.Text = "Show AX4 and AX5 Graph";
-            this.button_showAX4andAX5graph.UseVisualStyleBackColor = true;
-            this.button_showAX4andAX5graph.Click += new System.EventHandler(this.button_showAX4andAX5graph_Click);
+            this.label_analogueInputAX1357.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_analogueInputAX1357.AutoSize = true;
+            this.label_analogueInputAX1357.ForeColor = System.Drawing.Color.Blue;
+            this.label_analogueInputAX1357.Location = new System.Drawing.Point(766, 25);
+            this.label_analogueInputAX1357.Name = "label_analogueInputAX1357";
+            this.label_analogueInputAX1357.Size = new System.Drawing.Size(54, 13);
+            this.label_analogueInputAX1357.TabIndex = 47;
+            this.label_analogueInputAX1357.Text = "AX1,3,5,7";
             // 
-            // button_showAX2andAX3graph
+            // label_analogueInputLegend
             // 
-            this.button_showAX2andAX3graph.Location = new System.Drawing.Point(163, 20);
-            this.button_showAX2andAX3graph.Name = "button_showAX2andAX3graph";
-            this.button_showAX2andAX3graph.Size = new System.Drawing.Size(147, 23);
-            this.button_showAX2andAX3graph.TabIndex = 1;
-            this.button_showAX2andAX3graph.Text = "Show AX2 and AX3 Graph";
-            this.button_showAX2andAX3graph.UseVisualStyleBackColor = true;
-            this.button_showAX2andAX3graph.Click += new System.EventHandler(this.button_showAX2andAX3graph_Click);
+            this.label_analogueInputLegend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_analogueInputLegend.AutoSize = true;
+            this.label_analogueInputLegend.Location = new System.Drawing.Point(654, 25);
+            this.label_analogueInputLegend.Name = "label_analogueInputLegend";
+            this.label_analogueInputLegend.Size = new System.Drawing.Size(46, 13);
+            this.label_analogueInputLegend.TabIndex = 46;
+            this.label_analogueInputLegend.Text = "Legend:";
             // 
-            // button_showAX0andAX1graph
+            // showHideButton_AX6andAX7graph
             // 
-            this.button_showAX0andAX1graph.Location = new System.Drawing.Point(10, 20);
-            this.button_showAX0andAX1graph.Name = "button_showAX0andAX1graph";
-            this.button_showAX0andAX1graph.Size = new System.Drawing.Size(147, 23);
-            this.button_showAX0andAX1graph.TabIndex = 0;
-            this.button_showAX0andAX1graph.Text = "Show AX0 and AX1 Graph";
-            this.button_showAX0andAX1graph.UseVisualStyleBackColor = true;
-            this.button_showAX0andAX1graph.Click += new System.EventHandler(this.button_showAX0andAX1graph_Click);
+            this.showHideButton_AX6andAX7graph.FalsePrefixText = "Show ";
+            this.showHideButton_AX6andAX7graph.Location = new System.Drawing.Point(469, 20);
+            this.showHideButton_AX6andAX7graph.Name = "showHideButton_AX6andAX7graph";
+            this.showHideButton_AX6andAX7graph.Object = null;
+            this.showHideButton_AX6andAX7graph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_AX6andAX7graph.SuffixText = "AX6 And AX7 Graph";
+            this.showHideButton_AX6andAX7graph.TabIndex = 7;
+            this.showHideButton_AX6andAX7graph.Text = "Show AX6 And AX7 Graph";
+            this.showHideButton_AX6andAX7graph.ToggleState = false;
+            this.showHideButton_AX6andAX7graph.TruePrefixText = "Hide ";
+            this.showHideButton_AX6andAX7graph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_AX0andAX1graph
+            // 
+            this.showHideButton_AX0andAX1graph.FalsePrefixText = "Show ";
+            this.showHideButton_AX0andAX1graph.Location = new System.Drawing.Point(10, 20);
+            this.showHideButton_AX0andAX1graph.Name = "showHideButton_AX0andAX1graph";
+            this.showHideButton_AX0andAX1graph.Object = null;
+            this.showHideButton_AX0andAX1graph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_AX0andAX1graph.SuffixText = "AX0 And AX1 Graph";
+            this.showHideButton_AX0andAX1graph.TabIndex = 4;
+            this.showHideButton_AX0andAX1graph.Text = "Show AX0 And AX1 Graph";
+            this.showHideButton_AX0andAX1graph.ToggleState = false;
+            this.showHideButton_AX0andAX1graph.TruePrefixText = "Hide ";
+            this.showHideButton_AX0andAX1graph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_AX4andAX5graph
+            // 
+            this.showHideButton_AX4andAX5graph.FalsePrefixText = "Show ";
+            this.showHideButton_AX4andAX5graph.Location = new System.Drawing.Point(316, 20);
+            this.showHideButton_AX4andAX5graph.Name = "showHideButton_AX4andAX5graph";
+            this.showHideButton_AX4andAX5graph.Object = null;
+            this.showHideButton_AX4andAX5graph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_AX4andAX5graph.SuffixText = "AX4 And AX5 Graph";
+            this.showHideButton_AX4andAX5graph.TabIndex = 6;
+            this.showHideButton_AX4andAX5graph.Text = "Show AX4 And AX5 Graph";
+            this.showHideButton_AX4andAX5graph.ToggleState = false;
+            this.showHideButton_AX4andAX5graph.TruePrefixText = "Hide ";
+            this.showHideButton_AX4andAX5graph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_AX2andAX3graph
+            // 
+            this.showHideButton_AX2andAX3graph.FalsePrefixText = "Show ";
+            this.showHideButton_AX2andAX3graph.Location = new System.Drawing.Point(163, 20);
+            this.showHideButton_AX2andAX3graph.Name = "showHideButton_AX2andAX3graph";
+            this.showHideButton_AX2andAX3graph.Object = null;
+            this.showHideButton_AX2andAX3graph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_AX2andAX3graph.SuffixText = "AX2 And AX3 Graph";
+            this.showHideButton_AX2andAX3graph.TabIndex = 5;
+            this.showHideButton_AX2andAX3graph.Text = "Show AX2 And AX3 Graph";
+            this.showHideButton_AX2andAX3graph.ToggleState = false;
+            this.showHideButton_AX2andAX3graph.TruePrefixText = "Hide ";
+            this.showHideButton_AX2andAX3graph.UseVisualStyleBackColor = true;
             // 
             // groupBox_digitalIO
             // 
-            this.groupBox_digitalIO.Controls.Add(this.button_showDigitalIOpanel);
+            this.groupBox_digitalIO.Controls.Add(this.showHideButton_digitalIOpanel);
             this.groupBox_digitalIO.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_digitalIO.Location = new System.Drawing.Point(3, 3);
             this.groupBox_digitalIO.Name = "groupBox_digitalIO";
@@ -1036,15 +1221,19 @@
             this.groupBox_digitalIO.TabStop = false;
             this.groupBox_digitalIO.Text = "Digital I/O";
             // 
-            // button_showDigitalIOpanel
+            // showHideButton_digitalIOpanel
             // 
-            this.button_showDigitalIOpanel.Location = new System.Drawing.Point(10, 20);
-            this.button_showDigitalIOpanel.Name = "button_showDigitalIOpanel";
-            this.button_showDigitalIOpanel.Size = new System.Drawing.Size(147, 23);
-            this.button_showDigitalIOpanel.TabIndex = 0;
-            this.button_showDigitalIOpanel.Text = "Show Digital I/O Panel";
-            this.button_showDigitalIOpanel.UseVisualStyleBackColor = true;
-            this.button_showDigitalIOpanel.Click += new System.EventHandler(this.button_showDigitalIOpanel_Click);
+            this.showHideButton_digitalIOpanel.FalsePrefixText = "Show ";
+            this.showHideButton_digitalIOpanel.Location = new System.Drawing.Point(10, 20);
+            this.showHideButton_digitalIOpanel.Name = "showHideButton_digitalIOpanel";
+            this.showHideButton_digitalIOpanel.Object = null;
+            this.showHideButton_digitalIOpanel.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_digitalIOpanel.SuffixText = "Digital I/O Panel";
+            this.showHideButton_digitalIOpanel.TabIndex = 4;
+            this.showHideButton_digitalIOpanel.Text = "Show Digital I/O Panel";
+            this.showHideButton_digitalIOpanel.ToggleState = false;
+            this.showHideButton_digitalIOpanel.TruePrefixText = "Hide ";
+            this.showHideButton_digitalIOpanel.UseVisualStyleBackColor = true;
             // 
             // tabPage_dataLogger
             // 
@@ -1059,10 +1248,10 @@
             // 
             // groupBox_logReceivedDataToFile
             // 
-            this.groupBox_logReceivedDataToFile.Controls.Add(this.button_dataLoggerFilePathBrowse);
+            this.groupBox_logReceivedDataToFile.Controls.Add(this.toggleButton_dataLoggerStartStopLogging);
+            this.groupBox_logReceivedDataToFile.Controls.Add(this.button_dataLoggerBrowse);
             this.groupBox_logReceivedDataToFile.Controls.Add(this.label_dataLoggerFilePath);
             this.groupBox_logReceivedDataToFile.Controls.Add(this.textBox_dataLoggerFilePath);
-            this.groupBox_logReceivedDataToFile.Controls.Add(this.button_dataLoggerStart);
             this.groupBox_logReceivedDataToFile.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_logReceivedDataToFile.Location = new System.Drawing.Point(3, 3);
             this.groupBox_logReceivedDataToFile.Name = "groupBox_logReceivedDataToFile";
@@ -1071,16 +1260,31 @@
             this.groupBox_logReceivedDataToFile.TabStop = false;
             this.groupBox_logReceivedDataToFile.Text = "Log Received Data To File";
             // 
-            // button_dataLoggerFilePathBrowse
+            // toggleButton_dataLoggerStartStopLogging
             // 
-            this.button_dataLoggerFilePathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_dataLoggerFilePathBrowse.Location = new System.Drawing.Point(624, 22);
-            this.button_dataLoggerFilePathBrowse.Name = "button_dataLoggerFilePathBrowse";
-            this.button_dataLoggerFilePathBrowse.Size = new System.Drawing.Size(95, 23);
-            this.button_dataLoggerFilePathBrowse.TabIndex = 1;
-            this.button_dataLoggerFilePathBrowse.Text = "Browse...";
-            this.button_dataLoggerFilePathBrowse.UseVisualStyleBackColor = true;
-            this.button_dataLoggerFilePathBrowse.Click += new System.EventHandler(this.button_dataLoggerFilePathBrowse_Click);
+            this.toggleButton_dataLoggerStartStopLogging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.toggleButton_dataLoggerStartStopLogging.FalsePrefixText = "Start ";
+            this.toggleButton_dataLoggerStartStopLogging.Location = new System.Drawing.Point(725, 22);
+            this.toggleButton_dataLoggerStartStopLogging.Name = "toggleButton_dataLoggerStartStopLogging";
+            this.toggleButton_dataLoggerStartStopLogging.Size = new System.Drawing.Size(95, 23);
+            this.toggleButton_dataLoggerStartStopLogging.SuffixText = "Logging";
+            this.toggleButton_dataLoggerStartStopLogging.TabIndex = 2;
+            this.toggleButton_dataLoggerStartStopLogging.Text = "Start Logging";
+            this.toggleButton_dataLoggerStartStopLogging.ToggleState = false;
+            this.toggleButton_dataLoggerStartStopLogging.TruePrefixText = "Stop ";
+            this.toggleButton_dataLoggerStartStopLogging.UseVisualStyleBackColor = true;
+            this.toggleButton_dataLoggerStartStopLogging.Click += new System.EventHandler(this.toggleButton_dataLoggerStartStopLogging_Click);
+            // 
+            // button_dataLoggerBrowse
+            // 
+            this.button_dataLoggerBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_dataLoggerBrowse.Location = new System.Drawing.Point(624, 22);
+            this.button_dataLoggerBrowse.Name = "button_dataLoggerBrowse";
+            this.button_dataLoggerBrowse.Size = new System.Drawing.Size(95, 23);
+            this.button_dataLoggerBrowse.TabIndex = 1;
+            this.button_dataLoggerBrowse.Text = "Browse...";
+            this.button_dataLoggerBrowse.UseVisualStyleBackColor = true;
+            this.button_dataLoggerBrowse.Click += new System.EventHandler(this.button_dataLoggerBrowse_Click);
             // 
             // label_dataLoggerFilePath
             // 
@@ -1100,20 +1304,9 @@
             this.textBox_dataLoggerFilePath.Size = new System.Drawing.Size(554, 20);
             this.textBox_dataLoggerFilePath.TabIndex = 0;
             // 
-            // button_dataLoggerStart
-            // 
-            this.button_dataLoggerStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_dataLoggerStart.Location = new System.Drawing.Point(725, 22);
-            this.button_dataLoggerStart.Name = "button_dataLoggerStart";
-            this.button_dataLoggerStart.Size = new System.Drawing.Size(95, 23);
-            this.button_dataLoggerStart.TabIndex = 2;
-            this.button_dataLoggerStart.Text = "Start Logging";
-            this.button_dataLoggerStart.UseVisualStyleBackColor = true;
-            this.button_dataLoggerStart.Click += new System.EventHandler(this.button_dataLoggerStart_Click);
-            // 
             // tabPage_SDcard
             // 
-            this.tabPage_SDcard.Controls.Add(this.groupBox_convertBinaryFile);
+            this.tabPage_SDcard.Controls.Add(this.groupBox_binaryFileConverter);
             this.tabPage_SDcard.Location = new System.Drawing.Point(4, 22);
             this.tabPage_SDcard.Name = "tabPage_SDcard";
             this.tabPage_SDcard.Padding = new System.Windows.Forms.Padding(3);
@@ -1122,39 +1315,39 @@
             this.tabPage_SDcard.Text = "SD Card";
             this.tabPage_SDcard.UseVisualStyleBackColor = true;
             // 
-            // groupBox_convertBinaryFile
+            // groupBox_binaryFileConverter
             // 
-            this.groupBox_convertBinaryFile.Controls.Add(this.button_convertBinaryFileConvertBrowse);
-            this.groupBox_convertBinaryFile.Controls.Add(this.labelconvertBinaryFileFilePath);
-            this.groupBox_convertBinaryFile.Controls.Add(this.textBox_convertBinaryFileFilePath);
-            this.groupBox_convertBinaryFile.Controls.Add(this.button_convertBinaryFileConvert);
-            this.groupBox_convertBinaryFile.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox_convertBinaryFile.Location = new System.Drawing.Point(3, 3);
-            this.groupBox_convertBinaryFile.Name = "groupBox_convertBinaryFile";
-            this.groupBox_convertBinaryFile.Size = new System.Drawing.Size(826, 60);
-            this.groupBox_convertBinaryFile.TabIndex = 0;
-            this.groupBox_convertBinaryFile.TabStop = false;
-            this.groupBox_convertBinaryFile.Text = "Convert Binary File";
+            this.groupBox_binaryFileConverter.Controls.Add(this.button_convertBinaryFileBrowse);
+            this.groupBox_binaryFileConverter.Controls.Add(this.label_convertBinaryFileFilePath);
+            this.groupBox_binaryFileConverter.Controls.Add(this.textBox_convertBinaryFileFilePath);
+            this.groupBox_binaryFileConverter.Controls.Add(this.button_convertBinaryFileConvert);
+            this.groupBox_binaryFileConverter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox_binaryFileConverter.Location = new System.Drawing.Point(3, 3);
+            this.groupBox_binaryFileConverter.Name = "groupBox_binaryFileConverter";
+            this.groupBox_binaryFileConverter.Size = new System.Drawing.Size(826, 60);
+            this.groupBox_binaryFileConverter.TabIndex = 0;
+            this.groupBox_binaryFileConverter.TabStop = false;
+            this.groupBox_binaryFileConverter.Text = "Binary File Converter";
             // 
-            // button_convertBinaryFileConvertBrowse
+            // button_convertBinaryFileBrowse
             // 
-            this.button_convertBinaryFileConvertBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_convertBinaryFileConvertBrowse.Location = new System.Drawing.Point(624, 22);
-            this.button_convertBinaryFileConvertBrowse.Name = "button_convertBinaryFileConvertBrowse";
-            this.button_convertBinaryFileConvertBrowse.Size = new System.Drawing.Size(95, 23);
-            this.button_convertBinaryFileConvertBrowse.TabIndex = 1;
-            this.button_convertBinaryFileConvertBrowse.Text = "Browse...";
-            this.button_convertBinaryFileConvertBrowse.UseVisualStyleBackColor = true;
-            this.button_convertBinaryFileConvertBrowse.Click += new System.EventHandler(this.button_convertBinaryFileConvertBrowse_Click);
+            this.button_convertBinaryFileBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_convertBinaryFileBrowse.Location = new System.Drawing.Point(624, 22);
+            this.button_convertBinaryFileBrowse.Name = "button_convertBinaryFileBrowse";
+            this.button_convertBinaryFileBrowse.Size = new System.Drawing.Size(95, 23);
+            this.button_convertBinaryFileBrowse.TabIndex = 1;
+            this.button_convertBinaryFileBrowse.Text = "Browse...";
+            this.button_convertBinaryFileBrowse.UseVisualStyleBackColor = true;
+            this.button_convertBinaryFileBrowse.Click += new System.EventHandler(this.button_convertBinaryFileBrowse_Click);
             // 
-            // labelconvertBinaryFileFilePath
+            // label_convertBinaryFileFilePath
             // 
-            this.labelconvertBinaryFileFilePath.AutoSize = true;
-            this.labelconvertBinaryFileFilePath.Location = new System.Drawing.Point(8, 27);
-            this.labelconvertBinaryFileFilePath.Name = "labelconvertBinaryFileFilePath";
-            this.labelconvertBinaryFileFilePath.Size = new System.Drawing.Size(50, 13);
-            this.labelconvertBinaryFileFilePath.TabIndex = 47;
-            this.labelconvertBinaryFileFilePath.Text = "File path:";
+            this.label_convertBinaryFileFilePath.AutoSize = true;
+            this.label_convertBinaryFileFilePath.Location = new System.Drawing.Point(8, 27);
+            this.label_convertBinaryFileFilePath.Name = "label_convertBinaryFileFilePath";
+            this.label_convertBinaryFileFilePath.Size = new System.Drawing.Size(50, 13);
+            this.label_convertBinaryFileFilePath.TabIndex = 47;
+            this.label_convertBinaryFileFilePath.Text = "File path:";
             // 
             // textBox_convertBinaryFileFilePath
             // 
@@ -1245,10 +1438,10 @@
             // 
             // groupBox_step2collectHardIronCalibrationDataSet
             // 
+            this.groupBox_step2collectHardIronCalibrationDataSet.Controls.Add(this.toggleButton_collectHardIronCalDatasetStartStopLogging);
             this.groupBox_step2collectHardIronCalibrationDataSet.Controls.Add(this.button_collectHardIronCalDatasetBrowse);
             this.groupBox_step2collectHardIronCalibrationDataSet.Controls.Add(this.label_collectHardIronCalDatasetFilePath);
             this.groupBox_step2collectHardIronCalibrationDataSet.Controls.Add(this.textBox_collectHardIronCalDatasetFilePath);
-            this.groupBox_step2collectHardIronCalibrationDataSet.Controls.Add(this.button_collectHardIronCalDatasetStartLogging);
             this.groupBox_step2collectHardIronCalibrationDataSet.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_step2collectHardIronCalibrationDataSet.Location = new System.Drawing.Point(3, 63);
             this.groupBox_step2collectHardIronCalibrationDataSet.Name = "groupBox_step2collectHardIronCalibrationDataSet";
@@ -1256,6 +1449,21 @@
             this.groupBox_step2collectHardIronCalibrationDataSet.TabIndex = 1;
             this.groupBox_step2collectHardIronCalibrationDataSet.TabStop = false;
             this.groupBox_step2collectHardIronCalibrationDataSet.Text = "Step 2 - Collect Hard-Iron Calibration Dataset";
+            // 
+            // toggleButton_collectHardIronCalDatasetStartStopLogging
+            // 
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.FalsePrefixText = "Start ";
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Location = new System.Drawing.Point(725, 22);
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Name = "toggleButton_collectHardIronCalDatasetStartStopLogging";
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Size = new System.Drawing.Size(95, 23);
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.SuffixText = "Logging";
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.TabIndex = 2;
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Text = "Start Logging";
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.ToggleState = false;
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.TruePrefixText = "Stop ";
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.UseVisualStyleBackColor = true;
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Click += new System.EventHandler(this.toggleButton_collectHardIronCalDatasetStartStopLogging_Click);
             // 
             // button_collectHardIronCalDatasetBrowse
             // 
@@ -1286,17 +1494,6 @@
             this.textBox_collectHardIronCalDatasetFilePath.Size = new System.Drawing.Size(554, 20);
             this.textBox_collectHardIronCalDatasetFilePath.TabIndex = 0;
             this.textBox_collectHardIronCalDatasetFilePath.TextChanged += new System.EventHandler(this.textBox_collectHardIronCalDatasetFilePath_TextChanged);
-            // 
-            // button_collectHardIronCalDatasetStartLogging
-            // 
-            this.button_collectHardIronCalDatasetStartLogging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_collectHardIronCalDatasetStartLogging.Location = new System.Drawing.Point(725, 22);
-            this.button_collectHardIronCalDatasetStartLogging.Name = "button_collectHardIronCalDatasetStartLogging";
-            this.button_collectHardIronCalDatasetStartLogging.Size = new System.Drawing.Size(95, 23);
-            this.button_collectHardIronCalDatasetStartLogging.TabIndex = 2;
-            this.button_collectHardIronCalDatasetStartLogging.Text = "Start Logging";
-            this.button_collectHardIronCalDatasetStartLogging.UseVisualStyleBackColor = true;
-            this.button_collectHardIronCalDatasetStartLogging.Click += new System.EventHandler(this.button_collectHardIronCalDatasetStartLogging_Click);
             // 
             // groupBox_step1ClearHardIronBiasRegisters
             // 
@@ -1466,7 +1663,7 @@
             this.linkLabel_www.Location = new System.Drawing.Point(44, 167);
             this.linkLabel_www.Name = "linkLabel_www";
             this.linkLabel_www.Size = new System.Drawing.Size(80, 13);
-            this.linkLabel_www.TabIndex = 29;
+            this.linkLabel_www.TabIndex = 0;
             this.linkLabel_www.TabStop = true;
             this.linkLabel_www.Text = "www.x-io.co.uk";
             this.linkLabel_www.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_wwwxiocouk_LinkClicked);
@@ -1498,16 +1695,6 @@
             this.label_GUIversion.TabIndex = 23;
             this.label_GUIversion.Text = "GUI version:";
             // 
-            // appendedTreeView_registers
-            // 
-            this.appendedTreeView_registers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.appendedTreeView_registers.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.appendedTreeView_registers.Location = new System.Drawing.Point(3, 3);
-            this.appendedTreeView_registers.Name = "appendedTreeView_registers";
-            this.appendedTreeView_registers.Size = new System.Drawing.Size(826, 404);
-            this.appendedTreeView_registers.TabIndex = 0;
-            this.appendedTreeView_registers.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.appendedTreeView_registers_NodeMouseClick);
-            // 
             // Form_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1519,10 +1706,10 @@
             this.Load += new System.EventHandler(this.Form_main_Load);
             this.tabControl_main.ResumeLayout(false);
             this.tabPage_serialPort.ResumeLayout(false);
-            this.groupBox_packetCounts.ResumeLayout(false);
-            this.groupBox_packetCounts.PerformLayout();
-            this.groupBox_OpenClosePort.ResumeLayout(false);
-            this.groupBox_OpenClosePort.PerformLayout();
+            this.groupBox_packetCounters.ResumeLayout(false);
+            this.groupBox_packetCounters.PerformLayout();
+            this.groupBox_openClosePort.ResumeLayout(false);
+            this.groupBox_openClosePort.PerformLayout();
             this.tabPage_registers.ResumeLayout(false);
             this.tabPage_dateTime.ResumeLayout(false);
             this.groupBox_dateTime.ResumeLayout(false);
@@ -1535,23 +1722,25 @@
             this.groupBox_accelerometerCalibration.ResumeLayout(false);
             this.groupBox_gyroscopeCalibration.ResumeLayout(false);
             this.groupBox_general.ResumeLayout(false);
-            this.tabPage_ViewSensorData.ResumeLayout(false);
-            this.groupBox_orienData.ResumeLayout(false);
-            this.groupBox_orienData.PerformLayout();
-            this.groupBox_sensorData.ResumeLayout(false);
-            this.groupBox_sensorData.PerformLayout();
-            this.groupBox_battThermData.ResumeLayout(false);
+            this.tabPage_viewSensorData.ResumeLayout(false);
+            this.groupBox_orientationData.ResumeLayout(false);
+            this.groupBox_orientationData.PerformLayout();
+            this.groupBox_inertialAndMagneticData.ResumeLayout(false);
+            this.groupBox_inertialAndMagneticData.PerformLayout();
+            this.groupBox_batteryAndThermometerData.ResumeLayout(false);
             this.tabPage_auxillaryPort.ResumeLayout(false);
             this.groupBox_ADXL345bus.ResumeLayout(false);
-            this.groupBox_pwmOutput.ResumeLayout(false);
+            this.groupBox_ADXL345bus.PerformLayout();
+            this.groupBox_PWMoutput.ResumeLayout(false);
             this.groupBox_analogueInput.ResumeLayout(false);
+            this.groupBox_analogueInput.PerformLayout();
             this.groupBox_digitalIO.ResumeLayout(false);
             this.tabPage_dataLogger.ResumeLayout(false);
             this.groupBox_logReceivedDataToFile.ResumeLayout(false);
             this.groupBox_logReceivedDataToFile.PerformLayout();
             this.tabPage_SDcard.ResumeLayout(false);
-            this.groupBox_convertBinaryFile.ResumeLayout(false);
-            this.groupBox_convertBinaryFile.PerformLayout();
+            this.groupBox_binaryFileConverter.ResumeLayout(false);
+            this.groupBox_binaryFileConverter.PerformLayout();
             this.tabPage_hardIronCalibration.ResumeLayout(false);
             this.groupBox_step3hardIronCalibrationAlgorithm.ResumeLayout(false);
             this.groupBox_step3hardIronCalibrationAlgorithm.PerformLayout();
@@ -1572,32 +1761,32 @@
 
         #region Register tree view design code
 
-        private void InitializeAppendedTreeViewComponents()
+        private void InitializeRegisterTreeViewComponents()
         {
             #region General
 
-            appendedTreeNodeTextBox_firmVersionMajorNum = new AppendedTreeNodeTextBox("Major Number:");
-            appendedTreeNodeTextBox_firmVersionMajorNum.TextBox.ReadOnly = true;
-            appendedTreeNodeTextBox_firmVersionMinorNum = new AppendedTreeNodeTextBox("Minor Number:");
-            appendedTreeNodeTextBox_firmVersionMinorNum.TextBox.ReadOnly = true;
-            appendedTreeNodeTextBox_firmwareVersion = new System.Windows.Forms.TreeNode("Firmware Version (read-only):", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_firmVersionMajorNum,
-            appendedTreeNodeTextBox_firmVersionMinorNum});
-            appendedTreeNodeTextBox_deviceID = new AppendedTreeNodeTextBox("Device ID (read only):");
-            appendedTreeNodeTextBox_deviceID.TextBox.ReadOnly = true;
-            appendedTreeNodeComboBox_buttonMode = new AppendedTreeNodeComboBox("Button Mode:");
-            appendedTreeNodeComboBox_buttonMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_buttonMode.ComboBox.Width = 150;
-            appendedTreeNodeComboBox_buttonMode.ComboBox.Items.Add("Disabled");
-            appendedTreeNodeComboBox_buttonMode.ComboBox.Items.Add("Reset");
-            appendedTreeNodeComboBox_buttonMode.ComboBox.Items.Add("Sleep/wake");
-            appendedTreeNodeComboBox_buttonMode.ComboBox.Items.Add("Algorithm initialise");
-            appendedTreeNodeComboBox_buttonMode.ComboBox.Items.Add("Algorithm tare");
-            appendedTreeNodeComboBox_buttonMode.ComboBox.Items.Add("Algorithm initialise then tare");
+            registerTreeNodeTextBox_firmwareVersionMajorNum = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.FirmwareVersionMajorNum, "Major Number:");
+            registerTreeNodeTextBox_firmwareVersionMajorNum.TextBox.ReadOnly = true;
+            registerTreeNodeTextBox_firmwareVersionMinorNum = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.FirmwareVersionMinorNum, "Minor Number:");
+            registerTreeNodeTextBox_firmwareVersionMinorNum.TextBox.ReadOnly = true;
+            registerTreeNodeTextBox_firmwareVersion = new System.Windows.Forms.TreeNode("Firmware Version (read-only)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_firmwareVersionMajorNum,
+            registerTreeNodeTextBox_firmwareVersionMinorNum});
+            registerTreeNodeTextBox_deviceID = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.DeviceID, "Device ID (read-only):", "{0:X4}");
+            registerTreeNodeTextBox_deviceID.TextBox.ReadOnly = true;
+            registerTreeNodeComboBox_buttonMode = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.ButtonMode, "Button Mode:");
+            registerTreeNodeComboBox_buttonMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_buttonMode.ComboBox.Width = 150;
+            registerTreeNodeComboBox_buttonMode.ComboBox.Items.Add("Disabled");
+            registerTreeNodeComboBox_buttonMode.ComboBox.Items.Add("Reset");
+            registerTreeNodeComboBox_buttonMode.ComboBox.Items.Add("Sleep/wake");
+            registerTreeNodeComboBox_buttonMode.ComboBox.Items.Add("Algorithm initialise");
+            registerTreeNodeComboBox_buttonMode.ComboBox.Items.Add("Algorithm tare");
+            registerTreeNodeComboBox_buttonMode.ComboBox.Items.Add("Algorithm initialise then tare");
             treeNodeGeneral = new System.Windows.Forms.TreeNode("General", new System.Windows.Forms.TreeNode[] {
-            appendedTreeNodeTextBox_firmwareVersion,
-            appendedTreeNodeTextBox_deviceID,
-            appendedTreeNodeComboBox_buttonMode
+            registerTreeNodeTextBox_firmwareVersion,
+            registerTreeNodeTextBox_deviceID,
+            registerTreeNodeComboBox_buttonMode
             });
 
             #endregion
@@ -1606,95 +1795,95 @@
 
             #region Battery Voltmeter
 
-            appendedTreeNodeTextBox_battSens = new AppendedTreeNodeTextBox("Sensitivity (lsb/V):");
-            appendedTreeNodeTextBox_battBias = new AppendedTreeNodeTextBox("Bias (lsb):");
-            treeNode_battVoltmeter = new System.Windows.Forms.TreeNode("Battery Voltmeter", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_battSens,
-            appendedTreeNodeTextBox_battBias});
+            registerTreeNodeTextBox_batterySensitivity = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.BatterySensitivity, "Sensitivity (lsb/V):");
+            registerTreeNodeTextBox_batteryBias = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.BatteryBias, "Bias (lsb):");
+            treeNode_batteryVoltmeter = new System.Windows.Forms.TreeNode("Battery Voltmeter", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_batterySensitivity,
+            registerTreeNodeTextBox_batteryBias});
 
             #endregion
 
             #region Thermometer
 
-            appendedTreeNodeTextBox_thermSens = new AppendedTreeNodeTextBox("Sensitivity (lsb/˚C):");
-            appendedTreeNodeTextBox_thermBias = new AppendedTreeNodeTextBox("Bias (lsb):");
-            treeNode_thermometer = new System.Windows.Forms.TreeNode("Thermometer", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_thermSens,
-            appendedTreeNodeTextBox_thermBias});
+            registerTreeNodeTextBox_thermometerSensitivity = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ThermometerSensitivity, "Sensitivity (lsb/˚C):");
+            registerTreeNodeTextBox_thermometerBias = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ThermometerBias, "Bias (lsb):");
+            treeNode_thermometer = new System.Windows.Forms.TreeNode("Thermometer", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_thermometerSensitivity,
+            registerTreeNodeTextBox_thermometerBias});
 
             #endregion
 
             #region Gyroscope
 
-            appendedTreeNodeComboBox_gyroFullScale = new AppendedTreeNodeComboBox("Full-Scale:");
-            appendedTreeNodeComboBox_gyroFullScale.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_gyroFullScale.ComboBox.Width = 75;
-            appendedTreeNodeComboBox_gyroFullScale.ComboBox.Items.Add("±250 ˚/s");
-            appendedTreeNodeComboBox_gyroFullScale.ComboBox.Items.Add("±500 ˚/s");
-            appendedTreeNodeComboBox_gyroFullScale.ComboBox.Items.Add("±1000 ˚/s");
-            appendedTreeNodeComboBox_gyroFullScale.ComboBox.Items.Add("±2000 ˚/s");
-            appendedTreeNodeTextBox_gyroSensX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_gyroSensY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_gyroSensZ = new AppendedTreeNodeTextBox("Z:");
-            appendedTreeNodeTextBox_gyroSampledPlus200dpsX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_gyroSampledPlus200dpsY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_gyroSampledPlus200dpsZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_gyroSampledAxesAtPlus200dps = new System.Windows.Forms.TreeNode("Sample Axes @ +200 ˚/s (lsb)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_gyroSampledPlus200dpsX,
-            appendedTreeNodeTextBox_gyroSampledPlus200dpsY,
-            appendedTreeNodeTextBox_gyroSampledPlus200dpsZ});
-            appendedTreeNodeTextBox_gyroSampledMinus200dpsX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_gyroSampledMinus200dpsY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_gyroSampledMinus200dpsZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_gyroSampledAxesAtMinus200dps = new System.Windows.Forms.TreeNode("Sample Axes @ -200 ˚/s (lsb)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_gyroSampledMinus200dpsX,
-            appendedTreeNodeTextBox_gyroSampledMinus200dpsY,
-            appendedTreeNodeTextBox_gyroSampledMinus200dpsZ});
+            registerTreeNodeComboBox_gyroscopeFullScale = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.GyroscopeFullScale, "Full-Scale:");
+            registerTreeNodeComboBox_gyroscopeFullScale.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_gyroscopeFullScale.ComboBox.Width = 75;
+            registerTreeNodeComboBox_gyroscopeFullScale.ComboBox.Items.Add("±250 ˚/s");
+            registerTreeNodeComboBox_gyroscopeFullScale.ComboBox.Items.Add("±500 ˚/s");
+            registerTreeNodeComboBox_gyroscopeFullScale.ComboBox.Items.Add("±1000 ˚/s");
+            registerTreeNodeComboBox_gyroscopeFullScale.ComboBox.Items.Add("±2000 ˚/s");
+            registerTreeNodeTextBox_gyroscopeSensitivtyX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSensitivityX, "X:");
+            registerTreeNodeTextBox_gyroscopeSensitivtyY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSensitivityY, "Y:");
+            registerTreeNodeTextBox_gyroscopeSensitivtyZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSensitivityZ, "Z:");
+            registerTreeNodeTextBox_gyroscopeSampledPlus200dpsX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSampledPlus200dpsX, "X:");
+            registerTreeNodeTextBox_gyroscopeSampledPlus200dpsY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSampledPlus200dpsY, "Y:");
+            registerTreeNodeTextBox_gyroscopeSampledPlus200dpsZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSampledPlus200dpsZ, "Z:");
+            treeNode_gyroSampledAxesAtPlus200dps = new System.Windows.Forms.TreeNode("Sample Axes @ +200 ˚/s (lsb)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_gyroscopeSampledPlus200dpsX,
+            registerTreeNodeTextBox_gyroscopeSampledPlus200dpsY,
+            registerTreeNodeTextBox_gyroscopeSampledPlus200dpsZ});
+            registerTreeNodeTextBox_gyroscopeSampledMinus200dpsX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSampledMinus200dpsX, "X:");
+            registerTreeNodeTextBox_gyroscopeSampledMinus200dpsY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSampledMinus200dpsY, "Y:");
+            registerTreeNodeTextBox_gyroscopeSampledMinus200dpsZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSampledMinus200dpsZ, "Z:");
+            treeNode_gyroSampledAxesAtMinus200dps = new System.Windows.Forms.TreeNode("Sample Axes @ -200 ˚/s (lsb)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_gyroscopeSampledMinus200dpsX,
+            registerTreeNodeTextBox_gyroscopeSampledMinus200dpsY,
+            registerTreeNodeTextBox_gyroscopeSampledMinus200dpsZ});
             treeNode_gyroSens = new System.Windows.Forms.TreeNode("Sensitivity (lsb/˚/s)", new System.Windows.Forms.TreeNode[] {
-            appendedTreeNodeTextBox_gyroSensX,
-            appendedTreeNodeTextBox_gyroSensY,
-            appendedTreeNodeTextBox_gyroSensZ,
+            registerTreeNodeTextBox_gyroscopeSensitivtyX,
+            registerTreeNodeTextBox_gyroscopeSensitivtyY,
+            registerTreeNodeTextBox_gyroscopeSensitivtyZ,
             treeNode_gyroSampledAxesAtPlus200dps,
             treeNode_gyroSampledAxesAtMinus200dps});
-            appendedTreeNodeTextBox_gyroBiasX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_gyroBiasY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_gyroBiasZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_gyroBias = new System.Windows.Forms.TreeNode("Bias @ 25˚C (lsb)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_gyroBiasX,
-            appendedTreeNodeTextBox_gyroBiasY,
-            appendedTreeNodeTextBox_gyroBiasZ});
-            appendedTreeNodeTextBox_gyroBiasTempSensX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_gyroBiasTempSensY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_gyroBiasTempSensZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_gyroBiasTempSens = new System.Windows.Forms.TreeNode("Bias Temperature Sensitivity (˚C/lsb)", new AppendedTreeNodeTextBox[] { 
-            appendedTreeNodeTextBox_gyroBiasTempSensX,
-            appendedTreeNodeTextBox_gyroBiasTempSensY,
-            appendedTreeNodeTextBox_gyroBiasTempSensZ});
-            appendedTreeNodeTextBox_gyroSample1Temp = new AppendedTreeNodeTextBox("Temperature (˚C):");
-            appendedTreeNodeTextBox_gyroSample1BiasX = new AppendedTreeNodeTextBox("Bias X (lsb):");
-            appendedTreeNodeTextBox_gyroSample1BiasY = new AppendedTreeNodeTextBox("Bias Y (lsb):");
-            appendedTreeNodeTextBox_gyroSample1BiasZ = new AppendedTreeNodeTextBox("Bias Z (lsb):");
-            treeNode_gyroSample1 = new System.Windows.Forms.TreeNode("Sampled Temperature 1", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_gyroSample1Temp,
-            appendedTreeNodeTextBox_gyroSample1BiasX,
-            appendedTreeNodeTextBox_gyroSample1BiasY,
-            appendedTreeNodeTextBox_gyroSample1BiasZ});
-            appendedTreeNodeTextBox_gyroSample2Temp = new AppendedTreeNodeTextBox("Temperature (˚C):");
-            appendedTreeNodeTextBox_gyroSample2BiasX = new AppendedTreeNodeTextBox("Bias X (lsb):");
-            appendedTreeNodeTextBox_gyroSample2BiasY = new AppendedTreeNodeTextBox("Bias Y (lsb):");
-            appendedTreeNodeTextBox_gyroSample2BiasZ = new AppendedTreeNodeTextBox("Bias Z (lsb):");
-            treeNode_gyroSample2 = new System.Windows.Forms.TreeNode("Sampled Temperature 2", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_gyroSample2Temp,
-            appendedTreeNodeTextBox_gyroSample2BiasX,
-            appendedTreeNodeTextBox_gyroSample2BiasY,
-            appendedTreeNodeTextBox_gyroSample2BiasZ});
+            registerTreeNodeTextBox_gyroscopeBiasAt25degCX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeBiasAt25degCX, "X:");
+            registerTreeNodeTextBox_gyroscopeBiasAt25degCY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeBiasAt25degCY, "Y:");
+            registerTreeNodeTextBox_gyroscopeBiasAt25degCZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeBiasAt25degCZ, "Z:");
+            treeNode_gyroBias = new System.Windows.Forms.TreeNode("Bias @ 25˚C (lsb)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_gyroscopeBiasAt25degCX,
+            registerTreeNodeTextBox_gyroscopeBiasAt25degCY,
+            registerTreeNodeTextBox_gyroscopeBiasAt25degCZ});
+            registerTreeNodeTextBox_gyroscopeBiasTempSensitivityX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeBiasTempSensitivityX, "X:");
+            registerTreeNodeTextBox_gyroscopeBiasTempSensitivityY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeBiasTempSensitivityY, "Y:");
+            registerTreeNodeTextBox_gyroscopeBiasTempSensitivityZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeBiasTempSensitivityZ, "Z:");
+            treeNode_gyroBiasTempSens = new System.Windows.Forms.TreeNode("Bias Temperature Sensitivity (˚C/lsb)", new RegisterTreeNodeTextBox[] { 
+            registerTreeNodeTextBox_gyroscopeBiasTempSensitivityX,
+            registerTreeNodeTextBox_gyroscopeBiasTempSensitivityY,
+            registerTreeNodeTextBox_gyroscopeBiasTempSensitivityZ});
+            registerTreeNodeTextBox_gyroscopeSample1Temp = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSample1Temp, "Temperature (˚C):");
+            registerTreeNodeTextBox_gyroscopeSample1BiasX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSample1BiasX, "Bias X (lsb):");
+            registerTreeNodeTextBox_gyroscopeSample1BiasY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSample1BiasY, "Bias Y (lsb):");
+            registerTreeNodeTextBox_gyroscopeSample1BiasZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSample1BiasZ, "Bias Z (lsb):");
+            treeNode_gyroSample1 = new System.Windows.Forms.TreeNode("Sampled Temperature 1", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_gyroscopeSample1Temp,
+            registerTreeNodeTextBox_gyroscopeSample1BiasX,
+            registerTreeNodeTextBox_gyroscopeSample1BiasY,
+            registerTreeNodeTextBox_gyroscopeSample1BiasZ});
+            registerTreeNodeTextBox_gyroscopeSample2Temp = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSample2Temp, "Temperature (˚C):");
+            registerTreeNodeTextBox_gyroscopeSample2BiasX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSample2BiasX, "Bias X (lsb):");
+            registerTreeNodeTextBox_gyroscopeSample2BiasY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSample2BiasY, "Bias Y (lsb):");
+            registerTreeNodeTextBox_gyroscopeSample2BiasZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.GyroscopeSample2BiasZ, "Bias Z (lsb):");
+            treeNode_gyroSample2 = new System.Windows.Forms.TreeNode("Sampled Temperature 2", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_gyroscopeSample2Temp,
+            registerTreeNodeTextBox_gyroscopeSample2BiasX,
+            registerTreeNodeTextBox_gyroscopeSample2BiasY,
+            registerTreeNodeTextBox_gyroscopeSample2BiasZ});
             treeNode_gyroBiasParent = new System.Windows.Forms.TreeNode("Bias", new System.Windows.Forms.TreeNode[] {
             treeNode_gyroBias,
             treeNode_gyroBiasTempSens,
             treeNode_gyroSample1,
             treeNode_gyroSample2});
             treeNode_gyroscope = new System.Windows.Forms.TreeNode("Gyroscope", new System.Windows.Forms.TreeNode[] {
-            appendedTreeNodeComboBox_gyroFullScale,
+            registerTreeNodeComboBox_gyroscopeFullScale,
             treeNode_gyroSens,
             treeNode_gyroBiasParent});
 
@@ -1702,424 +1891,425 @@
 
             #region Acceleroemter
 
-            appendedTreeNodeComboBox_accelFullScale = new AppendedTreeNodeComboBox("Full-Scale:");
-            appendedTreeNodeComboBox_accelFullScale.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_accelFullScale.ComboBox.Width = 50;
-            appendedTreeNodeComboBox_accelFullScale.ComboBox.Items.Add("±2 g");
-            appendedTreeNodeComboBox_accelFullScale.ComboBox.Items.Add("±4 g");
-            appendedTreeNodeComboBox_accelFullScale.ComboBox.Items.Add("±8 g");
-            appendedTreeNodeTextBox_accelSensX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_accelSensY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_accelSensZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_accelSens = new System.Windows.Forms.TreeNode("Sensitivity (lsb/g)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_accelSensX,
-            appendedTreeNodeTextBox_accelSensY,
-            appendedTreeNodeTextBox_accelSensZ});
-            appendedTreeNodeTextBox_accelBiasX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_accelBiasY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_accelBiasZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_accelBias = new System.Windows.Forms.TreeNode("Bias (lsb)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_accelBiasX,
-            appendedTreeNodeTextBox_accelBiasY,
-            appendedTreeNodeTextBox_accelBiasZ});
-            appendedTreeNodeTextBox_accelSampledPlus1gX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_accelSampledPlus1gY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_accelSampledPlus1gZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_accelSampledAsexAtPlus1g = new System.Windows.Forms.TreeNode("Sampled Axes @ +1 g (lsb)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_accelSampledPlus1gX,
-            appendedTreeNodeTextBox_accelSampledPlus1gY,
-            appendedTreeNodeTextBox_accelSampledPlus1gZ});
-            appendedTreeNodeTextBox_accelSampledMinus1gX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_accelSampledMinus1gY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_accelSampledMinus1gZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_accelSampledAsexAtMinus1g = new System.Windows.Forms.TreeNode("Sampled Axes @ -1 g (lsb)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_accelSampledMinus1gX,
-            appendedTreeNodeTextBox_accelSampledMinus1gY,
-            appendedTreeNodeTextBox_accelSampledMinus1gZ});
-            treeNode_accelerometer = new System.Windows.Forms.TreeNode("Accelerometer", new System.Windows.Forms.TreeNode[] {
-            appendedTreeNodeComboBox_accelFullScale,
-            treeNode_accelSens,
-            treeNode_accelBias,
-            treeNode_accelSampledAsexAtPlus1g,
-            treeNode_accelSampledAsexAtMinus1g});
+            registerTreeNodeComboBox_accelerometerFullScale = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.AccelerometerFullScale, "Full-Scale:");
+            registerTreeNodeComboBox_accelerometerFullScale.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_accelerometerFullScale.ComboBox.Width = 50;
+            registerTreeNodeComboBox_accelerometerFullScale.ComboBox.Items.Add("±2 g");
+            registerTreeNodeComboBox_accelerometerFullScale.ComboBox.Items.Add("±4 g");
+            registerTreeNodeComboBox_accelerometerFullScale.ComboBox.Items.Add("±8 g");
+            registerTreeNodeTextBox_accelerometerSensitivtyX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AccelerometerSensitivityX, "X:");
+            registerTreeNodeTextBox_accelerometerSensitivtyY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AccelerometerSensitivityY, "Y:");
+            registerTreeNodeTextBox_accelerometerSensitivtyZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AccelerometerSensitivityZ, "Z:");
+            treeNode_accelerometerSensitivity = new System.Windows.Forms.TreeNode("Sensitivity (lsb/g)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_accelerometerSensitivtyX,
+            registerTreeNodeTextBox_accelerometerSensitivtyY,
+            registerTreeNodeTextBox_accelerometerSensitivtyZ});
+            registerTreeNodeTextBox_accelerometerBiasX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AccelerometerBiasX, "X:");
+            registerTreeNodeTextBox_accelerometerBiasY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AccelerometerBiasY, "Y:");
+            registerTreeNodeTextBox_accelerometerBiasZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AccelerometerBiasZ, "Z:");
+            treeNode_accelerometerBias = new System.Windows.Forms.TreeNode("Bias (lsb)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_accelerometerBiasX,
+            registerTreeNodeTextBox_accelerometerBiasY,
+            registerTreeNodeTextBox_accelerometerBiasZ});
+            registerTreeNodeTextBox_accelerometerSampledPlus1gX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AccelerometerSampledPlus1gX, "X:");
+            registerTreeNodeTextBox_accelerometerSampledPlus1gY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AccelerometerSampledPlus1gY, "Y:");
+            registerTreeNodeTextBox_accelerometerSampledPlus1gZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AccelerometerSampledPlus1gZ, "Z:");
+            treeNode_accelerometerSampledAsexAtPlus1g = new System.Windows.Forms.TreeNode("Sampled Axes @ +1 g (lsb)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_accelerometerSampledPlus1gX,
+            registerTreeNodeTextBox_accelerometerSampledPlus1gY,
+            registerTreeNodeTextBox_accelerometerSampledPlus1gZ});
+            registerTreeNodeTextBox_accelerometerSampledMinus1gX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AccelerometerSampledMinus1gX, "X:");
+            registerTreeNodeTextBox_accelerometerSampledMinus1gY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AccelerometerSampledMinus1gY, "Y:");
+            registerTreeNodeTextBox_accelerometerSampledMinus1gZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AccelerometerSampledMinus1gZ, "Z:");
+            treeNode_accelerometerSampledAsexAtMinus1g = new System.Windows.Forms.TreeNode("Sampled Axes @ -1 g (lsb)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_accelerometerSampledMinus1gX,
+            registerTreeNodeTextBox_accelerometerSampledMinus1gY,
+            registerTreeNodeTextBox_accelerometerSampledMinus1gZ});
+            treeNode_accelerometererometer = new System.Windows.Forms.TreeNode("Accelerometer", new System.Windows.Forms.TreeNode[] {
+            registerTreeNodeComboBox_accelerometerFullScale,
+            treeNode_accelerometerSensitivity,
+            treeNode_accelerometerBias,
+            treeNode_accelerometerSampledAsexAtPlus1g,
+            treeNode_accelerometerSampledAsexAtMinus1g});
 
             #endregion
 
             #region Magnetometer
 
-            appendedTreeNodeComboBox_magFullScale = new AppendedTreeNodeComboBox("Full Scale:");
-            appendedTreeNodeComboBox_magFullScale.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_magFullScale.ComboBox.Width = 60;
-            appendedTreeNodeComboBox_magFullScale.ComboBox.Items.Add("±1.3 G");
-            appendedTreeNodeComboBox_magFullScale.ComboBox.Items.Add("±1.9 G");
-            appendedTreeNodeComboBox_magFullScale.ComboBox.Items.Add("±2.5 G");
-            appendedTreeNodeComboBox_magFullScale.ComboBox.Items.Add("±4.0 G");
-            appendedTreeNodeComboBox_magFullScale.ComboBox.Items.Add("±4.7 G");
-            appendedTreeNodeComboBox_magFullScale.ComboBox.Items.Add("±5.6 G");
-            appendedTreeNodeComboBox_magFullScale.ComboBox.Items.Add("±8.1 G");
-            appendedTreeNodeTextBox_magSensX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_magSensY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_magSensZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_magSens = new System.Windows.Forms.TreeNode("Sensitivity (lsb/G)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_magSensX,
-            appendedTreeNodeTextBox_magSensY,
-            appendedTreeNodeTextBox_magSensZ});
-            appendedTreeNodeTextBox_magBiasX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_magBiasY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_magBiasZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_magBias = new System.Windows.Forms.TreeNode("Bias (lsb)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_magBiasX,
-            appendedTreeNodeTextBox_magBiasY,
-            appendedTreeNodeTextBox_magBiasZ});
-            appendedTreeNodeTextBox_magHIbiasX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_magHIbiasY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_magHIbiasZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_magHIbias = new System.Windows.Forms.TreeNode("Hard-Iron Bias (G)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_magHIbiasX,
-            appendedTreeNodeTextBox_magHIbiasY,
-            appendedTreeNodeTextBox_magHIbiasZ});
+            registerTreeNodeComboBox_magnetometerFullScale = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.MagnetometerFullScale, "Full Scale:");
+            registerTreeNodeComboBox_magnetometerFullScale.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_magnetometerFullScale.ComboBox.Width = 60;
+            registerTreeNodeComboBox_magnetometerFullScale.ComboBox.Items.Add("±1.3 G");
+            registerTreeNodeComboBox_magnetometerFullScale.ComboBox.Items.Add("±1.9 G");
+            registerTreeNodeComboBox_magnetometerFullScale.ComboBox.Items.Add("±2.5 G");
+            registerTreeNodeComboBox_magnetometerFullScale.ComboBox.Items.Add("±4.0 G");
+            registerTreeNodeComboBox_magnetometerFullScale.ComboBox.Items.Add("±4.7 G");
+            registerTreeNodeComboBox_magnetometerFullScale.ComboBox.Items.Add("±5.6 G");
+            registerTreeNodeComboBox_magnetometerFullScale.ComboBox.Items.Add("±8.1 G");
+            registerTreeNodeTextBox_magnetometerSensitivityX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.MagnetometerSensitivityX, "X:");
+            registerTreeNodeTextBox_magnetometerSensitivityY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.MagnetometerSensitivityY, "Y:");
+            registerTreeNodeTextBox_magnetometerSensitivityZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.MagnetometerSensitivityZ, "Z:");
+            treeNode_magnetometerSensitivity = new System.Windows.Forms.TreeNode("Sensitivity (lsb/G)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_magnetometerSensitivityX,
+            registerTreeNodeTextBox_magnetometerSensitivityY,
+            registerTreeNodeTextBox_magnetometerSensitivityZ});
+            registerTreeNodeTextBox_magnetometerBiasX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.MagnetometerBiasX, "X:");
+            registerTreeNodeTextBox_magnetometerBiasY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.MagnetometerBiasY, "Y:");
+            registerTreeNodeTextBox_magnetometerBiasZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.MagnetometerBiasZ, "Z:");
+            treeNode_magnetometerBias = new System.Windows.Forms.TreeNode("Bias (lsb)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_magnetometerBiasX,
+            registerTreeNodeTextBox_magnetometerBiasY,
+            registerTreeNodeTextBox_magnetometerBiasZ});
+            registerTreeNodeTextBox_magnetometerHardIronbiasX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.MagnetometerHardIronBiasX, "X:");
+            registerTreeNodeTextBox_magnetometerHardIronbiasY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.MagnetometerHardIronBiasY, "Y:");
+            registerTreeNodeTextBox_magnetometerHardIronbiasZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.MagnetometerHardIronBiasZ, "Z:");
+            treeNode_magnetometerHardIronbias = new System.Windows.Forms.TreeNode("Hard-Iron Bias (G)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_magnetometerHardIronbiasX,
+            registerTreeNodeTextBox_magnetometerHardIronbiasY,
+            registerTreeNodeTextBox_magnetometerHardIronbiasZ});
             treeNode_magnetometer = new System.Windows.Forms.TreeNode("Magnetometer", new System.Windows.Forms.TreeNode[] {
-            appendedTreeNodeComboBox_magFullScale,
-            treeNode_magSens,
-            treeNode_magBias,
-            treeNode_magHIbias});
-            System.Windows.Forms.TreeNode treeNode_sensorCalParam = new System.Windows.Forms.TreeNode("Sensor Calibration Parameters", new System.Windows.Forms.TreeNode[] {
-            treeNode_battVoltmeter,
-            treeNode_thermometer,
-            treeNode_gyroscope,
-            treeNode_accelerometer,
-            treeNode_magnetometer});
+            registerTreeNodeComboBox_magnetometerFullScale,
+            treeNode_magnetometerSensitivity,
+            treeNode_magnetometerBias,
+            treeNode_magnetometerHardIronbias});
 
             #endregion
+
+            System.Windows.Forms.TreeNode treeNode_sensorCalParam = new System.Windows.Forms.TreeNode("Sensor Calibration Parameters", new System.Windows.Forms.TreeNode[] {
+            treeNode_batteryVoltmeter,
+            treeNode_thermometer,
+            treeNode_gyroscope,
+            treeNode_accelerometererometer,
+            treeNode_magnetometer});
 
             #endregion
 
             #region Algorithm Parameters
 
-            appendedTreeNodeComboBox_algorithmMode = new AppendedTreeNodeComboBox("Algorithm Mode:");
-            appendedTreeNodeComboBox_algorithmMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_algorithmMode.ComboBox.Width = 60;
-            appendedTreeNodeComboBox_algorithmMode.ComboBox.Items.Add("Disabled");
-            appendedTreeNodeComboBox_algorithmMode.ComboBox.Items.Add("IMU");
-            appendedTreeNodeComboBox_algorithmMode.ComboBox.Items.Add("AHRS");
-            appendedTreeNodeTextBox_algorithmGainKp = new AppendedTreeNodeTextBox("Proportional Gain:");
-            appendedTreeNodeTextBox_algorithmGainKi = new AppendedTreeNodeTextBox("Integral Gain:");
+            registerTreeNodeComboBox_algorithmMode = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.AlgorithmMode, "Algorithm Mode:");
+            registerTreeNodeComboBox_algorithmMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_algorithmMode.ComboBox.Width = 60;
+            registerTreeNodeComboBox_algorithmMode.ComboBox.Items.Add("Disabled");
+            registerTreeNodeComboBox_algorithmMode.ComboBox.Items.Add("IMU");
+            registerTreeNodeComboBox_algorithmMode.ComboBox.Items.Add("AHRS");
+            registerTreeNodeTextBox_algorithmGainKp = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmKp, "Kp:");
+            registerTreeNodeTextBox_algorithmGainKi = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmKi, "Ki (1/1000):");
             System.Windows.Forms.TreeNode treeNode_algorithmGains = new System.Windows.Forms.TreeNode("Algorithm Gains", new System.Windows.Forms.TreeNode[] {
-            appendedTreeNodeTextBox_algorithmGainKp,
-            appendedTreeNodeTextBox_algorithmGainKi});
-            appendedTreeNodeTextBox_algorithmInitKp = new AppendedTreeNodeTextBox("Initial Proportional Gain:");
-            appendedTreeNodeTextBox_algorithmInitPeriod = new AppendedTreeNodeTextBox("Initialisation Period (s):");
+            registerTreeNodeTextBox_algorithmGainKp,
+            registerTreeNodeTextBox_algorithmGainKi});
+            registerTreeNodeTextBox_algorithmInitKp = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmInitKp, "Initial Kp:");
+            registerTreeNodeTextBox_algorithmInitPeriod = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmInitPeriod, "Initialisation Period (s):");
             System.Windows.Forms.TreeNode treeNode_algoInitialisation = new System.Windows.Forms.TreeNode("Initialisation", new System.Windows.Forms.TreeNode[] {
-            appendedTreeNodeTextBox_algorithmInitKp,
-            appendedTreeNodeTextBox_algorithmInitPeriod});
-            appendedTreeNodeTextBox_algorithmMinValidMag = new AppendedTreeNodeTextBox("Minimum Valid Field Magnitude (G):");
-            appendedTreeNodeTextBox_algorithmMaxValidMag = new AppendedTreeNodeTextBox("Maximum Valid Field Magnitude (G):");
-            System.Windows.Forms.TreeNode treeNode_magneticFieldRejection = new System.Windows.Forms.TreeNode("Magnetic Field Rejection", new System.Windows.Forms.TreeNode[] {
-            appendedTreeNodeTextBox_algorithmMinValidMag,
-            appendedTreeNodeTextBox_algorithmMaxValidMag});
-            appendedTreeNodeTextBoxtareQuatElement0 = new AppendedTreeNodeTextBox("Element 0:");
-            appendedTreeNodeTextBoxtareQuatElement1 = new AppendedTreeNodeTextBox("Element 1:");
-            appendedTreeNodeTextBoxtareQuatElement2 = new AppendedTreeNodeTextBox("Element 2:");
-            appendedTreeNodeTextBoxtareQuatElement3 = new AppendedTreeNodeTextBox("Element 3:");
-            appendedTreeNodeTextBox_algorithmTareQuaternion = new System.Windows.Forms.TreeNode("Tare Quaternion", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBoxtareQuatElement0,
-            appendedTreeNodeTextBoxtareQuatElement1,
-            appendedTreeNodeTextBoxtareQuatElement2,
-            appendedTreeNodeTextBoxtareQuatElement3});
+            registerTreeNodeTextBox_algorithmInitKp,
+            registerTreeNodeTextBox_algorithmInitPeriod});
+            registerTreeNodeTextBox_algorithmMinValidMag = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmMinValidMag, "Minimum Valid Field Magnitude (G):");
+            registerTreeNodeTextBox_algorithmMaxValidMag = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmMaxValidMag, "Maximum Valid Field Magnitude (G):");
+            System.Windows.Forms.TreeNode treeNode_magnetometerneticFieldRejection = new System.Windows.Forms.TreeNode("Magnetic Field Rejection", new System.Windows.Forms.TreeNode[] {
+            registerTreeNodeTextBox_algorithmMinValidMag,
+            registerTreeNodeTextBox_algorithmMaxValidMag});
+            registerTreeNodeTextBoxtareQuatElement0 = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmTareQuat0, "Element 0:");
+            registerTreeNodeTextBoxtareQuatElement1 = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmTareQuat1, "Element 1:");
+            registerTreeNodeTextBoxtareQuatElement2 = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmTareQuat2, "Element 2:");
+            registerTreeNodeTextBoxtareQuatElement3 = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmTareQuat3, "Element 3:");
+            registerTreeNodeTextBox_algorithmTareQuaternion = new System.Windows.Forms.TreeNode("Tare Quaternion", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBoxtareQuatElement0,
+            registerTreeNodeTextBoxtareQuatElement1,
+            registerTreeNodeTextBoxtareQuatElement2,
+            registerTreeNodeTextBoxtareQuatElement3});
             treeNode_algorithmParameters = new System.Windows.Forms.TreeNode("Algorithm Parameters", new System.Windows.Forms.TreeNode[] {
-            appendedTreeNodeComboBox_algorithmMode,
+            registerTreeNodeComboBox_algorithmMode,
             treeNode_algorithmGains,
             treeNode_algoInitialisation,
-            treeNode_magneticFieldRejection,
-            appendedTreeNodeTextBox_algorithmTareQuaternion});
+            treeNode_magnetometerneticFieldRejection,
+            registerTreeNodeTextBox_algorithmTareQuaternion});
 
             #endregion
 
             #region Data Output Settings
 
-            appendedTreeNodeComboBox_sensorDataMode = new AppendedTreeNodeComboBox("Sensor Data Mode:");
-            appendedTreeNodeComboBox_sensorDataMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_sensorDataMode.ComboBox.Items.Add("Raw ADC results");
-            appendedTreeNodeComboBox_sensorDataMode.ComboBox.Items.Add("Calibrated units");
-            appendedTreeNodeComboBox_dateTimeOutputRate = new AppendedTreeNodeComboBox("Date/Time Data Rate:");
-            appendedTreeNodeComboBox_dateTimeOutputRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_dateTimeOutputRate.ComboBox.Width = 80;
-            appendedTreeNodeComboBox_dateTimeOutputRate.ComboBox.Items.Add("Disabled");
-            appendedTreeNodeComboBox_dateTimeOutputRate.ComboBox.Items.Add("1 Hz");
-            appendedTreeNodeComboBox_dateTimeOutputRate.ComboBox.Items.Add("2 Hz");
-            appendedTreeNodeComboBox_dateTimeOutputRate.ComboBox.Items.Add("4 Hz");
-            appendedTreeNodeComboBox_dateTimeOutputRate.ComboBox.Items.Add("8 Hz");
-            appendedTreeNodeComboBox_dateTimeOutputRate.ComboBox.Items.Add("16 Hz");
-            appendedTreeNodeComboBox_dateTimeOutputRate.ComboBox.Items.Add("32 Hz");
-            appendedTreeNodeComboBox_dateTimeOutputRate.ComboBox.Items.Add("64 Hz");
-            appendedTreeNodeComboBox_dateTimeOutputRate.ComboBox.Items.Add("128 Hz");
-            appendedTreeNodeComboBox_dateTimeOutputRate.ComboBox.Items.Add("256 Hz");
-            appendedTreeNodeComboBox_battThermOutputRate = new AppendedTreeNodeComboBox("Battery and Thermometer Data Rate:");
-            appendedTreeNodeComboBox_battThermOutputRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_battThermOutputRate.ComboBox.Width = 80;
-            appendedTreeNodeComboBox_battThermOutputRate.ComboBox.Items.Add("Disabled");
-            appendedTreeNodeComboBox_battThermOutputRate.ComboBox.Items.Add("1 Hz");
-            appendedTreeNodeComboBox_battThermOutputRate.ComboBox.Items.Add("2 Hz");
-            appendedTreeNodeComboBox_battThermOutputRate.ComboBox.Items.Add("4 Hz");
-            appendedTreeNodeComboBox_battThermOutputRate.ComboBox.Items.Add("8 Hz");
-            appendedTreeNodeComboBox_battThermOutputRate.ComboBox.Items.Add("16 Hz");
-            appendedTreeNodeComboBox_battThermOutputRate.ComboBox.Items.Add("32 Hz");
-            appendedTreeNodeComboBox_battThermOutputRate.ComboBox.Items.Add("64 Hz");
-            appendedTreeNodeComboBox_battThermOutputRate.ComboBox.Items.Add("128 Hz");
-            appendedTreeNodeComboBox_battThermOutputRate.ComboBox.Items.Add("256 Hz");
-            appendedTreeNodeComboBox_inertialMagOutputRate = new AppendedTreeNodeComboBox("Inertial and Magnetic Data Rate:");
-            appendedTreeNodeComboBox_inertialMagOutputRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_inertialMagOutputRate.ComboBox.Width = 80;
-            appendedTreeNodeComboBox_inertialMagOutputRate.ComboBox.Items.Add("Disabled");
-            appendedTreeNodeComboBox_inertialMagOutputRate.ComboBox.Items.Add("1 Hz");
-            appendedTreeNodeComboBox_inertialMagOutputRate.ComboBox.Items.Add("2 Hz");
-            appendedTreeNodeComboBox_inertialMagOutputRate.ComboBox.Items.Add("4 Hz");
-            appendedTreeNodeComboBox_inertialMagOutputRate.ComboBox.Items.Add("8 Hz");
-            appendedTreeNodeComboBox_inertialMagOutputRate.ComboBox.Items.Add("16 Hz");
-            appendedTreeNodeComboBox_inertialMagOutputRate.ComboBox.Items.Add("32 Hz");
-            appendedTreeNodeComboBox_inertialMagOutputRate.ComboBox.Items.Add("64 Hz");
-            appendedTreeNodeComboBox_inertialMagOutputRate.ComboBox.Items.Add("128 Hz");
-            appendedTreeNodeComboBox_inertialMagOutputRate.ComboBox.Items.Add("256 Hz");
-            appendedTreeNodeComboBox_quatOutputRate = new AppendedTreeNodeComboBox("Quaternion Data Rate:");
-            appendedTreeNodeComboBox_quatOutputRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_quatOutputRate.ComboBox.Width = 80;
-            appendedTreeNodeComboBox_quatOutputRate.ComboBox.Items.Add("Disabled");
-            appendedTreeNodeComboBox_quatOutputRate.ComboBox.Items.Add("1 Hz");
-            appendedTreeNodeComboBox_quatOutputRate.ComboBox.Items.Add("2 Hz");
-            appendedTreeNodeComboBox_quatOutputRate.ComboBox.Items.Add("4 Hz");
-            appendedTreeNodeComboBox_quatOutputRate.ComboBox.Items.Add("8 Hz");
-            appendedTreeNodeComboBox_quatOutputRate.ComboBox.Items.Add("16 Hz");
-            appendedTreeNodeComboBox_quatOutputRate.ComboBox.Items.Add("32 Hz");
-            appendedTreeNodeComboBox_quatOutputRate.ComboBox.Items.Add("64 Hz");
-            appendedTreeNodeComboBox_quatOutputRate.ComboBox.Items.Add("128 Hz");
-            appendedTreeNodeComboBox_quatOutputRate.ComboBox.Items.Add("256 Hz");
+            registerTreeNodeComboBox_sensorDataMode = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.SensorDataMode, "Sensor Data Mode:");
+            registerTreeNodeComboBox_sensorDataMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_sensorDataMode.ComboBox.Items.Add("Raw ADC results");
+            registerTreeNodeComboBox_sensorDataMode.ComboBox.Items.Add("Calibrated units");
+            registerTreeNodeComboBox_dateTimeDateTimeDataRate = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.DateTimeDataRate, "Date/Time Data Rate:");
+            registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.Width = 80;
+            registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.Items.Add("Disabled");
+            registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.Items.Add("1 Hz");
+            registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.Items.Add("2 Hz");
+            registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.Items.Add("4 Hz");
+            registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.Items.Add("8 Hz");
+            registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.Items.Add("16 Hz");
+            registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.Items.Add("32 Hz");
+            registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.Items.Add("64 Hz");
+            registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.Items.Add("128 Hz");
+            registerTreeNodeComboBox_dateTimeDateTimeDataRate.ComboBox.Items.Add("256 Hz");
+            registerTreeNodeComboBox_batteryAndThermometerDataRate = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.BatteryAndThermometerDataRate, "Battery And Thermometer Data Rate:");
+            registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Width = 80;
+            registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Items.Add("Disabled");
+            registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Items.Add("1 Hz");
+            registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Items.Add("2 Hz");
+            registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Items.Add("4 Hz");
+            registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Items.Add("8 Hz");
+            registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Items.Add("16 Hz");
+            registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Items.Add("32 Hz");
+            registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Items.Add("64 Hz");
+            registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Items.Add("128 Hz");
+            registerTreeNodeComboBox_batteryAndThermometerDataRate.ComboBox.Items.Add("256 Hz");
+            registerTreeNodeComboBox_inertialAndMagneticDataRate = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.InertialAndMagneticDataRate, "Inertial And Magnetic Data Rate:");
+            registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Width = 80;
+            registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Items.Add("Disabled");
+            registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Items.Add("1 Hz");
+            registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Items.Add("2 Hz");
+            registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Items.Add("4 Hz");
+            registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Items.Add("8 Hz");
+            registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Items.Add("16 Hz");
+            registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Items.Add("32 Hz");
+            registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Items.Add("64 Hz");
+            registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Items.Add("128 Hz");
+            registerTreeNodeComboBox_inertialAndMagneticDataRate.ComboBox.Items.Add("256 Hz");
+            registerTreeNodeComboBox_quaternionDataRate = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.QuaternionDataRate, "Quaternion Data Rate:");
+            registerTreeNodeComboBox_quaternionDataRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_quaternionDataRate.ComboBox.Width = 80;
+            registerTreeNodeComboBox_quaternionDataRate.ComboBox.Items.Add("Disabled");
+            registerTreeNodeComboBox_quaternionDataRate.ComboBox.Items.Add("1 Hz");
+            registerTreeNodeComboBox_quaternionDataRate.ComboBox.Items.Add("2 Hz");
+            registerTreeNodeComboBox_quaternionDataRate.ComboBox.Items.Add("4 Hz");
+            registerTreeNodeComboBox_quaternionDataRate.ComboBox.Items.Add("8 Hz");
+            registerTreeNodeComboBox_quaternionDataRate.ComboBox.Items.Add("16 Hz");
+            registerTreeNodeComboBox_quaternionDataRate.ComboBox.Items.Add("32 Hz");
+            registerTreeNodeComboBox_quaternionDataRate.ComboBox.Items.Add("64 Hz");
+            registerTreeNodeComboBox_quaternionDataRate.ComboBox.Items.Add("128 Hz");
+            registerTreeNodeComboBox_quaternionDataRate.ComboBox.Items.Add("256 Hz");
             treeNode_dataOutputRate = new System.Windows.Forms.TreeNode("Data Output Settings", new System.Windows.Forms.TreeNode[] {
-            appendedTreeNodeComboBox_sensorDataMode,
-            appendedTreeNodeComboBox_dateTimeOutputRate,
-            appendedTreeNodeComboBox_battThermOutputRate,
-            appendedTreeNodeComboBox_inertialMagOutputRate,
-            appendedTreeNodeComboBox_quatOutputRate});
+            registerTreeNodeComboBox_sensorDataMode,
+            registerTreeNodeComboBox_dateTimeDateTimeDataRate,
+            registerTreeNodeComboBox_batteryAndThermometerDataRate,
+            registerTreeNodeComboBox_inertialAndMagneticDataRate,
+            registerTreeNodeComboBox_quaternionDataRate});
 
             #endregion
 
             #region SD Card
 
-            appendedTreeNodeTextBox_SDcardNewFileName = new AppendedTreeNodeTextBox("New File Name (integer):");
-            treeNode_SDcard = new System.Windows.Forms.TreeNode("SD Card", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_SDcardNewFileName});
+            registerTreeNodeTextBox_SDcardNewFileName = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.SDcardNewFileName, "New File Name (numeric):", "{0:D5}");
+            treeNode_SDcard = new System.Windows.Forms.TreeNode("SD Card", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_SDcardNewFileName});
 
             #endregion
 
             #region Power Management
 
-            appendedTreeNodeComboBox_battShutdownVoltage = new AppendedTreeNodeTextBox("Battery Shutdown Voltage (V):");
-            appendedTreeNodeTextBoxsleepTimer = new AppendedTreeNodeTextBox("Sleep Timer (s):");
-            appendedTreeNodeComboBox_motionTriggeredWakeup = new AppendedTreeNodeComboBox("Motion Triggered Wake Up:");
-            appendedTreeNodeComboBox_motionTriggeredWakeup.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_motionTriggeredWakeup.ComboBox.Width = 95;
-            appendedTreeNodeComboBox_motionTriggeredWakeup.ComboBox.Items.Add("Disabled");
-            appendedTreeNodeComboBox_motionTriggeredWakeup.ComboBox.Items.Add("Low sensitivity");
-            appendedTreeNodeComboBox_motionTriggeredWakeup.ComboBox.Items.Add("High sensitivity");
-            appendedTreeNodeComboBox_bluetoothPower = new AppendedTreeNodeComboBox("Bluetooth Power:");
-            appendedTreeNodeComboBox_bluetoothPower.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_bluetoothPower.ComboBox.Width = 80;
-            appendedTreeNodeComboBox_bluetoothPower.ComboBox.Items.Add("Disabled");
-            appendedTreeNodeComboBox_bluetoothPower.ComboBox.Items.Add("Enabled");
-            treeNode_powerManagement = new System.Windows.Forms.TreeNode("Power Management", new AppendedTreeNode[] {
-            appendedTreeNodeComboBox_battShutdownVoltage,
-            appendedTreeNodeTextBoxsleepTimer,
-            appendedTreeNodeComboBox_motionTriggeredWakeup,
-            appendedTreeNodeComboBox_bluetoothPower});
+            registerTreeNodeComboBox_batteryShutdownVoltage = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.BatteryShutdownVoltage, "Battery Shutdown Voltage (V):");
+            registerTreeNodeTextBox_sleepTimer = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.SleepTimer, "Sleep Timer (s):");
+            registerTreeNodeComboBox_motionTriggeredWakeup = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.MotionTrigWakeUp, "Motion Triggered Wake Up:");
+            registerTreeNodeComboBox_motionTriggeredWakeup.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_motionTriggeredWakeup.ComboBox.Width = 95;
+            registerTreeNodeComboBox_motionTriggeredWakeup.ComboBox.Items.Add("Disabled");
+            registerTreeNodeComboBox_motionTriggeredWakeup.ComboBox.Items.Add("Low sensitivity");
+            registerTreeNodeComboBox_motionTriggeredWakeup.ComboBox.Items.Add("High sensitivity");
+            registerTreeNodeComboBox_bluetoothPower = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.BluetoothPower, "Bluetooth Power:");
+            registerTreeNodeComboBox_bluetoothPower.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_bluetoothPower.ComboBox.Width = 80;
+            registerTreeNodeComboBox_bluetoothPower.ComboBox.Items.Add("Disabled");
+            registerTreeNodeComboBox_bluetoothPower.ComboBox.Items.Add("Enabled");
+            treeNode_powerManagement = new System.Windows.Forms.TreeNode("Power Management", new RegisterTreeNode[] {
+            registerTreeNodeComboBox_batteryShutdownVoltage,
+            registerTreeNodeTextBox_sleepTimer,
+            registerTreeNodeComboBox_motionTriggeredWakeup,
+            registerTreeNodeComboBox_bluetoothPower});
 
             #endregion
 
             #region Auxiliary Port
 
-            appendedTreeNodeComboBox_auxiliaryPortMode = new AppendedTreeNodeComboBox("Auxiliary Port Mode:");
-            appendedTreeNodeComboBox_auxiliaryPortMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_auxiliaryPortMode.ComboBox.Width = 100;
-            appendedTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("Disabled");
-            appendedTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("Digital I/O");
-            appendedTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("Analogue input");
-            appendedTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("PWM output");
-            appendedTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("ADXL345 bus");
+            registerTreeNodeComboBox_auxiliaryPortMode = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.AuxiliaryPortMode, "Auxiliary Port Mode:");
+            registerTreeNodeComboBox_auxiliaryPortMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_auxiliaryPortMode.ComboBox.Width = 100;
+            registerTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("Disabled");
+            registerTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("Digital I/O");
+            registerTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("Analogue input");
+            registerTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("PWM output");
+            registerTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("ADXL345 bus");
 
             #region Digital I/O
 
-            appendedTreeNodeComboBox_digitalIOdirection = new AppendedTreeNodeComboBox("I/O Direction:");
-            appendedTreeNodeComboBox_digitalIOdirection.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_digitalIOdirection.ComboBox.Width = 210;
-            appendedTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3,4,5,6,7");
-            appendedTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3,4,5,6, Ouput = AX7");
-            appendedTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3,4,5, Ouput = AX6,7");
-            appendedTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3,4, Ouput = AX5,6,7");
-            appendedTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3, Ouput = AX4,5,6,7");
-            appendedTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2, Ouput = AX3,4,5,6,7");
-            appendedTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1, Ouput = AX2,3,4,5,6,7");
-            appendedTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0, Ouput = AX1,2,3,4,5,6,7");
-            appendedTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Outputs = AX0,1,2,3,4,5,6,7");
-            appendedTreeNodeComboBox_digitalIOoutputRate = new AppendedTreeNodeComboBox("Data Rate:");
-            appendedTreeNodeComboBox_digitalIOoutputRate.ComboBox.Items.Add("On change only");
-            appendedTreeNodeComboBox_digitalIOoutputRate.ComboBox.Items.Add("1 Hz");
-            appendedTreeNodeComboBox_digitalIOoutputRate.ComboBox.Items.Add("2 Hz");
-            appendedTreeNodeComboBox_digitalIOoutputRate.ComboBox.Items.Add("4 Hz");
-            appendedTreeNodeComboBox_digitalIOoutputRate.ComboBox.Items.Add("8 Hz");
-            appendedTreeNodeComboBox_digitalIOoutputRate.ComboBox.Items.Add("16 Hz");
-            appendedTreeNodeComboBox_digitalIOoutputRate.ComboBox.Items.Add("32 Hz");
-            appendedTreeNodeComboBox_digitalIOoutputRate.ComboBox.Items.Add("64 Hz");
-            appendedTreeNodeComboBox_digitalIOoutputRate.ComboBox.Items.Add("128 Hz");
-            appendedTreeNodeComboBox_digitalIOoutputRate.ComboBox.Items.Add("256 Hz");
-            appendedTreeNodeComboBox_digitalIOoutputRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_digitalIOoutputRate.ComboBox.Width = 100;
-            treeNode_digitalIO = new System.Windows.Forms.TreeNode("Digital I/O", new AppendedTreeNode[] {
-            appendedTreeNodeComboBox_digitalIOdirection,
-            appendedTreeNodeComboBox_digitalIOoutputRate});
+            registerTreeNodeComboBox_digitalIOdirection = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.DigitalIOdirection, "I/O Direction:");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Width = 210;
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3,4,5,6,7");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3,4,5,6, Ouput = AX7");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3,4,5, Ouput = AX6,7");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3,4, Ouput = AX5,6,7");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2,3, Ouput = AX4,5,6,7");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1,2, Ouput = AX3,4,5,6,7");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0,1, Ouput = AX2,3,4,5,6,7");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Inputs = AX0, Ouput = AX1,2,3,4,5,6,7");
+            registerTreeNodeComboBox_digitalIOdirection.ComboBox.Items.Add("Outputs = AX0,1,2,3,4,5,6,7");
+            registerTreeNodeComboBox_digitalIOdataRate = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.DigitalIOdataRate, "Data Rate:");
+            registerTreeNodeComboBox_digitalIOdataRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_digitalIOdataRate.ComboBox.Width = 150;
+            registerTreeNodeComboBox_digitalIOdataRate.ComboBox.Items.Add("Disabled (On change only)");
+            registerTreeNodeComboBox_digitalIOdataRate.ComboBox.Items.Add("1 Hz");
+            registerTreeNodeComboBox_digitalIOdataRate.ComboBox.Items.Add("2 Hz");
+            registerTreeNodeComboBox_digitalIOdataRate.ComboBox.Items.Add("4 Hz");
+            registerTreeNodeComboBox_digitalIOdataRate.ComboBox.Items.Add("8 Hz");
+            registerTreeNodeComboBox_digitalIOdataRate.ComboBox.Items.Add("16 Hz");
+            registerTreeNodeComboBox_digitalIOdataRate.ComboBox.Items.Add("32 Hz");
+            registerTreeNodeComboBox_digitalIOdataRate.ComboBox.Items.Add("64 Hz");
+            registerTreeNodeComboBox_digitalIOdataRate.ComboBox.Items.Add("128 Hz");
+            registerTreeNodeComboBox_digitalIOdataRate.ComboBox.Items.Add("256 Hz");
+            treeNode_digitalIO = new System.Windows.Forms.TreeNode("Digital I/O", new RegisterTreeNode[] {
+            registerTreeNodeComboBox_digitalIOdirection,
+            registerTreeNodeComboBox_digitalIOdataRate});
 
             #endregion
 
             #region Analogue Input
 
-            appendedTreeNodeComboBox_analogueInputDataMode = new AppendedTreeNodeComboBox("Data Mode:");
-            appendedTreeNodeComboBox_analogueInputDataMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_analogueInputDataMode.ComboBox.Items.Add("Raw ADC results");
-            appendedTreeNodeComboBox_analogueInputDataMode.ComboBox.Items.Add("Calibrated units");
-            appendedTreeNodeComboBox_analogueInputDataRate = new AppendedTreeNodeComboBox("Data Rate:");
-            appendedTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("Disabled");
-            appendedTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("1 Hz");
-            appendedTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("2 Hz");
-            appendedTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("4 Hz");
-            appendedTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("8 Hz");
-            appendedTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("16 Hz");
-            appendedTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("32 Hz");
-            appendedTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("64 Hz");
-            appendedTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("128 Hz");
-            appendedTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("256 Hz");
-            appendedTreeNodeComboBox_analogueInputDataRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_analogueInputDataRate.ComboBox.Width = 80;
-            appendedTreeNodeTextBox_analogueInputSensitivity = new AppendedTreeNodeTextBox("Sensitivity:");
-            appendedTreeNodeTextBox_analogueInputBias = new AppendedTreeNodeTextBox("Bias:");
-            appendedTreeNodeComboBox_analogueInputCalibrationParameters = new System.Windows.Forms.TreeNode("Calibration Parameters", new System.Windows.Forms.TreeNode[] {
-            appendedTreeNodeTextBox_analogueInputSensitivity,
-            appendedTreeNodeTextBox_analogueInputBias});
+            registerTreeNodeComboBox_analogueInputDataMode = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.AnalogueInputDataMode, "Data Mode:");
+            registerTreeNodeComboBox_analogueInputDataMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_analogueInputDataMode.ComboBox.Items.Add("Raw ADC results");
+            registerTreeNodeComboBox_analogueInputDataMode.ComboBox.Items.Add("Calibrated units");
+            registerTreeNodeComboBox_analogueInputDataRate = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.AnalogueInputDataRate, "Data Rate:");
+            registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("Disabled");
+            registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("1 Hz");
+            registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("2 Hz");
+            registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("4 Hz");
+            registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("8 Hz");
+            registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("16 Hz");
+            registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("32 Hz");
+            registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("64 Hz");
+            registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("128 Hz");
+            registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Items.Add("256 Hz");
+            registerTreeNodeComboBox_analogueInputDataRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_analogueInputDataRate.ComboBox.Width = 80;
+            registerTreeNodeTextBox_analogueInputSensitivity = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AnalogueInputSensitivity, "Sensitivity:");
+            registerTreeNodeTextBox_analogueInputBias = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AnalogueInputBias, "Bias:");
+            registerTreeNodeComboBox_analogueInputCalibrationParameters = new System.Windows.Forms.TreeNode("Calibration Parameters", new System.Windows.Forms.TreeNode[] {
+            registerTreeNodeTextBox_analogueInputSensitivity,
+            registerTreeNodeTextBox_analogueInputBias});
             treeNode_analogueInput = new System.Windows.Forms.TreeNode("Analogue Input", new System.Windows.Forms.TreeNode[] {
-            appendedTreeNodeComboBox_analogueInputDataMode,
-            appendedTreeNodeComboBox_analogueInputDataRate,
-            appendedTreeNodeComboBox_analogueInputCalibrationParameters});
+            registerTreeNodeComboBox_analogueInputDataMode,
+            registerTreeNodeComboBox_analogueInputDataRate,
+            registerTreeNodeComboBox_analogueInputCalibrationParameters});
 
             #endregion
 
             #region PWMoutput
 
-            appendedTreeNodeTextBox_PWMoutputFrequency = new AppendedTreeNodeTextBox("Frequency (Hz):");
+            registerTreeNodeTextBox_PWMoutputFrequency = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.PWMoutputFrequency, "Frequency (Hz):");
             treeNode_PWMoutput = new System.Windows.Forms.TreeNode("PWM Output", new System.Windows.Forms.TreeNode[] {
-            appendedTreeNodeTextBox_PWMoutputFrequency});
+            registerTreeNodeTextBox_PWMoutputFrequency});
 
             #endregion
 
             #region ADXL345 bus
 
-            appendedTreeNodeComboBox_ADXL345busDataMode = new AppendedTreeNodeComboBox("Data Mode:");
-            appendedTreeNodeComboBox_ADXL345busDataMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_ADXL345busDataMode.ComboBox.Items.Add("Raw ADC results");
-            appendedTreeNodeComboBox_ADXL345busDataMode.ComboBox.Items.Add("Calibrated units");
-            appendedTreeNodeComboBox_ADXL345busDataRate = new AppendedTreeNodeComboBox("Data Rate:");
-            appendedTreeNodeComboBox_ADXL345busDataRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("Disabled");
-            appendedTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("1 Hz");
-            appendedTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("2 Hz");
-            appendedTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("4 Hz");
-            appendedTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("8 Hz");
-            appendedTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("16 Hz");
-            appendedTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("32 Hz");
-            appendedTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("64 Hz");
-            appendedTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("128 Hz");
-            appendedTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("256 Hz");
-            appendedTreeNodeComboBox_ADXL345busDataRate.ComboBox.Width = 80;
+            registerTreeNodeComboBox_ADXL345busDataMode = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.ADXL345busDataMode, "Data Mode:");
+            registerTreeNodeComboBox_ADXL345busDataMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_ADXL345busDataMode.ComboBox.Items.Add("Raw ADC results");
+            registerTreeNodeComboBox_ADXL345busDataMode.ComboBox.Items.Add("Calibrated units");
+            registerTreeNodeComboBox_ADXL345busDataRate = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.ADXL345busDataRate, "Data Rate:");
+            registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.Width = 80;
+            registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("Disabled");
+            registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("1 Hz");
+            registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("2 Hz");
+            registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("4 Hz");
+            registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("8 Hz");
+            registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("16 Hz");
+            registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("32 Hz");
+            registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("64 Hz");
+            registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("128 Hz");
+            registerTreeNodeComboBox_ADXL345busDataRate.ComboBox.Items.Add("256 Hz");
 
             #region ADXL345 A
 
-            appendedTreeNodeTextBox_ADXL345ASensX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_ADXL345ASensY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_ADXL345ASensZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_ADXL345ASens = new System.Windows.Forms.TreeNode("Sensitivity (lsb/g)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_ADXL345ASensX,
-            appendedTreeNodeTextBox_ADXL345ASensY,
-            appendedTreeNodeTextBox_ADXL345ASensZ});
-            appendedTreeNodeTextBox_ADXL345AbiasX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_ADXL345AbiasY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_ADXL345AbiasZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_ADXL345ABias = new System.Windows.Forms.TreeNode("Bias (lsb)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_ADXL345AbiasX,
-            appendedTreeNodeTextBox_ADXL345AbiasY,
-            appendedTreeNodeTextBox_ADXL345AbiasZ});
+            registerTreeNodeTextBox_ADXL345AsensitivityX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345AsensitivityX, "X:");
+            registerTreeNodeTextBox_ADXL345AsensitivityY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345AsensitivityY, "Y:");
+            registerTreeNodeTextBox_ADXL345AsensitivityZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345AsensitivityZ, "Z:");
+            treeNode_ADXL345Asensitivity = new System.Windows.Forms.TreeNode("Sensitivity (lsb/g)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_ADXL345AsensitivityX,
+            registerTreeNodeTextBox_ADXL345AsensitivityY,
+            registerTreeNodeTextBox_ADXL345AsensitivityZ});
+            registerTreeNodeTextBox_ADXL345AbiasX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345AbiasX, "X:");
+            registerTreeNodeTextBox_ADXL345AbiasY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345AbiasY, "Y:");
+            registerTreeNodeTextBox_ADXL345AbiasZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345AbiasZ, "Z:");
+            treeNode_ADXL345Abias = new System.Windows.Forms.TreeNode("Bias (lsb)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_ADXL345AbiasX,
+            registerTreeNodeTextBox_ADXL345AbiasY,
+            registerTreeNodeTextBox_ADXL345AbiasZ});
             treeNode_ADXL345A = new System.Windows.Forms.TreeNode("ADXL345 A", new System.Windows.Forms.TreeNode[] {
-            treeNode_ADXL345ASens,
-            treeNode_ADXL345ABias});
+            treeNode_ADXL345Asensitivity,
+            treeNode_ADXL345Abias});
 
             #endregion
 
             #region ADXL345 B
 
-            appendedTreeNodeTextBox_ADXL345BSensX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_ADXL345BSensY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_ADXL345BSensZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_ADXL345BSens = new System.Windows.Forms.TreeNode("Sensitivity (lsb/g)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_ADXL345BSensX,
-            appendedTreeNodeTextBox_ADXL345BSensY,
-            appendedTreeNodeTextBox_ADXL345BSensZ});
-            appendedTreeNodeTextBox_ADXL345BbiasX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_ADXL345BbiasY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_ADXL345BbiasZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_ADXL345Bbias = new System.Windows.Forms.TreeNode("Bias (lsb)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_ADXL345BbiasX,
-            appendedTreeNodeTextBox_ADXL345BbiasY,
-            appendedTreeNodeTextBox_ADXL345BbiasZ});
+            registerTreeNodeTextBox_ADXL345BsensitivityX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345BsensitivityX, "X:");
+            registerTreeNodeTextBox_ADXL345BsensitivityY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345BsensitivityY, "Y:");
+            registerTreeNodeTextBox_ADXL345BsensitivityZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345BsensitivityZ, "Z:");
+            treeNode_ADXL345Bsensitivity = new System.Windows.Forms.TreeNode("Sensitivity (lsb/g)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_ADXL345BsensitivityX,
+            registerTreeNodeTextBox_ADXL345BsensitivityY,
+            registerTreeNodeTextBox_ADXL345BsensitivityZ});
+            registerTreeNodeTextBox_ADXL345BbiasX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345BbiasX, "X:");
+            registerTreeNodeTextBox_ADXL345BbiasY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345BbiasY, "Y:");
+            registerTreeNodeTextBox_ADXL345BbiasZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345BbiasZ, "Z:");
+            treeNode_ADXL345Bbias = new System.Windows.Forms.TreeNode("Bias (lsb)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_ADXL345BbiasX,
+            registerTreeNodeTextBox_ADXL345BbiasY,
+            registerTreeNodeTextBox_ADXL345BbiasZ});
             treeNode_ADXL345B = new System.Windows.Forms.TreeNode("ADXL345 B", new System.Windows.Forms.TreeNode[] {
-            treeNode_ADXL345BSens,
+            treeNode_ADXL345Bsensitivity,
             treeNode_ADXL345Bbias});
 
             #endregion
 
             #region ADXL345 C
 
-            appendedTreeNodeTextBox_ADXL345CSensX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_ADXL345CSensY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_ADXL345CSensZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_ADXL345CSens = new System.Windows.Forms.TreeNode("Sensitivity (lsb/g)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_ADXL345CSensX,
-            appendedTreeNodeTextBox_ADXL345CSensY,
-            appendedTreeNodeTextBox_ADXL345CSensZ});
-            appendedTreeNodeTextBox_ADXL345CbiasX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_ADXL345CbiasY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_ADXL345CbiasZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_ADXL345Cbias = new System.Windows.Forms.TreeNode("Bias (lsb)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_ADXL345CbiasX,
-            appendedTreeNodeTextBox_ADXL345CbiasY,
-            appendedTreeNodeTextBox_ADXL345CbiasZ});
+            registerTreeNodeTextBox_ADXL345CsensitivityX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345CsensitivityX, "X:");
+            registerTreeNodeTextBox_ADXL345CsensitivityY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345CsensitivityY, "Y:");
+            registerTreeNodeTextBox_ADXL345CsensitivityZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345CsensitivityZ, "Z:");
+            treeNode_ADXL345Csensitivity = new System.Windows.Forms.TreeNode("Sensitivity (lsb/g)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_ADXL345CsensitivityX,
+            registerTreeNodeTextBox_ADXL345CsensitivityY,
+            registerTreeNodeTextBox_ADXL345CsensitivityZ});
+            registerTreeNodeTextBox_ADXL345CbiasX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345CbiasX, "X:");
+            registerTreeNodeTextBox_ADXL345CbiasY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345CbiasY, "Y:");
+            registerTreeNodeTextBox_ADXL345CbiasZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345CbiasZ, "Z:");
+            treeNode_ADXL345Cbias = new System.Windows.Forms.TreeNode("Bias (lsb)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_ADXL345CbiasX,
+            registerTreeNodeTextBox_ADXL345CbiasY,
+            registerTreeNodeTextBox_ADXL345CbiasZ});
             treeNode_ADXL345C = new System.Windows.Forms.TreeNode("ADXL345 C", new System.Windows.Forms.TreeNode[] {
-            treeNode_ADXL345CSens,
+            treeNode_ADXL345Csensitivity,
             treeNode_ADXL345Cbias});
 
             #endregion
 
             #region ADXL345 D
 
-            appendedTreeNodeTextBox_ADXL345DSensX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_ADXL345DSensY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_ADXL345DSensZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_ADXL345DSens = new System.Windows.Forms.TreeNode("Sensitivity (lsb/g)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_ADXL345DSensX,
-            appendedTreeNodeTextBox_ADXL345DSensY,
-            appendedTreeNodeTextBox_ADXL345DSensZ});
-            appendedTreeNodeTextBox_ADXL345DbiasX = new AppendedTreeNodeTextBox("X:");
-            appendedTreeNodeTextBox_ADXL345DbiasY = new AppendedTreeNodeTextBox("Y:");
-            appendedTreeNodeTextBox_ADXL345DbiasZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_ADXL345Dbias = new System.Windows.Forms.TreeNode("Bias (lsb)", new AppendedTreeNodeTextBox[] {
-            appendedTreeNodeTextBox_ADXL345DbiasX,
-            appendedTreeNodeTextBox_ADXL345DbiasY,
-            appendedTreeNodeTextBox_ADXL345DbiasZ});
+            registerTreeNodeTextBox_ADXL345DsensitivityX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345DsensitivityX, "X:");
+            registerTreeNodeTextBox_ADXL345DsensitivityY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345DsensitivityY, "Y:");
+            registerTreeNodeTextBox_ADXL345DsensitivityZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345DsensitivityZ, "Z:");
+            treeNode_ADXL345Dsensitivity = new System.Windows.Forms.TreeNode("Sensitivity (lsb/g)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_ADXL345DsensitivityX,
+            registerTreeNodeTextBox_ADXL345DsensitivityY,
+            registerTreeNodeTextBox_ADXL345DsensitivityZ});
+            registerTreeNodeTextBox_ADXL345DbiasX = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345DbiasX, "X:");
+            registerTreeNodeTextBox_ADXL345DbiasY = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345DbiasY, "Y:");
+            registerTreeNodeTextBox_ADXL345DbiasZ = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.ADXL345DbiasZ, "Z:");
+            treeNode_ADXL345Dbias = new System.Windows.Forms.TreeNode("Bias (lsb)", new RegisterTreeNodeTextBox[] {
+            registerTreeNodeTextBox_ADXL345DbiasX,
+            registerTreeNodeTextBox_ADXL345DbiasY,
+            registerTreeNodeTextBox_ADXL345DbiasZ});
             treeNode_ADXL345D = new System.Windows.Forms.TreeNode("ADXL345 D", new System.Windows.Forms.TreeNode[] {
-            treeNode_ADXL345DSens,
+            treeNode_ADXL345Dsensitivity,
             treeNode_ADXL345Dbias});
 
             #endregion
@@ -2130,14 +2320,14 @@
             treeNode_ADXL345C,
             treeNode_ADXL345D});
             treeNode_ADXL345 = new System.Windows.Forms.TreeNode("ADXL345 Bus", new System.Windows.Forms.TreeNode[] {
-            appendedTreeNodeComboBox_ADXL345busDataMode,
-            appendedTreeNodeComboBox_ADXL345busDataRate,
+            registerTreeNodeComboBox_ADXL345busDataMode,
+            registerTreeNodeComboBox_ADXL345busDataRate,
             treeNode_ADXL345busCalibrationParameters});
 
             #endregion
 
             treeNode_auxiliaryPort = new System.Windows.Forms.TreeNode("Auxiliary Port", new System.Windows.Forms.TreeNode[] {
-            appendedTreeNodeComboBox_auxiliaryPortMode,
+            registerTreeNodeComboBox_auxiliaryPortMode,
             treeNode_digitalIO,
             treeNode_analogueInput,
             treeNode_PWMoutput,
@@ -2145,7 +2335,7 @@
 
             #endregion
 
-            appendedTreeView_registers.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            registerTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNodeGeneral,
             treeNode_sensorCalParam,
             treeNode_algorithmParameters,
@@ -2160,17 +2350,17 @@
         private System.Windows.Forms.TabControl tabControl_main;
         private System.Windows.Forms.TabPage tabPage_serialPort;
         private System.Windows.Forms.Button button_refreshList;
-        private System.Windows.Forms.GroupBox groupBox_OpenClosePort;
+        private System.Windows.Forms.GroupBox groupBox_openClosePort;
         private System.Windows.Forms.Label label_portName;
         private System.Windows.Forms.ComboBox comboBox_portName;
-        private System.Windows.Forms.Button button_openPort;
-        private System.Windows.Forms.GroupBox groupBox_packetCounts;
+        private ToggleButton toggleButton_openClosePort;
+        private System.Windows.Forms.GroupBox groupBox_packetCounters;
         private System.Windows.Forms.Label label_packetsReceived;
         private System.Windows.Forms.TextBox textBox_packetsReceived;
         private System.Windows.Forms.Label label_packetsSent;
         private System.Windows.Forms.TextBox textBox_packetsSent;
         private System.Windows.Forms.TabPage tabPage_registers;
-        private AppendedTreeView appendedTreeView_registers;
+        private RegisterTreeView registerTreeView;
         private System.Windows.Forms.TabPage tabPage_dateTime;
         private System.Windows.Forms.GroupBox groupBox_dateTime;
         private System.Windows.Forms.Label label_receivedDateTime;
@@ -2179,73 +2369,80 @@
         private System.Windows.Forms.Button button_setDateTime;
         private System.Windows.Forms.TabPage tabPage_commands;
         private System.Windows.Forms.GroupBox groupBox_general;
-        private System.Windows.Forms.Button button_factoryReset;
-        private System.Windows.Forms.Button button_reset;
-        private System.Windows.Forms.Button button_sleep;
-        private System.Windows.Forms.Button button_resetSleepTimer;
+        private CommandButton commandButton_factoryReset;
+        private CommandButton commandButton_reset;
+        private CommandButton commandButton_sleep;
+        private CommandButton commandButton_resetSleepTimer;
         private System.Windows.Forms.GroupBox groupBox_gyroscopeCalibration;
-        private System.Windows.Forms.Button button_sampleGyroAt200dps;
-        private System.Windows.Forms.Button button_calculateGyroSensitivity;
-        private System.Windows.Forms.Button button_sampleGyroBiasAtT1;
-        private System.Windows.Forms.Button button_sampleGyroBiasAtT2;
-        private System.Windows.Forms.Button button_calcGyroBiasParameters;
+        private CommandButton commandButton_sampleGyroAt200dps;
+        private CommandButton commandButton_calculateGyroSensitivity;
+        private CommandButton commandButtonbutton_sampleGyroBiasAtT1;
+        private CommandButton commandButton_sampleGyroBiasAtT2;
+        private CommandButton commandButton_calcGyroBiasParameters;
         private System.Windows.Forms.GroupBox groupBox_accelerometerCalibration;
-        private System.Windows.Forms.Button button_sampleAccelAxisAt1g;
-        private System.Windows.Forms.Button button_calcAccelBiasSens;
+        private CommandButton commandButton_sampleAccelAxisAt1g;
+        private CommandButton commandButton_calcAccelBiasSens;
         private System.Windows.Forms.GroupBox groupBox_magnetometerCalibration;
-        private System.Windows.Forms.Button button_measMagBiasSens;
+        private CommandButton commandButton_measMagBiasSens;
         private System.Windows.Forms.GroupBox groupBox_algorithm;
-        private System.Windows.Forms.Button button_initialise;
-        private System.Windows.Forms.Button button_tare;
-        private System.Windows.Forms.Button button_clearTare;
-        private System.Windows.Forms.Button button_initialiseThenTare;
+        private CommandButton commandButton_initialise;
+        private CommandButton commandButton_tare;
+        private CommandButton commandButton_clearTare;
+        private CommandButton commandButton_initialiseThenTare;
         private System.Windows.Forms.GroupBox groupBox_receivedCommandMessages;
         private System.Windows.Forms.CheckBox checkBox_displayCommandConfirmations;
-        private System.Windows.Forms.TabPage tabPage_ViewSensorData;
-        private System.Windows.Forms.GroupBox groupBox_battThermData;
-        private System.Windows.Forms.Button button_showBatteryGraph;
-        private System.Windows.Forms.Button button_showThermGraph;
-        private System.Windows.Forms.GroupBox groupBox_sensorData;
-        private System.Windows.Forms.Button button_showGyroGraph;
-        private System.Windows.Forms.Button button_showAccelGraph;
-        private System.Windows.Forms.Button button_showMagGraph;
-        private System.Windows.Forms.Label label_sensorLegend;
-        private System.Windows.Forms.Label label_legendX;
-        private System.Windows.Forms.Label label_legendY;
-        private System.Windows.Forms.Label label_legendZ;
-        private System.Windows.Forms.GroupBox groupBox_orienData;
-        private System.Windows.Forms.Button button_show3Dcuboid;
-        private System.Windows.Forms.Button button_showEulerAngleGraph;
-        private System.Windows.Forms.Label label_eulerLegend;
-        private System.Windows.Forms.Label label_phi;
-        private System.Windows.Forms.Label label_theta;
-        private System.Windows.Forms.Label label_psi;
+        private System.Windows.Forms.TabPage tabPage_viewSensorData;
+        private System.Windows.Forms.GroupBox groupBox_batteryAndThermometerData;
+        private ShowHideButton showHideButton_batteryGraph;
+        private ShowHideButton showHideButton_thermometerGraph;
+        private System.Windows.Forms.GroupBox groupBox_inertialAndMagneticData;
+        private ShowHideButton showHideButton_gyroscopeGraph;
+        private ShowHideButton showHideButton_accelerometerGraph;
+        private ShowHideButton showHideButton_magnetometerGraph;
+        private System.Windows.Forms.Label label_inertialAndMagneticDataLegend;
+        private System.Windows.Forms.Label label_inertialAndMagneticDataX;
+        private System.Windows.Forms.Label label_inertialAndMagneticDataY;
+        private System.Windows.Forms.Label label_inertialAndMagneticDataZ;
+        private System.Windows.Forms.GroupBox groupBox_orientationData;
+        private ShowHideButton showHideButton_3Dcuboid;
+        private ShowHideButton showHideButton_eulerAnglesGraph;
+        private System.Windows.Forms.Label label_orientationDataLegend;
+        private System.Windows.Forms.Label label_orientationDataLegendPhi;
+        private System.Windows.Forms.Label label_orientationDataLegendTheta;
+        private System.Windows.Forms.Label label_orientationDataLegendPsi;
         private System.Windows.Forms.TabPage tabPage_auxillaryPort;
         private System.Windows.Forms.GroupBox groupBox_digitalIO;
-        private System.Windows.Forms.Button button_showDigitalIOpanel;
+        private ShowHideButton showHideButton_digitalIOpanel;
         private System.Windows.Forms.GroupBox groupBox_analogueInput;
-        private System.Windows.Forms.Button button_showAX0andAX1graph;
-        private System.Windows.Forms.Button button_showAX2andAX3graph;
-        private System.Windows.Forms.Button button_showAX4andAX5graph;
-        private System.Windows.Forms.Button button_showAX6andAX7graph;
-        private System.Windows.Forms.GroupBox groupBox_pwmOutput;
-        private System.Windows.Forms.Button button_showPWMoutputPanel;
+        private ShowHideButton showHideButton_AX0andAX1graph;
+        private ShowHideButton showHideButton_AX2andAX3graph;
+        private ShowHideButton showHideButton_AX4andAX5graph;
+        private ShowHideButton showHideButton_AX6andAX7graph;
+        private System.Windows.Forms.Label label_analogueInputLegend;
+        private System.Windows.Forms.Label label_analogueInputAX0246;
+        private System.Windows.Forms.Label label_analogueInputAX1357;
+        private System.Windows.Forms.GroupBox groupBox_PWMoutput;
+        private ShowHideButton showHideButton_PWMoutputPanel;
         private System.Windows.Forms.GroupBox groupBox_ADXL345bus;
-        private System.Windows.Forms.Button button_showADXL345Dgraph;
-        private System.Windows.Forms.Button button_showADXL345Cgraph;
-        private System.Windows.Forms.Button button_showADXL345Bgraph;
-        private System.Windows.Forms.Button button_showADXL345Agraph;
+        private ShowHideButton showHideButton_ADXL345Agraph;
+        private ShowHideButton showHideButton_ADXL345Bgraph;
+        private ShowHideButton showHideButton_ADXL345Cgraph;
+        private ShowHideButton showHideButton_ADXL345Dgraph;
+        private System.Windows.Forms.Label label_ADXL345busLegend;
+        private System.Windows.Forms.Label label_ADXL345busX;
+        private System.Windows.Forms.Label label_ADXL345busY;
+        private System.Windows.Forms.Label label_ADXL345busZ;
         private System.Windows.Forms.TabPage tabPage_dataLogger;
         private System.Windows.Forms.GroupBox groupBox_logReceivedDataToFile;
         private System.Windows.Forms.Label label_dataLoggerFilePath;
         private System.Windows.Forms.TextBox textBox_dataLoggerFilePath;
-        private System.Windows.Forms.Button button_dataLoggerFilePathBrowse;
-        private System.Windows.Forms.Button button_dataLoggerStart;
+        private System.Windows.Forms.Button button_dataLoggerBrowse;
+        private ToggleButton toggleButton_dataLoggerStartStopLogging;
         private System.Windows.Forms.TabPage tabPage_SDcard;
-        private System.Windows.Forms.GroupBox groupBox_convertBinaryFile;
+        private System.Windows.Forms.GroupBox groupBox_binaryFileConverter;
         private System.Windows.Forms.TextBox textBox_convertBinaryFileFilePath;
-        private System.Windows.Forms.Label labelconvertBinaryFileFilePath;
-        private System.Windows.Forms.Button button_convertBinaryFileConvertBrowse;
+        private System.Windows.Forms.Label label_convertBinaryFileFilePath;
+        private System.Windows.Forms.Button button_convertBinaryFileBrowse;
         private System.Windows.Forms.Button button_convertBinaryFileConvert;
         private System.Windows.Forms.TabPage tabPage_hardIronCalibration;
         private System.Windows.Forms.GroupBox groupBox_step1ClearHardIronBiasRegisters;
@@ -2254,7 +2451,7 @@
         private System.Windows.Forms.Label label_collectHardIronCalDatasetFilePath;
         private System.Windows.Forms.TextBox textBox_collectHardIronCalDatasetFilePath;
         private System.Windows.Forms.Button button_collectHardIronCalDatasetBrowse;
-        private System.Windows.Forms.Button button_collectHardIronCalDatasetStartLogging;
+        private ToggleButton toggleButton_collectHardIronCalDatasetStartStopLogging;
         private System.Windows.Forms.GroupBox groupBox_step3hardIronCalibrationAlgorithm;
         private System.Windows.Forms.Label label_hardIronCalFilePath;
         private System.Windows.Forms.TextBox textBox_hardIronCalFilePath;
@@ -2282,11 +2479,11 @@
 
         #region General
 
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_firmVersionMajorNum;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_firmVersionMinorNum;
-        private System.Windows.Forms.TreeNode appendedTreeNodeTextBox_firmwareVersion;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_deviceID;
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_buttonMode;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_firmwareVersionMajorNum;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_firmwareVersionMinorNum;
+        private System.Windows.Forms.TreeNode registerTreeNodeTextBox_firmwareVersion;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_deviceID;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_buttonMode;
         private System.Windows.Forms.TreeNode treeNodeGeneral;
 
         #endregion
@@ -2295,52 +2492,52 @@
 
         #region Battery Voltmeter
 
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_battSens;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_battBias;
-        private System.Windows.Forms.TreeNode treeNode_battVoltmeter;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_batterySensitivity;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_batteryBias;
+        private System.Windows.Forms.TreeNode treeNode_batteryVoltmeter;
 
         #endregion
 
         #region Thermometer
 
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_thermSens;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_thermBias;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_thermometerSensitivity;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_thermometerBias;
         private System.Windows.Forms.TreeNode treeNode_thermometer;
 
         #endregion
 
         #region Gyroscope
 
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_gyroFullScale;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSensX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSensY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSensZ;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSampledPlus200dpsX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSampledPlus200dpsY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSampledPlus200dpsZ;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_gyroscopeFullScale;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSensitivtyX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSensitivtyY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSensitivtyZ;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSampledPlus200dpsX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSampledPlus200dpsY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSampledPlus200dpsZ;
         private System.Windows.Forms.TreeNode treeNode_gyroSampledAxesAtPlus200dps;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSampledMinus200dpsX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSampledMinus200dpsY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSampledMinus200dpsZ;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSampledMinus200dpsX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSampledMinus200dpsY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSampledMinus200dpsZ;
         private System.Windows.Forms.TreeNode treeNode_gyroSampledAxesAtMinus200dps;
         private System.Windows.Forms.TreeNode treeNode_gyroSens;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroBiasX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroBiasY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroBiasZ;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeBiasAt25degCX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeBiasAt25degCY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeBiasAt25degCZ;
         private System.Windows.Forms.TreeNode treeNode_gyroBias;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroBiasTempSensX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroBiasTempSensY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroBiasTempSensZ;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeBiasTempSensitivityX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeBiasTempSensitivityY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeBiasTempSensitivityZ;
         private System.Windows.Forms.TreeNode treeNode_gyroBiasTempSens;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSample1Temp;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSample1BiasX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSample1BiasY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSample1BiasZ;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSample1Temp;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSample1BiasX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSample1BiasY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSample1BiasZ;
         private System.Windows.Forms.TreeNode treeNode_gyroSample1;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSample2Temp;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSample2BiasX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSample2BiasY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_gyroSample2BiasZ;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSample2Temp;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSample2BiasX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSample2BiasY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_gyroscopeSample2BiasZ;
         private System.Windows.Forms.TreeNode treeNode_gyroSample2;
         private System.Windows.Forms.TreeNode treeNode_gyroBiasParent;
         private System.Windows.Forms.TreeNode treeNode_gyroscope;
@@ -2349,42 +2546,42 @@
 
         #region Acceleroemter
 
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_accelFullScale;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_accelSensX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_accelSensY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_accelSensZ;
-        private System.Windows.Forms.TreeNode treeNode_accelSens;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_accelBiasX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_accelBiasY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_accelBiasZ;
-        private System.Windows.Forms.TreeNode treeNode_accelBias;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_accelSampledPlus1gX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_accelSampledPlus1gY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_accelSampledPlus1gZ;
-        private System.Windows.Forms.TreeNode treeNode_accelSampledAsexAtPlus1g;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_accelSampledMinus1gX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_accelSampledMinus1gY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_accelSampledMinus1gZ;
-        private System.Windows.Forms.TreeNode treeNode_accelSampledAsexAtMinus1g;
-        private System.Windows.Forms.TreeNode treeNode_accelerometer;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_accelerometerFullScale;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_accelerometerSensitivtyX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_accelerometerSensitivtyY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_accelerometerSensitivtyZ;
+        private System.Windows.Forms.TreeNode treeNode_accelerometerSensitivity;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_accelerometerBiasX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_accelerometerBiasY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_accelerometerBiasZ;
+        private System.Windows.Forms.TreeNode treeNode_accelerometerBias;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_accelerometerSampledPlus1gX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_accelerometerSampledPlus1gY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_accelerometerSampledPlus1gZ;
+        private System.Windows.Forms.TreeNode treeNode_accelerometerSampledAsexAtPlus1g;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_accelerometerSampledMinus1gX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_accelerometerSampledMinus1gY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_accelerometerSampledMinus1gZ;
+        private System.Windows.Forms.TreeNode treeNode_accelerometerSampledAsexAtMinus1g;
+        private System.Windows.Forms.TreeNode treeNode_accelerometererometer;
 
         #endregion
 
         #region Magnetometer
 
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_magFullScale;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_magSensX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_magSensY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_magSensZ;
-        private System.Windows.Forms.TreeNode treeNode_magSens;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_magBiasX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_magBiasY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_magBiasZ;
-        private System.Windows.Forms.TreeNode treeNode_magBias;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_magHIbiasX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_magHIbiasY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_magHIbiasZ;
-        private System.Windows.Forms.TreeNode treeNode_magHIbias;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_magnetometerFullScale;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_magnetometerSensitivityX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_magnetometerSensitivityY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_magnetometerSensitivityZ;
+        private System.Windows.Forms.TreeNode treeNode_magnetometerSensitivity;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_magnetometerBiasX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_magnetometerBiasY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_magnetometerBiasZ;
+        private System.Windows.Forms.TreeNode treeNode_magnetometerBias;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_magnetometerHardIronbiasX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_magnetometerHardIronbiasY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_magnetometerHardIronbiasZ;
+        private System.Windows.Forms.TreeNode treeNode_magnetometerHardIronbias;
         private System.Windows.Forms.TreeNode treeNode_magnetometer;
 
         #endregion
@@ -2393,121 +2590,123 @@
 
         #region Algorithm Parameters
 
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_algorithmMode;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_algorithmGainKp;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_algorithmGainKi;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_algorithmMinValidMag;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_algorithmMaxValidMag;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_algorithmInitKp;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_algorithmInitPeriod;
-        private System.Windows.Forms.TreeNode appendedTreeNodeTextBox_algorithmTareQuaternion;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBoxtareQuatElement0;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBoxtareQuatElement1;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBoxtareQuatElement2;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBoxtareQuatElement3;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_algorithmMode;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_algorithmGainKp;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_algorithmGainKi;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_algorithmMinValidMag;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_algorithmMaxValidMag;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_algorithmInitKp;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_algorithmInitPeriod;
+        private System.Windows.Forms.TreeNode registerTreeNodeTextBox_algorithmTareQuaternion;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBoxtareQuatElement0;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBoxtareQuatElement1;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBoxtareQuatElement2;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBoxtareQuatElement3;
         private System.Windows.Forms.TreeNode treeNode_algorithmParameters;
 
         #endregion
 
         #region Data Output Settings
 
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_sensorDataMode;
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_dateTimeOutputRate;
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_battThermOutputRate;
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_inertialMagOutputRate;
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_quatOutputRate;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_sensorDataMode;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_dateTimeDateTimeDataRate;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_batteryAndThermometerDataRate;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_inertialAndMagneticDataRate;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_quaternionDataRate;
         private System.Windows.Forms.TreeNode treeNode_dataOutputRate;
 
         #endregion
 
         #region SD Card
 
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_SDcardNewFileName;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_SDcardNewFileName;
         private System.Windows.Forms.TreeNode treeNode_SDcard;
 
         #endregion
 
         #region Power Management
 
-        private AppendedTreeNodeTextBox appendedTreeNodeComboBox_battShutdownVoltage;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBoxsleepTimer;
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_motionTriggeredWakeup;
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_bluetoothPower;
+        private RegisterTreeNodeTextBox registerTreeNodeComboBox_batteryShutdownVoltage;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_sleepTimer;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_motionTriggeredWakeup;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_bluetoothPower;
         private System.Windows.Forms.TreeNode treeNode_powerManagement;
 
         #endregion
 
         #region Auxiliary Port
 
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_auxiliaryPortMode;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_auxiliaryPortMode;
 
         #region Digital I/O
 
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_digitalIOdirection;
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_digitalIOoutputRate;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_digitalIOdirection;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_digitalIOdataRate;
         private System.Windows.Forms.TreeNode treeNode_digitalIO;
 
         #endregion
 
         #region Analogue Input
 
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_analogueInputDataMode;
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_analogueInputDataRate;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_analogueInputSensitivity;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_analogueInputBias;
-        private System.Windows.Forms.TreeNode appendedTreeNodeComboBox_analogueInputCalibrationParameters;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_analogueInputDataMode;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_analogueInputDataRate;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_analogueInputSensitivity;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_analogueInputBias;
+        private System.Windows.Forms.TreeNode registerTreeNodeComboBox_analogueInputCalibrationParameters;
         private System.Windows.Forms.TreeNode treeNode_analogueInput;
 
         #endregion
 
         #region PWM Output
 
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_PWMoutputFrequency;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_PWMoutputFrequency;
         private System.Windows.Forms.TreeNode treeNode_PWMoutput; 
 
         #endregion
 
         #region ADXL345 Bus
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_ADXL345busDataMode;
-        private AppendedTreeNodeComboBox appendedTreeNodeComboBox_ADXL345busDataRate;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345ASensX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345ASensY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345ASensZ;
-        private System.Windows.Forms.TreeNode treeNode_ADXL345ASens;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345AbiasX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345AbiasY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345AbiasZ;
-        private System.Windows.Forms.TreeNode treeNode_ADXL345ABias;
+
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_ADXL345busDataMode;
+        private RegisterTreeNodeComboBox registerTreeNodeComboBox_ADXL345busDataRate;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345AsensitivityX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345AsensitivityY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345AsensitivityZ;
+        private System.Windows.Forms.TreeNode treeNode_ADXL345Asensitivity;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345AbiasX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345AbiasY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345AbiasZ;
+        private System.Windows.Forms.TreeNode treeNode_ADXL345Abias;
         private System.Windows.Forms.TreeNode treeNode_ADXL345A;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345BSensX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345BSensY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345BSensZ;
-        private System.Windows.Forms.TreeNode treeNode_ADXL345BSens;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345BbiasX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345BbiasY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345BbiasZ;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345BsensitivityX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345BsensitivityY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345BsensitivityZ;
+        private System.Windows.Forms.TreeNode treeNode_ADXL345Bsensitivity;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345BbiasX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345BbiasY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345BbiasZ;
         private System.Windows.Forms.TreeNode treeNode_ADXL345Bbias;
         private System.Windows.Forms.TreeNode treeNode_ADXL345B;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345CSensX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345CSensY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345CSensZ;
-        private System.Windows.Forms.TreeNode treeNode_ADXL345CSens;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345CbiasX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345CbiasY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345CbiasZ;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345CsensitivityX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345CsensitivityY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345CsensitivityZ;
+        private System.Windows.Forms.TreeNode treeNode_ADXL345Csensitivity;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345CbiasX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345CbiasY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345CbiasZ;
         private System.Windows.Forms.TreeNode treeNode_ADXL345Cbias;
         private System.Windows.Forms.TreeNode treeNode_ADXL345C;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345DSensX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345DSensY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345DSensZ;
-        private System.Windows.Forms.TreeNode treeNode_ADXL345DSens;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345DbiasX;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345DbiasY;
-        private AppendedTreeNodeTextBox appendedTreeNodeTextBox_ADXL345DbiasZ;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345DsensitivityX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345DsensitivityY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345DsensitivityZ;
+        private System.Windows.Forms.TreeNode treeNode_ADXL345Dsensitivity;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345DbiasX;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345DbiasY;
+        private RegisterTreeNodeTextBox registerTreeNodeTextBox_ADXL345DbiasZ;
         private System.Windows.Forms.TreeNode treeNode_ADXL345Dbias;
         private System.Windows.Forms.TreeNode treeNode_ADXL345D;
         private System.Windows.Forms.TreeNode treeNode_ADXL345busCalibrationParameters;
         private System.Windows.Forms.TreeNode treeNode_ADXL345;
+
         #endregion
 
         private System.Windows.Forms.TreeNode treeNode_auxiliaryPort;

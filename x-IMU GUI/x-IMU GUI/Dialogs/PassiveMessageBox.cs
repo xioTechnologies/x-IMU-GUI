@@ -29,7 +29,7 @@ namespace x_IMU_GUI
         private static List<MessageBoxArgs> ExistingMessages = new List<MessageBoxArgs>();
 
         /// <summary>
-        /// Starts a <see cref="MessageBox"/> in a new thread.  Will not show new <see cref="MessageBox"/> if an identical <see cref="MessageBox"/> already exists.
+        /// Starts a <see cref="MessageBox"/> in a new thread. Will not show new <see cref="MessageBox"/> if an identical <see cref="MessageBox"/> already exists.
         /// </summary>
         /// <param name="text">
         /// Text to display in <see cref="MessageBox"/>.
@@ -40,7 +40,7 @@ namespace x_IMU_GUI
         }
 
         /// <summary>
-        /// Starts a <see cref="MessageBox"/> in a new thread.  Will not show new <see cref="MessageBox"/> if an identical <see cref="MessageBox"/> already exists.
+        /// Starts a <see cref="MessageBox"/> in a new thread. Will not show new <see cref="MessageBox"/> if an identical <see cref="MessageBox"/> already exists.
         /// </summary>
         /// <param name="text">
         /// Text to display in <see cref="MessageBox"/>.
@@ -54,7 +54,7 @@ namespace x_IMU_GUI
         }
 
         /// <summary>
-        /// Starts a <see cref="MessageBox"/> in a new thread.  Will not show new <see cref="MessageBox"/> if an identical <see cref="MessageBox"/> already exists.
+        /// Starts a <see cref="MessageBox"/> in a new thread. Will not show new <see cref="MessageBox"/> if an identical <see cref="MessageBox"/> already exists.
         /// </summary>
         /// <param name="text">
         /// Text to display in <see cref="MessageBox"/>.
@@ -68,7 +68,7 @@ namespace x_IMU_GUI
         }
 
         /// <summary>
-        /// Starts a <see cref="MessageBox"/> in a new thread.  Will not show new <see cref="MessageBox"/> if an identical <see cref="MessageBox"/> already exists.
+        /// Starts a <see cref="MessageBox"/> in a new thread. Will not show new <see cref="MessageBox"/> if an identical <see cref="MessageBox"/> already exists.
         /// </summary>
         /// <param name="text">
         /// Text to display in <see cref="MessageBox"/>.
@@ -82,9 +82,9 @@ namespace x_IMU_GUI
         public static void Show(string text, string caption, MessageBoxIcon icon)
         {
             MessageBoxArgs messageBoxArgs = new MessageBoxArgs { Text = text, Caption = caption, Icon = icon };
-            for (int i = 0; i < ExistingMessages.Count; i++)
+            foreach(MessageBoxArgs ExistingMessage in ExistingMessages)
             {
-                if (ExistingMessages[i].Equivalent(messageBoxArgs))
+                if (ExistingMessage.Equivalent(messageBoxArgs))
                 {
                     switch (icon)
                     {
@@ -110,7 +110,7 @@ namespace x_IMU_GUI
         {
             MessageBoxArgs messageBoxArgs = e.Argument as MessageBoxArgs;
             MessageBox.Show(messageBoxArgs.Text, messageBoxArgs.Caption, MessageBoxButtons.OK, messageBoxArgs.Icon);
-            for (int i = 0; i < ExistingMessages.Count; i++)
+            for (int i = 0; i < ExistingMessages.Count; i++)        // remove from ExistingMessages once collided
             {
                 if (ExistingMessages[i].Equivalent(messageBoxArgs))
                 {

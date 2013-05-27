@@ -29,7 +29,7 @@ namespace x_IMU_GUI
         public x_IMU_API.DigitalPortBits State { get; set; }
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="Form_digitalIOpanel"/> class.
+        /// Initialises a new instance of the Form_digitalIOpanel class.
         /// </summary>
         public Form_digitalIOpanel()
         {
@@ -42,7 +42,7 @@ namespace x_IMU_GUI
         }
 
         /// <summary>
-        /// Visible changed event to start/stop form update formUpdateTimer.
+        /// Form VisibleChanged event starts/stops form update formUpdateTimer.
         /// </summary>
         private void Form_digitalIOpanel_VisibleChanged(object sender, EventArgs e)
         {
@@ -57,7 +57,7 @@ namespace x_IMU_GUI
         }
 
         /// <summary>
-        /// Form closing event to minimise form instead of close.
+        /// FormClosing event minimises form instead of close.
         /// </summary>
         private void Form_digitalIOpanel_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -66,7 +66,7 @@ namespace x_IMU_GUI
         }
 
         /// <summary>
-        /// Timer tick event to update form controls.
+        /// Timer Tick event updates form controls.
         /// </summary>
         private void formUpdateTimer_Tick(object sender, EventArgs e)
         {
@@ -89,7 +89,7 @@ namespace x_IMU_GUI
         }
 
         /// <summary>
-        /// TrackBar Scroll event to parse data to parent via event.
+        /// TrackBar Scroll event parses data to parent via event.
         /// </summary>
         private void checkBox_CheckedChanged(object sender, EventArgs e)
         {

@@ -26,8 +26,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>x-IMU GUI</ProductName>
     <PublisherName>x-io Technologies</PublisherName>
-    <ApplicationRevision>18</ApplicationRevision>
-    <ApplicationVersion>10.0.0.18</ApplicationVersion>
+    <ApplicationRevision>19</ApplicationRevision>
+    <ApplicationVersion>11.0.0.19</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -74,25 +74,48 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tao.OpenGl">
-      <HintPath>Cuboid3D\Tao.OpenGl.dll</HintPath>
+    <Reference Include="Tao.OpenGl, Version=2.1.0.12, Culture=neutral, PublicKeyToken=1ca010269a4501ef, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Form_3Dcuboid\Tao.OpenGl.dll</HintPath>
     </Reference>
-    <Reference Include="Tao.Platform.Windows">
-      <HintPath>Cuboid3D\Tao.Platform.Windows.dll</HintPath>
+    <Reference Include="Tao.Platform.Windows, Version=1.0.0.5, Culture=neutral, PublicKeyToken=701104b2da67a104, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Form_3Dcuboid\Tao.Platform.Windows.dll</HintPath>
     </Reference>
-    <Reference Include="x-IMU API, Version=11.0.4214.22762, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="x-IMU API, Version=12.0.4242.27191, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>x-IMU API\x-IMU API.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppendedTreeView\AppendedTreeView.cs">
+    <Compile Include="CustomControls\ShowHideButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="AppendedTreeView\AppendedTreeNode.cs" />
-    <Compile Include="AppendedTreeView\AppendedTreeNodeComboBox.cs" />
-    <Compile Include="AppendedTreeView\AppendedTreeNodeTextBox.cs" />
-    <Compile Include="Cuboid3D\Cuboid3D.cs" />
+    <Compile Include="CustomControls\ShowHideButton.Designer.cs">
+      <DependentUpon>ShowHideButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\RegisterTreeNode.cs" />
+    <Compile Include="CustomControls\RegisterTreeNodeComboBox.cs" />
+    <Compile Include="CustomControls\RegisterTreeNodeTextBox.cs" />
+    <Compile Include="CustomControls\RegisterTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\RegisterTreeView.Designer.cs">
+      <DependentUpon>RegisterTreeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\CommandButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\CommandButton.Designer.cs">
+      <DependentUpon>CommandButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CSVfileWriterResults.cs" />
+    <Compile Include="Form_3Dcuboid\Form_3Dcuboid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_3Dcuboid\Form_3Dcuboid.designer.cs">
+      <DependentUpon>Form_3Dcuboid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_digitalIOpanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,11 +134,21 @@
     <Compile Include="Form_PWMoutputPanel.designer.cs">
       <DependentUpon>Form_PWMoutputPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialog\PassiveMessageBox.cs" />
-    <Compile Include="Dialog\ProcessDialog.cs" />
+    <Compile Include="Dialogs\PassiveMessageBox.cs" />
+    <Compile Include="Dialogs\ProcessDialog.cs" />
     <Compile Include="Oscilloscope\Oscilloscope.cs" />
+    <Compile Include="Oscilloscope\SimpleOscilloscope.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CustomControls\ToggleButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ToggleButton.Designer.cs">
+      <DependentUpon>ToggleButton.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form_3Dcuboid\Form_3Dcuboid.resx">
+      <DependentUpon>Form_3Dcuboid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_digitalIOpanel.resx">
       <DependentUpon>Form_digitalIOpanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -136,13 +169,28 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="Form_3Dcuboid\Back.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form_3Dcuboid\Bottom.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form_3Dcuboid\Front.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form_3Dcuboid\Left.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form_3Dcuboid\Right.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form_3Dcuboid\Top.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="HardIronCal\MathNet.Numerics.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="HardIronCal\MathNet.Numerics.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Oscilloscope\accelOscilloscope_settings.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Oscilloscope\ADXL345Aoscilloscope_settings.ini">
@@ -157,34 +205,37 @@
     <Content Include="Oscilloscope\ADXL345Doscilloscope_settings.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Oscilloscope\AnalogueInputAX0AX1oscilloscope_settings.ini">
+    <Content Include="Oscilloscope\analogueInputAX0AX1oscilloscope_settings.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Oscilloscope\AnalogueInputAX2AX3oscilloscope_settings.ini">
+    <Content Include="Oscilloscope\analogueInputAX2AX3oscilloscope_settings.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Oscilloscope\AnalogueInputAX4AX5oscilloscope_settings.ini">
+    <Content Include="Oscilloscope\analogueInputAX4AX5oscilloscope_settings.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Oscilloscope\AnalogueInputAX6AX7oscilloscope_settings.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Oscilloscope\battOscilloscope_settings.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Oscilloscope\eulerOscilloscope_settings.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Oscilloscope\gyroOscilloscope_settings.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Oscilloscope\magOscilloscope_settings.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Oscilloscope\thermOscilloscope_settings.ini">
+    <Content Include="Oscilloscope\analogueInputAX6AX7oscilloscope_settings.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="app.config" />
+    <Content Include="Oscilloscope\accelerometerOscilloscope_settings.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Oscilloscope\batteryOscilloscope_settings.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Oscilloscope\eulerAnglesOscilloscope_settings.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Oscilloscope\gyroscopeOscilloscope_settings.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Oscilloscope\magnetometerOscilloscope_settings.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Oscilloscope\thermometerOscilloscope_settings.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -198,24 +249,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bootloader\16-Bit Flash Programmer.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cuboid3D\Back.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cuboid3D\Bottom.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cuboid3D\Front.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cuboid3D\Left.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cuboid3D\Right.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cuboid3D\Top.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="HardIronCal\HardIronCal.exe">

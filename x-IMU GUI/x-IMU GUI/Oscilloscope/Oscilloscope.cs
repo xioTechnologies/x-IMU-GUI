@@ -37,7 +37,7 @@ using System.Runtime.InteropServices;
 
    Method: CreateScope() 
    
-   Creates an instance of the Oscilloscope.  The Initialization file 
+   Creates an instance of the Oscilloscope. The Initialization file 
    is not used in this version of the method.
   
    Lifetime:   static
@@ -49,7 +49,7 @@ using System.Runtime.InteropServices;
 
    Method: CreateScope ( string, string )
  
-   Creates an instance of the Oscilloscope.  The Initialization file 
+   Creates an instance of the Oscilloscope. The Initialization file 
    is used (if found) in this version of the method.
 
    Lifetime:   static
@@ -62,7 +62,7 @@ using System.Runtime.InteropServices;
 
    Method: ShowScope ()
   
-   Displays the Oscilloscope.  After the instance is created it will not 
+   Displays the Oscilloscope. After the instance is created it will not 
    become visible until this method is called.
    
    Lifetime:   instance
@@ -127,8 +127,8 @@ using System.Runtime.InteropServices;
    Method: Dispose ()
  
    Releases the Oscilloscope resources back to the system and removes
-   the Oscilloscope from the display.  Also sets the _disposed flag to
-   true.  Any future calls or property accesses will be ignored and 
+   the Oscilloscope from the display. Also sets the _disposed flag to
+   true. Any future calls or property accesses will be ignored and 
    will set a SCOPE_DISPOSED_ERROR into LastError.
 
    Lifetime:   instance
@@ -144,12 +144,12 @@ using System.Runtime.InteropServices;
    Property: LastError
     
    An application can check this to see if there has been an 
-   error, even when error message displays are turned off.  
+   error, even when error message displays are turned off. 
    If it is non-zero (!=NO_ERROR), there has been an error 
    and the value refers to one of the listed error constants.
     
    When setting LastError the value is ignored and LastError
-   is set to its defaul value, NO_ERROR.  The application
+   is set to its defaul value, NO_ERROR. The application
    should do this after finding a non-zero error value, as it is 
    not done automatically; the error code value will persist 
    until it is manually reset.
@@ -162,7 +162,7 @@ using System.Runtime.InteropServices;
 
    Property: ErrorMessagesOn
      
-   If set to "true", a throw new Exception will appear when there is an error.  
+   If set to "true", a throw new Exception will appear when there is an error. 
    When debugging is completed it may be desirable to set ErrorMessagesOn 
    to "false."  The LastError variable will work regardless of this 
    setting and may be checked even when there is no instance of the 
@@ -277,7 +277,7 @@ using System.Runtime.InteropServices;
    Property: AmplitudeScale1
      
    Sets the Amplitude Scale of Trace 1's grid divisions, in binary steps/grid 
-   cell.  The value will be adjusted to closest valid number (see the DLL 
+   cell. The value will be adjusted to closest valid number (see the DLL 
    documentation).
      
    Value:   double, Range: 0.00001-100,000.00000
@@ -290,7 +290,7 @@ using System.Runtime.InteropServices;
    Property: AmplitudeScale2
      
    Sets the Amplitude Scale Trace 2's grid divisions, in binary steps/grid 
-   cell.  The value will be adjusted to closest valid number (see the DLL 
+   cell. The value will be adjusted to closest valid number (see the DLL 
    documentation).
      
    Value:   double, Range: 0.00001-100,000.00000
@@ -303,7 +303,7 @@ using System.Runtime.InteropServices;
    Property: AmplitudeScale3
      
    Sets the Amplitude Scale Trace 3's grid divisions, in binary steps/grid 
-   cell.  The value will be adjusted to closest valid number (see the DLL 
+   cell. The value will be adjusted to closest valid number (see the DLL 
    documentation).
      
    Value:   double, Range: 0.00001-100,000.00000
@@ -384,7 +384,7 @@ using System.Runtime.InteropServices;
 
    Property: TriggerSource
      
-   Sets the Oscilloscope's Trigger Source.  The constants TRACE1_TRIG,
+   Sets the Oscilloscope's Trigger Source. The constants TRACE1_TRIG,
    TRACE2_TRIG, TRACE3_TRIG and EXTERNAL_TRIG are provided for conenience.
      
    Value:   int, Range 0-3 (TRACE1_TRIG-EXTERNAL_TRIG)
@@ -396,9 +396,9 @@ using System.Runtime.InteropServices;
 
    Property: TriggerEdge
      
-   Sets the Trigger Edge Detection Mode.  Any valid negative int sets it 
+   Sets the Trigger Edge Detection Mode. Any valid negative int sets it 
    Negative Edge Triggered, any valid positive int sets it Positive Edge 
-   Triggered, and 0 set it to disabled.  The constants FALLING_EDGE_TRIG,
+   Triggered, and 0 set it to disabled. The constants FALLING_EDGE_TRIG,
    RISING_EDGE_TRIG and DISABLED_TRIG are provided for convenience.
      
    Value:   int, Range: see above
@@ -828,7 +828,7 @@ namespace x_IMU_GUI
         }
 
         /// <summary>
-        /// Add data to the 'external' trigger function signal.  This value is used
+        /// Add data to the 'external' trigger function signal. This value is used
         /// when TriggerSource == EXTERNAL_TRIG.
         /// </summary>
         /// <param name="data">The data</param>
@@ -869,12 +869,12 @@ namespace x_IMU_GUI
         /// Property: LastError
         /// 
         /// An application can check this to see if there has been an 
-        /// error, even when error message displays are turned off.  
+        /// error, even when error message displays are turned off. 
         /// If it is non-zero (!=NO_ERROR), there has been an error 
         /// and the value refers to one of the listed error constants.
         /// 
         /// When setting LastError the value is ignored and LastError
-        /// is set to its defaul value, NO_ERROR.  The application
+        /// is set to its defaul value, NO_ERROR. The application
         /// should do this after finding an error value here, as it is 
         /// not done automatically; the error code value will persist 
         /// until it is manually reset.
@@ -893,7 +893,7 @@ namespace x_IMU_GUI
         /// Property: ErrorMessagesOn
         /// 
         /// If ErrorMessagesOn is set to "true", a throw new Exception will appear 
-        /// when there is an error.  When debugging is completed it may be 
+        /// when there is an error. When debugging is completed it may be 
         /// desirable to set ErrorMessagesOn to "false."
         /// 
         /// Value:   bool
@@ -1603,7 +1603,7 @@ namespace x_IMU_GUI
         /// <summary>
         /// Property: TriggerSource
         /// 
-        /// Sets the Oscilloscope's Trigger Source.  The Constants TRACE1_TRIG,
+        /// Sets the Oscilloscope's Trigger Source. The Constants TRACE1_TRIG,
         /// TRACE2_TRIG, TRACE3_TRIG and EXTERNAL_TRIG are provided for conenience.
         /// 
         /// Value:   int, Range 0-3 (TRACE1_TRIG-EXTERNAL_TRIG)
@@ -1652,9 +1652,9 @@ namespace x_IMU_GUI
         /// <summary>
         /// Property: TriggerEdge
         /// 
-        /// Sets the Trigger Edge Detection Mode.  Any valid negative int sets it 
+        /// Sets the Trigger Edge Detection Mode. Any valid negative int sets it 
         /// Negative Edge Triggered, any valid positive int sets it Positive Edge 
-        /// Triggered, and 0 set it to disabled.  The constants FALLING_EDGE_TRIG,
+        /// Triggered, and 0 set it to disabled. The constants FALLING_EDGE_TRIG,
         /// RISING_EDGE_TRIG and DISABLED_TRIG are provided for convenience.
         /// 
         /// Value:   int, Range: see above
