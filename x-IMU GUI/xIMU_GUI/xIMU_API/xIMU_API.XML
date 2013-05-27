@@ -4,93 +4,111 @@
         <name>xIMU_API</name>
     </assembly>
     <members>
-        <member name="T:xIMU_API.QuaternionData">
+        <member name="T:xIMU_API.xIMUserial">
             <summary>
-            Quaternion data class.
-            </summary>
-            <remarks>
-            See http://www.x-io.co.uk/res/doc/quaternions.pdf for more information on quaternions.
-            </remarks>
-        </member>
-        <member name="T:xIMU_API.xIMUdata">
-            <summary>
-            x-IMU data class.  Base class cannot be instantiated.
+            x-IMU serial class.
             </summary>
         </member>
-        <member name="M:xIMU_API.QuaternionData.#ctor">
+        <member name="M:xIMU_API.xIMUserial.#ctor">
             <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.QuaternionData"/> class.
+            Initializes a new instance of the <see cref="T:xIMUserial"/> class.
             </summary>
         </member>
-        <member name="M:xIMU_API.QuaternionData.#ctor(System.Single[])">
+        <member name="M:xIMU_API.xIMUserial.#ctor(System.String)">
             <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.QuaternionData"/> class.
+            Initializes a new instance of the <see cref="T:xIMUserial"/> class.
             </summary>
-            <param name="quaternion">
-            Quaternion. Must of 4 elements. Each element must be of value -1 to +1.
+            <param name="portName">
+            Name of the port the x-IMU appears as (for example, COM1).
             </param>
         </member>
-        <member name="M:xIMU_API.QuaternionData.Rad2Deg(System.Single)">
+        <member name="M:xIMU_API.xIMUserial.Open">
             <summary>
-            Converts from radians to degrees.
+            Opens a new serial port communication and resets statistics counters.
             </summary>
-            <param name="radians">
-            Angular quantity in radians.
+        </member>
+        <member name="M:xIMU_API.xIMUserial.Close">
+            <summary>
+            Closes the port connection.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.xIMUserial.GetPortNames">
+            <summary>
+            Gets an array of serial port names for the current computer.  Invalid characters are removed.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.xIMUserial.SendCommandPacket(xIMU_API.CommandCodes)">
+            <summary>
+            Sends command packet.
+            </summary>
+            <param name="commandCode">
+            Command data to be sent.
             </param> 
-            <returns>
-            Angular quantity in degrees.
-            </returns>
         </member>
-        <member name="M:xIMU_API.QuaternionData.ConvertToConjugate">
+        <member name="M:xIMU_API.xIMUserial.SendReadRegisterPacket(xIMU_API.RegisterData)">
             <summary>
-            Returns the quaternion conjugate.
+            Sends read register packet.
             </summary>
-            <returns>
-            Quaternion conjugate.
-            </returns>
+            <param name="registerData">
+            Register data containing register address.
+            </param>
         </member>
-        <member name="M:xIMU_API.QuaternionData.ConvertToRotationMatrix">
+        <member name="M:xIMU_API.xIMUserial.SendWriteRegisterPacket(xIMU_API.RegisterData)">
             <summary>
-            Converts data to rotation matrix.
+            Sends write register packet.
             </summary>
-            <remarks>
-            Elements 0 to 2 represent columns 1 to 3 of row 1.
-            Elements 3 to 5 represent columns 1 to 3 of row 2.
-            Elements 6 to 8 represent columns 1 to 3 of row 3.
-            </remarks>
+            <param name="registerData">
+            Register data containing register address and value.
+            </param>
         </member>
-        <member name="M:xIMU_API.QuaternionData.ConvertToEulerAngles">
+        <member name="M:xIMU_API.xIMUserial.SendReadDateTimePacket">
             <summary>
-            Converts data to XYZ Euler angles (in degrees).
+            Sends read date/time packet.
             </summary>
         </member>
-        <member name="M:xIMU_API.QuaternionData.ConvertToCSV">
+        <member name="M:xIMU_API.xIMUserial.SendWriteDateTimePacket(xIMU_API.DateTimeData)">
             <summary>
-            Converts data to string of Comma Separated Variables.
+            Sends write date/time packet.
+            </summary>
+            <param name="dateTimeData">
+            Date/time data to be written.
+            </param>
+        </member>
+        <member name="M:xIMU_API.xIMUserial.SendDigitalIOPacket(xIMU_API.DigitalIOdata)">
+            <summary>
+            Sends digital IO packet to set digital output states.
+            </summary>
+            <param name="digitalIOData">
+            <see cref="!:DigitalIOData"/> instance containing output states to be set.
+            </param>
+        </member>
+        <member name="M:xIMU_API.xIMUserial.SendByteArray(System.Byte[])">
+            <summary>
+            Sends byte array to serial port and increments the sent packets counter.
+            </summary>
+            <param name="byteArray">
+            Byte array to be sent to serial port.
+            </param>
+        </member>
+        <member name="M:xIMU_API.xIMUserial.serialPort_DataReceived(System.Object,System.IO.Ports.SerialDataReceivedEventArgs)">
+            <summary>
+            Data received event to decode packet and call associated data object received event.  Decoding exceptions handled and ignored.
             </summary>
         </member>
-        <member name="M:xIMU_API.QuaternionData.ConvertToRotationMatrixCSV">
+        <member name="P:xIMU_API.xIMUserial.PortName">
             <summary>
-            Converts data to string of Comma Separated Variables representaing the elements of a rotation matrix.
-            </summary>
-            <remarks>
-            First to third values represent columns 1 to 3 of row 1.
-            Forth to fifth values represent columns 1 to 3 of row 2.
-            Sixth to eighth values represent columns 1 to 3 of row 3.
-            </remarks>
-        </member>
-        <member name="M:xIMU_API.QuaternionData.ConvertToEulerAnglesCSV">
-            <summary>
-            Converts data to string of Comma Separated Variables representaing the XYZ Euler angles (in degrees).
+            Gets or sets the name of the serial port.
             </summary>
         </member>
-        <member name="P:xIMU_API.QuaternionData.Quaternion">
+        <member name="P:xIMU_API.xIMUserial.IsOpen">
             <summary>
-            Quaternion. Must of 4 elements. Each element must be of value -1 to +1.  Vector will be normalised.
+            Gets a value indicated the open or closed value of the serial port.
             </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid quaternion specified.
-            </exception>
+        </member>
+        <member name="P:xIMU_API.xIMUserial.PacketCounter">
+            <summary>
+            Gets the packet count data object.
+            </summary>
         </member>
         <member name="T:xIMU_API.PacketConstruction">
             <summary>
@@ -199,261 +217,47 @@
             MSB and LSB combined to create a short.
             </returns>
         </member>
-        <member name="T:xIMU_API.DigitalIOdata">
+        <member name="T:xIMU_API.FixedFloat">
             <summary>
-            Digital I/O data class.
+            16-bit fixed-point / floating-point conversion class.
             </summary>
         </member>
-        <member name="M:xIMU_API.DigitalIOdata.#ctor">
+        <member name="M:xIMU_API.FixedFloat.FixedToFloat(System.Int16,xIMU_API.Qvals)">
             <summary>
-            Initialises a new instance of the <see cref="!:DigitalIOData"/> class.
+            Returns floating-point value from specified 16-bit fixed-point.
             </summary>
-        </member>
-        <member name="M:xIMU_API.DigitalIOdata.#ctor(xIMU_API.DigitalIOdata.PortData)">
-            <summary>
-            Initialises a new instance of the <see cref="!:DigitalIOData"/> class.
-            </summary>
-            <param name="state">
-            State of the digital I/O port.  true (1) = logic high, false (0) = logic low.
+            <param name="fixedValue">
+            16-bit fixed-point value.
             </param>
-        </member>
-        <member name="M:xIMU_API.DigitalIOdata.#ctor(xIMU_API.DigitalIOdata.PortData,xIMU_API.DigitalIOdata.PortData)">
-            <summary>
-            Initialises a new instance of the <see cref="!:DigitalIOData"/> class.
-            </summary>     
-            <param name="isInput">
-            Mode of the digital I/O port.  true (1) = input, false (0) = output.
+            <param name="q">
+            Number of fraction bits. See <see cref="T:xIMU_API.Qvals"/>.
             </param>
-            <param name="state">
-            State of the digital I/O port.  true (1) = logic high, false (0) = logic low.
-            </param>
+            <returns>
+            Floating-point number.
+            </returns>
         </member>
-        <member name="M:xIMU_API.DigitalIOdata.ConvertToCSV">
+        <member name="M:xIMU_API.FixedFloat.FloatToFixed(System.Single,xIMU_API.Qvals)">
             <summary>
-            Converts data to string of Comma Separated Variables.
+            Returns 16-bit fixed-point value from specified floating-point value with saturation.
             </summary>
-        </member>
-        <member name="P:xIMU_API.DigitalIOdata.IsInput">
-            <summary>
-            Mode of the digital I/O port.  true (1) = input, false (0) = output.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.DigitalIOdata.State">
-            <summary>
-            State of the digital I/O port.  true (1) = logic high, false (0) = logic low.
-            </summary>
-        </member>
-        <member name="T:xIMU_API.DigitalIOdata.PortData">
-            <summary>
-            Port data class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.DigitalIOdata.PortData.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:xIMU_API.DigitalIOdata.PortData"/> class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.DigitalIOdata.PortData.#ctor(System.Byte)">
-            <summary>
-            Initializes a new instance of the <see cref="T:xIMU_API.DigitalIOdata.PortData"/> class.
-            </summary>
-            <param name="portByte">
-            8-bit port value.  lsb = AX0, msb = AX7.
-            </param>
-        </member>
-        <member name="M:xIMU_API.DigitalIOdata.PortData.#ctor(System.Boolean[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:xIMU_API.DigitalIOdata.PortData"/> class.
-            </summary>
-            <param name="portBits">
-            8-bit port value.  bits[0] = AX0 (lsb), bits[7] = AX7 (msb).
-            </param>
-        </member>
-        <member name="P:xIMU_API.DigitalIOdata.PortData.AX0">
-            <summary>
-            Channel AX0.  lsb of 8-bit port.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.DigitalIOdata.PortData.AX1">
-            <summary>
-            Channel AX1.  2nd lsb of 8-bit port.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.DigitalIOdata.PortData.AX2">
-            <summary>
-            Channel AX2.  3rd lsb of 8-bit port.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.DigitalIOdata.PortData.AX3">
-            <summary>
-            Channel AX3.  4th lsb of 8-bit port.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.DigitalIOdata.PortData.AX4">
-            <summary>
-            Channel AX4.  5th lsb of 8-bit port.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.DigitalIOdata.PortData.AX5">
-            <summary>
-            Channel AX5.  6th lsb of 8-bit port.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.DigitalIOdata.PortData.AX6">
-            <summary>
-            Channel AX6.  7th lsb of 8-bit port.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.DigitalIOdata.PortData.AX7">
-            <summary>
-            Channel AX7.  msb of 8-bit port.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.DigitalIOdata.PortData.PortBits">
-            <summary>
-            8-bit port value.  bits[0] = AX0 (lsb), bits[7] = AX7 (msb).
-            </summary>
-        </member>
-        <member name="P:xIMU_API.DigitalIOdata.PortData.PortByte">
-            <summary>
-            8-bit port value.  lsb = AX0, msb = AX7.
-            </summary>
-        </member>
-        <member name="T:xIMU_API.CalBattThermData">
-            <summary>
-            Calibrated battery voltage thermometer data class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.CalBattThermData.#ctor">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.CalBattThermData"/> class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.CalBattThermData.#ctor(System.Single,System.Single)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.CalBattThermData"/> class.
-            </summary>
-            <param name="batteryVoltage">
-            Calibrated battery voltage data in volts.
-            </param>
-            <param name="thermometer">
-            Calibrated thermometer data degrees Celsius.
-            </param>
-        </member>
-        <member name="M:xIMU_API.CalBattThermData.ConvertToCSV">
-            <summary>
-            Converts data to string of Comma Separated Variables.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.CalBattThermData.BatteryVoltage">
-            <summary>
-            Calibrated battery voltage data in volts.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.CalBattThermData.Thermometer">
-            <summary>
-            Calibrated thermometer data degrees Celsius.
-            </summary>
-        </member>
-        <member name="T:xIMU_API.RegisterData">
-            <summary>
-            Register data class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.RegisterData.#ctor">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.RegisterData.#ctor(System.UInt16)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
-            </summary>
-            <param name="address">
-            16-bit register address. Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
-            </param>
-        </member>
-        <member name="M:xIMU_API.RegisterData.#ctor(xIMU_API.RegisterAddresses)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
-            </summary>
-            <param name="registerAddress">
-            Register address. See <see cref="T:xIMU_API.RegisterAddresses"/>.
-            </param>
-        </member>
-        <member name="M:xIMU_API.RegisterData.#ctor(System.UInt16,System.Single)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
-            </summary>
-            <param name="address">
-            16-bit register address. Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
-            </param>
             <param name="floatValue">
             Floating-point representation of 16-bit fixed-point value.
             </param>
-        </member>
-        <member name="M:xIMU_API.RegisterData.#ctor(xIMU_API.RegisterAddresses,System.Single)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
-            </summary>
-            <param name="registerAddress">
-            Register address. See <see cref="T:xIMU_API.RegisterAddresses"/>.
-            </param>
-            <param name="floatValue">
-            Floating-point representation of 16-bit fixed-point value.
-            </param>
-        </member>
-        <member name="M:xIMU_API.RegisterData.#ctor(System.UInt16,System.UInt16)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
-            </summary>
-            <param name="address">
-            16-bit register address. Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
-            </param>
-            <param name="value">
-            16-bit register value.
-            </param>
-        </member>
-        <member name="M:xIMU_API.RegisterData.LookupQval">
-            <summary>
-            Returns <see cref="T:xIMU_API.Qvals"/> associated with register address.
-            </summary>
-            <returns>
-            <see cref="T:xIMU_API.Qvals"/> associated with register address.
-            </returns>
-        </member>
-        <member name="M:xIMU_API.RegisterData.LookupQval(System.UInt16)">
-            <summary>
-            Returns <see cref="T:xIMU_API.Qvals"/> associated with specified register address.
-            </summary>
-            <param name="address">
-            Register address.
+            <param name="q">
+            Number of fraction bits. See <see cref="T:xIMU_API.Qvals"/>.
             </param>
             <returns>
-            <see cref="T:xIMU_API.Qvals"/> associated with register address.
+            16-bit fixed-point value.
             </returns>
-            <exception cref="T:System.Exception">
-            Thrown if register address does not have associated <see cref="T:xIMU_API.Qvals"/>.
-            </exception>
-        </member>
-        <member name="P:xIMU_API.RegisterData.Address">
-            <summary>
-            16-bit register address.  Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.RegisterData.Value">
-            <summary>
-            16-bit register value.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.RegisterData.floatValue">
-            <summary>
-            Floating-point representation of 16-bit register value when interpreted as fixed-point.
-            </summary>
         </member>
         <member name="T:xIMU_API.RawInertialMagData">
             <summary>
             Raw gyroscope, accelerometer and magnetometer data class.
+            </summary>
+        </member>
+        <member name="T:xIMU_API.xIMUdata">
+            <summary>
+            x-IMU data class.  Base class cannot be instantiated.
             </summary>
         </member>
         <member name="M:xIMU_API.RawInertialMagData.#ctor">
@@ -636,45 +440,6 @@
             A matching enumeration exists in firmware source.
             </remarks> 
         </member>
-        <member name="T:xIMU_API.ErrorData">
-            <summary>
-            Error data class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.ErrorData.#ctor">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.ErrorData"/> class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.ErrorData.#ctor(xIMU_API.ErrorCodes)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.ErrorData"/> class.
-            </summary>
-            <param name="errorCode">
-            Error code. See <see cref="T:xIMU_API.ErrorCodes"/>.
-            </param>
-        </member>
-        <member name="M:xIMU_API.ErrorData.#ctor(System.UInt16)">
-            <summary>
-            Initialises a new instance of the ErrorData class.
-            </summary>
-            <param name="errorCode">
-            Error code. Must be defined in <see cref="T:xIMU_API.ErrorCodes"/>.
-            </param>
-        </member>
-        <member name="M:xIMU_API.ErrorData.GetMessage">
-            <summary>
-            Message associated with error code.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.ErrorData.ErrorCode">
-            <summary>
-            Error code. Must be defined in <see cref="T:xIMU_API.ErrorCodes"/>.
-            </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid error code specifed.
-            </exception>
-        </member>
         <member name="T:xIMU_API.CalInertialMagData">
             <summary>
             Calibrated gyroscope, accelerometer and magnetometer data class.
@@ -719,303 +484,220 @@
             Calibrated magnetometer data in Gauss.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
             </summary>
         </member>
-        <member name="T:xIMU_API.xIMUfile">
+        <member name="T:xIMU_API.RegisterData">
             <summary>
-            x-IMU file class.
+            Register data class.
             </summary>
         </member>
-        <member name="M:xIMU_API.xIMUfile.#ctor(System.String)">
+        <member name="M:xIMU_API.RegisterData.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:xIMUfile"/> class. Opens or creates file.
+            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
             </summary>
-            <param name="filePath">
-            Path of file.
+        </member>
+        <member name="M:xIMU_API.RegisterData.#ctor(System.UInt16)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
+            </summary>
+            <param name="address">
+            16-bit register address. Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
             </param>
         </member>
-        <member name="M:xIMU_API.xIMUfile.#ctor(System.String,System.Boolean)">
+        <member name="M:xIMU_API.RegisterData.#ctor(xIMU_API.RegisterAddresses)">
             <summary>
-            Initializes a new instance of the <see cref="T:xIMUfile"/> class.
+            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
             </summary>
-            <param name="filePath">
-            Path of file.
-            </param>
-            <param name="overwrite">
-            Enable overwrite. true = create or overwrite file, false = create or open file.
+            <param name="registerAddress">
+            Register address. See <see cref="T:xIMU_API.RegisterAddresses"/>.
             </param>
         </member>
-        <member name="M:xIMU_API.xIMUfile.Close">
+        <member name="M:xIMU_API.RegisterData.#ctor(System.UInt16,System.Single)">
             <summary>
-            Closes the file.
+            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
             </summary>
-        </member>
-        <member name="M:xIMU_API.xIMUfile.WriteWriteRegisterPacket(xIMU_API.RegisterData)">
-            <summary>
-            Writes write register packet.
-            </summary>
-            <param name="registerData">
-            Register data containing register address and value.
+            <param name="address">
+            16-bit register address. Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
+            </param>
+            <param name="floatValue">
+            Floating-point representation of 16-bit fixed-point value.
             </param>
         </member>
-        <member name="M:xIMU_API.xIMUfile.WriteByteArray(System.Byte[])">
+        <member name="M:xIMU_API.RegisterData.#ctor(xIMU_API.RegisterAddresses,System.Single)">
             <summary>
-            Writes byte array to serial port and increments the sent packets counter.
+            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
             </summary>
-            <param name="byteArray">
-            Byte array to be sent to serial port.
+            <param name="registerAddress">
+            Register address. See <see cref="T:xIMU_API.RegisterAddresses"/>.
+            </param>
+            <param name="floatValue">
+            Floating-point representation of 16-bit fixed-point value.
             </param>
         </member>
-        <member name="M:xIMU_API.xIMUfile.Read">
+        <member name="M:xIMU_API.RegisterData.#ctor(System.UInt16,System.UInt16)">
             <summary>
-            Reads file.  Interpreted packets are provided in individual packet read events.
+            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
             </summary>
-        </member>
-        <member name="P:xIMU_API.xIMUfile.FilePath">
-            <summary>
-            Gets the file path.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.xIMUfile.PacketCounter">
-            <summary>
-            Gets the packet count data object.
-            </summary>
-        </member>
-        <member name="T:xIMU_API.DateTimeData">
-            <summary>
-            Date/Time data class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.DateTimeData.#ctor">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.DateTimeData"/> class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.DateTimeData.#ctor(System.DateTime)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.DateTimeData"/> class.
-            </summary>
-            <param name="dateTime">
-            <see cref="T:System.DateTime"/> object.
+            <param name="address">
+            16-bit register address. Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
+            </param>
+            <param name="value">
+            16-bit register value.
             </param>
         </member>
-        <member name="M:xIMU_API.DateTimeData.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:xIMU_API.RegisterData.LookupQval">
             <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.DateTimeData"/> class.
+            Returns <see cref="T:xIMU_API.Qvals"/> associated with register address.
             </summary>
-            <param name="year">
-            Year. Must be of value 2000 2099.
-            </param>
-            <param name="month">
-            Month. Must be of value 1 to 12.
-            </param>
-            <param name="date">
-            Date. Must be of value 1 to 31.
-            </param>
-            <param name="hours">
-            Hours. Must be of value 0 to 23.
-            </param>
-            <param name="minutes">
-            Minutes. Must be of value 0 to 59.
-            </param>
-            <param name="seconds">
-            Seconds. Must be of value 0 to 59.
-            </param>
+            <returns>
+            <see cref="T:xIMU_API.Qvals"/> associated with register address.
+            </returns>
         </member>
-        <member name="P:xIMU_API.DateTimeData.Year">
+        <member name="M:xIMU_API.RegisterData.LookupQval(System.UInt16)">
             <summary>
-            Year. Must be of value 2000 2099.
+            Returns <see cref="T:xIMU_API.Qvals"/> associated with specified register address.
             </summary>
+            <param name="address">
+            Register address.
+            </param>
+            <returns>
+            <see cref="T:xIMU_API.Qvals"/> associated with register address.
+            </returns>
             <exception cref="T:System.Exception">
-            Thrown if invalid year specified.
+            Thrown if register address does not have associated <see cref="T:xIMU_API.Qvals"/>.
             </exception>
         </member>
-        <member name="P:xIMU_API.DateTimeData.Month">
+        <member name="P:xIMU_API.RegisterData.Address">
             <summary>
-            Month. Must be of value 1 to 12.
-            </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid month specified.
-            </exception>
-        </member>
-        <member name="P:xIMU_API.DateTimeData.Date">
-            <summary>
-            Date. Must be of value 1 to 31.
-            </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid date specified.
-            </exception>
-        </member>
-        <member name="P:xIMU_API.DateTimeData.Hours">
-            <summary>
-            Hours. Must be of value 0 to 23.
-            </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid hours specified.
-            </exception>
-        </member>
-        <member name="P:xIMU_API.DateTimeData.Minutes">
-            <summary>
-            Minutes. Must be of value 0 to 59.
-            </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid minutes specified.
-            </exception>
-        </member>
-        <member name="P:xIMU_API.DateTimeData.Seconds">
-            <summary>
-            Seconds. Must be of value 0 to 59.
-            </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid seconds specified.
-            </exception>
-        </member>
-        <member name="P:xIMU_API.DateTimeData.DateTimeObject">
-            <summary>
-            <see cref="T:System.DateTime"/> object representation of data.
+            16-bit register address.  Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
             </summary>
         </member>
-        <member name="T:xIMU_API.CommandData">
+        <member name="P:xIMU_API.RegisterData.Value">
             <summary>
-            Command data class.
+            16-bit register value.
             </summary>
         </member>
-        <member name="M:xIMU_API.CommandData.#ctor">
+        <member name="P:xIMU_API.RegisterData.floatValue">
             <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.CommandData"/> class.
+            Floating-point representation of 16-bit register value when interpreted as fixed-point.
             </summary>
         </member>
-        <member name="M:xIMU_API.CommandData.#ctor(xIMU_API.CommandCodes)">
+        <member name="T:xIMU_API.DigitalIOdata">
             <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.CommandData"/> class.
+            Digital I/O data class.
             </summary>
-            <param name="commandCode">
-            Command code. See <see cref="T:xIMU_API.CommandCodes"/>.
+        </member>
+        <member name="M:xIMU_API.DigitalIOdata.#ctor">
+            <summary>
+            Initialises a new instance of the <see cref="!:DigitalIOData"/> class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.DigitalIOdata.#ctor(xIMU_API.DigitalIOdata.PortData)">
+            <summary>
+            Initialises a new instance of the <see cref="!:DigitalIOData"/> class.
+            </summary>
+            <param name="state">
+            State of the digital I/O port.  true (1) = logic high, false (0) = logic low.
             </param>
         </member>
-        <member name="M:xIMU_API.CommandData.#ctor(System.UInt16)">
+        <member name="M:xIMU_API.DigitalIOdata.#ctor(xIMU_API.DigitalIOdata.PortData,xIMU_API.DigitalIOdata.PortData)">
             <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.CommandData"/> class.
-            </summary>
-            <param name="commandCode">
-            Command code. Must be defined in <see cref="T:xIMU_API.CommandCodes"/>.
+            Initialises a new instance of the <see cref="!:DigitalIOData"/> class.
+            </summary>     
+            <param name="isInput">
+            Mode of the digital I/O port.  true (1) = input, false (0) = output.
+            </param>
+            <param name="state">
+            State of the digital I/O port.  true (1) = logic high, false (0) = logic low.
             </param>
         </member>
-        <member name="M:xIMU_API.CommandData.GetMessage">
+        <member name="M:xIMU_API.DigitalIOdata.ConvertToCSV">
             <summary>
-            Gets message associated with command code.
+            Converts data to string of Comma Separated Variables.
             </summary>
         </member>
-        <member name="P:xIMU_API.CommandData.CommandCode">
+        <member name="P:xIMU_API.DigitalIOdata.IsInput">
             <summary>
-            Command code.  Must be defined in <see cref="T:xIMU_API.CommandCodes"/>.
-            </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid command code specifed.
-            </exception>
-        </member>
-        <member name="T:xIMU_API.xIMUserial">
-            <summary>
-            x-IMU serial class.
+            Mode of the digital I/O port.  true (1) = input, false (0) = output.
             </summary>
         </member>
-        <member name="M:xIMU_API.xIMUserial.#ctor">
+        <member name="P:xIMU_API.DigitalIOdata.State">
             <summary>
-            Initializes a new instance of the <see cref="T:xIMUserial"/> class.
+            State of the digital I/O port.  true (1) = logic high, false (0) = logic low.
             </summary>
         </member>
-        <member name="M:xIMU_API.xIMUserial.#ctor(System.String)">
+        <member name="T:xIMU_API.DigitalIOdata.PortData">
             <summary>
-            Initializes a new instance of the <see cref="T:xIMUserial"/> class.
+            Port data class.
             </summary>
-            <param name="portName">
-            Name of the port the x-IMU appears as (for example, COM1).
+        </member>
+        <member name="M:xIMU_API.DigitalIOdata.PortData.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:xIMU_API.DigitalIOdata.PortData"/> class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.DigitalIOdata.PortData.#ctor(System.Byte)">
+            <summary>
+            Initializes a new instance of the <see cref="T:xIMU_API.DigitalIOdata.PortData"/> class.
+            </summary>
+            <param name="portByte">
+            8-bit port value.  lsb = AX0, msb = AX7.
             </param>
         </member>
-        <member name="M:xIMU_API.xIMUserial.Open">
+        <member name="M:xIMU_API.DigitalIOdata.PortData.#ctor(System.Boolean[])">
             <summary>
-            Opens a new serial port communication and resets statistics counters.
+            Initializes a new instance of the <see cref="T:xIMU_API.DigitalIOdata.PortData"/> class.
             </summary>
-        </member>
-        <member name="M:xIMU_API.xIMUserial.Close">
-            <summary>
-            Closes the port connection.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.xIMUserial.GetPortNames">
-            <summary>
-            Gets an array of serial port names for the current computer.  Invalid characters are removed.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.xIMUserial.SendCommandPacket(xIMU_API.CommandCodes)">
-            <summary>
-            Sends command packet.
-            </summary>
-            <param name="commandCode">
-            Command data to be sent.
-            </param> 
-        </member>
-        <member name="M:xIMU_API.xIMUserial.SendReadRegisterPacket(xIMU_API.RegisterData)">
-            <summary>
-            Sends read register packet.
-            </summary>
-            <param name="registerData">
-            Register data containing register address.
+            <param name="portBits">
+            8-bit port value.  bits[0] = AX0 (lsb), bits[7] = AX7 (msb).
             </param>
         </member>
-        <member name="M:xIMU_API.xIMUserial.SendWriteRegisterPacket(xIMU_API.RegisterData)">
+        <member name="P:xIMU_API.DigitalIOdata.PortData.AX0">
             <summary>
-            Sends write register packet.
-            </summary>
-            <param name="registerData">
-            Register data containing register address and value.
-            </param>
-        </member>
-        <member name="M:xIMU_API.xIMUserial.SendReadDateTimePacket">
-            <summary>
-            Sends read date/time packet.
+            Channel AX0.  lsb of 8-bit port.
             </summary>
         </member>
-        <member name="M:xIMU_API.xIMUserial.SendWriteDateTimePacket(xIMU_API.DateTimeData)">
+        <member name="P:xIMU_API.DigitalIOdata.PortData.AX1">
             <summary>
-            Sends write date/time packet.
-            </summary>
-            <param name="dateTimeData">
-            Date/time data to be written.
-            </param>
-        </member>
-        <member name="M:xIMU_API.xIMUserial.SendDigitalIOPacket(xIMU_API.DigitalIOdata)">
-            <summary>
-            Sends digital IO packet to set digital output states.
-            </summary>
-            <param name="digitalIOData">
-            <see cref="!:DigitalIOData"/> instance containing output states to be set.
-            </param>
-        </member>
-        <member name="M:xIMU_API.xIMUserial.SendByteArray(System.Byte[])">
-            <summary>
-            Sends byte array to serial port and increments the sent packets counter.
-            </summary>
-            <param name="byteArray">
-            Byte array to be sent to serial port.
-            </param>
-        </member>
-        <member name="M:xIMU_API.xIMUserial.serialPort_DataReceived(System.Object,System.IO.Ports.SerialDataReceivedEventArgs)">
-            <summary>
-            Data received event to decode packet and call associated data object received event.  Decoding exceptions handled and ignored.
+            Channel AX1.  2nd lsb of 8-bit port.
             </summary>
         </member>
-        <member name="P:xIMU_API.xIMUserial.PortName">
+        <member name="P:xIMU_API.DigitalIOdata.PortData.AX2">
             <summary>
-            Gets or sets the name of the serial port.
+            Channel AX2.  3rd lsb of 8-bit port.
             </summary>
         </member>
-        <member name="P:xIMU_API.xIMUserial.IsOpen">
+        <member name="P:xIMU_API.DigitalIOdata.PortData.AX3">
             <summary>
-            Gets a value indicated the open or closed value of the serial port.
+            Channel AX3.  4th lsb of 8-bit port.
             </summary>
         </member>
-        <member name="P:xIMU_API.xIMUserial.PacketCounter">
+        <member name="P:xIMU_API.DigitalIOdata.PortData.AX4">
             <summary>
-            Gets the packet count data object.
+            Channel AX4.  5th lsb of 8-bit port.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.DigitalIOdata.PortData.AX5">
+            <summary>
+            Channel AX5.  6th lsb of 8-bit port.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.DigitalIOdata.PortData.AX6">
+            <summary>
+            Channel AX6.  7th lsb of 8-bit port.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.DigitalIOdata.PortData.AX7">
+            <summary>
+            Channel AX7.  msb of 8-bit port.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.DigitalIOdata.PortData.PortBits">
+            <summary>
+            8-bit port value.  bits[0] = AX0 (lsb), bits[7] = AX7 (msb).
+            </summary>
+        </member>
+        <member name="P:xIMU_API.DigitalIOdata.PortData.PortByte">
+            <summary>
+            8-bit port value.  lsb = AX0, msb = AX7.
             </summary>
         </member>
         <member name="T:xIMU_API.RawBattThermData">
@@ -1102,6 +784,227 @@
             <returns>
             The left shifted byte array.
             </returns> 
+        </member>
+        <member name="T:xIMU_API.xIMUfile">
+            <summary>
+            x-IMU file class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.xIMUfile.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:xIMUfile"/> class. Opens or creates file.
+            </summary>
+            <param name="filePath">
+            Path of file.
+            </param>
+        </member>
+        <member name="M:xIMU_API.xIMUfile.#ctor(System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:xIMUfile"/> class.
+            </summary>
+            <param name="filePath">
+            Path of file.
+            </param>
+            <param name="overwrite">
+            Enable overwrite. true = create or overwrite file, false = create or open file.
+            </param>
+        </member>
+        <member name="M:xIMU_API.xIMUfile.Close">
+            <summary>
+            Closes the file.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.xIMUfile.WriteWriteRegisterPacket(xIMU_API.RegisterData)">
+            <summary>
+            Writes write register packet.
+            </summary>
+            <param name="registerData">
+            Register data containing register address and value.
+            </param>
+        </member>
+        <member name="M:xIMU_API.xIMUfile.WriteByteArray(System.Byte[])">
+            <summary>
+            Writes byte array to serial port and increments the sent packets counter.
+            </summary>
+            <param name="byteArray">
+            Byte array to be sent to serial port.
+            </param>
+        </member>
+        <member name="M:xIMU_API.xIMUfile.Read">
+            <summary>
+            Reads file.  Interpreted packets are provided in individual packet read events.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.xIMUfile.FilePath">
+            <summary>
+            Gets the file path.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.xIMUfile.PacketCounter">
+            <summary>
+            Gets the packet count data object.
+            </summary>
+        </member>
+        <member name="T:xIMU_API.CommandData">
+            <summary>
+            Command data class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.CommandData.#ctor">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.CommandData"/> class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.CommandData.#ctor(xIMU_API.CommandCodes)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.CommandData"/> class.
+            </summary>
+            <param name="commandCode">
+            Command code. See <see cref="T:xIMU_API.CommandCodes"/>.
+            </param>
+        </member>
+        <member name="M:xIMU_API.CommandData.#ctor(System.UInt16)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.CommandData"/> class.
+            </summary>
+            <param name="commandCode">
+            Command code. Must be defined in <see cref="T:xIMU_API.CommandCodes"/>.
+            </param>
+        </member>
+        <member name="M:xIMU_API.CommandData.GetMessage">
+            <summary>
+            Gets message associated with command code.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.CommandData.CommandCode">
+            <summary>
+            Command code.  Must be defined in <see cref="T:xIMU_API.CommandCodes"/>.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid command code specifed.
+            </exception>
+        </member>
+        <member name="T:xIMU_API.QuaternionData">
+            <summary>
+            Quaternion data class.
+            </summary>
+            <remarks>
+            See http://www.x-io.co.uk/res/doc/quaternions.pdf for more information on quaternions.
+            </remarks>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.#ctor">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.QuaternionData"/> class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.#ctor(System.Single[])">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.QuaternionData"/> class.
+            </summary>
+            <param name="quaternion">
+            Quaternion. Must of 4 elements. Each element must be of value -1 to +1.
+            </param>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.Rad2Deg(System.Single)">
+            <summary>
+            Converts from radians to degrees.
+            </summary>
+            <param name="radians">
+            Angular quantity in radians.
+            </param> 
+            <returns>
+            Angular quantity in degrees.
+            </returns>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.ConvertToConjugate">
+            <summary>
+            Returns the quaternion conjugate.
+            </summary>
+            <returns>
+            Quaternion conjugate.
+            </returns>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.ConvertToRotationMatrix">
+            <summary>
+            Converts data to rotation matrix.
+            </summary>
+            <remarks>
+            Elements 0 to 2 represent columns 1 to 3 of row 1.
+            Elements 3 to 5 represent columns 1 to 3 of row 2.
+            Elements 6 to 8 represent columns 1 to 3 of row 3.
+            </remarks>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.ConvertToEulerAngles">
+            <summary>
+            Converts data to XYZ Euler angles (in degrees).
+            </summary>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.ConvertToCSV">
+            <summary>
+            Converts data to string of Comma Separated Variables.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.ConvertToRotationMatrixCSV">
+            <summary>
+            Converts data to string of Comma Separated Variables representaing the elements of a rotation matrix.
+            </summary>
+            <remarks>
+            First to third values represent columns 1 to 3 of row 1.
+            Forth to fifth values represent columns 1 to 3 of row 2.
+            Sixth to eighth values represent columns 1 to 3 of row 3.
+            </remarks>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.ConvertToEulerAnglesCSV">
+            <summary>
+            Converts data to string of Comma Separated Variables representaing the XYZ Euler angles (in degrees).
+            </summary>
+        </member>
+        <member name="P:xIMU_API.QuaternionData.Quaternion">
+            <summary>
+            Quaternion. Must of 4 elements. Each element must be of value -1 to +1.  Vector will be normalised.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid quaternion specified.
+            </exception>
+        </member>
+        <member name="T:xIMU_API.ErrorData">
+            <summary>
+            Error data class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.ErrorData.#ctor">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.ErrorData"/> class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.ErrorData.#ctor(xIMU_API.ErrorCodes)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.ErrorData"/> class.
+            </summary>
+            <param name="errorCode">
+            Error code. See <see cref="T:xIMU_API.ErrorCodes"/>.
+            </param>
+        </member>
+        <member name="M:xIMU_API.ErrorData.#ctor(System.UInt16)">
+            <summary>
+            Initialises a new instance of the ErrorData class.
+            </summary>
+            <param name="errorCode">
+            Error code. Must be defined in <see cref="T:xIMU_API.ErrorCodes"/>.
+            </param>
+        </member>
+        <member name="M:xIMU_API.ErrorData.GetMessage">
+            <summary>
+            Message associated with error code.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.ErrorData.ErrorCode">
+            <summary>
+            Error code. Must be defined in <see cref="T:xIMU_API.ErrorCodes"/>.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid error code specifed.
+            </exception>
         </member>
         <member name="T:xIMU_API.PacketCount">
             <summary>
@@ -1232,38 +1135,135 @@
             Gets or sets the number of digital I/O data packets sent.
             </summary>
         </member>
-        <member name="T:xIMU_API.FixedFloat">
+        <member name="T:xIMU_API.CalBattThermData">
             <summary>
-            16-bit fixed-point / floating-point conversion class.
+            Calibrated battery voltage thermometer data class.
             </summary>
         </member>
-        <member name="M:xIMU_API.FixedFloat.FixedToFloat(System.Int16,xIMU_API.Qvals)">
+        <member name="M:xIMU_API.CalBattThermData.#ctor">
             <summary>
-            Returns floating-point value from specified 16-bit fixed-point.
+            Initialises a new instance of the <see cref="T:xIMU_API.CalBattThermData"/> class.
             </summary>
-            <param name="fixedValue">
-            16-bit fixed-point value.
-            </param>
-            <param name="q">
-            Number of fraction bits. See <see cref="T:xIMU_API.Qvals"/>.
-            </param>
-            <returns>
-            Floating-point number.
-            </returns>
         </member>
-        <member name="M:xIMU_API.FixedFloat.FloatToFixed(System.Single,xIMU_API.Qvals)">
+        <member name="M:xIMU_API.CalBattThermData.#ctor(System.Single,System.Single)">
             <summary>
-            Returns 16-bit fixed-point value from specified floating-point value with saturation.
+            Initialises a new instance of the <see cref="T:xIMU_API.CalBattThermData"/> class.
             </summary>
-            <param name="floatValue">
-            Floating-point representation of 16-bit fixed-point value.
+            <param name="batteryVoltage">
+            Calibrated battery voltage data in volts.
             </param>
-            <param name="q">
-            Number of fraction bits. See <see cref="T:xIMU_API.Qvals"/>.
+            <param name="thermometer">
+            Calibrated thermometer data degrees Celsius.
             </param>
-            <returns>
-            16-bit fixed-point value.
-            </returns>
+        </member>
+        <member name="M:xIMU_API.CalBattThermData.ConvertToCSV">
+            <summary>
+            Converts data to string of Comma Separated Variables.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.CalBattThermData.BatteryVoltage">
+            <summary>
+            Calibrated battery voltage data in volts.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.CalBattThermData.Thermometer">
+            <summary>
+            Calibrated thermometer data degrees Celsius.
+            </summary>
+        </member>
+        <member name="T:xIMU_API.DateTimeData">
+            <summary>
+            Date/Time data class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.DateTimeData.#ctor">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.DateTimeData"/> class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.DateTimeData.#ctor(System.DateTime)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.DateTimeData"/> class.
+            </summary>
+            <param name="dateTime">
+            <see cref="T:System.DateTime"/> object.
+            </param>
+        </member>
+        <member name="M:xIMU_API.DateTimeData.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.DateTimeData"/> class.
+            </summary>
+            <param name="year">
+            Year. Must be of value 2000 2099.
+            </param>
+            <param name="month">
+            Month. Must be of value 1 to 12.
+            </param>
+            <param name="date">
+            Date. Must be of value 1 to 31.
+            </param>
+            <param name="hours">
+            Hours. Must be of value 0 to 23.
+            </param>
+            <param name="minutes">
+            Minutes. Must be of value 0 to 59.
+            </param>
+            <param name="seconds">
+            Seconds. Must be of value 0 to 59.
+            </param>
+        </member>
+        <member name="P:xIMU_API.DateTimeData.Year">
+            <summary>
+            Year. Must be of value 2000 2099.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid year specified.
+            </exception>
+        </member>
+        <member name="P:xIMU_API.DateTimeData.Month">
+            <summary>
+            Month. Must be of value 1 to 12.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid month specified.
+            </exception>
+        </member>
+        <member name="P:xIMU_API.DateTimeData.Date">
+            <summary>
+            Date. Must be of value 1 to 31.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid date specified.
+            </exception>
+        </member>
+        <member name="P:xIMU_API.DateTimeData.Hours">
+            <summary>
+            Hours. Must be of value 0 to 23.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid hours specified.
+            </exception>
+        </member>
+        <member name="P:xIMU_API.DateTimeData.Minutes">
+            <summary>
+            Minutes. Must be of value 0 to 59.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid minutes specified.
+            </exception>
+        </member>
+        <member name="P:xIMU_API.DateTimeData.Seconds">
+            <summary>
+            Seconds. Must be of value 0 to 59.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid seconds specified.
+            </exception>
+        </member>
+        <member name="P:xIMU_API.DateTimeData.DateTimeObject">
+            <summary>
+            <see cref="T:System.DateTime"/> object representation of data.
+            </summary>
         </member>
     </members>
 </doc>

@@ -736,10 +736,17 @@ namespace xIMU_GUI
                 AppendedTreeNode treeNode = null;
                 switch (registerData.Address)
                 {
+                    #region General
+
                     case ((ushort)xIMU_API.RegisterAddresses.FirmVersionMajorNum): treeNode = appendedTextBoxTreeNode_FirmVersionMajorNum; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString((ushort)registerData.Value); break;
                     case ((ushort)xIMU_API.RegisterAddresses.FirmVersionMinorNum): treeNode = appendedTextBoxTreeNode_FirmVersionMinorNum; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString((ushort)registerData.Value); break;
                     case ((ushort)xIMU_API.RegisterAddresses.DeviceID): treeNode = appendedTextBoxTreeNode_DeviceID; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = string.Format("{0:X4}", registerData.Value); break;
                     case ((ushort)xIMU_API.RegisterAddresses.ButtonMode): treeNode = appendedComboBoxTreeNode_buttonMode; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
+
+                    #endregion
+
+                    #region Sensor Calibration Parameters
+
                     case ((ushort)xIMU_API.RegisterAddresses.BattSensitivity): treeNode = appendedTextBoxTreeNode_battSens; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)xIMU_API.RegisterAddresses.BattBias): treeNode = appendedTextBoxTreeNode_battBias; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)xIMU_API.RegisterAddresses.ThermSensitivity): treeNode = appendedTextBoxTreeNode_thermSens; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
@@ -778,28 +785,58 @@ namespace xIMU_GUI
                     case ((ushort)xIMU_API.RegisterAddresses.MagHardIronBiasX): treeNode = appendedTextBoxTreeNode_magHIbiasX; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)xIMU_API.RegisterAddresses.MagHardIronBiasY): treeNode = appendedTextBoxTreeNode_magHIbiasY; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)xIMU_API.RegisterAddresses.MagHardIronBiasZ): treeNode = appendedTextBoxTreeNode_magHIbiasZ; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
+                    
+                    #endregion
+
+                    #region Algorithm Parameters
+
                     case ((ushort)xIMU_API.RegisterAddresses.AlgorithmMode): treeNode = appendedComboBoxTreeNode_algorithmMode; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
                     case ((ushort)xIMU_API.RegisterAddresses.AlgorithmKp): treeNode = appendedTextBoxTreeNode_algoGainKp; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)xIMU_API.RegisterAddresses.AlgorithmKi): treeNode = appendedTextBoxTreeNode_algoGainKi; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)xIMU_API.RegisterAddresses.AlgorithmInitKp): treeNode = appendedTextBoxTreeNode_algoInitKp; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)xIMU_API.RegisterAddresses.AlgorithmInitPeriod): treeNode = appendedTextBoxTreeNode_algoInitPeriod; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
+                    case ((ushort)xIMU_API.RegisterAddresses.AlgorithmMinValidMag): treeNode = appendedTextBoxTreeNode_algoMinValidMag; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
+                    case ((ushort)xIMU_API.RegisterAddresses.AlgorithmMaxValidMag): treeNode = appendedTextBoxTreeNode_algoMaxValidMag; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)xIMU_API.RegisterAddresses.TareQuat0): treeNode = appendedTextBoxTreeNode_tareQuatElement0; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)xIMU_API.RegisterAddresses.TareQuat1): treeNode = appendedTextBoxTreeNode_tareQuatElement1; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)xIMU_API.RegisterAddresses.TareQuat2): treeNode = appendedTextBoxTreeNode_tareQuatElement2; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)xIMU_API.RegisterAddresses.TareQuat3): treeNode = appendedTextBoxTreeNode_tareQuatElement3; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
+
+                    #endregion
+
+                    #region Data Ouput Settings
+
                     case ((ushort)xIMU_API.RegisterAddresses.SensorDataMode): treeNode = appendedComboBoxTreeNode_sensorDataMode; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
                     case ((ushort)xIMU_API.RegisterAddresses.DateTimeOutputRate): treeNode = appendedComboBoxTreeNode_dateTimeOutputRate; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
                     case ((ushort)xIMU_API.RegisterAddresses.BattThermOutputRate): treeNode = appendedComboBoxTreeNode_battThermOutputRate; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
                     case ((ushort)xIMU_API.RegisterAddresses.InertialMagOutputRate): treeNode = appendedComboBoxTreeNode_inertialMagOutputRate; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
                     case ((ushort)xIMU_API.RegisterAddresses.QuatOutputRate): treeNode = appendedComboBoxTreeNode_quatOutputRate; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
+
+                    #endregion
+
+                    #region SD Card
+
                     case ((ushort)xIMU_API.RegisterAddresses.SDcardNewFileName): treeNode = appendedTextBoxTreeNode_SDcardNewFileName; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = string.Format("{0:D5}", (ushort)registerData.Value); break;
+
+                    #endregion
+
+                    #region Power Managment
+
                     case ((ushort)xIMU_API.RegisterAddresses.BattShutdownVoltage): treeNode = appendedComboBoxTreeNode_battShutdownVoltage; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)xIMU_API.RegisterAddresses.SleepTimer): treeNode = appendedTextBoxTreeNode_sleepTimer; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = (registerData.Value == 0 ? "Disabled" : Convert.ToString(registerData.Value)); break;
                     case ((ushort)xIMU_API.RegisterAddresses.MotionTrigWakeUp): treeNode = appendedComboBoxTreeNode_motionTriggeredWakeup; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
                     case ((ushort)xIMU_API.RegisterAddresses.BluetoothPower): treeNode = appendedComboBoxTreeNode_bluetoothPower; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
+
+                    #endregion
+
+                    #region Auxilary Port
+
                     case ((ushort)xIMU_API.RegisterAddresses.AuxiliaryPortMode): treeNode = appendedComboBoxTreeNode_auxiliaryPortMode; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
                     case ((ushort)xIMU_API.RegisterAddresses.DigitalIOdirection): treeNode = appendedComboBoxTreeNode_digitalIOdirection; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
                     case ((ushort)xIMU_API.RegisterAddresses.DigitalIOoutputRate): treeNode = appendedComboBoxTreeNode_digitalIOoutputRate; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
+
+                    #endregion
+
                     default: throw new Exception("Specified register address does have an associated tree node.");
                 }
                 if (treeNode != null)
@@ -842,10 +879,17 @@ namespace xIMU_GUI
             xIMU_API.RegisterData registerData = new xIMU_API.RegisterData();
             try
             {
+                #region General
+
                 if (treeNode.Equals(appendedTextBoxTreeNode_FirmVersionMajorNum)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.FirmVersionMajorNum; if (!addressOnly) registerData = null; }         // return null for read-only register
                 else if (treeNode.Equals(appendedTextBoxTreeNode_FirmVersionMinorNum)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.FirmVersionMinorNum; if (!addressOnly) registerData = null; }    // return null for read-only register
-                else if (treeNode.Equals(appendedTextBoxTreeNode_DeviceID)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.DeviceID; if (!addressOnly) registerData = null; }                                      // return null for read-only register
+                else if (treeNode.Equals(appendedTextBoxTreeNode_DeviceID)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.DeviceID; if (!addressOnly) registerData = null; }                          // return null for read-only register
                 else if (treeNode.Equals(appendedComboBoxTreeNode_buttonMode)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.ButtonMode; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_buttonMode.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
+
+                #endregion
+
+                #region Sensor Calibration Parameters
+
                 else if (treeNode.Equals(appendedTextBoxTreeNode_battSens)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.BattSensitivity; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_battSens.TextBox.Text); }
                 else if (treeNode.Equals(appendedTextBoxTreeNode_battBias)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.BattBias; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_battBias.TextBox.Text); }
                 else if (treeNode.Equals(appendedTextBoxTreeNode_thermSens)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.ThermSensitivity; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_thermSens.TextBox.Text); }
@@ -884,28 +928,58 @@ namespace xIMU_GUI
                 else if (treeNode.Equals(appendedTextBoxTreeNode_magHIbiasX)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.MagHardIronBiasX; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_magHIbiasX.TextBox.Text); }
                 else if (treeNode.Equals(appendedTextBoxTreeNode_magHIbiasY)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.MagHardIronBiasY; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_magHIbiasY.TextBox.Text); }
                 else if (treeNode.Equals(appendedTextBoxTreeNode_magHIbiasZ)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.MagHardIronBiasZ; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_magHIbiasZ.TextBox.Text); }
+
+                #endregion
+
+                #region Algorithm Parameters
+
                 else if (treeNode.Equals(appendedComboBoxTreeNode_algorithmMode)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.AlgorithmMode; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_algorithmMode.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
                 else if (treeNode.Equals(appendedTextBoxTreeNode_algoGainKp)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.AlgorithmKp; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_algoGainKp.TextBox.Text); }
                 else if (treeNode.Equals(appendedTextBoxTreeNode_algoGainKi)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.AlgorithmKi; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_algoGainKi.TextBox.Text); }
                 else if (treeNode.Equals(appendedTextBoxTreeNode_algoInitKp)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.AlgorithmInitKp; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_algoInitKp.TextBox.Text); }
                 else if (treeNode.Equals(appendedTextBoxTreeNode_algoInitPeriod)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.AlgorithmInitPeriod; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_algoInitPeriod.TextBox.Text); }
+                else if (treeNode.Equals(appendedTextBoxTreeNode_algoMinValidMag)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.AlgorithmMinValidMag; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_algoMinValidMag.TextBox.Text); }
+                else if (treeNode.Equals(appendedTextBoxTreeNode_algoMaxValidMag)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.AlgorithmMaxValidMag; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_algoMaxValidMag.TextBox.Text); }
                 else if (treeNode.Equals(appendedTextBoxTreeNode_tareQuatElement0)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.TareQuat0; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_tareQuatElement0.TextBox.Text); }
                 else if (treeNode.Equals(appendedTextBoxTreeNode_tareQuatElement1)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.TareQuat1; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_tareQuatElement1.TextBox.Text); }
                 else if (treeNode.Equals(appendedTextBoxTreeNode_tareQuatElement2)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.TareQuat2; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_tareQuatElement2.TextBox.Text); }
                 else if (treeNode.Equals(appendedTextBoxTreeNode_tareQuatElement3)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.TareQuat3; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTextBoxTreeNode_tareQuatElement3.TextBox.Text); }
+
+                #endregion
+
+                #region Data Ouput Settings
+
                 else if (treeNode.Equals(appendedComboBoxTreeNode_sensorDataMode)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.SensorDataMode; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_sensorDataMode.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
                 else if (treeNode.Equals(appendedComboBoxTreeNode_dateTimeOutputRate)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.DateTimeOutputRate; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_dateTimeOutputRate.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
                 else if (treeNode.Equals(appendedComboBoxTreeNode_battThermOutputRate)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.BattThermOutputRate; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_battThermOutputRate.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
                 else if (treeNode.Equals(appendedComboBoxTreeNode_inertialMagOutputRate)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.InertialMagOutputRate; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_inertialMagOutputRate.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
                 else if (treeNode.Equals(appendedComboBoxTreeNode_quatOutputRate)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.QuatOutputRate; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_quatOutputRate.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
+
+                #endregion
+
+                #region SD Card
+
                 else if (treeNode.Equals(appendedTextBoxTreeNode_SDcardNewFileName)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.SDcardNewFileName; if (!addressOnly) registerData.Value = Convert.ToUInt16(appendedTextBoxTreeNode_SDcardNewFileName.TextBox.Text); }
+
+                #endregion
+
+                #region Power Managment
+
                 else if (treeNode.Equals(appendedComboBoxTreeNode_battShutdownVoltage)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.BattShutdownVoltage; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedComboBoxTreeNode_battShutdownVoltage.TextBox.Text); }
                 else if (treeNode.Equals(appendedTextBoxTreeNode_sleepTimer)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.SleepTimer; if (!addressOnly) { string text = appendedTextBoxTreeNode_sleepTimer.TextBox.Text; registerData.Value = (string.Equals(text, "Disabled", StringComparison.CurrentCultureIgnoreCase) ? (ushort)0 : Convert.ToUInt16(text)); } }
                 else if (treeNode.Equals(appendedComboBoxTreeNode_motionTriggeredWakeup)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.MotionTrigWakeUp; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_motionTriggeredWakeup.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
                 else if (treeNode.Equals(appendedComboBoxTreeNode_bluetoothPower)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.BluetoothPower; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_bluetoothPower.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
+
+                #endregion
+
+                #region Auxilary Port
+
                 else if (treeNode.Equals(appendedComboBoxTreeNode_auxiliaryPortMode)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.AuxiliaryPortMode; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_auxiliaryPortMode.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
                 else if (treeNode.Equals(appendedComboBoxTreeNode_digitalIOdirection)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.DigitalIOdirection; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_digitalIOdirection.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
                 else if (treeNode.Equals(appendedComboBoxTreeNode_digitalIOoutputRate)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.DigitalIOoutputRate; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_digitalIOoutputRate.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
+
+                #endregion
+
                 else registerData = null;
             }
             catch (Exception ex)

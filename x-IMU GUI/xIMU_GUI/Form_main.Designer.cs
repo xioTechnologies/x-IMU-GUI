@@ -1603,11 +1603,19 @@
             appendedComboBoxTreeNode_algorithmMode.ComboBox.Items.Add("AHRS");
             appendedTextBoxTreeNode_algoGainKp = new AppendedTreeNodeTextBox("Proportional Gain:");
             appendedTextBoxTreeNode_algoGainKi = new AppendedTreeNodeTextBox("Integral Gain:");
+            System.Windows.Forms.TreeNode treeNode_algorithmGains = new System.Windows.Forms.TreeNode("Algorithm Gains", new System.Windows.Forms.TreeNode[] {
+            appendedTextBoxTreeNode_algoGainKp,
+            appendedTextBoxTreeNode_algoGainKi});
             appendedTextBoxTreeNode_algoInitKp = new AppendedTreeNodeTextBox("Initial Proportional Gain:");
             appendedTextBoxTreeNode_algoInitPeriod = new AppendedTreeNodeTextBox("Ramp-Down Period (s):");
             System.Windows.Forms.TreeNode treeNode_algoInitialisation = new System.Windows.Forms.TreeNode("Initialisation", new System.Windows.Forms.TreeNode[] {
             appendedTextBoxTreeNode_algoInitKp,
             appendedTextBoxTreeNode_algoInitPeriod});
+            appendedTextBoxTreeNode_algoMinValidMag = new AppendedTreeNodeTextBox("Minimum Valid Field Magnitude (G):");
+            appendedTextBoxTreeNode_algoMaxValidMag = new AppendedTreeNodeTextBox("Maximum Valid Field Magnitude (G):");
+            System.Windows.Forms.TreeNode treeNode_magneticFieldRejection = new System.Windows.Forms.TreeNode("Magnetic Field Rejection", new System.Windows.Forms.TreeNode[] {
+            appendedTextBoxTreeNode_algoMinValidMag,
+            appendedTextBoxTreeNode_algoMaxValidMag});
             appendedTextBoxTreeNode_tareQuatElement0 = new AppendedTreeNodeTextBox("Element 0:");
             appendedTextBoxTreeNode_tareQuatElement1 = new AppendedTreeNodeTextBox("Element 1:");
             appendedTextBoxTreeNode_tareQuatElement2 = new AppendedTreeNodeTextBox("Element 2:");
@@ -1619,9 +1627,9 @@
             appendedTextBoxTreeNode_tareQuatElement3});
             treeNode_algorithmParameters = new System.Windows.Forms.TreeNode("Algorithm Parameters", new System.Windows.Forms.TreeNode[] {
             appendedComboBoxTreeNode_algorithmMode,
-            appendedTextBoxTreeNode_algoGainKp,
-            appendedTextBoxTreeNode_algoGainKi,
+            treeNode_algorithmGains,
             treeNode_algoInitialisation,
+            treeNode_magneticFieldRejection,
             appendedTextBoxTreeNode_TareQuaternion});
             appendedComboBoxTreeNode_sensorDataMode = new AppendedTreeNodeComboBox("Sensor Data Mode:");
             appendedComboBoxTreeNode_sensorDataMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1680,9 +1688,10 @@
             appendedTextBoxTreeNode_sleepTimer = new AppendedTreeNodeTextBox("Sleep Timer (s):");
             appendedComboBoxTreeNode_motionTriggeredWakeup = new AppendedTreeNodeComboBox("Motion Triggered Wake Up:");
             appendedComboBoxTreeNode_motionTriggeredWakeup.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            appendedComboBoxTreeNode_motionTriggeredWakeup.ComboBox.Width = 80;
+            appendedComboBoxTreeNode_motionTriggeredWakeup.ComboBox.Width = 95;
             appendedComboBoxTreeNode_motionTriggeredWakeup.ComboBox.Items.Add("Disabled");
-            appendedComboBoxTreeNode_motionTriggeredWakeup.ComboBox.Items.Add("Enabled");
+            appendedComboBoxTreeNode_motionTriggeredWakeup.ComboBox.Items.Add("Low sensitivity");
+            appendedComboBoxTreeNode_motionTriggeredWakeup.ComboBox.Items.Add("High sensitivity");
             appendedComboBoxTreeNode_bluetoothPower = new AppendedTreeNodeComboBox("Bluetooth Power:");
             appendedComboBoxTreeNode_bluetoothPower.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             appendedComboBoxTreeNode_bluetoothPower.ComboBox.Width = 80;
@@ -1803,6 +1812,8 @@
         private AppendedTreeNodeComboBox appendedComboBoxTreeNode_algorithmMode;
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_algoGainKp;
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_algoGainKi;
+        private AppendedTreeNodeTextBox appendedTextBoxTreeNode_algoMinValidMag;
+        private AppendedTreeNodeTextBox appendedTextBoxTreeNode_algoMaxValidMag;
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_algoInitKp;
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_algoInitPeriod;
         private System.Windows.Forms.TreeNode appendedTextBoxTreeNode_TareQuaternion;

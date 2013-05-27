@@ -94,7 +94,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Tao\Tao.Platform.Windows.dll</HintPath>
     </Reference>
-    <Reference Include="xIMU_API, Version=2.1.4089.41431, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="xIMU_API, Version=3.0.4104.29101, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>xIMU_API\xIMU_API.dll</HintPath>
     </Reference>
