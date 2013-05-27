@@ -62,7 +62,10 @@ namespace xIMU_API
         /// <summary>
         /// Initialises a new instance of the <see cref="QuaternionData"/> class.
         /// </summary>
-        public QuaternionData() : this(new float[] { 1, 0, 0, 0 }) { }
+        public QuaternionData()
+            : this(new float[] { 1, 0, 0, 0 })
+        {
+        }
 
         /// <summary>
         /// Initialises a new instance of the <see cref="QuaternionData"/> class.

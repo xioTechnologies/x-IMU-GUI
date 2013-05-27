@@ -33,6 +33,8 @@ namespace xIMU_API
         /// </summary>
         private enum FileIndexes
         {
+            ErrorMessages,
+            CommandConfirmations,
             DateTime,
             RawBattTherm,
             CalBattTherm,
@@ -105,13 +107,45 @@ namespace xIMU_API
         /// </param>
         public void WriteData(xIMUdata xIMUdataObject)
         {
-            if (xIMUdataObject is DateTimeData) WriteDateTimeData((DateTimeData)(xIMUdataObject));
+            if (xIMUdataObject is ErrorData) WriteErrorData((ErrorData)(xIMUdataObject));
+            else if (xIMUdataObject is CommandData) WriteCommandData((CommandData)(xIMUdataObject));
+            else if (xIMUdataObject is DateTimeData) WriteDateTimeData((DateTimeData)(xIMUdataObject));
             else if (xIMUdataObject is RawBattThermData) WriteRawBattThermData((RawBattThermData)(xIMUdataObject));
             else if (xIMUdataObject is CalBattThermData) WriteCalBattThermData((CalBattThermData)(xIMUdataObject));
             else if (xIMUdataObject is RawInertialMagData) WriteRawInertialMagData((RawInertialMagData)(xIMUdataObject));
             else if (xIMUdataObject is CalInertialMagData) WriteCalInertialMagData((CalInertialMagData)(xIMUdataObject));
             else if (xIMUdataObject is QuaternionData) WriteQuaternionData((QuaternionData)(xIMUdataObject));
             else if (xIMUdataObject is DigitalIOdata) WriteDigitalIOdata((DigitalIOdata)(xIMUdataObject));
+        }
+
+        /// <summary>
+        /// Write error message to .txt file.  Will create new file if required.
+        /// </summary>
+        /// <param name="errorData">
+        /// x-IMU error data.
+        /// </param>
+        public void WriteErrorData(ErrorData errorData)
+        {
+            if (ASCIIfiles[(int)FileIndexes.ErrorMessages] == null)
+            {
+                ASCIIfiles[(int)FileIndexes.ErrorMessages] = new System.IO.StreamWriter(FileBasePath + "_" + FileIndexes.ErrorMessages.ToString() + ".txt", false);
+            }
+            ASCIIfiles[(int)FileIndexes.ErrorMessages].WriteLine(errorData.GetMessage());
+        }
+
+        /// <summary>
+        /// Write command message to .txt file.  Will create new file if required.
+        /// </summary>
+        /// <param name="commandData">
+        /// x-IMU command data.
+        /// </param>
+        public void WriteCommandData(CommandData commandData)
+        {
+            if (ASCIIfiles[(int)FileIndexes.CommandConfirmations] == null)
+            {
+                ASCIIfiles[(int)FileIndexes.CommandConfirmations] = new System.IO.StreamWriter(FileBasePath + "_" + FileIndexes.CommandConfirmations.ToString() + ".txt", false);
+            }
+            ASCIIfiles[(int)FileIndexes.CommandConfirmations].WriteLine(commandData.GetMessage());
         }
 
         /// <summary>

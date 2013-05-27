@@ -89,7 +89,7 @@ namespace xIMU_API
                 case ((int)CommandCodes.ResetDevice): message = "Device reset."; break;
                 case ((int)CommandCodes.Sleep): message = "Device sleep."; break;
                 case ((int)CommandCodes.ResetSleepTimer): message = "Reset sleep timer."; break;
-                case ((int)CommandCodes.SampleGyroBiasTemp1): message = "Sample gyroscope bias at temperature 1 sucsesful."; break;
+                case ((int)CommandCodes.SampleGyroBiasTemp1): message = "Sample gyroscope bias at temperature 1."; break;
                 case ((int)CommandCodes.SampleGyroBiasTemp2): message = "Sample gyroscope bias at temperature 2."; break;
                 case ((int)CommandCodes.CalcGyroBiasParams): message = "Calculate gyroscope bias parameters."; break;
                 case ((int)CommandCodes.MeasureMagBiasAndSens): message = "Measure magnetometer bias and sensitivity."; break;

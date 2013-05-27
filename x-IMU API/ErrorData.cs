@@ -100,8 +100,8 @@ namespace xIMU_API
                 case ((int)ErrorCodes.RegisterReadOnly): message = "Cannot write to read-only register."; break;
                 case ((int)ErrorCodes.InvalidRegisterValue): message = "Invalid register value."; break;
                 case ((int)ErrorCodes.InvalidCommand): message = "Invalid command."; break;
-                case ((int)ErrorCodes.GyroscopeNotStationary): message = "Gyroscope not stationary.  Calibration aborted."; break;
-                case ((int)ErrorCodes.MagnetometerSaturation): message = "Magnetometer saturation occurred.  Calibration aborted."; break;
+                case ((int)ErrorCodes.GyroscopeNotStationary): message = "Gyroscope not stationary. Calibration aborted."; break;
+                case ((int)ErrorCodes.MagnetometerSaturation): message = "Magnetometer saturation occurred. Calibration aborted."; break;
                 case ((int)ErrorCodes.IncorrectAuxillaryPortMode): message = "Auxiliary port in incorrect mode."; break;
                 default: break;
             }
