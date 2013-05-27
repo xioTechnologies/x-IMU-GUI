@@ -12,7 +12,7 @@ namespace xIMU_API
     /// </summary>
     public enum CompatibleFirmwareVersions
     {
-        v3_x = 3
+        v4_x = 4
     }
 
     #endregion
@@ -55,9 +55,11 @@ namespace xIMU_API
     {
         NoError,
         LowBattery,
-        TransmitBufferOvun,
-        ReceiveBufferOvun,
-        SDcardBufferOverrun,
+        USBreceiveBufferOvun,
+        USBtransmitBufferOvun,
+        BluetoothReceiveBufferOvun,
+        BluetoothTransmitBufferOvun,
+        SDcardWriteBufferOverrun,
         TooFewBytesInPacket,
         TooManyBytesInPacket,
         InvalidChecksum,
