@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Globalization;
 
 namespace x_IMU_API
 {
@@ -130,7 +131,8 @@ namespace x_IMU_API
         /// </returns>
         public string ConvertToCSVstring()
         {
-            return Quaternion[0].ToString() + "," + Quaternion[1].ToString() + "," + Quaternion[2].ToString() + "," + Quaternion[3].ToString();
+            return Quaternion[0].ToString(CultureInfo.InvariantCulture) + "," + Quaternion[1].ToString(CultureInfo.InvariantCulture) + "," +
+                   Quaternion[2].ToString(CultureInfo.InvariantCulture) + "," + Quaternion[3].ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -145,9 +147,9 @@ namespace x_IMU_API
         public string ConvertToRotationMatrixCSVstring()
         {
             float[] R = ConvertToRotationMatrix();
-            return R[0].ToString() + "," + R[1].ToString() + "," + R[2].ToString() + "," +
-                   R[3].ToString() + "," + R[4].ToString() + "," + R[5].ToString() + "," +
-                   R[6].ToString() + "," + R[7].ToString() + "," + R[8].ToString();
+            return R[0].ToString(CultureInfo.InvariantCulture) + "," + R[1].ToString(CultureInfo.InvariantCulture) + "," + R[2].ToString(CultureInfo.InvariantCulture) + "," +
+                   R[3].ToString(CultureInfo.InvariantCulture) + "," + R[4].ToString(CultureInfo.InvariantCulture) + "," + R[5].ToString(CultureInfo.InvariantCulture) + "," +
+                   R[6].ToString(CultureInfo.InvariantCulture) + "," + R[7].ToString(CultureInfo.InvariantCulture) + "," + R[8].ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -159,7 +161,7 @@ namespace x_IMU_API
         public string ConvertToEulerAnglesCSVstring()
         {
             float[] euler = ConvertToEulerAngles();
-            return euler[0].ToString() + "," + euler[1].ToString() + "," + euler[2].ToString();
+            return euler[0].ToString(CultureInfo.InvariantCulture) + "," + euler[1].ToString(CultureInfo.InvariantCulture) + "," + euler[2].ToString(CultureInfo.InvariantCulture);
         }
     }
 }

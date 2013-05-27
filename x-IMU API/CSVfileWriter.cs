@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Globalization;
 
 namespace x_IMU_API
 {
@@ -162,7 +163,7 @@ namespace x_IMU_API
         /// </param>
         public void WriteErrorData(ErrorData errorData)
         {
-            WriteCSVlineAtFileIndex(((ushort)errorData.ErrorCode).ToString() + "," + errorData.GetMessage(), FileIndexes.Errors);
+            WriteCSVlineAtFileIndex(((ushort)errorData.ErrorCode).ToString(CultureInfo.InvariantCulture) + "," + errorData.GetMessage(), FileIndexes.Errors);
             PacketsWrittenCounter.ErrorPackets++;
         }
 
@@ -174,7 +175,7 @@ namespace x_IMU_API
         /// </param>
         public void WriteCommandData(CommandData commandData)
         {
-            WriteCSVlineAtFileIndex(((ushort)commandData.CommandCode).ToString() + "," + commandData.GetMessage(), FileIndexes.Commands);
+            WriteCSVlineAtFileIndex(((ushort)commandData.CommandCode).ToString(CultureInfo.InvariantCulture) + "," + commandData.GetMessage(), FileIndexes.Commands);
             PacketsWrittenCounter.CommandPackets++;
         }
 
@@ -189,10 +190,10 @@ namespace x_IMU_API
             string fixedPointValue = "NaN";
             try
             {
-                fixedPointValue = registerData.ConvertValueToFloat().ToString();
+                fixedPointValue = registerData.ConvertValueToFloat().ToString(CultureInfo.InvariantCulture);
             }
             catch { }
-            WriteCSVlineAtFileIndex(((ushort)registerData.Address).ToString() + "," + registerData.Value.ToString() + "," + fixedPointValue + "," + Enum.GetName(typeof(RegisterAddresses), registerData.Address), FileIndexes.Registers);
+            WriteCSVlineAtFileIndex(((ushort)registerData.Address).ToString(CultureInfo.InvariantCulture) + "," + registerData.Value.ToString(CultureInfo.InvariantCulture) + "," + fixedPointValue + "," + Enum.GetName(typeof(RegisterAddresses), registerData.Address), FileIndexes.Registers);
             PacketsWrittenCounter.WriteRegisterPackets++;
         }
 
@@ -355,12 +356,12 @@ namespace x_IMU_API
         {
             if (writesEnabled)
             {
-                if (streamWriters[(int)fileIndex] == null)
+                if (streamWriter == null)
                 {
-                    streamWriters[(int)fileIndex] = new System.IO.StreamWriter(FileBasePath + "_" + fileIndex.ToString() + ".csv", false);
-                    streamWriters[(int)fileIndex].WriteLine(CSVheadings[(int)fileIndex]);
+                    streamWriter = new System.IO.StreamWriter(FileBasePath + "_" + fileIndex.ToString(CultureInfo.InvariantCulture) + ".csv", false);
+                    streamWriter.WriteLine(CSVheading);
                 }
-                streamWriters[(int)fileIndex].WriteLine(PacketsWrittenCounter.TotalPackets.ToString() + "," + CSVline);
+                streamWriter.WriteLine(PacketsWrittenCounter.TotalPackets.ToString(CultureInfo.InvariantCulture) + "," + CSVline);
             }
         }
     }

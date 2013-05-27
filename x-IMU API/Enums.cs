@@ -449,9 +449,7 @@ namespace x_IMU_API
         UARTbaudRate38400,
         UARTbaudRate57600,
         UARTbaudRate115200,
-        UARTbaudRate230400,
-        UARTbaudRate460800,
-        UARTbaudRate921600
+        UARTbaudRate230400
     };
 
     /// <summary>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Globalization;
 
 namespace x_IMU_API
 {
@@ -105,7 +106,10 @@ namespace x_IMU_API
         /// </returns>
         public string ConvertToCSVstring()
         {
-            return AX0.ToString() + "," + AX1.ToString() + "," + AX2.ToString() + "," + AX3.ToString() + "," + AX4.ToString() + "," + AX5.ToString() + "," + AX6.ToString() + "," + AX7.ToString();
+            return AX0.ToString(CultureInfo.InvariantCulture) + "," + AX1.ToString(CultureInfo.InvariantCulture) + "," +
+                   AX2.ToString(CultureInfo.InvariantCulture) + "," + AX3.ToString(CultureInfo.InvariantCulture) + "," +
+                   AX4.ToString(CultureInfo.InvariantCulture) + "," + AX5.ToString(CultureInfo.InvariantCulture) + "," +
+                   AX6.ToString(CultureInfo.InvariantCulture) + "," + AX7.ToString(CultureInfo.InvariantCulture);
         }
     }
 }

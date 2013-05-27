@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Globalization;
 
 namespace x_IMU_API
 {
@@ -69,10 +70,10 @@ namespace x_IMU_API
         /// </returns>
         public string ConvertToCSVstring()
         {
-            return ADXL345_A[0].ToString() + "," + ADXL345_A[1].ToString() + "," + ADXL345_A[2].ToString() + "," +
-                   ADXL345_B[0].ToString() + "," + ADXL345_B[1].ToString() + "," + ADXL345_B[2].ToString() + "," +
-                   ADXL345_C[0].ToString() + "," + ADXL345_C[1].ToString() + "," + ADXL345_C[2].ToString() + "," +
-                   ADXL345_D[0].ToString() + "," + ADXL345_D[1].ToString() + "," + ADXL345_D[2].ToString();
+            return ADXL345_A[0].ToString(CultureInfo.InvariantCulture) + "," + ADXL345_A[1].ToString(CultureInfo.InvariantCulture) + "," + ADXL345_A[2].ToString(CultureInfo.InvariantCulture) + "," +
+                   ADXL345_B[0].ToString(CultureInfo.InvariantCulture) + "," + ADXL345_B[1].ToString(CultureInfo.InvariantCulture) + "," + ADXL345_B[2].ToString(CultureInfo.InvariantCulture) + "," +
+                   ADXL345_C[0].ToString(CultureInfo.InvariantCulture) + "," + ADXL345_C[1].ToString(CultureInfo.InvariantCulture) + "," + ADXL345_C[2].ToString(CultureInfo.InvariantCulture) + "," +
+                   ADXL345_D[0].ToString(CultureInfo.InvariantCulture) + "," + ADXL345_D[1].ToString(CultureInfo.InvariantCulture) + "," + ADXL345_D[2].ToString(CultureInfo.InvariantCulture);
         }
     }
 }

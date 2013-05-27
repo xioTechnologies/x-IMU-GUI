@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Globalization;
 
 namespace x_IMU_API
 {
@@ -51,7 +52,7 @@ namespace x_IMU_API
         /// </returns>
         public string ConvertToCSVstring()
         {
-            return BatteryVoltage.ToString() + "," + Thermometer.ToString();
+            return BatteryVoltage.ToString(CultureInfo.InvariantCulture) + "," + Thermometer.ToString(CultureInfo.InvariantCulture);
         }
     }
 }

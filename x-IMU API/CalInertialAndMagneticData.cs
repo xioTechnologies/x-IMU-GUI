@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Globalization;
 
 namespace x_IMU_API
 {
@@ -60,9 +61,9 @@ namespace x_IMU_API
         /// </returns>
         public string ConvertToCSVstring()
         {
-            return Gyroscope[0].ToString() + "," + Gyroscope[1].ToString() + "," + Gyroscope[2].ToString() + "," +
-                   Accelerometer[0].ToString() + "," + Accelerometer[1].ToString() + "," + Accelerometer[2].ToString() + "," +
-                   Magnetometer[0].ToString() + "," + Magnetometer[1].ToString() + "," + Magnetometer[2].ToString();
+            return Gyroscope[0].ToString(CultureInfo.InvariantCulture) + "," + Gyroscope[1].ToString(CultureInfo.InvariantCulture) + "," + Gyroscope[2].ToString(CultureInfo.InvariantCulture) + "," +
+                   Accelerometer[0].ToString(CultureInfo.InvariantCulture) + "," + Accelerometer[1].ToString(CultureInfo.InvariantCulture) + "," + Accelerometer[2].ToString(CultureInfo.InvariantCulture) + "," +
+                   Magnetometer[0].ToString(CultureInfo.InvariantCulture) + "," + Magnetometer[1].ToString(CultureInfo.InvariantCulture) + "," + Magnetometer[2].ToString(CultureInfo.InvariantCulture);
         }
     }
 }
