@@ -235,7 +235,7 @@ namespace xIMU_API
 
         #region Variables
 
-        private PortData privIsInput;
+        private PortData privDirection;
         private PortData privState;
 
         #endregion
@@ -243,13 +243,13 @@ namespace xIMU_API
         #region Properties
 
         /// <summary>
-        /// Mode of the digital I/O port.  true (1) = input, false (0) = output.
+        /// Direction of the digital I/O port.  true (1) = input, false (0) = output.
         /// </summary>
-        public PortData IsInput
+        public PortData Direction
         {
             get
             {
-                return privIsInput;
+                return privDirection;
             }
         }
 
@@ -276,7 +276,7 @@ namespace xIMU_API
         /// Initialises a new instance of the <see cref="DigitalIOdata"/> class.
         /// </summary>
         public DigitalIOdata()
-            : this(null, new PortData())
+            : this(new PortData(), new PortData())
         {
         }
 
@@ -287,23 +287,22 @@ namespace xIMU_API
         /// State of the digital I/O port.  true (1) = logic high, false (0) = logic low.
         /// </param>
         public DigitalIOdata(PortData state)
+            : this(new PortData(), state)
         {
-            privIsInput = null;
-            privState = state;
         }
 
         /// <summary>
         /// Initialises a new instance of the <see cref="DigitalIOdata"/> class.
         /// </summary>     
-        /// <param name="isInput">
-        /// Mode of the digital I/O port.  true (1) = input, false (0) = output.
+        /// <param name="direction">
+        /// Direction of the digital I/O port.  true (1) = input, false (0) = output.
         /// </param>
         /// <param name="state">
         /// State of the digital I/O port.  true (1) = logic high, false (0) = logic low.
         /// </param>
-        internal DigitalIOdata(PortData isInput, PortData state)
+        internal DigitalIOdata(PortData direction, PortData state)
         {
-            privIsInput = isInput;
+            privDirection = direction;
             privState = state;
         }
 
@@ -317,13 +316,9 @@ namespace xIMU_API
         public string ConvertToCSV()
         {
             string CSVline = "";
-            if (privIsInput != null)
+            for (int i = 0; i < 8; i++)
             {
-                for (int i = 0; i < 8; i++) CSVline += privIsInput.PortBits[i] ? "in," : "out,";
-            }
-            else
-            {
-                CSVline += "?,?,?,?,?,?,?,?,";
+                CSVline += (privDirection.PortBits[i] ? "1" : "0") + ",";
             }
             for (int i = 0; i < 8; i++)
             {

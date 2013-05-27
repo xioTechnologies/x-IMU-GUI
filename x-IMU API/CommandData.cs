@@ -86,17 +86,19 @@ namespace xIMU_API
             string message = "Unknown command.";
             switch (CommandCode)
             {
-                case ((int)CommandCodes.ResetDevice): message = "Device reset."; break;
-                case ((int)CommandCodes.Sleep): message = "Device sleep."; break;
+                case ((int)CommandCodes.NullCommand): message = "Null command."; break;
+                case ((int)CommandCodes.Reset): message = "Reset."; break;
+                case ((int)CommandCodes.Sleep): message = "Sleep."; break;
                 case ((int)CommandCodes.ResetSleepTimer): message = "Reset sleep timer."; break;
                 case ((int)CommandCodes.SampleGyroBiasTemp1): message = "Sample gyroscope bias at temperature 1."; break;
                 case ((int)CommandCodes.SampleGyroBiasTemp2): message = "Sample gyroscope bias at temperature 2."; break;
                 case ((int)CommandCodes.CalcGyroBiasParams): message = "Calculate gyroscope bias parameters."; break;
                 case ((int)CommandCodes.MeasureMagBiasAndSens): message = "Measure magnetometer bias and sensitivity."; break;
                 case ((int)CommandCodes.LookupAccelBiasAndSens): message = "Lookup accelerometer bias and sensitivity."; break;
-                case ((int)CommandCodes.ResetAlgorithm): message = "Reset algorithm."; break;
-                case ((int)CommandCodes.Tare): message = "Tare."; break;
-                case ((int)CommandCodes.ClearTare): message = "Clear tare."; break;
+                case ((int)CommandCodes.AlgorithmInit): message = "Algorithm initialise."; break;
+                case ((int)CommandCodes.AlgorithmTare): message = "Algorithm tare."; break;
+                case ((int)CommandCodes.AlgorithmClearTare): message = "Algorithm clear tare."; break;
+                case ((int)CommandCodes.AlgorithmInitThenTare): message = "Algorithm initialise then tare."; break;
                 default: break;
             }
             return message;

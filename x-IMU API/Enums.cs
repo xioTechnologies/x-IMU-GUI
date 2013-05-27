@@ -12,7 +12,7 @@ namespace xIMU_API
     /// </summary>
     public enum CompatibleFirmwareVersions
     {
-        v4_x = 4
+        v5_x = 5
     }
 
     #endregion
@@ -87,7 +87,7 @@ namespace xIMU_API
     public enum CommandCodes
     {
         NullCommand,
-        ResetDevice,
+        Reset,
         Sleep,
         ResetSleepTimer,
         SampleGyroBiasTemp1,
@@ -95,9 +95,10 @@ namespace xIMU_API
         CalcGyroBiasParams,
         LookupAccelBiasAndSens,
         MeasureMagBiasAndSens,
-        ResetAlgorithm,
-        Tare,
-        ClearTare
+        AlgorithmInit,
+        AlgorithmTare,
+        AlgorithmClearTare,
+        AlgorithmInitThenTare
     }
 
     #endregion
@@ -215,7 +216,7 @@ namespace xIMU_API
         DigitalIOoutputRate,
         AlgorithmMinValidMag,
         AlgorithmMaxValidMag,
-        numRegisters
+        NumRegisters
     }
 
     #endregion
@@ -233,8 +234,9 @@ namespace xIMU_API
         Disabled,
         ResetDevice,
         SleepWake,
-        ResetAlgorithm,
-        TareAlgorithm
+        AlgorithmInit,
+        AlgorithmTare,
+        AlgorithmInitThenTare
     }
 
     /// <summary>

@@ -60,6 +60,8 @@
     <Compile Include="QuaternionData.cs" />
     <Compile Include="RawBattThermData.cs" />
     <Compile Include="RawInertialMagData.cs" />
+    <Compile Include="AsyncReadCompletedEventArgs.cs" />
+    <Compile Include="AsyncReadProgressChangedEventArgs.cs" />
     <Compile Include="RegisterData.cs" />
     <Compile Include="RunScanCompletedEventArgs.cs" />
     <Compile Include="ScanProgressChangedEventArgs.cs" />

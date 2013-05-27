@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.ComponentModel;
 
 namespace xIMU_API
 {
@@ -16,6 +17,7 @@ namespace xIMU_API
         private FileStream fileStream;
         private string privFilePath;
         private PacketCount privPacketCounter;
+        private BackgroundWorker backgroundWorker;
 
         #endregion
 
@@ -72,6 +74,9 @@ namespace xIMU_API
             privPacketCounter = new PacketCount();
             privFilePath = filePath;
             fileStream = new FileStream(FilePath, overwrite ? FileMode.Create : FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            backgroundWorker = new BackgroundWorker();
+            backgroundWorker.WorkerSupportsCancellation = true;
+            backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
         }
 
         #endregion
@@ -118,10 +123,60 @@ namespace xIMU_API
         #region Packet read methods
 
         /// <summary>
-        /// Reads file.  Interpreted packets are provided in individual packet read events.
+        /// Reads file. Interpreted packets are provided in individual events.
         /// </summary>
         public void Read()
         {
+            DoRead(false);
+        }
+
+        /// <summary>
+        /// Run asynchronous read. Interpreted packets are provided in individual events.
+        /// </summary>
+        public void RunAnsycRead()
+        {
+            if (backgroundWorker.IsBusy)
+            {
+                throw new Exception("xIMUfile is currently busy and cannot run multiple reads concurrently.");
+            }
+            else
+            {
+                backgroundWorker.RunWorkerAsync();
+            }
+        }
+
+        /// <summary>
+        /// Requests cancelation of pending read process.
+        /// </summary>
+        public void CancelAnsycRead()
+        {
+            backgroundWorker.CancelAsync();
+        }
+
+        /// <summary>
+        /// BackgroundWorker DoWork event to run Read as new process.
+        /// </summary>
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                DoRead(true);
+            }
+            catch (Exception ex)
+            {
+                OnAsyncReadCompleted(new AsyncReadCompletedEventArgs(PacketCounter, ex, backgroundWorker.CancellationPending));
+            }
+        }
+
+        /// <summary>
+        /// Reads file. Interpreted packets are provided in individual events.
+        /// </summary>
+        /// <param name="isAsync">
+        /// Enables OnProgressChanged and OnReadCompleted events for use when called within background worker.
+        /// </param>
+        private void DoRead(bool isAsync)
+        {
+            int previousProgressPercentage = 0;
             byte[] readBuffer = new byte[256];
             byte readBufferIndex = 0;
 
@@ -129,6 +184,10 @@ namespace xIMU_API
             byte[] fileBuffer = new byte[fileStream.Length];
             int numBytesToRead = (int)fileStream.Length;
             int numBytesRead = 0;
+            if (isAsync)
+            {
+                OnAsyncReadProgressChanged(new AsyncReadProgressChangedEventArgs(0, "Reading file..."));
+            }
             while (numBytesToRead > 0)
             {
                 int n = fileStream.Read(fileBuffer, numBytesRead, numBytesToRead);  // Read may return anything from 0 to numBytesToRead.
@@ -140,6 +199,21 @@ namespace xIMU_API
             // Process each byte one-by-one
             for (int i = 0; i < numBytesRead; i++)
             {
+                if (isAsync)
+                {
+                    int newProgressPercentage = (int)(Math.Round(100d * ((double)i / (double)numBytesRead)));
+                    if (backgroundWorker.CancellationPending)
+                    {
+                        break;
+                    }
+                    if (newProgressPercentage != previousProgressPercentage)
+                    {
+                        OnAsyncReadProgressChanged(new AsyncReadProgressChangedEventArgs(newProgressPercentage, "Processed " + string.Format("{0:n0}", i / 1024) + " KB of " + string.Format("{0:n0}", numBytesRead / 1024) + " KB"));
+                        previousProgressPercentage = newProgressPercentage;
+                    }
+                }
+
+                // Process byte
                 readBuffer[readBufferIndex++] = fileBuffer[i];                      // add to buffer
                 if ((fileBuffer[i] & 0x80) == 0x80)                                 // if packet framing char 
                 {
@@ -172,7 +246,19 @@ namespace xIMU_API
                     readBufferIndex = 0;                                            // reset buffer.
                 }
             }
+            if (isAsync)
+            {
+                OnAsyncReadCompleted(new AsyncReadCompletedEventArgs(PacketCounter, null, backgroundWorker.CancellationPending));
+            }
         }
+
+        public delegate void onAsyncReadProgressChanged(object sender, AsyncReadProgressChangedEventArgs e);
+        public event onAsyncReadProgressChanged AsyncReadProgressChanged;
+        protected virtual void OnAsyncReadProgressChanged(AsyncReadProgressChangedEventArgs e) { if (AsyncReadProgressChanged != null) AsyncReadProgressChanged(this, e); }
+
+        public delegate void onAsyncReadCompleted(object sender, AsyncReadCompletedEventArgs e);
+        public event onAsyncReadCompleted AsyncReadCompleted;
+        protected virtual void OnAsyncReadCompleted(AsyncReadCompletedEventArgs e) { if (AsyncReadCompleted != null) AsyncReadCompleted(this, e); }
 
         public delegate void onxIMUdataRead(object sender, xIMUdata e);
         public event onxIMUdataRead xIMUdataRead;

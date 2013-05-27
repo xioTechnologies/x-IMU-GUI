@@ -37,14 +37,7 @@ namespace xIMU_API
             {
                 if (value.Length != 4)
                 {
-                    throw new Exception("Quaternion must be of 4 elements.");
-                }
-                if (((value[0] < -1) | (value[0] > 1)) |
-                    ((value[1] < -1) | (value[1] > 1)) |
-                    ((value[2] < -1) | (value[2] > 1)) |
-                    ((value[3] < -1) | (value[3] > 1)))
-                {
-                    throw new Exception("Quaternion must be of 4 elements.");
+                    throw new Exception("Quaternion vector must be of 4 elements.");
                 }
                 float norm = (float)Math.Sqrt(value[0] * value[0] + value[1] * value[1] + value[2] * value[2] + value[3] * value[3]);
                 privQuaternion = value;
