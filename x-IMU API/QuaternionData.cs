@@ -98,6 +98,17 @@ namespace xIMU_API
         #region Public methods
 
         /// <summary>
+        /// Returns the quaternion conjugate.
+        /// </summary>
+        /// <returns>
+        /// Quaternion conjugate.
+        /// </returns>
+        public QuaternionData ConvertToConjugate()
+        {
+            return new QuaternionData(new float[] { Quaternion[0], -Quaternion[1], -Quaternion[2], -Quaternion[3] });
+        }
+
+        /// <summary>
         /// Converts data to rotation matrix.
         /// </summary>
         /// <remarks>
@@ -127,7 +138,7 @@ namespace xIMU_API
         public float[] ConvertToEulerAngles()
         {
             float phi = (float)Math.Atan2(2 * (Quaternion[2] * Quaternion[3] - Quaternion[0] * Quaternion[1]), 2 * Quaternion[0] * Quaternion[0] - 1 + 2 * Quaternion[3] * Quaternion[3]);
-            float theta = (float)-Math.Atan((2 * (Quaternion[1] * Quaternion[3] + Quaternion[0] * Quaternion[2])) / Math.Sqrt(1 - Math.Pow((2 * Quaternion[1] * Quaternion[3] + 2 * Quaternion[0] * Quaternion[2]), 2)));
+            float theta = (float)-Math.Atan((2.0 * (Quaternion[1] * Quaternion[3] + Quaternion[0] * Quaternion[2])) / Math.Sqrt(1.0 - Math.Pow((2.0 * Quaternion[1] * Quaternion[3] + 2.0 * Quaternion[0] * Quaternion[2]), 2.0)));
             float psi = (float)Math.Atan2(2 * (Quaternion[1] * Quaternion[2] - Quaternion[0] * Quaternion[3]), 2 * Quaternion[0] * Quaternion[0] - 1 + 2 * Quaternion[1] * Quaternion[1]);
             return new float[] { Rad2Deg(phi), Rad2Deg(theta), Rad2Deg(psi) };
         }
