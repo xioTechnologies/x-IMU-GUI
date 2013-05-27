@@ -152,8 +152,8 @@ namespace x_IMU_GUI
             xIMUserial.DateTimeDataReceived += new x_IMU_API.xIMUserial.onDateTimeDataReceived(xIMUserial_DateTimeDataReceived);
             xIMUserial.RawBattThermDataReceived += new x_IMU_API.xIMUserial.onRawBattThermDataReceived(xIMUserial_RawBattThermDataReceived);
             xIMUserial.CalBattThermDataReceived += new x_IMU_API.xIMUserial.onCalBattThermDataReceived(xIMUserial_CalBattThermDataReceived);
-            xIMUserial.RawInertialMagDataReceived += new x_IMU_API.xIMUserial.onRawInertialMagDataReceived(xIMUserial_RawInertialMagDataReceived);
-            xIMUserial.CalInertialMagDataReceived += new x_IMU_API.xIMUserial.onCalInertialMagDataReceived(xIMUserial_CalInertialMagDataReceived);
+            xIMUserial.RawInertialMagneticDataReceived += new x_IMU_API.xIMUserial.onRawInertialMagneticDataReceived(xIMUserial_RawInertialMagneticDataReceived);
+            xIMUserial.CalInertialMagneticDataReceived += new x_IMU_API.xIMUserial.onCalInertialMagneticDataReceived(xIMUserial_CalInertialMagneticDataReceived);
             xIMUserial.QuaternionDataReceived += new x_IMU_API.xIMUserial.onQuaternionDataReceived(xIMUserial_QuaternionDataReceived);
             xIMUserial.DigitalIODataReceived += new x_IMU_API.xIMUserial.onDigitalIODataReceived(xIMUserial_DigitalIODataReceived);
             xIMUserial.RawAnalogueInputDataReceived += new x_IMU_API.xIMUserial.onRawAnalogueInputDataReceived(xIMUserial_RawAnalogueInputDataReceived);
@@ -816,12 +816,12 @@ namespace x_IMU_GUI
                     case ((ushort)x_IMU_API.RegisterAddresses.GyroSampledMinus200dpsX): treeNode = appendedTreeNodeTextBox_gyroSampledMinus200dpsX; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)x_IMU_API.RegisterAddresses.GyroSampledMinus200dpsY): treeNode = appendedTreeNodeTextBox_gyroSampledMinus200dpsY; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)x_IMU_API.RegisterAddresses.GyroSampledMinus200dpsZ): treeNode = appendedTreeNodeTextBox_gyroSampledMinus200dpsZ; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;                   
-                    case ((ushort)x_IMU_API.RegisterAddresses.GyroBiasX): treeNode = appendedTreeNodeTextBox_gyroBiasX; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
-                    case ((ushort)x_IMU_API.RegisterAddresses.GyroBiasY): treeNode = appendedTreeNodeTextBox_gyroBiasY; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
-                    case ((ushort)x_IMU_API.RegisterAddresses.GyroBiasZ): treeNode = appendedTreeNodeTextBox_gyroBiasZ; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
-                    case ((ushort)x_IMU_API.RegisterAddresses.GyroBiasTempSensX): treeNode = appendedTreeNodeTextBox_gyroBiasTempSensX; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
-                    case ((ushort)x_IMU_API.RegisterAddresses.GyroBiasTempSensY): treeNode = appendedTreeNodeTextBox_gyroBiasTempSensY; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
-                    case ((ushort)x_IMU_API.RegisterAddresses.GyroBiasTempSensZ): treeNode = appendedTreeNodeTextBox_gyroBiasTempSensZ; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
+                    case ((ushort)x_IMU_API.RegisterAddresses.GyroBiasAt25degCX): treeNode = appendedTreeNodeTextBox_gyroBiasX; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
+                    case ((ushort)x_IMU_API.RegisterAddresses.GyroBiasAt25degCY): treeNode = appendedTreeNodeTextBox_gyroBiasY; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
+                    case ((ushort)x_IMU_API.RegisterAddresses.GyroBiasAt25degCZ): treeNode = appendedTreeNodeTextBox_gyroBiasZ; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
+                    case ((ushort)x_IMU_API.RegisterAddresses.GyroBiasTempSensitivityX): treeNode = appendedTreeNodeTextBox_gyroBiasTempSensX; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
+                    case ((ushort)x_IMU_API.RegisterAddresses.GyroBiasTempSensitivityY): treeNode = appendedTreeNodeTextBox_gyroBiasTempSensY; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
+                    case ((ushort)x_IMU_API.RegisterAddresses.GyroBiasTempSensitivityZ): treeNode = appendedTreeNodeTextBox_gyroBiasTempSensZ; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)x_IMU_API.RegisterAddresses.GyroSample1Temp): treeNode = appendedTreeNodeTextBox_gyroSample1Temp; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)x_IMU_API.RegisterAddresses.GyroSample1BiasX): treeNode = appendedTreeNodeTextBox_gyroSample1BiasX; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)x_IMU_API.RegisterAddresses.GyroSample1BiasY): treeNode = appendedTreeNodeTextBox_gyroSample1BiasY; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
@@ -1019,12 +1019,12 @@ namespace x_IMU_GUI
                 else if (treeNode.Equals(appendedTreeNodeTextBox_gyroSampledMinus200dpsX)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroSampledMinus200dpsX; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroSampledMinus200dpsX.TextBox.Text); }
                 else if (treeNode.Equals(appendedTreeNodeTextBox_gyroSampledMinus200dpsY)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroSampledMinus200dpsY; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroSampledMinus200dpsY.TextBox.Text); }
                 else if (treeNode.Equals(appendedTreeNodeTextBox_gyroSampledMinus200dpsZ)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroSampledMinus200dpsZ; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroSampledMinus200dpsZ.TextBox.Text); }
-                else if (treeNode.Equals(appendedTreeNodeTextBox_gyroBiasX)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroBiasX; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroBiasX.TextBox.Text); }
-                else if (treeNode.Equals(appendedTreeNodeTextBox_gyroBiasY)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroBiasY; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroBiasY.TextBox.Text); }
-                else if (treeNode.Equals(appendedTreeNodeTextBox_gyroBiasZ)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroBiasZ; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroBiasZ.TextBox.Text); }
-                else if (treeNode.Equals(appendedTreeNodeTextBox_gyroBiasTempSensX)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroBiasTempSensX; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroBiasTempSensX.TextBox.Text); }
-                else if (treeNode.Equals(appendedTreeNodeTextBox_gyroBiasTempSensY)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroBiasTempSensY; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroBiasTempSensY.TextBox.Text); }
-                else if (treeNode.Equals(appendedTreeNodeTextBox_gyroBiasTempSensZ)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroBiasTempSensZ; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroBiasTempSensZ.TextBox.Text); }
+                else if (treeNode.Equals(appendedTreeNodeTextBox_gyroBiasX)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroBiasAt25degCX; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroBiasX.TextBox.Text); }
+                else if (treeNode.Equals(appendedTreeNodeTextBox_gyroBiasY)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroBiasAt25degCY; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroBiasY.TextBox.Text); }
+                else if (treeNode.Equals(appendedTreeNodeTextBox_gyroBiasZ)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroBiasAt25degCZ; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroBiasZ.TextBox.Text); }
+                else if (treeNode.Equals(appendedTreeNodeTextBox_gyroBiasTempSensX)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroBiasTempSensitivityX; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroBiasTempSensX.TextBox.Text); }
+                else if (treeNode.Equals(appendedTreeNodeTextBox_gyroBiasTempSensY)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroBiasTempSensitivityY; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroBiasTempSensY.TextBox.Text); }
+                else if (treeNode.Equals(appendedTreeNodeTextBox_gyroBiasTempSensZ)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroBiasTempSensitivityZ; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroBiasTempSensZ.TextBox.Text); }
                 else if (treeNode.Equals(appendedTreeNodeTextBox_gyroSample1Temp)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroSample1Temp; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroSample1Temp.TextBox.Text); }
                 else if (treeNode.Equals(appendedTreeNodeTextBox_gyroSample1BiasX)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroSample1BiasX; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroSample1BiasX.TextBox.Text); }
                 else if (treeNode.Equals(appendedTreeNodeTextBox_gyroSample1BiasY)) { registerData.Address = (ushort)x_IMU_API.RegisterAddresses.GyroSample1BiasY; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedTreeNodeTextBox_gyroSample1BiasY.TextBox.Text); }
@@ -1535,7 +1535,7 @@ namespace x_IMU_GUI
         /// <summary>
         /// Raw inertial and magnetic data received event to update oscilloscope.
         /// </summary>
-        private void xIMUserial_RawInertialMagDataReceived(object sender, x_IMU_API.RawInertialMagData e)
+        private void xIMUserial_RawInertialMagneticDataReceived(object sender, x_IMU_API.RawInertialMagneticData e)
         {
             gyroOscilloscope.AddScopeData(e.Gyroscope[0], e.Gyroscope[1], e.Gyroscope[2]);
             accelOscilloscope.AddScopeData(e.Accelerometer[0], e.Accelerometer[1], e.Accelerometer[2]);
@@ -1545,7 +1545,7 @@ namespace x_IMU_GUI
         /// <summary>
         /// Calibrated inertial and magnetic data received event to update oscilloscope.
         /// </summary>
-        private void xIMUserial_CalInertialMagDataReceived(object sender, x_IMU_API.CalInertialMagData e)
+        private void xIMUserial_CalInertialMagneticDataReceived(object sender, x_IMU_API.CalInertialMagneticData e)
         {
             gyroOscilloscope.AddScopeData(e.Gyroscope[0], e.Gyroscope[1], e.Gyroscope[2]);
             accelOscilloscope.AddScopeData(e.Accelerometer[0], e.Accelerometer[1], e.Accelerometer[2]);
@@ -1914,11 +1914,11 @@ namespace x_IMU_GUI
                 }
                 catch { }
             }
-            if ((hardIronCalDataFiles != null) && (e is x_IMU_API.CalInertialMagData))
+            if ((hardIronCalDataFiles != null) && (e is x_IMU_API.CalInertialMagneticData))
             {
                 try
                 {
-                    hardIronCalDataFiles.WriteCalInertialMagData((x_IMU_API.CalInertialMagData)e);
+                    hardIronCalDataFiles.WriteCalInertialMagneticData((x_IMU_API.CalInertialMagneticData)e);
                 }
                 catch { }
             }
