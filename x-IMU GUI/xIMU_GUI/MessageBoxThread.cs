@@ -21,6 +21,7 @@ namespace xIMU_GUI
         {
             public string Text { get; set; }
             public string Caption { get; set; }
+            public MessageBoxIcon Icon { get; set; }
         }
 
         /// <summary>
@@ -33,7 +34,7 @@ namespace xIMU_GUI
         {
             BackgroundWorker backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
-            backgroundWorker.RunWorkerAsync(new MessageBoxArgs { Text = text, Caption = "" });
+            backgroundWorker.RunWorkerAsync(new MessageBoxArgs { Text = text, Caption = "", Icon = MessageBoxIcon.None });
         }
 
         /// <summary>
@@ -49,7 +50,14 @@ namespace xIMU_GUI
         {
             BackgroundWorker backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
-            backgroundWorker.RunWorkerAsync(new MessageBoxArgs { Text = text, Caption = caption });
+            backgroundWorker.RunWorkerAsync(new MessageBoxArgs { Text = text, Caption = caption, Icon = MessageBoxIcon.None });
+        }
+
+        public static void Show(string text, string caption, MessageBoxIcon icon)
+        {
+            BackgroundWorker backgroundWorker = new BackgroundWorker();
+            backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
+            backgroundWorker.RunWorkerAsync(new MessageBoxArgs { Text = text, Caption = caption, Icon = icon });
         }
 
         /// <summary>
@@ -58,7 +66,7 @@ namespace xIMU_GUI
         private static void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             MessageBoxArgs messageBoxArgs = e.Argument as MessageBoxArgs;
-            MessageBox.Show(messageBoxArgs.Text, messageBoxArgs.Caption);
+            MessageBox.Show(messageBoxArgs.Text, messageBoxArgs.Caption, MessageBoxButtons.OK, messageBoxArgs.Icon);
         }
     }
 }

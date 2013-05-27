@@ -310,7 +310,7 @@ namespace xIMU_GUI
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Error");
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     button_openPort.Text = "Open Port";
                     comboBox_portName.Enabled = true;
                     button_refreshList.Enabled = true;
@@ -358,7 +358,7 @@ namespace xIMU_GUI
         private void xIMUserial_ErrorMessageReceived(object sender, xIMU_API.ErrorData e)
         {
             if (e.ErrorCode == (ushort)xIMU_API.ErrorCodes.TransmitBufferOvun) return;      // ignore transmit buffer overrun errors as may be frequent with poor Bluetooth reception
-            MessageBoxThread.Show("Error message: " + e.GetMessage(), "Message From Device");
+            MessageBoxThread.Show("Error: " + e.GetMessage(), "Message From x-IMU", MessageBoxIcon.Error);
         }
 
         #endregion
@@ -520,7 +520,7 @@ namespace xIMU_GUI
                       xIMUfile.Read();
                       if (xIMUfile.PacketCounter.PacketsReceivedErrors != 0)
                       {
-                          MessageBox.Show(Convert.ToString(xIMUfile.PacketCounter.PacketsReceivedErrors) + " read errors occurred.", "Error");
+                          MessageBox.Show(Convert.ToString(xIMUfile.PacketCounter.PacketsReceivedErrors) + " read errors occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                       }
                       xIMUfile.Close();
                   });
@@ -556,7 +556,7 @@ namespace xIMU_GUI
             }
             else
             {
-                MessageBox.Show("The port is closed.", "Error");
+                MessageBox.Show("The port is closed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -572,7 +572,7 @@ namespace xIMU_GUI
             }
             else
             {
-                MessageBox.Show("The port is closed.", "Error");
+                MessageBox.Show("The port is closed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -618,7 +618,7 @@ namespace xIMU_GUI
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Error");
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -651,7 +651,7 @@ namespace xIMU_GUI
             }
             else
             {
-                MessageBox.Show("The port is closed.", "Error");
+                MessageBox.Show("The port is closed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -666,7 +666,7 @@ namespace xIMU_GUI
             }
             else
             {
-                MessageBox.Show("The port is closed.", "Error");
+                MessageBox.Show("The port is closed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -712,7 +712,7 @@ namespace xIMU_GUI
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Error");
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -849,7 +849,7 @@ namespace xIMU_GUI
                     {
                         if (!Enum.IsDefined(typeof(xIMU_API.CompatibleFirmwareVersions), Convert.ToInt32(appendedTextBoxTreeNode_FirmVersionMajorNum.TextBox.Text)))
                         {
-                            MessageBoxThread.Show("The detected firmware version is not fully compatible with this software version.", "Warning");
+                            MessageBoxThread.Show("The detected firmware version is not fully compatible with this software version.", "Warning", MessageBoxIcon.Warning);
                         }
                     }
 
@@ -858,7 +858,7 @@ namespace xIMU_GUI
             }
             catch
             {
-                MessageBox.Show("Invalid register address (0x" + string.Format("{0:X4}", registerData.Address) + ") and/or value (0x" + string.Format("{0:X4}", registerData.Value) + ")", "Error");
+                MessageBox.Show("Invalid register address (0x" + string.Format("{0:X4}", registerData.Address) + ") and/or value (0x" + string.Format("{0:X4}", registerData.Value) + ")", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -984,7 +984,7 @@ namespace xIMU_GUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\r" + treeNode.ToString(), "Error");
+                MessageBox.Show(ex.Message + "\r" + treeNode.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 registerData = null;
             }
             return registerData;
@@ -1140,7 +1140,7 @@ namespace xIMU_GUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1151,7 +1151,7 @@ namespace xIMU_GUI
         {
             if (checkBox_displayReceivedCommandMessages.Checked)
             {
-                MessageBoxThread.Show("Command message: " + e.GetMessage(), "Message From Device");
+                MessageBoxThread.Show("Command confirmed: " + e.GetMessage(), "Message From x-IMU", MessageBoxIcon.Information);
             }
         }
 
@@ -1444,7 +1444,7 @@ namespace xIMU_GUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1519,7 +1519,7 @@ namespace xIMU_GUI
                 }
                 catch
                 {
-                    MessageBox.Show("Invalid file path.", "Error");
+                    MessageBox.Show("Invalid file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -1576,7 +1576,8 @@ namespace xIMU_GUI
                                   "Digital I/O packets " + (LogOrConvert ? "received:\t" : "read:") + "\t\t\t" + Convert.ToString(packetCount.DigitalIODataPacketsReceived) + "\r\r" +
                                   "Files created:" +
                                   filesCreated,
-                                  (LogOrConvert ? "Log" : "Conversion") + " Report");
+                                  (LogOrConvert ? "Log" : "Conversion") + " Report",
+                                  MessageBoxIcon.Information);
         }
 
         /// <summary>
@@ -1625,7 +1626,7 @@ namespace xIMU_GUI
 
             if (!File.Exists(textBox_convertBinaryFileFilePath.Text))
             {
-                MessageBox.Show("File does not exist.", "Error");
+                MessageBox.Show("File does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -1661,7 +1662,7 @@ namespace xIMU_GUI
                   }
                   catch (Exception ex)
                   {
-                      MessageBox.Show(ex.Message, "Error");
+                      MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                   }
                   CloseFiles(ConvertedFiles);
 
@@ -1678,6 +1679,7 @@ namespace xIMU_GUI
                   #endregion
               });
             thread.Start();
+
             #endregion
         }
 
@@ -1813,7 +1815,7 @@ namespace xIMU_GUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1868,7 +1870,7 @@ namespace xIMU_GUI
                 }
                 catch
                 {
-                    MessageBox.Show("Invalid file path.", "Error");
+                    MessageBox.Show("Invalid file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -1882,7 +1884,7 @@ namespace xIMU_GUI
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Error");
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -1899,7 +1901,7 @@ namespace xIMU_GUI
                 hardIronDatasetFile.Close();
                 hardIronDatasetFile = null;
 
-                MessageBoxThread.Show("Calibrated inertial/magnetic packets received: " + Convert.ToString(packetCountAtStartOfHardIronDatasetCollection.Difference(xIMUserial.PacketCounter).CalInertialMagDataPacketsReceived), "Message");
+                MessageBoxThread.Show("Calibrated inertial/magnetic packets received: " + Convert.ToString(packetCountAtStartOfHardIronDatasetCollection.Difference(xIMUserial.PacketCounter).CalInertialMagDataPacketsReceived), "Message", MessageBoxIcon.Information);
 
                 button_collectHardIronCalDatasetBrowse.Enabled = true;
                 textBox_collectHardIronCalDatasetFilePath.Enabled = true;
@@ -1944,7 +1946,7 @@ namespace xIMU_GUI
 
             if (!File.Exists(textBox_hardIronCalFilePath.Text))
             {
-                MessageBox.Show("File does not exist.", "Error");
+                MessageBox.Show("File does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -2018,13 +2020,13 @@ namespace xIMU_GUI
                 }
 
                 MessageBoxThread.Show("Hard-iron calibration complete. Standard deviation = " + string.Format("{0:0.000000}", biasAndSD[3]) + ".\r\r" +
-                                      "The magnetometer hard-iron bias registers have been updated.", "Message");
+                                      "The magnetometer hard-iron bias registers have been updated.", "Message", MessageBoxIcon.Information);
 
                 #endregion
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             #region Re-enable hard-iron calibration form controls
@@ -2042,18 +2044,6 @@ namespace xIMU_GUI
         #endregion
 
         #region Bootloader
-
-        /// <summary>
-        /// Tab control selected index changed event to display warning to user.
-        /// </summary>
-        private void tabControl_main_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tabControl_main.SelectedIndex == tabControl_main.TabPages.IndexOf(tabPage_bootloader))
-            {
-                MessageBox.Show("Register values may be lost when new firmware is uploaded.\r" +
-                                "Save registers to file before uploading new firmware.", "Warning");
-            }
-        }
 
         /// <summary>
         /// Button click event to open file dialog and copy result to firmware file path textbox.
@@ -2087,7 +2077,7 @@ namespace xIMU_GUI
 
             if (!File.Exists(textBox_bootloaderFilePath.Text))
             {
-                MessageBox.Show("File does not exist.", "Error");
+                MessageBox.Show("File does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -2097,7 +2087,7 @@ namespace xIMU_GUI
 
             if (xIMUserial.IsOpen)
             {
-                MessageBox.Show("Serial port must be closed.", "Error");
+                MessageBox.Show("Serial port must be closed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -2133,7 +2123,7 @@ namespace xIMU_GUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             #endregion
@@ -2190,7 +2180,7 @@ namespace xIMU_GUI
             }
             catch
             {
-                MessageBox.Show("Browser launch failed.", "Error");
+                MessageBox.Show("Browser launch failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
