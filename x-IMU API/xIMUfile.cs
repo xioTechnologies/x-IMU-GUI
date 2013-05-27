@@ -110,7 +110,7 @@ namespace xIMU_API
         private void WriteByteArray(byte[] byteArray)
         {
             fileStream.Write(byteArray, 0, byteArray.Length);
-            privPacketCounter.WriteRegisterPacketsSent++;
+            privPacketCounter.WriteRegisterPacketsWritten++;
         }
 
         #endregion
@@ -152,27 +152,31 @@ namespace xIMU_API
                     }
                     catch
                     {
-                        privPacketCounter.PacketsReceivedErrors++;
-
+                        privPacketCounter.PacketsReadErrors++;
                     }
                     if (dataObject != null)                                         // if packet successfully deconstructed
                     {
-                        if (dataObject is ErrorData) { OnErrorMessageRead((ErrorData)dataObject); privPacketCounter.ErrorPacketsReceived++; }
-                        else if (dataObject is CommandData) { OnCommandMessageRead((CommandData)dataObject); privPacketCounter.CommandPacketsReceived++; }
-                        else if (dataObject is RegisterData) { OnRegisterDataRead((RegisterData)dataObject); privPacketCounter.RegisterDataPacketsReceived++; }
-                        else if (dataObject is DateTimeData) { OnDateTimeDataRead((DateTimeData)dataObject); privPacketCounter.DateTimeDataPacketsReceived++; }
-                        else if (dataObject is RawBattThermData) { OnRawBattThermDataRead((RawBattThermData)dataObject); privPacketCounter.RawBattThermDataPacketsReceived++; }
-                        else if (dataObject is CalBattThermData) { OnCalBattThermDataRead((CalBattThermData)dataObject); privPacketCounter.CalBattThermDataPacketsReceived++; }
-                        else if (dataObject is RawInertialMagData) { OnRawInertialMagDataRead((RawInertialMagData)dataObject); privPacketCounter.RawInertialMagDataPacketsReceived++; }
-                        else if (dataObject is CalInertialMagData) { OnCalInertialMagDataRead((CalInertialMagData)dataObject); privPacketCounter.CalInertialMagDataPacketsReceived++; }
-                        else if (dataObject is QuaternionData) { OnQuaternionDataRead((QuaternionData)dataObject); privPacketCounter.QuaternionDataPacketsReceived++; }
-                        else if (dataObject is DigitalIOdata) { OnDigitalIODataRead((DigitalIOdata)dataObject); privPacketCounter.DigitalIODataPacketsReceived++; }
-                        privPacketCounter.TotalPacketsReceived++;
+                        OnxIMUdataRead(dataObject);
+                        if (dataObject is ErrorData) { OnErrorMessageRead((ErrorData)dataObject); privPacketCounter.ErrorPacketsRead++; }
+                        else if (dataObject is CommandData) { OnCommandMessageRead((CommandData)dataObject); privPacketCounter.CommandPacketsRead++; }
+                        else if (dataObject is RegisterData) { OnRegisterDataRead((RegisterData)dataObject); privPacketCounter.RegisterDataPacketsRead++; }
+                        else if (dataObject is DateTimeData) { OnDateTimeDataRead((DateTimeData)dataObject); privPacketCounter.DateTimeDataPacketsRead++; }
+                        else if (dataObject is RawBattThermData) { OnRawBattThermDataRead((RawBattThermData)dataObject); privPacketCounter.RawBattThermDataPacketsRead++; }
+                        else if (dataObject is CalBattThermData) { OnCalBattThermDataRead((CalBattThermData)dataObject); privPacketCounter.CalBattThermDataPacketsRead++; }
+                        else if (dataObject is RawInertialMagData) { OnRawInertialMagDataRead((RawInertialMagData)dataObject); privPacketCounter.RawInertialMagDataPacketsRead++; }
+                        else if (dataObject is CalInertialMagData) { OnCalInertialMagDataRead((CalInertialMagData)dataObject); privPacketCounter.CalInertialMagDataPacketsRead++; }
+                        else if (dataObject is QuaternionData) { OnQuaternionDataRead((QuaternionData)dataObject); privPacketCounter.QuaternionDataPacketsRead++; }
+                        else if (dataObject is DigitalIOdata) { OnDigitalIODataRead((DigitalIOdata)dataObject); privPacketCounter.DigitalIODataPacketsRead++; }
+                        privPacketCounter.TotalPacketsRead++;
                     }
                     readBufferIndex = 0;                                            // reset buffer.
                 }
             }
         }
+
+        public delegate void onxIMUdataRead(object sender, xIMUdata e);
+        public event onxIMUdataRead xIMUdataRead;
+        protected virtual void OnxIMUdataRead(xIMUdata e) { if (xIMUdataRead != null) xIMUdataRead(this, e); }
 
         public delegate void onErrorMessageRead(object sender, ErrorData e);
         public event onErrorMessageRead ErrorMessageRead;

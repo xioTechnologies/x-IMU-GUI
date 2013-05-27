@@ -273,7 +273,7 @@ namespace xIMU_API
         #region Constructors
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="DigitalIOData"/> class.
+        /// Initialises a new instance of the <see cref="DigitalIOdata"/> class.
         /// </summary>
         public DigitalIOdata()
             : this(null, new PortData())
@@ -281,7 +281,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="DigitalIOData"/> class.
+        /// Initialises a new instance of the <see cref="DigitalIOdata"/> class.
         /// </summary>
         /// <param name="state">
         /// State of the digital I/O port.  true (1) = logic high, false (0) = logic low.
@@ -293,7 +293,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="DigitalIOData"/> class.
+        /// Initialises a new instance of the <see cref="DigitalIOdata"/> class.
         /// </summary>     
         /// <param name="isInput">
         /// Mode of the digital I/O port.  true (1) = input, false (0) = output.

@@ -6,7 +6,7 @@ using System.Text;
 namespace xIMU_API
 {
     /// <summary>
-    /// Packet count class tracks number of packets set and received.
+    /// Packet count class tracks number of packets read and written.
     /// </summary>
     public class PacketCount
     {
@@ -14,25 +14,25 @@ namespace xIMU_API
 
         private enum index
         {
-            PacketsReceivedErrors,
-            TotalPacketsReceived,
-            ErrorPacketsReceived,
-            CommandPacketsReceived,
-            RegisterDataPacketsReceived,
-            DateTimeDataPacketsReceived,
-            RawBattThermDataPacketsReceived,
-            CalBattThermDataPacketsReceived,
-            RawInertialMagDataPacketsReceived,
-            CalInertialMagDataPacketsReceived,
-            QuaternionDataPacketsReceived,
-            DigitalIODataPacketsReceived,
-            TotalPacketsSent,
-            CommandPacketsSent,
-            ReadRegisterPacketsSent,
-            WriteRegisterPacketsSent,
-            ReadDateTimePacketsSent,
-            WriteDateTimePacketsSent,
-            DigitalIODataPacketsSent,
+            PacketsReadErrors,
+            TotalPacketsRead,
+            ErrorPacketsRead,
+            CommandPacketsRead,
+            RegisterDataPacketsRead,
+            DateTimeDataPacketsRead,
+            RawBattThermDataPacketsRead,
+            CalBattThermDataPacketsRead,
+            RawInertialMagDataPacketsRead,
+            CalInertialMagDataPacketsRead,
+            QuaternionDataPacketsRead,
+            DigitalIODataPacketsRead,
+            TotalPacketsWritten,
+            CommandPacketsWritten,
+            ReadRegisterPacketsWritten,
+            WriteRegisterPacketsWritten,
+            ReadDateTimePacketsWritten,
+            WriteDateTimePacketsWritten,
+            DigitalIODataPacketsWritten,
             NumIndexes
         }
 
@@ -42,106 +42,106 @@ namespace xIMU_API
 
         #region Properties
 
-        #region Packet received counters
+        #region Packet read counters
 
         /// <summary>
-        /// Gets or sets the number of packet received errors.
+        /// Gets or sets the number of packet read errors.
         /// </summary>
-        public int PacketsReceivedErrors { get { return array[(int)index.PacketsReceivedErrors]; } set { array[(int)index.PacketsReceivedErrors] = value; } }
+        public int PacketsReadErrors { get { return array[(int)index.PacketsReadErrors]; } set { array[(int)index.PacketsReadErrors] = value; } }
 
         /// <summary>
-        /// Gets or sets the total number of packets received.
+        /// Gets or sets the total number of packets read.
         /// </summary>
-        public int TotalPacketsReceived { get { return array[(int)index.TotalPacketsReceived]; } set { array[(int)index.TotalPacketsReceived] = value; } }
+        public int TotalPacketsRead { get { return array[(int)index.TotalPacketsRead]; } set { array[(int)index.TotalPacketsRead] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of error data packets received.
+        /// Gets or sets the number of error data packets read.
         /// </summary>
-        public int ErrorPacketsReceived { get { return array[(int)index.ErrorPacketsReceived]; } set { array[(int)index.ErrorPacketsReceived] = value; } }
+        public int ErrorPacketsRead { get { return array[(int)index.ErrorPacketsRead]; } set { array[(int)index.ErrorPacketsRead] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of command data packets received.
+        /// Gets or sets the number of command data packets read.
         /// </summary>
-        public int CommandPacketsReceived { get { return array[(int)index.CommandPacketsReceived]; } set { array[(int)index.CommandPacketsReceived] = value; } }
+        public int CommandPacketsRead { get { return array[(int)index.CommandPacketsRead]; } set { array[(int)index.CommandPacketsRead] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of register data packets received.
+        /// Gets or sets the number of register data packets read.
         /// </summary>
-        public int RegisterDataPacketsReceived { get { return array[(int)index.RegisterDataPacketsReceived]; } set { array[(int)index.RegisterDataPacketsReceived] = value; } }
+        public int RegisterDataPacketsRead { get { return array[(int)index.RegisterDataPacketsRead]; } set { array[(int)index.RegisterDataPacketsRead] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of date/time data packets received.
+        /// Gets or sets the number of date/time data packets read.
         /// </summary>
-        public int DateTimeDataPacketsReceived { get { return array[(int)index.DateTimeDataPacketsReceived]; } set { array[(int)index.DateTimeDataPacketsReceived] = value; } }
+        public int DateTimeDataPacketsRead { get { return array[(int)index.DateTimeDataPacketsRead]; } set { array[(int)index.DateTimeDataPacketsRead] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of raw battery and thermometer data packets received.
+        /// Gets or sets the number of raw battery and thermometer data packets read.
         /// </summary>
-        public int RawBattThermDataPacketsReceived { get { return array[(int)index.RawBattThermDataPacketsReceived]; } set { array[(int)index.RawBattThermDataPacketsReceived] = value; } }
+        public int RawBattThermDataPacketsRead { get { return array[(int)index.RawBattThermDataPacketsRead]; } set { array[(int)index.RawBattThermDataPacketsRead] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of calibration battery and thermometer data packets received.
+        /// Gets or sets the number of calibration battery and thermometer data packets read.
         /// </summary>
-        public int CalBattThermDataPacketsReceived { get { return array[(int)index.CalBattThermDataPacketsReceived]; } set { array[(int)index.CalBattThermDataPacketsReceived] = value; } }
+        public int CalBattThermDataPacketsRead { get { return array[(int)index.CalBattThermDataPacketsRead]; } set { array[(int)index.CalBattThermDataPacketsRead] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of raw inertial/magnetic data packets received.
+        /// Gets or sets the number of raw inertial/magnetic data packets read.
         /// </summary>
-        public int RawInertialMagDataPacketsReceived { get { return array[(int)index.RawInertialMagDataPacketsReceived]; } set { array[(int)index.RawInertialMagDataPacketsReceived] = value; } }
+        public int RawInertialMagDataPacketsRead { get { return array[(int)index.RawInertialMagDataPacketsRead]; } set { array[(int)index.RawInertialMagDataPacketsRead] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of calibrated inertial/magnetic data packets received.
+        /// Gets or sets the number of calibrated inertial/magnetic data packets read.
         /// </summary>
-        public int CalInertialMagDataPacketsReceived { get { return array[(int)index.CalInertialMagDataPacketsReceived]; } set { array[(int)index.CalInertialMagDataPacketsReceived] = value; } }
+        public int CalInertialMagDataPacketsRead { get { return array[(int)index.CalInertialMagDataPacketsRead]; } set { array[(int)index.CalInertialMagDataPacketsRead] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of quaternion packets received.
+        /// Gets or sets the number of quaternion packets read.
         /// </summary>
-        public int QuaternionDataPacketsReceived { get { return array[(int)index.QuaternionDataPacketsReceived]; } set { array[(int)index.QuaternionDataPacketsReceived] = value; } }
+        public int QuaternionDataPacketsRead { get { return array[(int)index.QuaternionDataPacketsRead]; } set { array[(int)index.QuaternionDataPacketsRead] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of digital I/O data packets received.
+        /// Gets or sets the number of digital I/O data packets read.
         /// </summary>
-        public int DigitalIODataPacketsReceived { get { return array[(int)index.DigitalIODataPacketsReceived]; } set { array[(int)index.DigitalIODataPacketsReceived] = value; } }
+        public int DigitalIODataPacketsRead { get { return array[(int)index.DigitalIODataPacketsRead]; } set { array[(int)index.DigitalIODataPacketsRead] = value; } }
 
         #endregion
 
-        #region Packet send counters
+        #region Packet write counters
 
         /// <summary>
-        /// Gets or sets the total number of packets sent.
+        /// Gets or sets the total number of packets written.
         /// </summary>  
-        public int TotalPacketsSent { get { return array[(int)index.TotalPacketsSent]; } set { array[(int)index.TotalPacketsSent] = value; } }
+        public int TotalPacketsWritten { get { return array[(int)index.TotalPacketsWritten]; } set { array[(int)index.TotalPacketsWritten] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of command packets sent.
+        /// Gets or sets the number of command packets written.
         /// </summary>  
-        public int CommandPacketsSent { get { return array[(int)index.CommandPacketsSent]; } set { array[(int)index.CommandPacketsSent] = value; } }
+        public int CommandPacketsWritten { get { return array[(int)index.CommandPacketsWritten]; } set { array[(int)index.CommandPacketsWritten] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of read register packets sent.
+        /// Gets or sets the number of read register packets written.
         /// </summary>  
-        public int ReadRegisterPacketsSent { get { return array[(int)index.ReadRegisterPacketsSent]; } set { array[(int)index.ReadRegisterPacketsSent] = value; } }
+        public int ReadRegisterPacketsWritten { get { return array[(int)index.ReadRegisterPacketsWritten]; } set { array[(int)index.ReadRegisterPacketsWritten] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of write register packets sent.
+        /// Gets or sets the number of write register packets written.
         /// </summary>  
-        public int WriteRegisterPacketsSent { get { return array[(int)index.WriteRegisterPacketsSent]; } set { array[(int)index.WriteRegisterPacketsSent] = value; } }
+        public int WriteRegisterPacketsWritten { get { return array[(int)index.WriteRegisterPacketsWritten]; } set { array[(int)index.WriteRegisterPacketsWritten] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of read date/time packets sent.
+        /// Gets or sets the number of read date/time packets written.
         /// </summary>  
-        public int ReadDateTimePacketsSent { get { return array[(int)index.ReadDateTimePacketsSent]; } set { array[(int)index.ReadDateTimePacketsSent] = value; } }
+        public int ReadDateTimePacketsWritten { get { return array[(int)index.ReadDateTimePacketsWritten]; } set { array[(int)index.ReadDateTimePacketsWritten] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of write date/time packets sent.
+        /// Gets or sets the number of write date/time packets written.
         /// </summary>  
-        public int WriteDateTimePacketsSent { get { return array[(int)index.WriteDateTimePacketsSent]; } set { array[(int)index.WriteDateTimePacketsSent] = value; } }
+        public int WriteDateTimePacketsWritten { get { return array[(int)index.WriteDateTimePacketsWritten]; } set { array[(int)index.WriteDateTimePacketsWritten] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of digital I/O data packets sent.
+        /// Gets or sets the number of digital I/O data packets written.
         /// </summary>
-        public int DigitalIODataPacketsSent { get { return array[(int)index.DigitalIODataPacketsSent]; } set { array[(int)index.DigitalIODataPacketsSent] = value; } }
+        public int DigitalIODataPacketsWritten { get { return array[(int)index.DigitalIODataPacketsWritten]; } set { array[(int)index.DigitalIODataPacketsWritten] = value; } }
 
         #endregion
 
@@ -189,20 +189,20 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Returns the difference in the number of packets between this and another specified <see cref="PacketCount"/> instance.
+        /// Returns the difference between the current and previous packet count.
         /// </summary>
-        /// <param name="packetCount">
-        /// <see cref="PacketCount"/> instance that this instance will be subtracted from for the result.
+        /// <param name="previousPacketCount">
+        /// Previous packet count.
         /// </param>
         /// <returns>
-        /// Returns the difference in the number of packets between this specified <see cref="PacketCount"/> instance.
+        /// Difference between the current and previous packet count.
         /// </returns>
-        public PacketCount Difference(PacketCount packetCount)
+        public PacketCount Difference(PacketCount previousPacketCount)
         {
-            PacketCount packetCountDiff = new PacketCount(packetCount);
+            PacketCount packetCountDiff = new PacketCount(this);
             for (int i = 0; i < array.Length; i++)
             {
-                packetCountDiff.array[i] -= array[i];
+                packetCountDiff.array[i] -= previousPacketCount.array[i];
             }
             return packetCountDiff;
         }

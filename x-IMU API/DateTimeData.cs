@@ -230,5 +230,20 @@ namespace xIMU_API
         }
 
         #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Converts date/time data to string.
+        /// </summary>
+        /// <returns>
+        /// Date/time data as string.
+        /// </returns>
+        public string ConvertToString()
+        {
+            return String.Format("{0:F}", DateTimeObject);
+        }
+
+        #endregion
     }
 }
