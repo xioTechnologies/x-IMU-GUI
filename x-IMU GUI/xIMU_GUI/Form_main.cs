@@ -46,7 +46,7 @@ namespace xIMU_GUI
         /// Oscilloscope objects used to display individual sensor data.
         /// </summary>
         /// <remarks>
-        /// Requires Osc_DLL.dll version 2.8.2, see http://www.oscilloscope-lib.com/. Oscilloscope.cs wrapper class provided by Frank Greenlee.
+        /// Requires Osc_DLL.dll version 2.8.2, see http://www.oscilloscope-lib.com/. Original Oscilloscope.cs wrapper class provided by Frank Greenlee.
         /// </remarks>
         private Oscilloscope battOscilloscope, thermOscilloscope, gyroOscilloscope, accelOscilloscope, magOscilloscope, eulerOscilloscope;
 
@@ -63,7 +63,7 @@ namespace xIMU_GUI
         /// <summary>
         /// ASCII files object for data logger.
         /// </summary>
-        private xIMU_API.ASCIIdataFiles dataLoggerFiles;
+        private xIMU_API.CSVfileWriter dataLoggerFiles;
 
         /// <summary>
         /// Packet count object used to calculate the number of packets logged using the data logger.
@@ -73,12 +73,12 @@ namespace xIMU_GUI
         /// <summary>
         /// ASCII files object for converted binary files.
         /// </summary>
-        private xIMU_API.ASCIIdataFiles convertedBinaryFiles;
+        private xIMU_API.CSVfileWriter convertedBinaryFiles;
 
         /// <summary>
         /// ASCII files object for hard-iron calibration dataset logging.
         /// </summary>
-        private xIMU_API.ASCIIdataFiles hardIronCalDataFiles;
+        private xIMU_API.CSVfileWriter hardIronCalDataFiles;
 
         /// <summary>
         /// Packet count object used to calculate the number of packets logged using the hard-iron calibration dataset logger.
@@ -115,7 +115,7 @@ namespace xIMU_GUI
             magOscilloscope = Oscilloscope.CreateScope("Oscilloscope/magOscilloscope_settings.ini", "");
             eulerOscilloscope = Oscilloscope.CreateScope("Oscilloscope/eulerOscilloscope_settings.ini", "");
             cuboid3D = new Cuboid3D(new float[] { 6, 4, 2 }, new string[] { "Cuboid3D/Right.png", "Cuboid3D/Left.png", "Cuboid3D/Back.png",
-                                                                            "Cuboid3D/Front.png", "Cuboid3D/Top.png", "Cuboid3D/Bottom.png"});
+                                                                                       "Cuboid3D/Front.png", "Cuboid3D/Top.png", "Cuboid3D/Bottom.png"});
             digitalIOpanel = new DigitalIOpanel();
             digitalIOpanel.StateChanged += new DigitalIOpanel.onStateChanged(digitalIOpanel_StateChanged);
 
@@ -1439,7 +1439,7 @@ namespace xIMU_GUI
                 try
                 {
                     dataLoggerStartPacketCount = new xIMU_API.PacketCount(xIMUserial.PacketCounter);
-                    dataLoggerFiles = new xIMU_API.ASCIIdataFiles(textBox_dataLoggerFilePath.Text);
+                    dataLoggerFiles = new xIMU_API.CSVfileWriter(textBox_dataLoggerFilePath.Text);
                     button_dataLoggerStart.Text = "Stop Logging";
                     textBox_dataLoggerFilePath.Enabled = false;
                     button_dataLoggerFilePathBrowse.Enabled = false;
@@ -1557,7 +1557,7 @@ namespace xIMU_GUI
               {
                   try
                   {
-                      convertedBinaryFiles = new xIMU_API.ASCIIdataFiles(Path.GetDirectoryName(textBox_convertBinaryFileFilePath.Text) + "\\" + Path.GetFileNameWithoutExtension(textBox_convertBinaryFileFilePath.Text));
+                      convertedBinaryFiles = new xIMU_API.CSVfileWriter(Path.GetDirectoryName(textBox_convertBinaryFileFilePath.Text) + "\\" + Path.GetFileNameWithoutExtension(textBox_convertBinaryFileFilePath.Text));
                       xIMU_API.xIMUfile xIMUfile = new xIMU_API.xIMUfile(textBox_convertBinaryFileFilePath.Text);
                       xIMUfile.xIMUdataRead += new xIMU_API.xIMUfile.onxIMUdataRead(xIMUfile_xIMUdataRead);
                       xIMUfile.Read();
@@ -1662,7 +1662,7 @@ namespace xIMU_GUI
                 try
                 {
                     hardIronCalStartPacketCount = new xIMU_API.PacketCount(xIMUserial.PacketCounter);
-                    hardIronCalDataFiles = new xIMU_API.ASCIIdataFiles(textBox_collectHardIronCalDatasetFilePath.Text);
+                    hardIronCalDataFiles = new xIMU_API.CSVfileWriter(textBox_collectHardIronCalDatasetFilePath.Text);
                     button_collectHardIronCalDatasetStartLogging.Text = "Stop Logging";
                     textBox_collectHardIronCalDatasetFilePath.Enabled = false;
                     button_collectHardIronCalDatasetBrowse.Enabled = false;
@@ -1737,7 +1737,7 @@ namespace xIMU_GUI
                 processInfo.Arguments = " -src " + "\"" + textBox_hardIronCalFilePath.Text + "\"" +
                                         " -des " + "\"" + resultPath + "\"" +
                                         " -row " + "1" +
-                                        " -col " + "6" +
+                                        " -col " + "7" +
                                         " -ext " + "True";
                 processInfo.UseShellExecute = false;
                 Process process = Process.Start(processInfo);

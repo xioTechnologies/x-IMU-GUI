@@ -1462,7 +1462,7 @@
             appendedTextBoxTreeNode_FirmwareVersion = new System.Windows.Forms.TreeNode("Firmware Version (read-only):", new AppendedTreeNodeTextBox[] {
             appendedTextBoxTreeNode_FirmVersionMajorNum,
             appendedTextBoxTreeNode_FirmVersionMinorNum});
-            appendedTextBoxTreeNode_DeviceID = new AppendedTreeNodeTextBox("ID (read only):");
+            appendedTextBoxTreeNode_DeviceID = new AppendedTreeNodeTextBox("Device ID (read only):");
             appendedTextBoxTreeNode_DeviceID.TextBox.ReadOnly = true;
             appendedComboBoxTreeNode_buttonMode = new AppendedTreeNodeComboBox("Button Mode:");
             appendedComboBoxTreeNode_buttonMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1645,7 +1645,7 @@
             appendedTextBoxTreeNode_algoGainKp,
             appendedTextBoxTreeNode_algoGainKi});
             appendedTextBoxTreeNode_algoInitKp = new AppendedTreeNodeTextBox("Initial Proportional Gain:");
-            appendedTextBoxTreeNode_algoInitPeriod = new AppendedTreeNodeTextBox("Ramp-Down Period (s):");
+            appendedTextBoxTreeNode_algoInitPeriod = new AppendedTreeNodeTextBox("Initialisation Period (s):");
             System.Windows.Forms.TreeNode treeNode_algoInitialisation = new System.Windows.Forms.TreeNode("Initialisation", new System.Windows.Forms.TreeNode[] {
             appendedTextBoxTreeNode_algoInitKp,
             appendedTextBoxTreeNode_algoInitPeriod});
