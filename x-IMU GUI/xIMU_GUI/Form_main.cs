@@ -1013,15 +1013,6 @@ namespace xIMU_GUI
         }
 
         /// <summary>
-        /// Sends command packet calcualte gyroscope bias parameters.
-        /// </summary>
-        private void button_calcGyroBiasParams_Click(object sender, EventArgs e)
-        {
-            SendCommandPacket(xIMU_API.CommandCodes.CalcGyroBiasParams);
-        } 
-
-
-        /// <summary>
         /// Sends command packet to lookup accelerometer sensitivity.
         /// </summary>
         private void button_lookupAccelSensitivity_Click(object sender, EventArgs e)

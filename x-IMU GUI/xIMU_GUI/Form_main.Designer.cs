@@ -59,12 +59,12 @@
             this.button_tare = new System.Windows.Forms.Button();
             this.button_resetAlgorithm = new System.Windows.Forms.Button();
             this.groupBox_sensorCalibration = new System.Windows.Forms.GroupBox();
-            this.button_calcGyroBiasParams = new System.Windows.Forms.Button();
             this.button_sampleGyroBiasAtT2 = new System.Windows.Forms.Button();
             this.button_lookupAccelBiasAndSens = new System.Windows.Forms.Button();
             this.button_measMagParameters = new System.Windows.Forms.Button();
             this.button_sampleGyroBiasAtT1 = new System.Windows.Forms.Button();
             this.groupBox_general = new System.Windows.Forms.GroupBox();
+            this.button_resetSleepTimer = new System.Windows.Forms.Button();
             this.button_sleep = new System.Windows.Forms.Button();
             this.button_resetDevice = new System.Windows.Forms.Button();
             this.tabPage_ViewSensorData = new System.Windows.Forms.TabPage();
@@ -133,7 +133,6 @@
             this.label_compatibleFirmwareVersions = new System.Windows.Forms.Label();
             this.label_APIversion = new System.Windows.Forms.Label();
             this.label_GUIversion = new System.Windows.Forms.Label();
-            this.button_resetSleepTimer = new System.Windows.Forms.Button();
             this.tabControl_main.SuspendLayout();
             this.tabPage_serialPort.SuspendLayout();
             this.groupBox_packetCounts.SuspendLayout();
@@ -212,7 +211,6 @@
             this.tabControl_main.SelectedIndex = 0;
             this.tabControl_main.Size = new System.Drawing.Size(812, 490);
             this.tabControl_main.TabIndex = 10;
-            this.tabControl_main.SelectedIndexChanged += new System.EventHandler(this.tabControl_main_SelectedIndexChanged);
             // 
             // tabPage_serialPort
             // 
@@ -472,7 +470,6 @@
             // 
             // groupBox_sensorCalibration
             // 
-            this.groupBox_sensorCalibration.Controls.Add(this.button_calcGyroBiasParams);
             this.groupBox_sensorCalibration.Controls.Add(this.button_sampleGyroBiasAtT2);
             this.groupBox_sensorCalibration.Controls.Add(this.button_lookupAccelBiasAndSens);
             this.groupBox_sensorCalibration.Controls.Add(this.button_measMagParameters);
@@ -484,16 +481,6 @@
             this.groupBox_sensorCalibration.TabIndex = 1;
             this.groupBox_sensorCalibration.TabStop = false;
             this.groupBox_sensorCalibration.Text = "Sensor Calibration";
-            // 
-            // button_calcGyroBiasParams
-            // 
-            this.button_calcGyroBiasParams.Location = new System.Drawing.Point(316, 20);
-            this.button_calcGyroBiasParams.Name = "button_calcGyroBiasParams";
-            this.button_calcGyroBiasParams.Size = new System.Drawing.Size(147, 23);
-            this.button_calcGyroBiasParams.TabIndex = 4;
-            this.button_calcGyroBiasParams.Text = "Calc. Gyro. Bias. Params.";
-            this.button_calcGyroBiasParams.UseVisualStyleBackColor = true;
-            this.button_calcGyroBiasParams.Click += new System.EventHandler(this.button_calcGyroBiasParams_Click);
             // 
             // button_sampleGyroBiasAtT2
             // 
@@ -507,7 +494,7 @@
             // 
             // button_lookupAccelBiasAndSens
             // 
-            this.button_lookupAccelBiasAndSens.Location = new System.Drawing.Point(469, 20);
+            this.button_lookupAccelBiasAndSens.Location = new System.Drawing.Point(316, 20);
             this.button_lookupAccelBiasAndSens.Name = "button_lookupAccelBiasAndSens";
             this.button_lookupAccelBiasAndSens.Size = new System.Drawing.Size(147, 23);
             this.button_lookupAccelBiasAndSens.TabIndex = 1;
@@ -517,7 +504,7 @@
             // 
             // button_measMagParameters
             // 
-            this.button_measMagParameters.Location = new System.Drawing.Point(622, 20);
+            this.button_measMagParameters.Location = new System.Drawing.Point(469, 20);
             this.button_measMagParameters.Name = "button_measMagParameters";
             this.button_measMagParameters.Size = new System.Drawing.Size(147, 23);
             this.button_measMagParameters.TabIndex = 2;
@@ -547,6 +534,16 @@
             this.groupBox_general.TabIndex = 0;
             this.groupBox_general.TabStop = false;
             this.groupBox_general.Text = "General";
+            // 
+            // button_resetSleepTimer
+            // 
+            this.button_resetSleepTimer.Location = new System.Drawing.Point(316, 20);
+            this.button_resetSleepTimer.Name = "button_resetSleepTimer";
+            this.button_resetSleepTimer.Size = new System.Drawing.Size(147, 23);
+            this.button_resetSleepTimer.TabIndex = 2;
+            this.button_resetSleepTimer.Text = "Reset Sleep Timer";
+            this.button_resetSleepTimer.UseVisualStyleBackColor = true;
+            this.button_resetSleepTimer.Click += new System.EventHandler(this.button_resetSleepTimer_Click);
             // 
             // button_sleep
             // 
@@ -1291,16 +1288,6 @@
             this.label_GUIversion.TabIndex = 23;
             this.label_GUIversion.Text = "GUI version:";
             // 
-            // button_resetSleepTimer
-            // 
-            this.button_resetSleepTimer.Location = new System.Drawing.Point(316, 20);
-            this.button_resetSleepTimer.Name = "button_resetSleepTimer";
-            this.button_resetSleepTimer.Size = new System.Drawing.Size(147, 23);
-            this.button_resetSleepTimer.TabIndex = 2;
-            this.button_resetSleepTimer.Text = "Reset Sleep Timer";
-            this.button_resetSleepTimer.UseVisualStyleBackColor = true;
-            this.button_resetSleepTimer.Click += new System.EventHandler(this.button_resetSleepTimer_Click);
-            // 
             // Form_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1400,7 +1387,6 @@
         private System.Windows.Forms.GroupBox groupBox_sensorCalibration;
         private System.Windows.Forms.Button button_sampleGyroBiasAtT1;
         private System.Windows.Forms.Button button_sampleGyroBiasAtT2;
-        private System.Windows.Forms.Button button_calcGyroBiasParams;
         private System.Windows.Forms.Button button_lookupAccelBiasAndSens;
         private System.Windows.Forms.Button button_measMagParameters;
         private System.Windows.Forms.GroupBox groupBox_algorithm;
