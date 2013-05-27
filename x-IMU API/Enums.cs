@@ -12,7 +12,7 @@ namespace xIMU_API
     /// </summary>
     public enum CompatibleFirmwareVersions
     {
-        v1_x = 1
+        v2_x = 2
     }
 
     #endregion
@@ -85,8 +85,9 @@ namespace xIMU_API
     public enum CommandCodes
     {
         NullCommand,
-        Reset,
+        ResetDevice,
         Sleep,
+        ResetSleepTimer,
         SampleGyroBiasTemp1,
         SampleGyroBiasTemp2,
         CalcGyroBiasParams,
@@ -225,6 +226,7 @@ namespace xIMU_API
     /// </remarks> 
     enum ButtonModes
     {
+        Disabled,
         ResetDevice,
         SleepWake,
         ResetAlgorithm,
