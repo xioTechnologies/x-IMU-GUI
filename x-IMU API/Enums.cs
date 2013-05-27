@@ -12,7 +12,7 @@ namespace xIMU_API
     /// </summary>
     public enum CompatibleFirmwareVersions
     {
-        v2_x = 2
+        v3_x = 3
     }
 
     #endregion
@@ -211,6 +211,8 @@ namespace xIMU_API
         AuxiliaryPortMode,
         DigitalIOdirection,
         DigitalIOoutputRate,
+        AlgorithmMinValidMag,
+        AlgorithmMaxValidMag,
         numRegisters
     }
 
@@ -329,7 +331,8 @@ namespace xIMU_API
     enum MotionTrigWakeUpModes
     {
         Disabled,
-        Enabled
+        LowSensitivity,
+        HighSensitivity
     }
 
     /// <summary>

@@ -213,6 +213,8 @@ namespace xIMU_API
                 case ((ushort)RegisterAddresses.AlgorithmKi): return Qvals.AlgorithmKi;
                 case ((ushort)RegisterAddresses.AlgorithmInitKp): return Qvals.AlgorithmInitKp;
                 case ((ushort)RegisterAddresses.AlgorithmInitPeriod): return Qvals.AlgorithmInitPeriod;
+                case ((ushort)RegisterAddresses.AlgorithmMinValidMag): return Qvals.CalibratedMag;
+                case ((ushort)RegisterAddresses.AlgorithmMaxValidMag): return Qvals.CalibratedMag;
                 case ((ushort)RegisterAddresses.TareQuat0): return Qvals.Quaternion;
                 case ((ushort)RegisterAddresses.TareQuat1): return Qvals.Quaternion;
                 case ((ushort)RegisterAddresses.TareQuat2): return Qvals.Quaternion;
