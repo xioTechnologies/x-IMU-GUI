@@ -11,17 +11,17 @@ namespace x_IMU_API
     public class RawInertialAndMagneticData : xIMUdata
     {
         /// <summary>
-        /// Gets or sets the raw gyroscope ADC data in LSBs. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Gets or sets the raw gyroscope ADC data in lsb. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </summary>
         public short[] Gyroscope { get; set; }
 
         /// <summary>
-        /// Gets or sets the raw accelerometer ADC data in LSBs. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Gets or sets the raw accelerometer ADC data in lsb. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </summary>
         public short[] Accelerometer { get; set; }
 
         /// <summary>
-        /// Gets or sets the raw magnetometer ADC data in LSBs. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Gets or sets the raw magnetometer ADC data in lsb. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </summary>
         public short[] Magnetometer { get; set; }
 
@@ -37,13 +37,13 @@ namespace x_IMU_API
         /// Initialises a new instance of the <see cref="RawInertialAndMagneticData"/> class.
         /// </summary>
         /// <param name="gyroscope">
-        /// Raw gyroscope ADC data in LSBs. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Raw gyroscope ADC data in lsb. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </param>
         /// <param name="accelerometer">
-        /// Raw accelerometer ADC data in LSBs. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Raw accelerometer ADC data in lsb. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </param>  
         /// <param name="magnetometer">
-        /// Raw magnetometer ADC data in LSBs. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Raw magnetometer ADC data in lsb. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </param>  
         public RawInertialAndMagneticData(short[] gyroscope, short[] accelerometer, short[] magnetometer)
         {

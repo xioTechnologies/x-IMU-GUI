@@ -11,12 +11,12 @@ namespace x_IMU_API
     public class RawBatteryAndThermometerData : xIMUdata
     {
         /// <summary>
-        /// Gets or sets the raw battery voltage ADC data in LSBs.
+        /// Gets or sets the raw battery voltage ADC data in lsb.
         /// </summary>
         public short BatteryVoltage { get; set; }
 
         /// <summary>
-        /// Gets or sets the raw Thermometer ADC data in LSBs.
+        /// Gets or sets the raw Thermometer ADC data in lsb.
         /// </summary>
         public short Thermometer { get; set; }
 
@@ -32,10 +32,10 @@ namespace x_IMU_API
         /// Initialises a new instance of the <see cref="RawBatteryAndThermometerData"/> class.
         /// </summary>
         /// <param name="batteryVoltage">
-        /// Raw battery voltage ADC data in LSBs.
+        /// Raw battery voltage ADC data in lsb.
         /// </param>
         /// <param name="thermometer">
-        /// Raw Thermometer ADC data in LSBs.
+        /// Raw Thermometer ADC data in lsb.
         /// </param>        
         public RawBatteryAndThermometerData(short batteryVoltage, short thermometer)
         {

@@ -11,22 +11,22 @@ namespace x_IMU_API
     public class RawADXL345busData : xIMUdata
     {
         /// <summary>
-        /// Gets or sets raw accelerometer ADC data in LSBs. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Gets or sets raw accelerometer ADC data in lsb. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </summary>
         public short[] ADXL345_A { get; set; }
 
         /// <summary>
-        /// Gets or sets raw accelerometer ADC data in LSBs. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Gets or sets raw accelerometer ADC data in lsb. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </summary>
         public short[] ADXL345_B { get; set; }
 
         /// <summary>
-        /// Gets or sets raw accelerometer ADC data in LSBs. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Gets or sets raw accelerometer ADC data in lsb. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </summary>
         public short[] ADXL345_C { get; set; }
 
         /// <summary>
-        /// Gets or sets raw accelerometer ADC data in LSBs. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Gets or sets raw accelerometer ADC data in lsb. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </summary>
         public short[] ADXL345_D { get; set; }
 
@@ -42,16 +42,16 @@ namespace x_IMU_API
         /// Initialises a new instance of the <see cref="RawADXL345busData"/> class.
         /// </summary>
         /// <param name="ADXL345_A">
-        /// Raw accelerometer ADC data in LSBs. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Raw accelerometer ADC data in lsb. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </param>
         /// <param name="ADXL345_B">
-        /// Raw accelerometer ADC data in LSBs. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Raw accelerometer ADC data in lsb. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </param>
         /// <param name="ADXL345_C">
-        /// Raw accelerometer ADC data in LSBs. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Raw accelerometer ADC data in lsb. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </param>
         /// <param name="ADXL345_D">
-        /// Raw accelerometer ADC data in LSBs. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Raw accelerometer ADC data in lsb. Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </param>
         public RawADXL345busData(short[] ADXL345_A, short[] ADXL345_B, short[] ADXL345_C, short[] ADXL345_D)
         {

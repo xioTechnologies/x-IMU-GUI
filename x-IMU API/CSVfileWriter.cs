@@ -162,7 +162,7 @@ namespace x_IMU_API
         /// </param>
         public void WriteErrorData(ErrorData errorData)
         {
-            WriteCSVlineAtFileIndex(errorData.ErrorCode.ToString() + "," + errorData.GetMessage(), FileIndexes.Errors);
+            WriteCSVlineAtFileIndex(((ushort)errorData.ErrorCode).ToString() + "," + errorData.GetMessage(), FileIndexes.Errors);
             PacketsWrittenCounter.ErrorPackets++;
         }
 
