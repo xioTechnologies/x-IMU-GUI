@@ -1032,7 +1032,7 @@
             this.button_collectHardIronCalDatasetBrowse.TabIndex = 49;
             this.button_collectHardIronCalDatasetBrowse.Text = "Browse...";
             this.button_collectHardIronCalDatasetBrowse.UseVisualStyleBackColor = true;
-            this.button_collectHardIronCalDatasetBrowse.Click += new System.EventHandler(this.buttoncollectHardIronCalDatasetBrowse_Click);
+            this.button_collectHardIronCalDatasetBrowse.Click += new System.EventHandler(this.buttonCollectHardIronCalDatasetBrowse_Click);
             // 
             // label_collectHardIronCalDatasetFilePath
             // 
@@ -1051,6 +1051,7 @@
             this.textBox_collectHardIronCalDatasetFilePath.Name = "textBox_collectHardIronCalDatasetFilePath";
             this.textBox_collectHardIronCalDatasetFilePath.Size = new System.Drawing.Size(526, 20);
             this.textBox_collectHardIronCalDatasetFilePath.TabIndex = 48;
+            this.textBox_collectHardIronCalDatasetFilePath.TextChanged += new System.EventHandler(this.textBox_collectHardIronCalDatasetFilePath_TextChanged);
             // 
             // button_collectHardIronCalDatasetStartLogging
             // 
@@ -1445,12 +1446,15 @@
         private System.Windows.Forms.Label label_compatibleFirmwareVersionNums;
         private System.Windows.Forms.LinkLabel linkLabel_sourceforgenetprojectstaoframework;
         private System.Windows.Forms.LinkLabel linkLabel_wwwoscilloscopelibcom;
-        private AppendedTreeView appendedTreeView_registers;
 
         #region appendedTreeView_registers design code and child nodes
 
+        private AppendedTreeView appendedTreeView_registers;
+
         private void InitializeAppendedTreeViewComponents()
         {
+            #region General
+
             appendedTextBoxTreeNode_FirmVersionMajorNum = new AppendedTreeNodeTextBox("Major Number:");
             appendedTextBoxTreeNode_FirmVersionMajorNum.TextBox.ReadOnly = true;
             appendedTextBoxTreeNode_FirmVersionMinorNum = new AppendedTreeNodeTextBox("Minor Number:");
@@ -1472,20 +1476,37 @@
             appendedTextBoxTreeNode_DeviceID,
             appendedComboBoxTreeNode_buttonMode
             });
-            appendedTextBoxTreeNode_battSens = new AppendedTreeNodeTextBox("Sensitivity (V/lsb):");
+
+            #endregion
+
+            #region Sensor Calibration Parameters
+
+            #region Battery Voltmeter
+
+            appendedTextBoxTreeNode_battSens = new AppendedTreeNodeTextBox("Sensitivity (lsb/V):");
             appendedTextBoxTreeNode_battBias = new AppendedTreeNodeTextBox("Bias (lsb):");
             treeNode_battVoltmeter = new System.Windows.Forms.TreeNode("Battery Voltmeter", new AppendedTreeNodeTextBox[] {
             appendedTextBoxTreeNode_battSens,
             appendedTextBoxTreeNode_battBias});
-            appendedTextBoxTreeNode_thermSens = new AppendedTreeNodeTextBox("Sensitivity (˚C/lsb):");
+
+            #endregion
+
+            #region Thermometer
+
+            appendedTextBoxTreeNode_thermSens = new AppendedTreeNodeTextBox("Sensitivity (lsb/˚C):");
             appendedTextBoxTreeNode_thermBias = new AppendedTreeNodeTextBox("Bias (lsb):");
             treeNode_thermometer = new System.Windows.Forms.TreeNode("Thermometer", new AppendedTreeNodeTextBox[] {
             appendedTextBoxTreeNode_thermSens,
             appendedTextBoxTreeNode_thermBias});
+
+            #endregion
+
+            #region Gyroscope
+
             appendedTextBoxTreeNode_gyroSensX = new AppendedTreeNodeTextBox("X:");
             appendedTextBoxTreeNode_gyroSensY = new AppendedTreeNodeTextBox("Y:");
             appendedTextBoxTreeNode_gyroSensZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_gyroSens = new System.Windows.Forms.TreeNode("Sensitivity (˚/s/lsb)", new AppendedTreeNodeTextBox[] {
+            treeNode_gyroSens = new System.Windows.Forms.TreeNode("Sensitivity (lsb/˚/s)", new AppendedTreeNodeTextBox[] {
             appendedTextBoxTreeNode_gyroSensX,
             appendedTextBoxTreeNode_gyroSensY,
             appendedTextBoxTreeNode_gyroSensZ});
@@ -1499,7 +1520,7 @@
             appendedTextBoxTreeNode_gyroBiasTempSensX = new AppendedTreeNodeTextBox("X:");
             appendedTextBoxTreeNode_gyroBiasTempSensY = new AppendedTreeNodeTextBox("Y:");
             appendedTextBoxTreeNode_gyroBiasTempSensZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_gyroBiasTempSens = new System.Windows.Forms.TreeNode("Bias Temperature Sensitivity (lsb/˚C)", new AppendedTreeNodeTextBox[] { 
+            treeNode_gyroBiasTempSens = new System.Windows.Forms.TreeNode("Bias Temperature Sensitivity (˚C/lsb)", new AppendedTreeNodeTextBox[] { 
             appendedTextBoxTreeNode_gyroBiasTempSensX,
             appendedTextBoxTreeNode_gyroBiasTempSensY,
             appendedTextBoxTreeNode_gyroBiasTempSensZ});
@@ -1529,6 +1550,11 @@
             treeNode_gyroscope = new System.Windows.Forms.TreeNode("Gyroscope", new System.Windows.Forms.TreeNode[] {
             treeNode_gyroSens,
             treeNode_gyroBiasParent});
+
+            #endregion
+
+            #region Acceleroemter
+
             appendedComboBoxTreeNode_accelFullScale = new AppendedTreeNodeComboBox("Full-Scale:");
             appendedComboBoxTreeNode_accelFullScale.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             appendedComboBoxTreeNode_accelFullScale.ComboBox.Width = 50;
@@ -1538,7 +1564,7 @@
             appendedTextBoxTreeNode_accelSensX = new AppendedTreeNodeTextBox("X:");
             appendedTextBoxTreeNode_accelSensY = new AppendedTreeNodeTextBox("Y:");
             appendedTextBoxTreeNode_accelSensZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_accelSens = new System.Windows.Forms.TreeNode("Sensitivity (g/lsb)", new AppendedTreeNodeTextBox[] {
+            treeNode_accelSens = new System.Windows.Forms.TreeNode("Sensitivity (lsb/g)", new AppendedTreeNodeTextBox[] {
             appendedTextBoxTreeNode_accelSensX,
             appendedTextBoxTreeNode_accelSensY,
             appendedTextBoxTreeNode_accelSensZ});
@@ -1553,6 +1579,11 @@
             appendedComboBoxTreeNode_accelFullScale,
             treeNode_accelSens,
             treeNode_accelBias});
+
+            #endregion
+
+            #region Magnetometer
+
             appendedComboBoxTreeNode_magFullScale = new AppendedTreeNodeComboBox("Full Scale:");
             appendedComboBoxTreeNode_magFullScale.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             appendedComboBoxTreeNode_magFullScale.ComboBox.Width = 60;
@@ -1566,7 +1597,7 @@
             appendedTextBoxTreeNode_magSensX = new AppendedTreeNodeTextBox("X:");
             appendedTextBoxTreeNode_magSensY = new AppendedTreeNodeTextBox("Y:");
             appendedTextBoxTreeNode_magSensZ = new AppendedTreeNodeTextBox("Z:");
-            treeNode_magSens = new System.Windows.Forms.TreeNode("Sensitivity (G/lsb)", new AppendedTreeNodeTextBox[] {
+            treeNode_magSens = new System.Windows.Forms.TreeNode("Sensitivity (lsb/G)", new AppendedTreeNodeTextBox[] {
             appendedTextBoxTreeNode_magSensX,
             appendedTextBoxTreeNode_magSensY,
             appendedTextBoxTreeNode_magSensZ});
@@ -1595,6 +1626,13 @@
             treeNode_gyroscope,
             treeNode_accelerometer,
             treeNode_magnetometer});
+
+            #endregion
+
+            #endregion
+
+            #region Algorithm Parameters
+
             appendedComboBoxTreeNode_algorithmMode = new AppendedTreeNodeComboBox("Algorithm Mode:");
             appendedComboBoxTreeNode_algorithmMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             appendedComboBoxTreeNode_algorithmMode.ComboBox.Width = 60;
@@ -1631,6 +1669,11 @@
             treeNode_algoInitialisation,
             treeNode_magneticFieldRejection,
             appendedTextBoxTreeNode_TareQuaternion});
+
+            #endregion
+
+            #region Data Output Settings
+
             appendedComboBoxTreeNode_sensorDataMode = new AppendedTreeNodeComboBox("Sensor Data Mode:");
             appendedComboBoxTreeNode_sensorDataMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             appendedComboBoxTreeNode_sensorDataMode.ComboBox.Items.Add("Raw ADC results");
@@ -1681,9 +1724,19 @@
             appendedComboBoxTreeNode_battThermOutputRate,
             appendedComboBoxTreeNode_inertialMagOutputRate,
             appendedComboBoxTreeNode_quatOutputRate});
+
+            #endregion
+
+            #region SD Card
+
             appendedTextBoxTreeNode_SDcardNewFileName = new AppendedTreeNodeTextBox("New File Name (integer):");
             treeNode_SDcard = new System.Windows.Forms.TreeNode("SD Card", new AppendedTreeNodeTextBox[] {
             appendedTextBoxTreeNode_SDcardNewFileName});
+
+            #endregion
+
+            #region Power Management
+
             appendedComboBoxTreeNode_battShutdownVoltage = new AppendedTreeNodeTextBox("Battery Shutdown Voltage (V):");
             appendedTextBoxTreeNode_sleepTimer = new AppendedTreeNodeTextBox("Sleep Timer (s):");
             appendedComboBoxTreeNode_motionTriggeredWakeup = new AppendedTreeNodeComboBox("Motion Triggered Wake Up:");
@@ -1702,11 +1755,19 @@
             appendedTextBoxTreeNode_sleepTimer,
             appendedComboBoxTreeNode_motionTriggeredWakeup,
             appendedComboBoxTreeNode_bluetoothPower});
+
+            #endregion
+
+            #region Auxiliary port
+
             appendedComboBoxTreeNode_auxiliaryPortMode = new AppendedTreeNodeComboBox("Auxiliary Port Mode:");
             appendedComboBoxTreeNode_auxiliaryPortMode.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             appendedComboBoxTreeNode_auxiliaryPortMode.ComboBox.Width = 100;
             appendedComboBoxTreeNode_auxiliaryPortMode.ComboBox.Items.Add("Disabled");
             appendedComboBoxTreeNode_auxiliaryPortMode.ComboBox.Items.Add("Digital I/O");
+
+            #region Digital I/O
+
             appendedComboBoxTreeNode_digitalIOdirection = new AppendedTreeNodeComboBox("I/O Direction:");
             appendedComboBoxTreeNode_digitalIOdirection.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             appendedComboBoxTreeNode_digitalIOdirection.ComboBox.Width = 210;
@@ -1735,9 +1796,15 @@
             treeNode_digitalIO = new System.Windows.Forms.TreeNode("Digital I/O", new AppendedTreeNode[] {
             appendedComboBoxTreeNode_digitalIOdirection,
             appendedComboBoxTreeNode_digitalIOoutputRate});
+
+            #endregion
+
             treeNode_auxiliaryPort = new System.Windows.Forms.TreeNode("Auxiliary Port", new System.Windows.Forms.TreeNode[] {
             appendedComboBoxTreeNode_auxiliaryPortMode,
             treeNode_digitalIO});
+
+            #endregion
+
             appendedTreeView_registers.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNodeGeneral,
             treeNode_sensorCalParam,
@@ -1748,13 +1815,19 @@
             treeNode_auxiliaryPort});
         }
 
+        #region General
+
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_FirmVersionMajorNum;
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_FirmVersionMinorNum;
         private System.Windows.Forms.TreeNode appendedTextBoxTreeNode_FirmwareVersion;
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_DeviceID;
         private AppendedTreeNodeComboBox appendedComboBoxTreeNode_buttonMode;
         private System.Windows.Forms.TreeNode treeNodeGeneral;
-        private AppendedTreeNodeComboBox appendedComboBoxTreeNode_sensorDataMode;
+
+        #endregion
+
+        #region Sensor Calibration Parameters
+
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_battSens;
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_battBias;
         private System.Windows.Forms.TreeNode treeNode_battVoltmeter;
@@ -1809,6 +1882,11 @@
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_magHIbiasZ;
         private System.Windows.Forms.TreeNode treeNode_magHIbias;
         private System.Windows.Forms.TreeNode treeNode_magnetometer;
+
+        #endregion
+
+        #region Algorithm Parameters
+
         private AppendedTreeNodeComboBox appendedComboBoxTreeNode_algorithmMode;
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_algoGainKp;
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_algoGainKi;
@@ -1822,24 +1900,56 @@
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_tareQuatElement2;
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_tareQuatElement3;
         private System.Windows.Forms.TreeNode treeNode_algorithmParameters;
+
+        #endregion
+
+        #region Data Output Settings
+
+        private AppendedTreeNodeComboBox appendedComboBoxTreeNode_sensorDataMode;
         private AppendedTreeNodeComboBox appendedComboBoxTreeNode_dateTimeOutputRate;
         private AppendedTreeNodeComboBox appendedComboBoxTreeNode_battThermOutputRate;
         private AppendedTreeNodeComboBox appendedComboBoxTreeNode_inertialMagOutputRate;
         private AppendedTreeNodeComboBox appendedComboBoxTreeNode_quatOutputRate;
         private System.Windows.Forms.TreeNode treeNode_dataOutputRate;
+
+        #endregion
+
+        #region SD Card
+
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_SDcardNewFileName;
         private System.Windows.Forms.TreeNode treeNode_SDcard;
+
+        #endregion
+
+        #region Power Management
+
         private AppendedTreeNodeTextBox appendedComboBoxTreeNode_battShutdownVoltage;
-        private System.Windows.Forms.TreeNode treeNode_powerManagement;
         private AppendedTreeNodeTextBox appendedTextBoxTreeNode_sleepTimer;
         private AppendedTreeNodeComboBox appendedComboBoxTreeNode_motionTriggeredWakeup;
         private AppendedTreeNodeComboBox appendedComboBoxTreeNode_bluetoothPower;
+        private System.Windows.Forms.TreeNode treeNode_powerManagement;
+
+        #endregion
+
+        #region Auxiliary Port
+
         private AppendedTreeNodeComboBox appendedComboBoxTreeNode_auxiliaryPortMode;
+
+        #region Digital I/O
+
         private AppendedTreeNodeComboBox appendedComboBoxTreeNode_digitalIOdirection;
         private AppendedTreeNodeComboBox appendedComboBoxTreeNode_digitalIOoutputRate;
         private System.Windows.Forms.TreeNode treeNode_digitalIO;
+
+        #endregion
+
+
         private System.Windows.Forms.TreeNode treeNode_auxiliaryPort;
 
         #endregion
+
+
+        #endregion
+
     }
 }

@@ -1,24 +1,28 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xIMU_GUI", "xIMU_GUI\xIMU_GUI.csproj", "{FEE4386B-8760-4490-B637-39F8B9BD4185}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xIMU_GUI", "xIMU_GUI\xIMU_GUI.csproj", "{520185A1-0026-48D8-898E-EB4C7055F80D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FEE4386B-8760-4490-B637-39F8B9BD4185}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FEE4386B-8760-4490-B637-39F8B9BD4185}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FEE4386B-8760-4490-B637-39F8B9BD4185}.Debug|x86.ActiveCfg = Debug|x86
-		{FEE4386B-8760-4490-B637-39F8B9BD4185}.Debug|x86.Build.0 = Debug|x86
-		{FEE4386B-8760-4490-B637-39F8B9BD4185}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FEE4386B-8760-4490-B637-39F8B9BD4185}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FEE4386B-8760-4490-B637-39F8B9BD4185}.Release|x86.ActiveCfg = Release|x86
-		{FEE4386B-8760-4490-B637-39F8B9BD4185}.Release|x86.Build.0 = Release|x86
+		{520185A1-0026-48D8-898E-EB4C7055F80D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{520185A1-0026-48D8-898E-EB4C7055F80D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{520185A1-0026-48D8-898E-EB4C7055F80D}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{520185A1-0026-48D8-898E-EB4C7055F80D}.Debug|x86.ActiveCfg = Debug|x86
+		{520185A1-0026-48D8-898E-EB4C7055F80D}.Debug|x86.Build.0 = Debug|x86
+		{520185A1-0026-48D8-898E-EB4C7055F80D}.Release|Any CPU.ActiveCfg = Release|x86
+		{520185A1-0026-48D8-898E-EB4C7055F80D}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{520185A1-0026-48D8-898E-EB4C7055F80D}.Release|Mixed Platforms.Build.0 = Release|x86
+		{520185A1-0026-48D8-898E-EB4C7055F80D}.Release|x86.ActiveCfg = Release|x86
+		{520185A1-0026-48D8-898E-EB4C7055F80D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

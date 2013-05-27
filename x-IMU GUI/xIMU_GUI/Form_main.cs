@@ -30,7 +30,7 @@ namespace xIMU_GUI
         /// <summary>
         /// RegisterData array used to parse register data between xIMUserial and GUI threads.
         /// </summary>
-        private xIMU_API.RegisterData[] treeViewRegisterData;
+        private xIMU_API.RegisterData[] treeViewRegisterDataBuffer;
 
         /// <summary>
         /// DateTime object used to buffer date/time data between xIMUserial and GUI threads.
@@ -56,60 +56,29 @@ namespace xIMU_GUI
         private DigitalIOpanel digitalIOpanel;
 
         /// <summary>
-        /// Packet count data at of start of data logging.  This is used to calculate the number of packets received during data logging.
+        /// ASCII files object for data logger.
         /// </summary>
-        private xIMU_API.PacketCount packetCountAtStartOfDataLogging;
+        private xIMU_API.ASCIIdataFiles dataLoggerFiles;
 
         /// <summary>
-        /// Global flag set/cleared used by data logger functionality to enable/disabled file writes in individual data receive events.
+        /// Packet count object used to calculate the number of packets logged using the data logger.
         /// </summary>
-        private bool loggingToFile = false;
+        private xIMU_API.PacketCount dataLoggerStartPacketCount;
 
         /// <summary>
-        /// Packet count data at start of hard-iron calibration dataset collection. This is used to calculate the number of packets received during data logging.
+        /// ASCII files object for converted binary files.
         /// </summary>
-        private xIMU_API.PacketCount packetCountAtStartOfHardIronDatasetCollection;
+        private xIMU_API.ASCIIdataFiles convertedBinaryFiles;
 
         /// <summary>
-        /// File used to collect hard-iron calibration dataset.  A non-null value is used to enable file writes in data received event.
+        /// ASCII files object for hard-iron calibration dataset logging.
         /// </summary>
-        private StreamWriter hardIronDatasetFile = null;
-
-        #region Data files
+        private xIMU_API.ASCIIdataFiles hardIronCalDataFiles;
 
         /// <summary>
-        /// Index of each file within array.  Each label is used as part of file name.
+        /// Packet count object used to calculate the number of packets logged using the hard-iron calibration dataset logger.
         /// </summary>
-        private enum FileIndexes
-        {
-            DateTime,
-            RawBattTherm,
-            CalBattTherm,
-            RawInertialMagnetic,
-            CalInertialMagnetic,
-            Quaternion,
-            RotationMatrix,
-            EulerAngles,
-            DigitalIO,
-            NumberOfFiles
-        }
-
-        /// <summary>
-        /// CSV column headings for each file type.
-        /// </summary>
-        private string[] CSVheadings;
-
-        /// <summary>
-        /// Array of files used by data logging functionality.  A non-null value is used to enable file writes in data received event.
-        /// </summary>
-        private StreamWriter[] LoggedFiles;
-
-        /// <summary>
-        /// Array of files used by binary file conversion functionality.  A non-null value is used to enable file writes in data received event.
-        /// </summary>
-        private StreamWriter[] ConvertedFiles;
-
-        #endregion
+        private xIMU_API.PacketCount hardIronCalStartPacketCount;
 
         #endregion
 
@@ -129,32 +98,11 @@ namespace xIMU_GUI
         #region Form load/close
 
         /// <summary>
-        /// Form closed load event to set initial form control values and start form update timer.
+        /// Form load event to set initial form control values and start form update timer.
         /// </summary>
         private void Form_main_Load(object sender, EventArgs e)
         {
-            #region Initialise variables
-
-            treeViewRegisterData = new xIMU_API.RegisterData[(int)xIMU_API.RegisterAddresses.numRegisters];
-
-            CSVheadings = new string[(int)FileIndexes.NumberOfFiles];
-            CSVheadings[(int)FileIndexes.DateTime] = null;
-            CSVheadings[(int)FileIndexes.RawBattTherm] = "Battery voltage (lsb),Thermometer (lsb)";
-            CSVheadings[(int)FileIndexes.CalBattTherm] = "Battery voltage (V),Thermometer (degC)";
-            CSVheadings[(int)FileIndexes.RawInertialMagnetic] = "Gyroscope X (lsb),Gyroscope Y (lsb),Gyroscope Z (lsb),Accelerometer X (lsb),Accelerometer Y (lsb),Accelerometer Z (lsb),Magnetometer X (lsb),Magnetometer Y (lsb),Magnetometer Z (lsb)";
-            CSVheadings[(int)FileIndexes.CalInertialMagnetic] = "Gyroscope X (deg/s),Gyroscope Y (deg/s),Gyroscope Z (deg/s),Accelerometer X (g),Accelerometer Y (g),Accelerometer Z (g),Magnetometer X (G),Magnetometer Y (G),Magnetometer Z (G)";
-            CSVheadings[(int)FileIndexes.Quaternion] = "Element 1, Element 2, Element 3, Element 4";
-            CSVheadings[(int)FileIndexes.RotationMatrix] = "Element 11, Element 12, Element 13, Element 21, Element 22, Element 23, Element 31, Element 32, Element 33";
-            CSVheadings[(int)FileIndexes.EulerAngles] = "Roll | phi | X (deg), Pitch | theta | Y (deg), Yaw | psi | Z (deg)";
-            CSVheadings[(int)FileIndexes.DigitalIO] = "AX0 Direction, AX1 Direction, AX2 Direction, AX3 Direction, AX4 Direction, AX5 Direction, AX6 Direction, AX7 Direction, AX0 State, AX1 State, AX2 State, AX3 State, AX4 State, AX5 State, AX6 State, AX7 State,";
-
-            LoggedFiles = new StreamWriter[(int)FileIndexes.NumberOfFiles];
-            ConvertedFiles = new StreamWriter[(int)FileIndexes.NumberOfFiles];
-
-            #endregion
-
-            #region Create peripheral GUI objects
-
+            // Create peripheral GUI objects
             battOscilloscope = Oscilloscope.CreateScope("ScopeSettings/battOscilloscope_settings.ini", "");
             thermOscilloscope = Oscilloscope.CreateScope("ScopeSettings/thermOscilloscope_settings.ini", "");
             gyroOscilloscope = Oscilloscope.CreateScope("ScopeSettings/gyroOscilloscope_settings.ini", "");
@@ -166,11 +114,9 @@ namespace xIMU_GUI
             digitalIOpanel = new DigitalIOpanel();
             digitalIOpanel.StateChanged += new DigitalIOpanel.onStateChanged(digitalIOpanel_StateChanged);
 
-            #endregion
-
-            #region Create x-IMU serial object
-
+            // Create x-IMU serial object
             xIMUserial = new xIMU_API.xIMUserial();
+            xIMUserial.xIMUdataReceived += new xIMU_API.xIMUserial.onxIMUdataReceived(xIMUserial_xIMUdataReceived);
             xIMUserial.ErrorMessageReceived += new xIMU_API.xIMUserial.onErrorMessageReceived(xIMUserial_ErrorMessageReceived);
             xIMUserial.CommandMessageReceived += new xIMU_API.xIMUserial.onCommandMessageReceived(xIMUserial_CommandMessageReceived);
             xIMUserial.RegisterDataReceived += new xIMU_API.xIMUserial.onRegisterDataReceived(xIMUserial_RegisterDataReceived);
@@ -182,51 +128,36 @@ namespace xIMU_GUI
             xIMUserial.QuaternionDataReceived += new xIMU_API.xIMUserial.onQuaternionDataReceived(xIMUserial_QuaternionDataReceived);
             xIMUserial.DigitalIODataReceived += new xIMU_API.xIMUserial.onDigitalIODataReceived(xIMUserial_DigitalIODataReceived);
 
-            #endregion
-
-            #region Create tool tip for registers
-
+            // Create register data buffer and tool tip
+            treeViewRegisterDataBuffer = new xIMU_API.RegisterData[(int)xIMU_API.RegisterAddresses.numRegisters];
             ToolTip toolTip = new ToolTip();
-            toolTip.ToolTipTitle = "Tip";
+            toolTip.ToolTipTitle = "Tip:";
             toolTip.SetToolTip(appendedTreeView_registers, "Right-click for action menu");
 
-            #endregion
-
-            #region Set constant form control values
-
+            // Set fixed form control values
             this.Text += " " + Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString();
             label_GUIversionNum.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             label_APIversionNum.Text = FileVersionInfo.GetVersionInfo("xIMU_API.dll").FileVersion.ToString();
             label_compatibleFirmwareVersionNums.Text = "";
-            int[] compatibleFirmMajorVerNums = (int[])Enum.GetValues(typeof(xIMU_API.CompatibleFirmwareVersions));
-            for (int i = 0; i < compatibleFirmMajorVerNums.Length; i++)
+            for (int i = 0; i < ((int[])Enum.GetValues(typeof(xIMU_API.CompatibleFirmwareVersions))).Length; i++)
             {
-                label_compatibleFirmwareVersionNums.Text += Convert.ToString(compatibleFirmMajorVerNums[i]) + ".x";
-                if (i < compatibleFirmMajorVerNums.Length - 1)
+                label_compatibleFirmwareVersionNums.Text += Convert.ToString(((int[])Enum.GetValues(typeof(xIMU_API.CompatibleFirmwareVersions)))[i]) + ".x";
+                if (i < ((int[])Enum.GetValues(typeof(xIMU_API.CompatibleFirmwareVersions))).Length - 1)
                 {
                     label_compatibleFirmwareVersionNums.Text += ", ";
                 }
             }
 
-            #endregion
-
-            #region Set default variable form control values
-
+            // Set default variable form control values
             refreshCOMportList();
             textBox_dataLoggerFilePath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + "LoggedData";
-            textBox_collectHardIronCalDatasetFilePath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + "HardIronCalDataset" + "_" + FileIndexes.CalInertialMagnetic.ToString() + ".csv";
-            textBox_hardIronCalFilePath.Text = textBox_collectHardIronCalDatasetFilePath.Text;
+            textBox_collectHardIronCalDatasetFilePath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\" + "HardIronCal";
 
-            #endregion
-
-            #region Create and start form update timer
-
+            // Create and start form update timer
             formUpdateTimer = new System.Windows.Forms.Timer();
             formUpdateTimer.Interval = 50;
             formUpdateTimer.Tick += new EventHandler(formUpdateTimer_Tick);
             formUpdateTimer.Start();
-
-            #endregion
         }
 
         /// <summary>
@@ -235,9 +166,9 @@ namespace xIMU_GUI
         private void Form_main_FormClosed(object sender, FormClosedEventArgs e)
         {
             xIMUserial.Close();
-            CloseFiles(LoggedFiles);
-            CloseFiles(ConvertedFiles);
-            hardIronDatasetFile.Close();
+            dataLoggerFiles.CloseFiles();
+            convertedBinaryFiles.CloseFiles();
+            hardIronCalDataFiles.CloseFiles();
         }
 
         #endregion
@@ -249,22 +180,18 @@ namespace xIMU_GUI
         /// </summary>
         private void formUpdateTimer_Tick(object sender, EventArgs e)
         {
-            #region Update packet counter text boxes
+            // Update packet counter text boxes
+            textBox_packetsReceived.Text = Convert.ToString(xIMUserial.PacketCounter.TotalPacketsRead);
+            textBox_packetsSent.Text = Convert.ToString(xIMUserial.PacketCounter.TotalPacketsWritten);
 
-            textBox_packetsReceived.Text = Convert.ToString(xIMUserial.PacketCounter.TotalPacketsReceived);
-            textBox_packetsSent.Text = Convert.ToString(xIMUserial.PacketCounter.TotalPacketsSent);
-
-            #endregion
-
-            #region Apply new register data to tree view
-
+            // Apply new register data to tree view
             bool needToRefresh = false;
             for (int i = 0; i < (int)xIMU_API.RegisterAddresses.numRegisters; i++)
             {
-                if (treeViewRegisterData[i] != null)                                // non-null data class indicates new data
+                if (treeViewRegisterDataBuffer[i] != null)                                // non-null data class indicates new data
                 {
-                    RegisterDataToTreeNode(treeViewRegisterData[i]);
-                    treeViewRegisterData[i] = null;                                 // flag data class as up-to-date
+                    RegisterDataToTreeNode(treeViewRegisterDataBuffer[i]);
+                    treeViewRegisterDataBuffer[i] = null;                                 // flag data class as up-to-date
                     needToRefresh = true;
                 }
             }
@@ -273,16 +200,11 @@ namespace xIMU_GUI
                 appendedTreeView_registers.Refresh();                               // refresh only once per timer tick
             }
 
-            #endregion
-
-            #region Update received date/time text box
-
+            // Update received date/time text box
             if (dateTimeData != null)
             {
-                textBox_receivedDataTime.Text = String.Format("{0:F}", dateTimeData.DateTimeObject);
+                textBox_receivedDataTime.Text = dateTimeData.ConvertToString();
             }
-
-            #endregion
         }
 
         #endregion
@@ -441,8 +363,7 @@ namespace xIMU_GUI
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "Select File";
-            saveFileDialog.Filter = "binary files (*.bin)|*.bin|All files (*.*)|*.*";
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            saveFileDialog.Filter = "x-IMU Binary Files (*.bin)|*.bin|All files (*.*)|*.*";
             saveFileDialog.FileName = "savedRegisters" + appendedTextBoxTreeNode_DeviceID.TextBox.Text + ".bin";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -507,9 +428,7 @@ namespace xIMU_GUI
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Select File";
-            openFileDialog.Filter = "binary files (*.bin)|*.bin|All files (*.*)|*.*";
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            openFileDialog.FileName = "savedRegisters.bin";
+            openFileDialog.Filter = "x-IMU Binary Files (*.bin)|*.bin|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 var thread = new Thread(
@@ -518,9 +437,9 @@ namespace xIMU_GUI
                       xIMU_API.xIMUfile xIMUfile = new xIMU_API.xIMUfile(openFileDialog.FileName.ToString());
                       xIMUfile.RegisterDataRead += new xIMU_API.xIMUfile.onRegisterDataRead(xIMUfile_RegisterDataRead);
                       xIMUfile.Read();
-                      if (xIMUfile.PacketCounter.PacketsReceivedErrors != 0)
+                      if (xIMUfile.PacketCounter.PacketsReadErrors != 0)
                       {
-                          MessageBox.Show(Convert.ToString(xIMUfile.PacketCounter.PacketsReceivedErrors) + " read errors occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                          MessageBox.Show(Convert.ToString(xIMUfile.PacketCounter.PacketsReadErrors) + " read errors occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                       }
                       xIMUfile.Close();
                   });
@@ -533,7 +452,7 @@ namespace xIMU_GUI
         /// </summary>
         private void xIMUfile_RegisterDataRead(object sender, xIMU_API.RegisterData e)
         {
-            treeViewRegisterData[(int)e.Address] = e;
+            treeViewRegisterDataBuffer[(int)e.Address] = e;
         }
 
         #endregion
@@ -628,7 +547,7 @@ namespace xIMU_GUI
         /// </summary>
         private void xIMUserial_RegisterDataReceived(object sender, xIMU_API.RegisterData e)
         {
-            treeViewRegisterData[(int)e.Address] = e;
+            treeViewRegisterDataBuffer[(int)e.Address] = e;
         }
 
         #endregion
@@ -785,7 +704,7 @@ namespace xIMU_GUI
                     case ((ushort)xIMU_API.RegisterAddresses.MagHardIronBiasX): treeNode = appendedTextBoxTreeNode_magHIbiasX; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)xIMU_API.RegisterAddresses.MagHardIronBiasY): treeNode = appendedTextBoxTreeNode_magHIbiasY; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)xIMU_API.RegisterAddresses.MagHardIronBiasZ): treeNode = appendedTextBoxTreeNode_magHIbiasZ; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
-                    
+
                     #endregion
 
                     #region Algorithm Parameters
@@ -804,7 +723,7 @@ namespace xIMU_GUI
 
                     #endregion
 
-                    #region Data Ouput Settings
+                    #region Data Output Settings
 
                     case ((ushort)xIMU_API.RegisterAddresses.SensorDataMode): treeNode = appendedComboBoxTreeNode_sensorDataMode; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
                     case ((ushort)xIMU_API.RegisterAddresses.DateTimeOutputRate): treeNode = appendedComboBoxTreeNode_dateTimeOutputRate; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
@@ -820,7 +739,7 @@ namespace xIMU_GUI
 
                     #endregion
 
-                    #region Power Managment
+                    #region Power Management
 
                     case ((ushort)xIMU_API.RegisterAddresses.BattShutdownVoltage): treeNode = appendedComboBoxTreeNode_battShutdownVoltage; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = Convert.ToString(registerData.floatValue); break;
                     case ((ushort)xIMU_API.RegisterAddresses.SleepTimer): treeNode = appendedTextBoxTreeNode_sleepTimer; ((AppendedTreeNodeTextBox)treeNode).TextBox.Text = (registerData.Value == 0 ? "Disabled" : Convert.ToString(registerData.Value)); break;
@@ -829,7 +748,7 @@ namespace xIMU_GUI
 
                     #endregion
 
-                    #region Auxilary Port
+                    #region Auxiliary Port
 
                     case ((ushort)xIMU_API.RegisterAddresses.AuxiliaryPortMode): treeNode = appendedComboBoxTreeNode_auxiliaryPortMode; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
                     case ((ushort)xIMU_API.RegisterAddresses.DigitalIOdirection): treeNode = appendedComboBoxTreeNode_digitalIOdirection; ((AppendedTreeNodeComboBox)treeNode).ComboBox.SelectedIndex = registerData.Value; break;
@@ -842,23 +761,18 @@ namespace xIMU_GUI
                 if (treeNode != null)
                 {
                     treeNode.TextColor = Color.Blue;
-
-                    #region Warning if device firmware is not listed as compatible
-
-                    if (treeNode == appendedTextBoxTreeNode_FirmVersionMajorNum)
+                    if (treeNode == appendedTextBoxTreeNode_FirmVersionMajorNum)    // Warning if device firmware is not listed as compatible
                     {
                         if (!Enum.IsDefined(typeof(xIMU_API.CompatibleFirmwareVersions), Convert.ToInt32(appendedTextBoxTreeNode_FirmVersionMajorNum.TextBox.Text)))
                         {
                             MessageBoxThread.Show("The detected firmware version is not fully compatible with this software version.", "Warning", MessageBoxIcon.Warning);
                         }
                     }
-
-                    #endregion
                 }
             }
             catch
             {
-                MessageBox.Show("Invalid register address (0x" + string.Format("{0:X4}", registerData.Address) + ") and/or value (0x" + string.Format("{0:X4}", registerData.Value) + ")", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxThread.Show("Invalid register address (0x" + string.Format("{0:X4}", registerData.Address) + ") and/or value (0x" + string.Format("{0:X4}", registerData.Value) + ")", "Error", MessageBoxIcon.Error);
             }
         }
 
@@ -947,7 +861,7 @@ namespace xIMU_GUI
 
                 #endregion
 
-                #region Data Ouput Settings
+                #region Data Output Settings
 
                 else if (treeNode.Equals(appendedComboBoxTreeNode_sensorDataMode)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.SensorDataMode; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_sensorDataMode.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
                 else if (treeNode.Equals(appendedComboBoxTreeNode_dateTimeOutputRate)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.DateTimeOutputRate; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_dateTimeOutputRate.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
@@ -963,7 +877,7 @@ namespace xIMU_GUI
 
                 #endregion
 
-                #region Power Managment
+                #region Power Management
 
                 else if (treeNode.Equals(appendedComboBoxTreeNode_battShutdownVoltage)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.BattShutdownVoltage; if (!addressOnly) registerData.floatValue = (float)Convert.ToDouble(appendedComboBoxTreeNode_battShutdownVoltage.TextBox.Text); }
                 else if (treeNode.Equals(appendedTextBoxTreeNode_sleepTimer)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.SleepTimer; if (!addressOnly) { string text = appendedTextBoxTreeNode_sleepTimer.TextBox.Text; registerData.Value = (string.Equals(text, "Disabled", StringComparison.CurrentCultureIgnoreCase) ? (ushort)0 : Convert.ToUInt16(text)); } }
@@ -972,7 +886,7 @@ namespace xIMU_GUI
 
                 #endregion
 
-                #region Auxilary Port
+                #region Auxiliary Port
 
                 else if (treeNode.Equals(appendedComboBoxTreeNode_auxiliaryPortMode)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.AuxiliaryPortMode; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_auxiliaryPortMode.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
                 else if (treeNode.Equals(appendedComboBoxTreeNode_digitalIOdirection)) { registerData.Address = (ushort)xIMU_API.RegisterAddresses.DigitalIOdirection; if (!addressOnly) { int selectedIndex = (int)appendedComboBoxTreeNode_digitalIOdirection.ComboBox.SelectedIndex; if (selectedIndex != -1) registerData.Value = (ushort)selectedIndex; else throw new Exception("Item not selected."); } }
@@ -1027,19 +941,11 @@ namespace xIMU_GUI
         }
 
         /// <summary>
-        /// Date/Time data received event to display data in form and write to file.  Will create new file if file not open.
+        /// Date/Time data received event to display data in form and write to file.
         /// </summary>
         private void xIMUserial_DateTimeDataReceived(object sender, xIMU_API.DateTimeData e)
         {
             dateTimeData = e;
-            if (loggingToFile)
-            {
-                if (LoggedFiles[(int)FileIndexes.DateTime] == null)
-                {
-                    LoggedFiles[(int)FileIndexes.DateTime] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_dataLoggerFilePath.Text) + "_" + FileIndexes.DateTime.ToString() + ".txt", false);
-                }
-                LoggedFiles[(int)FileIndexes.DateTime].WriteLine(String.Format("{0:F}", e.DateTimeObject));
-            }
         }
 
         #endregion
@@ -1157,135 +1063,7 @@ namespace xIMU_GUI
 
         #endregion
 
-        #region View sensor data & Data logger file writes
-
-        #region Sensor data received events & Data logger file writes
-
-        /// <summary>
-        /// Raw battery and thermometer data received event to write data to graph and file.  Will create new file if file not open.
-        /// </summary>
-        private void xIMUserial_RawBattThermDataReceived(object sender, xIMU_API.RawBattThermData e)
-        {
-            battOscilloscope.AddScopeData(e.BatteryVoltage, 0.0, 0.0);
-            thermOscilloscope.AddScopeData(e.Thermometer, 0.0, 0.0);
-            if (loggingToFile)
-            {
-                if (LoggedFiles[(int)FileIndexes.RawBattTherm] == null)
-                {
-                    LoggedFiles[(int)FileIndexes.RawBattTherm] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_dataLoggerFilePath.Text) + "_" + FileIndexes.RawBattTherm.ToString() + ".csv", false);
-                    LoggedFiles[(int)FileIndexes.RawBattTherm].WriteLine(CSVheadings[(int)FileIndexes.RawBattTherm]);
-                }
-                LoggedFiles[(int)FileIndexes.RawBattTherm].WriteLine(e.ConvertToCSV());
-            }
-        }
-
-        /// <summary>
-        /// Calibrated battery and thermometer data received event to write data to graph and file.  Will create new file if file not open.
-        /// </summary>
-        private void xIMUserial_CalBattThermDataReceived(object sender, xIMU_API.CalBattThermData e)
-        {
-            battOscilloscope.AddScopeData(e.BatteryVoltage, 0.0, 0.0);
-            thermOscilloscope.AddScopeData(e.Thermometer, 0.0, 0.0);
-            if (loggingToFile)
-            {
-                if (LoggedFiles[(int)FileIndexes.CalBattTherm] == null)
-                {
-                    LoggedFiles[(int)FileIndexes.CalBattTherm] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_dataLoggerFilePath.Text) + "_" + FileIndexes.CalBattTherm.ToString() + ".csv", false);
-                    LoggedFiles[(int)FileIndexes.CalBattTherm].WriteLine(CSVheadings[(int)FileIndexes.CalBattTherm]);
-                }
-                LoggedFiles[(int)FileIndexes.CalBattTherm].WriteLine(e.ConvertToCSV());
-            }
-        }
-
-        /// <summary>
-        /// Raw inertial and magnetic data received event to write data to graph and file.  Will create new file if file not open.
-        /// </summary>
-        private void xIMUserial_RawInertialMagDataReceived(object sender, xIMU_API.RawInertialMagData e)
-        {
-            gyroOscilloscope.AddScopeData(e.Gyroscope[0], e.Gyroscope[1], e.Gyroscope[2]);
-            accelOscilloscope.AddScopeData(e.Accelerometer[0], e.Accelerometer[1], e.Accelerometer[2]);
-            magOscilloscope.AddScopeData(e.Magnetometer[0], e.Magnetometer[1], e.Magnetometer[2]);
-            if (loggingToFile)
-            {
-                if (LoggedFiles[(int)FileIndexes.RawInertialMagnetic] == null)
-                {
-                    LoggedFiles[(int)FileIndexes.RawInertialMagnetic] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_dataLoggerFilePath.Text) + "_" + FileIndexes.RawInertialMagnetic.ToString() + ".csv", false);
-                    LoggedFiles[(int)FileIndexes.RawInertialMagnetic].WriteLine(CSVheadings[(int)FileIndexes.RawInertialMagnetic]);
-                }
-                LoggedFiles[(int)FileIndexes.RawInertialMagnetic].WriteLine(e.ConvertToCSV());
-            }
-        }
-
-        /// <summary>
-        /// Calibrated inertial and magnetic data received event to write data to graph and files.  Will create new file if file not open.
-        /// </summary>
-        private void xIMUserial_CalInertialMagDataReceived(object sender, xIMU_API.CalInertialMagData e)
-        {
-            gyroOscilloscope.AddScopeData(e.Gyroscope[0], e.Gyroscope[1], e.Gyroscope[2]);
-            accelOscilloscope.AddScopeData(e.Accelerometer[0], e.Accelerometer[1], e.Accelerometer[2]);
-            magOscilloscope.AddScopeData(e.Magnetometer[0], e.Magnetometer[1], e.Magnetometer[2]);
-            if (loggingToFile)
-            {
-                if (LoggedFiles[(int)FileIndexes.CalInertialMagnetic] == null)
-                {
-                    LoggedFiles[(int)FileIndexes.CalInertialMagnetic] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_dataLoggerFilePath.Text) + "_" + FileIndexes.CalInertialMagnetic.ToString() + ".csv", false);
-                    LoggedFiles[(int)FileIndexes.CalInertialMagnetic].WriteLine(CSVheadings[(int)FileIndexes.CalInertialMagnetic]);
-                }
-                LoggedFiles[(int)FileIndexes.CalInertialMagnetic].WriteLine(e.ConvertToCSV());
-            }
-            if (hardIronDatasetFile != null)
-            {
-                try { hardIronDatasetFile.WriteLine(e.ConvertToCSV()); }
-                catch { }
-            }
-        }
-
-        /// <summary>
-        /// Quaternion data received event to write data to graph and file.  Will create new file if file not open.
-        /// </summary>
-        private void xIMUserial_QuaternionDataReceived(object sender, xIMU_API.QuaternionData e)
-        {
-            float[] euler = e.ConvertToEulerAngles();
-            eulerOscilloscope.AddScopeData(euler[0], euler[1], euler[2]);
-            cuboid3D.RotationMatrix = e.ConvertToRotationMatrix();
-            if (loggingToFile)
-            {
-                if (LoggedFiles[(int)FileIndexes.Quaternion] == null)
-                {
-                    LoggedFiles[(int)FileIndexes.Quaternion] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_dataLoggerFilePath.Text) + "_" + FileIndexes.Quaternion.ToString() + ".csv", false);
-                    LoggedFiles[(int)FileIndexes.Quaternion].WriteLine(CSVheadings[(int)FileIndexes.Quaternion]);
-                }
-                LoggedFiles[(int)FileIndexes.Quaternion].WriteLine(e.ConvertToCSV());
-                if (LoggedFiles[(int)FileIndexes.RotationMatrix] == null)
-                {
-                    LoggedFiles[(int)FileIndexes.RotationMatrix] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_dataLoggerFilePath.Text) + "_" + FileIndexes.RotationMatrix.ToString() + ".csv", false);
-                    LoggedFiles[(int)FileIndexes.RotationMatrix].WriteLine(CSVheadings[(int)FileIndexes.RotationMatrix]);
-                }
-                LoggedFiles[(int)FileIndexes.RotationMatrix].WriteLine(e.ConvertToRotationMatrixCSV());
-                if (LoggedFiles[(int)FileIndexes.EulerAngles] == null)
-                {
-                    LoggedFiles[(int)FileIndexes.EulerAngles] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_dataLoggerFilePath.Text) + "_" + FileIndexes.EulerAngles.ToString() + ".csv", false);
-                    LoggedFiles[(int)FileIndexes.EulerAngles].WriteLine(CSVheadings[(int)FileIndexes.EulerAngles]);
-                }
-                LoggedFiles[(int)FileIndexes.EulerAngles].WriteLine(e.ConvertToEulerAnglesCSV());
-            }
-        }
-
-        /// <summary>
-        /// Gets file path without extension.
-        /// </summary>
-        /// <param name="fullPath">
-        /// Full path of file including extension.
-        /// </param>
-        /// <returns>
-        /// File path without extension.
-        /// </returns>
-        string GetPathWithoutExtension(string fullPath)
-        {
-            return Path.GetDirectoryName(fullPath) + "\\" + Path.GetFileNameWithoutExtension(fullPath);
-        }
-
-        #endregion
+        #region View sensor data
 
         #region Show/hide sensor data graphics
 
@@ -1410,9 +1188,69 @@ namespace xIMU_GUI
 
         #endregion
 
+        #region Sensor data received events
+
+        /// <summary>
+        /// Raw battery and thermometer data received event to write data to graph and file.
+        /// </summary>
+        private void xIMUserial_RawBattThermDataReceived(object sender, xIMU_API.RawBattThermData e)
+        {
+            battOscilloscope.AddScopeData(e.BatteryVoltage, 0.0, 0.0);
+            thermOscilloscope.AddScopeData(e.Thermometer, 0.0, 0.0);
+        }
+
+        /// <summary>
+        /// Calibrated battery and thermometer data received event to write data to graph and file.
+        /// </summary>
+        private void xIMUserial_CalBattThermDataReceived(object sender, xIMU_API.CalBattThermData e)
+        {
+            battOscilloscope.AddScopeData(e.BatteryVoltage, 0.0, 0.0);
+            thermOscilloscope.AddScopeData(e.Thermometer, 0.0, 0.0);
+        }
+
+        /// <summary>
+        /// Raw inertial and magnetic data received event to write data to graph and file.
+        /// </summary>
+        private void xIMUserial_RawInertialMagDataReceived(object sender, xIMU_API.RawInertialMagData e)
+        {
+            gyroOscilloscope.AddScopeData(e.Gyroscope[0], e.Gyroscope[1], e.Gyroscope[2]);
+            accelOscilloscope.AddScopeData(e.Accelerometer[0], e.Accelerometer[1], e.Accelerometer[2]);
+            magOscilloscope.AddScopeData(e.Magnetometer[0], e.Magnetometer[1], e.Magnetometer[2]);
+        }
+
+        /// <summary>
+        /// Calibrated inertial and magnetic data received event to write data to graph and files.
+        /// </summary>
+        private void xIMUserial_CalInertialMagDataReceived(object sender, xIMU_API.CalInertialMagData e)
+        {
+            gyroOscilloscope.AddScopeData(e.Gyroscope[0], e.Gyroscope[1], e.Gyroscope[2]);
+            accelOscilloscope.AddScopeData(e.Accelerometer[0], e.Accelerometer[1], e.Accelerometer[2]);
+            magOscilloscope.AddScopeData(e.Magnetometer[0], e.Magnetometer[1], e.Magnetometer[2]);
+            if (hardIronCalDataFiles != null)
+            {
+                try
+                {
+                    hardIronCalDataFiles.WriteCalInertialMagData(e);
+                }
+                catch { }
+            }
+        }
+
+        /// <summary>
+        /// Quaternion data received event to write data to graph and file.
+        /// </summary>
+        private void xIMUserial_QuaternionDataReceived(object sender, xIMU_API.QuaternionData e)
+        {
+            float[] euler = e.ConvertToEulerAngles();
+            eulerOscilloscope.AddScopeData(euler[0], euler[1], euler[2]);
+            cuboid3D.RotationMatrix = e.ConvertToRotationMatrix();
+        }
+
         #endregion
 
-        #region Auxilary port
+        #endregion
+
+        #region Auxiliary port
 
         #region Digital I/O
 
@@ -1449,21 +1287,12 @@ namespace xIMU_GUI
         }
 
         /// <summary>
-        /// Digital I/O data received event to display data in form and write to file.  Will create new file if file not open.
+        /// Digital I/O data received event to display data in form and write to file.
         /// </summary>
         private void xIMUserial_DigitalIODataReceived(object sender, xIMU_API.DigitalIOdata e)
         {
             digitalIOpanel.IsInput = e.IsInput;
             digitalIOpanel.State = e.State;
-            if (loggingToFile)
-            {
-                if (LoggedFiles[(int)FileIndexes.DigitalIO] == null)
-                {
-                    LoggedFiles[(int)FileIndexes.DigitalIO] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_dataLoggerFilePath.Text) + "_" + FileIndexes.DigitalIO.ToString() + ".csv", false);
-                    LoggedFiles[(int)FileIndexes.DigitalIO].WriteLine(CSVheadings[(int)FileIndexes.DigitalIO]);
-                }
-                LoggedFiles[(int)FileIndexes.DigitalIO].WriteLine(e.ConvertToCSV());
-            }
         }
 
         #endregion
@@ -1481,16 +1310,7 @@ namespace xIMU_GUI
             saveFileDialog.Title = "Select File";
             saveFileDialog.Filter = "All files (*.*)|*.*";
             saveFileDialog.OverwritePrompt = false;
-            try
-            {
-                saveFileDialog.InitialDirectory = Path.GetDirectoryName(textBox_dataLoggerFilePath.Text);
-                saveFileDialog.FileName = Path.GetFileName(textBox_dataLoggerFilePath.Text);
-            }
-            catch
-            {
-                saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                saveFileDialog.FileName = "LoggedData";
-            }
+            saveFileDialog.FileName = "LoggedData";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 textBox_dataLoggerFilePath.Text = Path.GetDirectoryName(saveFileDialog.FileName.ToString()) + "\\" + Path.GetFileNameWithoutExtension(saveFileDialog.FileName.ToString());
@@ -1507,35 +1327,23 @@ namespace xIMU_GUI
         {
             if (button_dataLoggerStart.Text == "Start Logging")
             {
-                #region Error if invalid file path
-
                 try
                 {
-                    if ((!Directory.Exists(Path.GetDirectoryName(textBox_dataLoggerFilePath.Text)) ||
-                        (Path.GetFileNameWithoutExtension(textBox_dataLoggerFilePath.Text) == "")))
-                    {
-                        throw new Exception();
-                    }
+                    dataLoggerStartPacketCount = new xIMU_API.PacketCount(xIMUserial.PacketCounter);
+                    dataLoggerFiles = new xIMU_API.ASCIIdataFiles(textBox_dataLoggerFilePath.Text);
+                    button_dataLoggerStart.Text = "Stop Logging";
+                    textBox_dataLoggerFilePath.Enabled = false;
+                    button_dataLoggerFilePathBrowse.Enabled = false;
                 }
                 catch
                 {
                     MessageBox.Show("Invalid file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
                 }
-
-                #endregion
-
-                button_dataLoggerStart.Text = "Stop Logging";
-                textBox_dataLoggerFilePath.Enabled = false;
-                button_dataLoggerFilePathBrowse.Enabled = false;
-                packetCountAtStartOfDataLogging = new xIMU_API.PacketCount(xIMUserial.PacketCounter);
-                loggingToFile = true;
             }
             else if (button_dataLoggerStart.Text == "Stop Logging")
             {
-                loggingToFile = false;
-                ShowLogOrConvertReport(packetCountAtStartOfDataLogging.Difference(xIMUserial.PacketCounter), LoggedFiles, true);
-                CloseFiles(LoggedFiles);
+                ShowDataLoggerReport(xIMUserial.PacketCounter.Difference(dataLoggerStartPacketCount), dataLoggerFiles.CloseFiles(), "Data Logger Report");
+                dataLoggerFiles = null;
                 button_dataLoggerFilePathBrowse.Enabled = true;
                 textBox_dataLoggerFilePath.Enabled = true;
                 button_dataLoggerStart.Text = "Start Logging";
@@ -1543,59 +1351,56 @@ namespace xIMU_GUI
         }
 
         /// <summary>
-        /// Shows a log or conversion report detailing packets counts and files created.
+        /// x-IMU data receive event to write data to ASCII files if data logging.
+        /// </summary>
+        void xIMUserial_xIMUdataReceived(object sender, xIMU_API.xIMUdata e)
+        {
+            if (dataLoggerFiles != null)
+            {
+                try
+                {
+                    dataLoggerFiles.WriteData(e);
+                }
+                catch { }
+            }
+        }
+
+        /// <summary>
+        /// Shows data logger report detailing packets counts and files created.
         /// </summary>
         /// <param name="packetCount">
         /// PacketCount instance representing the number of packets received (for log report) or read (for conversion report).
         /// </param>
-        /// <param name="files">
-        /// Array containing file objects. Object is null if not created.
+        /// <param name="filesNames">
+        /// Array of file names of created files.
         /// </param>
-        /// <param name="LogOrConvert">
-        /// Used to display correct language.  true = log report, false = conversion report.
+        /// <param name="caption">
+        /// Caption of report message box.
         /// </param>
-        private void ShowLogOrConvertReport(xIMU_API.PacketCount packetCount, StreamWriter[] files, bool LogOrConvert)
+        private void ShowDataLoggerReport(xIMU_API.PacketCount packetCount, string[] filesNames, string caption)
         {
             string filesCreated = "";
-            for (int i = 0; i < (int)FileIndexes.NumberOfFiles; i++)        // create list of files created
+            if (filesNames != null)
             {
-                if (files[i] != null)
+                for (int i = 0; i < filesNames.Length; i++)
                 {
-                    filesCreated += "\r" + Path.GetFileName(((FileStream)files[i].BaseStream).Name);
+                    filesCreated += "\r" + filesNames[i];
                 }
             }
             if (filesCreated == "") filesCreated = "\rNone.";
-            MessageBoxThread.Show("Total packets " + (LogOrConvert ? "received:" : "read:") + "\t\t\t\t" + Convert.ToString(packetCount.TotalPacketsReceived) + "\r" +
-                                  "Packet " + (LogOrConvert ? "reception" : "read") + " errors: \t\t\t\t" + Convert.ToString(packetCount.PacketsReceivedErrors) + "\r" +
-                                  "Date/time packets " + (LogOrConvert ? "received:\t" : "read:") + "\t\t\t" + Convert.ToString(packetCount.DateTimeDataPacketsReceived) + "\r" +
-                                  "Raw battery and thermometer packets " + (LogOrConvert ? "received:\t" : "read:") + "\t" + Convert.ToString(packetCount.RawBattThermDataPacketsReceived) + "\r" +
-                                  "Calibrated battery and thermometer packets " + (LogOrConvert ? "received:" : "read:") + "\t" + Convert.ToString(packetCount.CalBattThermDataPacketsReceived) + "\r" +
-                                  "Raw inertial/magnetic packets " + (LogOrConvert ? "received:\t" : "read:") + "\t\t" + Convert.ToString(packetCount.RawInertialMagDataPacketsReceived) + "\r" +
-                                  "Calibrated inertial/magnetic packets " + (LogOrConvert ? "received:" : "read:") + "\t\t" + Convert.ToString(packetCount.CalInertialMagDataPacketsReceived) + "\r" +
-                                  "Quaternion packets " + (LogOrConvert ? "received:\t" : "read:") + "\t\t\t" + Convert.ToString(packetCount.QuaternionDataPacketsReceived) + "\r" +
-                                  "Digital I/O packets " + (LogOrConvert ? "received:\t" : "read:") + "\t\t\t" + Convert.ToString(packetCount.DigitalIODataPacketsReceived) + "\r\r" +
+            MessageBoxThread.Show("Total packets read:\t\t\t\t" + Convert.ToString(packetCount.TotalPacketsRead) + "\r" +
+                                  "Packet read errors:\t\t\t\t" + Convert.ToString(packetCount.PacketsReadErrors) + "\r" +
+                                  "Date/time packets read:\t\t\t" + Convert.ToString(packetCount.DateTimeDataPacketsRead) + "\r" +
+                                  "Raw battery and thermometer packets read:\t" + Convert.ToString(packetCount.RawBattThermDataPacketsRead) + "\r" +
+                                  "Calibrated battery and thermometer packets read:\t" + Convert.ToString(packetCount.CalBattThermDataPacketsRead) + "\r" +
+                                  "Raw inertial/magnetic packets read:\t\t" + Convert.ToString(packetCount.RawInertialMagDataPacketsRead) + "\r" +
+                                  "Calibrated inertial/magnetic packets read:\t\t" + Convert.ToString(packetCount.CalInertialMagDataPacketsRead) + "\r" +
+                                  "Quaternion packets read:\t\t\t" + Convert.ToString(packetCount.QuaternionDataPacketsRead) + "\r" +
+                                  "Digital I/O packets read:\t\t\t" + Convert.ToString(packetCount.DigitalIODataPacketsRead) + "\r\r" +
                                   "Files created:" +
                                   filesCreated,
-                                  (LogOrConvert ? "Log" : "Conversion") + " Report",
+                                  caption,
                                   MessageBoxIcon.Information);
-        }
-
-        /// <summary>
-        /// Closes files and sets file objects to null.
-        /// </summary>
-        /// <param name="files">
-        /// Array of files to close and set to null.
-        /// </param>
-        private void CloseFiles(StreamWriter[] files)
-        {
-            for (int i = 0; i < (int)FileIndexes.NumberOfFiles; i++)
-            {
-                if (files[i] != null)
-                {
-                    files[i].Close();
-                    files[i] = null;
-                }
-            }
         }
 
         #endregion
@@ -1622,52 +1427,36 @@ namespace xIMU_GUI
         /// </summary>
         private void button_convertBinaryFileConvert_Click(object sender, EventArgs e)
         {
-            #region Error if file not exist
-
+            // Error if file not exist
             if (!File.Exists(textBox_convertBinaryFileFilePath.Text))
             {
                 MessageBox.Show("File does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            #endregion
-
-            #region Disable SD card form controls
-
+            // Disable SD card form controls
             textBox_convertBinaryFileFilePath.Enabled = false;
             button_convertBinaryFileConvertBrowse.Enabled = false;
             button_convertBinaryFileConvert.Enabled = false;
             button_convertBinaryFileConvert.Text = "Converting...";
 
-            #endregion
-
-            #region Perform conversion in new thread (Re-enable SD card form controls when complete)
-
+            // Perform conversion in new thread (Re-enable SD card form controls when complete)
             var thread = new Thread(
               () =>
               {
                   try
                   {
+                      convertedBinaryFiles = new xIMU_API.ASCIIdataFiles(Path.GetDirectoryName(textBox_convertBinaryFileFilePath.Text) + "\\" + Path.GetFileNameWithoutExtension(textBox_convertBinaryFileFilePath.Text));
                       xIMU_API.xIMUfile xIMUfile = new xIMU_API.xIMUfile(textBox_convertBinaryFileFilePath.Text);
-                      xIMUfile.DateTimeDataRead += new xIMU_API.xIMUfile.onDateTimeDataRead(xIMUfile_DateTimeDataRead);
-                      xIMUfile.RawBattThermDataRead += new xIMU_API.xIMUfile.onRawBattThermDataRead(xIMUfile_RawBattThermDataRead);
-                      xIMUfile.CalBattThermDataRead += new xIMU_API.xIMUfile.onCalBattThermDataRead(xIMUfile_CalBattThermDataRead);
-                      xIMUfile.RawInertialMagDataRead += new xIMU_API.xIMUfile.onRawInertialMagDataRead(xIMUfile_RawInertialMagDataRead);
-                      xIMUfile.CalInertialMagDataRead += new xIMU_API.xIMUfile.onCalInertialMagDataRead(xIMUfile_CalInertialMagDataRead);
-                      xIMUfile.QuaternionDataRead += new xIMU_API.xIMUfile.onQuaternionDataRead(xIMUfile_QuaternionDataRead);
-                      xIMUfile.DigitalIODataRead += new xIMU_API.xIMUfile.onDigitalIODataRead(xIMUfile_DigitalIODataRead);
+                      xIMUfile.xIMUdataRead += new xIMU_API.xIMUfile.onxIMUdataRead(xIMUfile_xIMUdataRead);
                       xIMUfile.Read();
                       xIMUfile.Close();
-                      ShowLogOrConvertReport(xIMUfile.PacketCounter, ConvertedFiles, false);
+                      ShowDataLoggerReport(xIMUfile.PacketCounter, convertedBinaryFiles.CloseFiles(), "Conversion Report");
                   }
                   catch (Exception ex)
                   {
                       MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                   }
-                  CloseFiles(ConvertedFiles);
-
-                  #region Re-enable SD card form controls
-
                   this.EndInvoke(this.BeginInvoke(new MethodInvoker(delegate
                   {
                       button_convertBinaryFileConvert.Text = "Convert";
@@ -1675,119 +1464,21 @@ namespace xIMU_GUI
                       button_convertBinaryFileConvert.Enabled = true;
                       button_convertBinaryFileConvertBrowse.Enabled = true;
                   })));
-
-                  #endregion
               });
             thread.Start();
-
-            #endregion
-        }
-
-        #region Packet read events
-
-        /// <summary>
-        /// Date/time data read event to write data to file.  Will create new file if file not open.
-        /// </summary>
-        private void xIMUfile_DateTimeDataRead(object sender, xIMU_API.DateTimeData e)
-        {
-            if (ConvertedFiles[(int)FileIndexes.DateTime] == null)
-            {
-                ConvertedFiles[(int)FileIndexes.DateTime] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_convertBinaryFileFilePath.Text) + "_" + FileIndexes.DateTime.ToString() + ".txt", false);
-            }
-            ConvertedFiles[(int)FileIndexes.DateTime].WriteLine(String.Format("{0:F}", e.DateTimeObject));
         }
 
         /// <summary>
-        /// Raw battery and thermometer data read event to write data to file.  Will create new file if file not open.
+        /// x-IMU data read event to write data to ASCII files.
         /// </summary>
-        private void xIMUfile_RawBattThermDataRead(object sender, xIMU_API.RawBattThermData e)
+        void xIMUfile_xIMUdataRead(object sender, xIMU_API.xIMUdata e)
         {
-            if (ConvertedFiles[(int)FileIndexes.RawBattTherm] == null)
+            try
             {
-                ConvertedFiles[(int)FileIndexes.RawBattTherm] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_convertBinaryFileFilePath.Text) + "_" + FileIndexes.RawBattTherm.ToString() + ".csv", false);
-                ConvertedFiles[(int)FileIndexes.RawBattTherm].WriteLine(CSVheadings[(int)FileIndexes.RawBattTherm]);
+                convertedBinaryFiles.WriteData(e);
             }
-            ConvertedFiles[(int)FileIndexes.RawBattTherm].WriteLine(e.ConvertToCSV());
+            catch { }
         }
-
-        /// <summary>
-        /// Calibrated battery and thermometer data read event to write data to file.  Will create new file if file not open.
-        /// </summary>
-        private void xIMUfile_CalBattThermDataRead(object sender, xIMU_API.CalBattThermData e)
-        {
-            if (ConvertedFiles[(int)FileIndexes.CalBattTherm] == null)
-            {
-                ConvertedFiles[(int)FileIndexes.CalBattTherm] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_convertBinaryFileFilePath.Text) + "_" + FileIndexes.CalBattTherm.ToString() + ".csv", false);
-                ConvertedFiles[(int)FileIndexes.CalBattTherm].WriteLine(CSVheadings[(int)FileIndexes.CalBattTherm]);
-            }
-            ConvertedFiles[(int)FileIndexes.CalBattTherm].WriteLine(e.ConvertToCSV());
-        }
-
-        /// <summary>
-        /// Raw inertial/magnetic data read event to write data to file.  Will create new file if file not open.
-        /// </summary>
-        private void xIMUfile_RawInertialMagDataRead(object sender, xIMU_API.RawInertialMagData e)
-        {
-            if (ConvertedFiles[(int)FileIndexes.RawInertialMagnetic] == null)
-            {
-                ConvertedFiles[(int)FileIndexes.RawInertialMagnetic] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_convertBinaryFileFilePath.Text) + "_" + FileIndexes.RawInertialMagnetic.ToString() + ".csv", false);
-                ConvertedFiles[(int)FileIndexes.RawInertialMagnetic].WriteLine(CSVheadings[(int)FileIndexes.RawInertialMagnetic]);
-            }
-            ConvertedFiles[(int)FileIndexes.RawInertialMagnetic].WriteLine(e.ConvertToCSV());
-        }
-
-        /// <summary>
-        /// Calibrated inertial/magnetic data read event to write data to file.  Will create new file if file not open.
-        /// </summary>
-        private void xIMUfile_CalInertialMagDataRead(object sender, xIMU_API.CalInertialMagData e)
-        {
-            if (ConvertedFiles[(int)FileIndexes.CalInertialMagnetic] == null)
-            {
-                ConvertedFiles[(int)FileIndexes.CalInertialMagnetic] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_convertBinaryFileFilePath.Text) + "_" + FileIndexes.CalInertialMagnetic.ToString() + ".csv", false);
-                ConvertedFiles[(int)FileIndexes.CalInertialMagnetic].WriteLine(CSVheadings[(int)FileIndexes.CalInertialMagnetic]);
-            }
-            ConvertedFiles[(int)FileIndexes.CalInertialMagnetic].WriteLine(e.ConvertToCSV());
-        }
-
-        /// <summary>
-        /// Quaternion data read event to write data to files.  Will create new files if files not open.
-        /// </summary>
-        private void xIMUfile_QuaternionDataRead(object sender, xIMU_API.QuaternionData e)
-        {
-            if (ConvertedFiles[(int)FileIndexes.Quaternion] == null)
-            {
-                ConvertedFiles[(int)FileIndexes.Quaternion] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_convertBinaryFileFilePath.Text) + "_" + FileIndexes.Quaternion.ToString() + ".csv", false);
-                ConvertedFiles[(int)FileIndexes.Quaternion].WriteLine(CSVheadings[(int)FileIndexes.Quaternion]);
-            }
-            ConvertedFiles[(int)FileIndexes.Quaternion].WriteLine(e.ConvertToCSV());
-            if (ConvertedFiles[(int)FileIndexes.RotationMatrix] == null)
-            {
-                ConvertedFiles[(int)FileIndexes.RotationMatrix] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_convertBinaryFileFilePath.Text) + "_" + FileIndexes.RotationMatrix.ToString() + ".csv", false);
-                ConvertedFiles[(int)FileIndexes.RotationMatrix].WriteLine(CSVheadings[(int)FileIndexes.RotationMatrix]);
-            }
-            ConvertedFiles[(int)FileIndexes.RotationMatrix].WriteLine(e.ConvertToRotationMatrixCSV());
-            if (ConvertedFiles[(int)FileIndexes.EulerAngles] == null)
-            {
-                ConvertedFiles[(int)FileIndexes.EulerAngles] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_convertBinaryFileFilePath.Text) + "_" + FileIndexes.EulerAngles.ToString() + ".csv", false);
-                ConvertedFiles[(int)FileIndexes.EulerAngles].WriteLine(CSVheadings[(int)FileIndexes.EulerAngles]);
-            }
-            ConvertedFiles[(int)FileIndexes.EulerAngles].WriteLine(e.ConvertToEulerAnglesCSV());
-        }
-
-        /// <summary>
-        /// Digital I/O data read event to write data to file.  Will create new files if file not open.
-        /// </summary>
-        private void xIMUfile_DigitalIODataRead(object sender, xIMU_API.DigitalIOdata e)
-        {
-            if (ConvertedFiles[(int)FileIndexes.DigitalIO] == null)
-            {
-                ConvertedFiles[(int)FileIndexes.DigitalIO] = new System.IO.StreamWriter(GetPathWithoutExtension(textBox_convertBinaryFileFilePath.Text) + "_" + FileIndexes.DigitalIO.ToString() + ".csv", false);
-                ConvertedFiles[(int)FileIndexes.DigitalIO].WriteLine(CSVheadings[(int)FileIndexes.DigitalIO]);
-            }
-            ConvertedFiles[(int)FileIndexes.DigitalIO].WriteLine(e.ConvertToCSV());
-        }
-
-        #endregion
 
         #endregion
 
@@ -1826,26 +1517,25 @@ namespace xIMU_GUI
         /// <summary>
         /// Opens file navigation form to define file path for the hard-iron calibration dataset.
         /// </summary>
-        private void buttoncollectHardIronCalDatasetBrowse_Click(object sender, EventArgs e)
+        private void buttonCollectHardIronCalDatasetBrowse_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "Select File";
-            saveFileDialog.Filter = "CSV files (*.csv)|*.csv";
+            saveFileDialog.Filter = "All files (*.*)|*.*";
             saveFileDialog.OverwritePrompt = false;
-            try
-            {
-                saveFileDialog.InitialDirectory = Path.GetDirectoryName(textBox_collectHardIronCalDatasetFilePath.Text);
-                saveFileDialog.FileName = Path.GetFileName(textBox_collectHardIronCalDatasetFilePath.Text);
-            }
-            catch
-            {
-                saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                saveFileDialog.FileName = "HardIronCalDataset" + "_" + FileIndexes.CalInertialMagnetic.ToString() + ".csv";
-            }
+            saveFileDialog.FileName = "HardIronCalDataset";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 textBox_collectHardIronCalDatasetFilePath.Text = saveFileDialog.FileName.ToString();
             }
+        }
+
+        /// <summary>
+        /// Text changed event to synchronise dependant file path in text box.
+        /// </summary>
+        private void textBox_collectHardIronCalDatasetFilePath_TextChanged(object sender, EventArgs e)
+        {
+            textBox_hardIronCalFilePath.Text = textBox_collectHardIronCalDatasetFilePath.Text + "_CalInertialMagnetic.csv";
         }
 
         /// <summary>
@@ -1858,51 +1548,33 @@ namespace xIMU_GUI
         {
             if (button_collectHardIronCalDatasetStartLogging.Text == "Start Logging")
             {
-                #region Error if invalid file path
-
                 try
                 {
-                    if ((!Directory.Exists(Path.GetDirectoryName(textBox_collectHardIronCalDatasetFilePath.Text)) ||
-                        (Path.GetFileNameWithoutExtension(textBox_collectHardIronCalDatasetFilePath.Text) == "")))
-                    {
-                        throw new Exception();
-                    }
+                    hardIronCalStartPacketCount = new xIMU_API.PacketCount(xIMUserial.PacketCounter);
+                    hardIronCalDataFiles = new xIMU_API.ASCIIdataFiles(textBox_collectHardIronCalDatasetFilePath.Text);
+                    button_collectHardIronCalDatasetStartLogging.Text = "Stop Logging";
+                    textBox_collectHardIronCalDatasetFilePath.Enabled = false;
+                    button_collectHardIronCalDatasetBrowse.Enabled = false;
                 }
                 catch
                 {
                     MessageBox.Show("Invalid file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
                 }
-
-                #endregion
-
-                #region Open file
-
-                try
-                {
-                    hardIronDatasetFile = new StreamWriter(GetPathWithoutExtension(textBox_collectHardIronCalDatasetFilePath.Text) + ".csv");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                #endregion
-
-                packetCountAtStartOfHardIronDatasetCollection = new xIMU_API.PacketCount(xIMUserial.PacketCounter);
-
-                button_collectHardIronCalDatasetStartLogging.Text = "Stop Logging";
-                textBox_collectHardIronCalDatasetFilePath.Enabled = false;
-                button_collectHardIronCalDatasetBrowse.Enabled = false;
             }
             else if (button_collectHardIronCalDatasetStartLogging.Text == "Stop Logging")
             {
-                hardIronDatasetFile.Close();
-                hardIronDatasetFile = null;
-
-                MessageBoxThread.Show("Calibrated inertial/magnetic packets received: " + Convert.ToString(packetCountAtStartOfHardIronDatasetCollection.Difference(xIMUserial.PacketCounter).CalInertialMagDataPacketsReceived), "Message", MessageBoxIcon.Information);
-
+                int numPackets = xIMUserial.PacketCounter.Difference(hardIronCalStartPacketCount).CalInertialMagDataPacketsRead;
+                string[] fileNames = hardIronCalDataFiles.CloseFiles();
+                hardIronCalDataFiles = null;;
+                if (numPackets == 0)
+                {
+                    MessageBoxThread.Show("No calibrated inertial/magnetic data packets were received.  File not created.", "Message", MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBoxThread.Show("Calibrated inertial/magnetic packets received: " + Convert.ToString(numPackets) + ".\r"+
+                                          "File created: " + fileNames[0], "Message", MessageBoxIcon.Information);
+                }
                 button_collectHardIronCalDatasetBrowse.Enabled = true;
                 textBox_collectHardIronCalDatasetFilePath.Enabled = true;
                 button_collectHardIronCalDatasetStartLogging.Text = "Start Logging";
@@ -1919,18 +1591,8 @@ namespace xIMU_GUI
         private void button_hardIronCalBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "Select *_inertialMag.csv File";
-            openFileDialog.Filter = "CSV Files|*.csv";
-            try
-            {
-                openFileDialog.InitialDirectory = Path.GetDirectoryName(textBox_hardIronCalFilePath.Text);
-                openFileDialog.FileName = Path.GetFileName(textBox_hardIronCalFilePath.Text);
-            }
-            catch
-            {
-                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                openFileDialog.FileName = "HardIronCalDataset" + "_" + FileIndexes.CalInertialMagnetic.ToString() + ".csv";
-            }
+            openFileDialog.Title = "Select File";
+            openFileDialog.Filter = "x-IMU Calibrated Inertial/Magnetic CSV Files|*_CalInertialMagnetic.csv";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 textBox_hardIronCalFilePath.Text = openFileDialog.FileName.ToString();
@@ -1942,101 +1604,68 @@ namespace xIMU_GUI
         /// </summary>
         private void button_hardIronCalRun_Click(object sender, EventArgs e)
         {
-            #region Error if file not exist
-
+            // Error if file not exist
             if (!File.Exists(textBox_hardIronCalFilePath.Text))
             {
                 MessageBox.Show("File does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            #endregion
-
-            #region Disable hard-iron calibration form controls
-
+            // Disable hard-iron calibration form controls
             textBox_hardIronCalFilePath.Enabled = false;
             button_hardIronCalBrowse.Enabled = false;
             button_hardIronCalRun.Enabled = false;
             button_hardIronCalRun.Text = "Running...";
             this.Update();
 
-            #endregion
-
             try
             {
-                #region Import calibration dataset from CSV file
-
-                StreamReader streamReader = new StreamReader(textBox_hardIronCalFilePath.Text);
-                string CSVline = streamReader.ReadLine();               // read and disregard first line (column headings)
-                List<double> xDataList = new List<double>();
-                List<double> yDataList = new List<double>();
-                List<double> zDataList = new List<double>();
-
-                while ((CSVline = streamReader.ReadLine()) != null)
+                // Run hard-iron calibration bootloader process
+                string resultPath = Path.GetDirectoryName(textBox_hardIronCalFilePath.Text) + "\\" + "HardIronCal_result.csv";
+                ProcessStartInfo processInfo = new ProcessStartInfo("HardIronCal\\HardIronCal.exe");
+                processInfo.Arguments = " -src " + "\"" + textBox_hardIronCalFilePath.Text + "\"" +
+                                        " -des " + "\"" + resultPath + "\"" +
+                                        " -row " + "1" +
+                                        " -col " + "6" +
+                                        " -ext " + "True";
+                processInfo.UseShellExecute = false;
+                Process process = Process.Start(processInfo);
+                process.WaitForExit();
+                if (process.ExitCode != 0)
                 {
-                    try
-                    {
-                        string[] vars = CSVline.Split(',');
-                        xDataList.Add(Convert.ToDouble(vars[6]));
-                        yDataList.Add(Convert.ToDouble(vars[7]));
-                        zDataList.Add(Convert.ToDouble(vars[8]));
-                    }
-                    catch
-                    {
-                        streamReader.Close();
-                        throw new Exception("Error reading CSV line.");
-                    }
+                    throw new Exception("Hard-iron calibration failed.  See console application for details.");
                 }
+                process.Close();
+
+                // Import hard-iron bias parameters
+                StreamReader streamReader = new StreamReader(resultPath);
+                streamReader.ReadLine();                                    // disregard first line (column headings)
+                string[] biasesStr = streamReader.ReadLine().Split(',');
                 streamReader.Close();
 
-                double[] xData = xDataList.ToArray();
-                double[] yData = yDataList.ToArray();
-                double[] zData = zDataList.ToArray();
-
-                if (xData.Length == 0)
-                {
-                    throw new Exception("No data was imported from CSV file.");
-                }
-
-                #endregion
-
-                #region Run hard-iron calibration algorithm
-
-                double[] biasAndSD = HardIronCal.HardIronCalibration.Run(xData, yData, zData);
-
-                #endregion
-
-                #region Write parameters to device registers
-
+                // Write parameters to device registers
                 if (xIMUserial.IsOpen)
                 {
-                    SendWriteRegister(new xIMU_API.RegisterData(xIMU_API.RegisterAddresses.MagHardIronBiasX, (float)biasAndSD[0]));
-                    SendWriteRegister(new xIMU_API.RegisterData(xIMU_API.RegisterAddresses.MagHardIronBiasY, (float)biasAndSD[1]));
-                    SendWriteRegister(new xIMU_API.RegisterData(xIMU_API.RegisterAddresses.MagHardIronBiasZ, (float)biasAndSD[2]));
+                    SendWriteRegister(new xIMU_API.RegisterData(xIMU_API.RegisterAddresses.MagHardIronBiasX, (float)Convert.ToDouble(biasesStr[0])));
+                    SendWriteRegister(new xIMU_API.RegisterData(xIMU_API.RegisterAddresses.MagHardIronBiasY, (float)Convert.ToDouble(biasesStr[1])));
+                    SendWriteRegister(new xIMU_API.RegisterData(xIMU_API.RegisterAddresses.MagHardIronBiasZ, (float)Convert.ToDouble(biasesStr[2])));
                 }
                 else
                 {
                     throw new Exception("Port is closed.");
                 }
-
-                MessageBoxThread.Show("Hard-iron calibration complete. Standard deviation = " + string.Format("{0:0.000000}", biasAndSD[3]) + ".\r\r" +
-                                      "The magnetometer hard-iron bias registers have been updated.", "Message", MessageBoxIcon.Information);
-
-                #endregion
+                MessageBoxThread.Show("Hard-iron calibration complete.  The magnetometer hard-iron bias registers have been updated.", "Message", MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            #region Re-enable hard-iron calibration form controls
-
+            // Re-enable hard-iron calibration form controls
             button_hardIronCalRun.Text = "Run";
             textBox_hardIronCalFilePath.Enabled = true;
             button_hardIronCalBrowse.Enabled = true;
             button_hardIronCalRun.Enabled = true;
-
-            #endregion
         }
 
         #endregion
@@ -2073,38 +1702,30 @@ namespace xIMU_GUI
         /// </summary>
         private void button_bootloaderUpload_Click(object sender, EventArgs e)
         {
-            #region Error if file not exist
-
+            // Error if file not exist
             if (!File.Exists(textBox_bootloaderFilePath.Text))
             {
                 MessageBox.Show("File does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            #endregion
-
-            #region  Error if serial port already open
-
+            // Error if serial port already open
             if (xIMUserial.IsOpen)
             {
                 MessageBox.Show("Serial port must be closed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            #endregion
+            MessageBox.Show("Do not disconnect or switch off the x-IMU while firmware is being uploaded.  Doing so may permanently damage the x-IMU.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-            #region Disable bootloader form controls
-
+            // Disable bootloader form controls
             textBox_bootloaderFilePath.Enabled = false;
             button_bootloaderBrowse.Enabled = false;
             button_bootloaderUpload.Enabled = false;
             button_bootloaderUpload.Text = "Uploading...";
             this.Update();
 
-            #endregion
-
-            #region Perform firmware upload procedure
-
+            // Perform firmware upload procedure
             try
             {
                 // Reset device
@@ -2126,16 +1747,11 @@ namespace xIMU_GUI
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            #endregion
-
-            #region Re-enable bootloader form controls
-
+            // Re-enable bootloader form controls
             textBox_bootloaderFilePath.Enabled = true;
             button_bootloaderBrowse.Enabled = true;
             button_bootloaderUpload.Enabled = true;
             button_bootloaderUpload.Text = "Upload";
-
-            #endregion
         }
 
         #endregion
