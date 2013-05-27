@@ -26,8 +26,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>x-IMU GUI</ProductName>
     <PublisherName>x-io Technologies</PublisherName>
-    <ApplicationRevision>21</ApplicationRevision>
-    <ApplicationVersion>12.1.0.21</ApplicationVersion>
+    <ApplicationRevision>22</ApplicationRevision>
+    <ApplicationVersion>12.2.0.22</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -82,7 +82,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Form_3Dcuboid\Tao.Platform.Windows.dll</HintPath>
     </Reference>
-    <Reference Include="x-IMU API, Version=13.1.4302.430, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="x-IMU API, Version=13.2.4516.32952, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>x-IMU API\x-IMU API.dll</HintPath>
     </Reference>

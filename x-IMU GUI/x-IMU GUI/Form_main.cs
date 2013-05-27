@@ -701,8 +701,8 @@ namespace x_IMU_GUI
         /// </summary>
         private void commandButton_Click(object sender, EventArgs e)
         {
-            if ((sender == commandButton_factoryReset) && (MessageBox.Show("Factory reset will set all registers to default values and all current calibration parameters will be lost." + Environment.NewLine + Environment.NewLine +
-                                                                           "Press button on x-IMU after sending this command to confirm.", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != System.Windows.Forms.DialogResult.OK))
+            if ((sender == commandButton_factoryReset) && (MessageBox.Show("Factory reset will set all registers on the x-IMU to default values and all current calibration parameters will be lost." + Environment.NewLine + Environment.NewLine +
+                                                                           "Press button on x-IMU within 3 seconds of sending this command to confirm.", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != System.Windows.Forms.DialogResult.OK))
                 return;
             try
             {
@@ -1197,7 +1197,7 @@ namespace x_IMU_GUI
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Select File";
-            openFileDialog.Filter = "x-IMU CSV File|*_CalInertialAndMagnetic.csv";
+            openFileDialog.Filter = "x-IMU CSV File|*_CalInertialAndMag.csv";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 textBox_hardIronCalFilePath.Text = openFileDialog.FileName.ToString();

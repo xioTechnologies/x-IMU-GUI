@@ -41,10 +41,8 @@
             this.textBox_packetsReceived = new System.Windows.Forms.TextBox();
             this.label_packetsReceived = new System.Windows.Forms.Label();
             this.groupBox_openClosePort = new System.Windows.Forms.GroupBox();
-            this.toggleButton_openClosePort = new x_IMU_GUI.ToggleButton();
             this.button_refreshList = new System.Windows.Forms.Button();
             this.tabPage_registers = new System.Windows.Forms.TabPage();
-            this.registerTreeView = new x_IMU_GUI.RegisterTreeView();
             this.tabPage_dateTime = new System.Windows.Forms.TabPage();
             this.groupBox_dateTime = new System.Windows.Forms.GroupBox();
             this.button_setDateTime = new System.Windows.Forms.Button();
@@ -55,70 +53,36 @@
             this.groupBox_receivedCommandMessages = new System.Windows.Forms.GroupBox();
             this.checkBox_displayCommandConfirmations = new System.Windows.Forms.CheckBox();
             this.groupBox_algorithm = new System.Windows.Forms.GroupBox();
-            this.commandButton_initialiseThenTare = new x_IMU_GUI.CommandButton();
-            this.commandButton_initialise = new x_IMU_GUI.CommandButton();
-            this.commandButton_clearTare = new x_IMU_GUI.CommandButton();
-            this.commandButton_tare = new x_IMU_GUI.CommandButton();
             this.groupBox_magnetometerCalibration = new System.Windows.Forms.GroupBox();
-            this.commandButton_measMagBiasSens = new x_IMU_GUI.CommandButton();
             this.groupBox_accelerometerCalibration = new System.Windows.Forms.GroupBox();
-            this.commandButton_calcAccelBiasSens = new x_IMU_GUI.CommandButton();
-            this.commandButton_sampleAccelAxisAt1g = new x_IMU_GUI.CommandButton();
             this.groupBox_gyroscopeCalibration = new System.Windows.Forms.GroupBox();
-            this.commandButton_calcGyroBiasParameters = new x_IMU_GUI.CommandButton();
-            this.commandButton_sampleGyroAt200dps = new x_IMU_GUI.CommandButton();
-            this.commandButton_sampleGyroBiasAtT2 = new x_IMU_GUI.CommandButton();
-            this.commandButton_calculateGyroSensitivity = new x_IMU_GUI.CommandButton();
-            this.commandButtonbutton_sampleGyroBiasAtT1 = new x_IMU_GUI.CommandButton();
             this.groupBox_general = new System.Windows.Forms.GroupBox();
-            this.commandButton_resetSleepTimer = new x_IMU_GUI.CommandButton();
-            this.commandButton_sleep = new x_IMU_GUI.CommandButton();
-            this.commandButton_reset = new x_IMU_GUI.CommandButton();
-            this.commandButton_factoryReset = new x_IMU_GUI.CommandButton();
             this.tabPage_viewSensorData = new System.Windows.Forms.TabPage();
             this.groupBox_orientationData = new System.Windows.Forms.GroupBox();
-            this.showHideButton_eulerAnglesGraph = new x_IMU_GUI.ShowHideButton();
-            this.showHideButton_3Dcuboid = new x_IMU_GUI.ShowHideButton();
             this.label_orientationDataLegendPsi = new System.Windows.Forms.Label();
             this.label_orientationDataLegendTheta = new System.Windows.Forms.Label();
             this.label_orientationDataLegendPhi = new System.Windows.Forms.Label();
             this.label_orientationDataLegend = new System.Windows.Forms.Label();
             this.groupBox_inertialAndMagneticData = new System.Windows.Forms.GroupBox();
-            this.showHideButton_magnetometerGraph = new x_IMU_GUI.ShowHideButton();
-            this.showHideButton_accelerometerGraph = new x_IMU_GUI.ShowHideButton();
-            this.showHideButton_gyroscopeGraph = new x_IMU_GUI.ShowHideButton();
             this.label_inertialAndMagneticDataZ = new System.Windows.Forms.Label();
             this.label_inertialAndMagneticDataY = new System.Windows.Forms.Label();
             this.label_inertialAndMagneticDataX = new System.Windows.Forms.Label();
             this.label_inertialAndMagneticDataLegend = new System.Windows.Forms.Label();
             this.groupBox_batteryAndThermometerData = new System.Windows.Forms.GroupBox();
-            this.showHideButton_thermometerGraph = new x_IMU_GUI.ShowHideButton();
-            this.showHideButton_batteryGraph = new x_IMU_GUI.ShowHideButton();
             this.tabPage_auxillaryPort = new System.Windows.Forms.TabPage();
             this.groupBox_ADXL345bus = new System.Windows.Forms.GroupBox();
             this.label_ADXL345busZ = new System.Windows.Forms.Label();
             this.label_ADXL345busY = new System.Windows.Forms.Label();
             this.label_ADXL345busX = new System.Windows.Forms.Label();
             this.label_ADXL345busLegend = new System.Windows.Forms.Label();
-            this.showHideButton_ADXL345Dgraph = new x_IMU_GUI.ShowHideButton();
-            this.showHideButton_ADXL345Agraph = new x_IMU_GUI.ShowHideButton();
-            this.showHideButton_ADXL345Bgraph = new x_IMU_GUI.ShowHideButton();
-            this.showHideButton_ADXL345Cgraph = new x_IMU_GUI.ShowHideButton();
             this.groupBox_PWMoutput = new System.Windows.Forms.GroupBox();
-            this.showHideButton_PWMoutputPanel = new x_IMU_GUI.ShowHideButton();
             this.groupBox_analogueInput = new System.Windows.Forms.GroupBox();
             this.label_analogueInputAX0246 = new System.Windows.Forms.Label();
             this.label_analogueInputAX1357 = new System.Windows.Forms.Label();
             this.label_analogueInputLegend = new System.Windows.Forms.Label();
-            this.showHideButton_AX6andAX7graph = new x_IMU_GUI.ShowHideButton();
-            this.showHideButton_AX0andAX1graph = new x_IMU_GUI.ShowHideButton();
-            this.showHideButton_AX4andAX5graph = new x_IMU_GUI.ShowHideButton();
-            this.showHideButton_AX2andAX3graph = new x_IMU_GUI.ShowHideButton();
             this.groupBox_digitalIO = new System.Windows.Forms.GroupBox();
-            this.showHideButton_digitalIOpanel = new x_IMU_GUI.ShowHideButton();
             this.tabPage_dataLogger = new System.Windows.Forms.TabPage();
             this.groupBox_logReceivedDataToFile = new System.Windows.Forms.GroupBox();
-            this.toggleButton_dataLoggerStartStopLogging = new x_IMU_GUI.ToggleButton();
             this.button_dataLoggerBrowse = new System.Windows.Forms.Button();
             this.label_dataLoggerFilePath = new System.Windows.Forms.Label();
             this.textBox_dataLoggerFilePath = new System.Windows.Forms.TextBox();
@@ -135,7 +99,6 @@
             this.textBox_hardIronCalFilePath = new System.Windows.Forms.TextBox();
             this.button_hardIronCalRun = new System.Windows.Forms.Button();
             this.groupBox_step2collectHardIronCalibrationDataSet = new System.Windows.Forms.GroupBox();
-            this.toggleButton_collectHardIronCalDatasetStartStopLogging = new x_IMU_GUI.ToggleButton();
             this.button_collectHardIronCalDatasetBrowse = new System.Windows.Forms.Button();
             this.label_collectHardIronCalDatasetFilePath = new System.Windows.Forms.Label();
             this.textBox_collectHardIronCalDatasetFilePath = new System.Windows.Forms.TextBox();
@@ -158,6 +121,43 @@
             this.label_compatibleFirmwareVersions = new System.Windows.Forms.Label();
             this.label_APIversion = new System.Windows.Forms.Label();
             this.label_GUIversion = new System.Windows.Forms.Label();
+            this.toggleButton_openClosePort = new x_IMU_GUI.ToggleButton();
+            this.registerTreeView = new x_IMU_GUI.RegisterTreeView();
+            this.commandButton_initialiseThenTare = new x_IMU_GUI.CommandButton();
+            this.commandButton_initialise = new x_IMU_GUI.CommandButton();
+            this.commandButton_clearTare = new x_IMU_GUI.CommandButton();
+            this.commandButton_tare = new x_IMU_GUI.CommandButton();
+            this.commandButton_measMagBiasSens = new x_IMU_GUI.CommandButton();
+            this.commandButton_calcAccelBiasSens = new x_IMU_GUI.CommandButton();
+            this.commandButton_sampleAccelAxisAt1g = new x_IMU_GUI.CommandButton();
+            this.commandButton_calcGyroBiasParameters = new x_IMU_GUI.CommandButton();
+            this.commandButton_sampleGyroAt200dps = new x_IMU_GUI.CommandButton();
+            this.commandButton_sampleGyroBiasAtT2 = new x_IMU_GUI.CommandButton();
+            this.commandButton_calculateGyroSensitivity = new x_IMU_GUI.CommandButton();
+            this.commandButtonbutton_sampleGyroBiasAtT1 = new x_IMU_GUI.CommandButton();
+            this.commandButton_resetSleepTimer = new x_IMU_GUI.CommandButton();
+            this.commandButton_sleep = new x_IMU_GUI.CommandButton();
+            this.commandButton_reset = new x_IMU_GUI.CommandButton();
+            this.commandButton_factoryReset = new x_IMU_GUI.CommandButton();
+            this.showHideButton_eulerAnglesGraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_3Dcuboid = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_magnetometerGraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_accelerometerGraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_gyroscopeGraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_thermometerGraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_batteryGraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_ADXL345Dgraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_ADXL345Agraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_ADXL345Bgraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_ADXL345Cgraph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_PWMoutputPanel = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_AX6andAX7graph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_AX0andAX1graph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_AX4andAX5graph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_AX2andAX3graph = new x_IMU_GUI.ShowHideButton();
+            this.showHideButton_digitalIOpanel = new x_IMU_GUI.ShowHideButton();
+            this.toggleButton_dataLoggerStartStopLogging = new x_IMU_GUI.ToggleButton();
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging = new x_IMU_GUI.ToggleButton();
             this.tabControl_main.SuspendLayout();
             this.tabPage_serialPort.SuspendLayout();
             this.groupBox_packetCounters.SuspendLayout();
@@ -229,7 +229,7 @@
             this.tabControl_main.Location = new System.Drawing.Point(0, 0);
             this.tabControl_main.Name = "tabControl_main";
             this.tabControl_main.SelectedIndex = 0;
-            this.tabControl_main.Size = new System.Drawing.Size(840, 436);
+            this.tabControl_main.Size = new System.Drawing.Size(834, 392);
             this.tabControl_main.TabIndex = 10;
             // 
             // tabPage_serialPort
@@ -240,7 +240,7 @@
             this.tabPage_serialPort.Location = new System.Drawing.Point(4, 22);
             this.tabPage_serialPort.Name = "tabPage_serialPort";
             this.tabPage_serialPort.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_serialPort.Size = new System.Drawing.Size(832, 410);
+            this.tabPage_serialPort.Size = new System.Drawing.Size(826, 366);
             this.tabPage_serialPort.TabIndex = 0;
             this.tabPage_serialPort.Text = "Serial Port";
             this.tabPage_serialPort.UseVisualStyleBackColor = true;
@@ -254,7 +254,7 @@
             this.groupBox_packetCounters.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_packetCounters.Location = new System.Drawing.Point(3, 62);
             this.groupBox_packetCounters.Name = "groupBox_packetCounters";
-            this.groupBox_packetCounters.Size = new System.Drawing.Size(826, 84);
+            this.groupBox_packetCounters.Size = new System.Drawing.Size(820, 84);
             this.groupBox_packetCounters.TabIndex = 1;
             this.groupBox_packetCounters.TabStop = false;
             this.groupBox_packetCounters.Text = "Packet Counters";
@@ -304,30 +304,15 @@
             this.groupBox_openClosePort.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_openClosePort.Location = new System.Drawing.Point(3, 3);
             this.groupBox_openClosePort.Name = "groupBox_openClosePort";
-            this.groupBox_openClosePort.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_openClosePort.Size = new System.Drawing.Size(820, 59);
             this.groupBox_openClosePort.TabIndex = 0;
             this.groupBox_openClosePort.TabStop = false;
             this.groupBox_openClosePort.Text = "Open/Close Port";
             // 
-            // toggleButton_openClosePort
-            // 
-            this.toggleButton_openClosePort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.toggleButton_openClosePort.FalsePrefixText = "Open ";
-            this.toggleButton_openClosePort.Location = new System.Drawing.Point(720, 20);
-            this.toggleButton_openClosePort.Name = "toggleButton_openClosePort";
-            this.toggleButton_openClosePort.Size = new System.Drawing.Size(100, 23);
-            this.toggleButton_openClosePort.SuffixText = "Port";
-            this.toggleButton_openClosePort.TabIndex = 2;
-            this.toggleButton_openClosePort.Text = "Open Port";
-            this.toggleButton_openClosePort.ToggleState = false;
-            this.toggleButton_openClosePort.TruePrefixText = "Close ";
-            this.toggleButton_openClosePort.UseVisualStyleBackColor = true;
-            this.toggleButton_openClosePort.Click += new System.EventHandler(this.toggleButton_openClosePort_Click);
-            // 
             // button_refreshList
             // 
             this.button_refreshList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_refreshList.Location = new System.Drawing.Point(614, 20);
+            this.button_refreshList.Location = new System.Drawing.Point(608, 20);
             this.button_refreshList.Name = "button_refreshList";
             this.button_refreshList.Size = new System.Drawing.Size(100, 23);
             this.button_refreshList.TabIndex = 1;
@@ -341,21 +326,10 @@
             this.tabPage_registers.Location = new System.Drawing.Point(4, 22);
             this.tabPage_registers.Name = "tabPage_registers";
             this.tabPage_registers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_registers.Size = new System.Drawing.Size(832, 410);
+            this.tabPage_registers.Size = new System.Drawing.Size(826, 366);
             this.tabPage_registers.TabIndex = 6;
             this.tabPage_registers.Text = "Registers";
             this.tabPage_registers.UseVisualStyleBackColor = true;
-            // 
-            // registerTreeView
-            // 
-            this.registerTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.registerTreeView.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.registerTreeView.Location = new System.Drawing.Point(3, 3);
-            this.registerTreeView.Name = "registerTreeView";
-            this.registerTreeView.RefreshPending = false;
-            this.registerTreeView.Size = new System.Drawing.Size(826, 404);
-            this.registerTreeView.TabIndex = 0;
-            this.registerTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.registerTreeView_registers_NodeMouseClick);
             // 
             // tabPage_dateTime
             // 
@@ -363,7 +337,7 @@
             this.tabPage_dateTime.Location = new System.Drawing.Point(4, 22);
             this.tabPage_dateTime.Name = "tabPage_dateTime";
             this.tabPage_dateTime.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_dateTime.Size = new System.Drawing.Size(832, 410);
+            this.tabPage_dateTime.Size = new System.Drawing.Size(826, 366);
             this.tabPage_dateTime.TabIndex = 11;
             this.tabPage_dateTime.Text = "Date/Time";
             this.tabPage_dateTime.UseVisualStyleBackColor = true;
@@ -377,7 +351,7 @@
             this.groupBox_dateTime.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_dateTime.Location = new System.Drawing.Point(3, 3);
             this.groupBox_dateTime.Name = "groupBox_dateTime";
-            this.groupBox_dateTime.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_dateTime.Size = new System.Drawing.Size(820, 59);
             this.groupBox_dateTime.TabIndex = 0;
             this.groupBox_dateTime.TabStop = false;
             this.groupBox_dateTime.Text = "Date/Time";
@@ -385,7 +359,7 @@
             // button_setDateTime
             // 
             this.button_setDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_setDateTime.Location = new System.Drawing.Point(693, 20);
+            this.button_setDateTime.Location = new System.Drawing.Point(687, 20);
             this.button_setDateTime.Name = "button_setDateTime";
             this.button_setDateTime.Size = new System.Drawing.Size(125, 23);
             this.button_setDateTime.TabIndex = 2;
@@ -396,7 +370,7 @@
             // button_readDateTime
             // 
             this.button_readDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_readDateTime.Location = new System.Drawing.Point(562, 20);
+            this.button_readDateTime.Location = new System.Drawing.Point(556, 20);
             this.button_readDateTime.Name = "button_readDateTime";
             this.button_readDateTime.Size = new System.Drawing.Size(125, 23);
             this.button_readDateTime.TabIndex = 1;
@@ -411,7 +385,7 @@
             this.textBox_receivedDataTime.Enabled = false;
             this.textBox_receivedDataTime.Location = new System.Drawing.Point(116, 22);
             this.textBox_receivedDataTime.Name = "textBox_receivedDataTime";
-            this.textBox_receivedDataTime.Size = new System.Drawing.Size(440, 20);
+            this.textBox_receivedDataTime.Size = new System.Drawing.Size(434, 20);
             this.textBox_receivedDataTime.TabIndex = 0;
             this.textBox_receivedDataTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -435,7 +409,7 @@
             this.tabPage_commands.Location = new System.Drawing.Point(4, 22);
             this.tabPage_commands.Name = "tabPage_commands";
             this.tabPage_commands.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_commands.Size = new System.Drawing.Size(832, 410);
+            this.tabPage_commands.Size = new System.Drawing.Size(826, 366);
             this.tabPage_commands.TabIndex = 9;
             this.tabPage_commands.Text = "Commands";
             this.tabPage_commands.UseVisualStyleBackColor = true;
@@ -446,7 +420,7 @@
             this.groupBox_receivedCommandMessages.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_receivedCommandMessages.Location = new System.Drawing.Point(3, 298);
             this.groupBox_receivedCommandMessages.Name = "groupBox_receivedCommandMessages";
-            this.groupBox_receivedCommandMessages.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_receivedCommandMessages.Size = new System.Drawing.Size(820, 59);
             this.groupBox_receivedCommandMessages.TabIndex = 5;
             this.groupBox_receivedCommandMessages.TabStop = false;
             this.groupBox_receivedCommandMessages.Text = "Received Command Messages";
@@ -472,54 +446,10 @@
             this.groupBox_algorithm.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_algorithm.Location = new System.Drawing.Point(3, 239);
             this.groupBox_algorithm.Name = "groupBox_algorithm";
-            this.groupBox_algorithm.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_algorithm.Size = new System.Drawing.Size(820, 59);
             this.groupBox_algorithm.TabIndex = 4;
             this.groupBox_algorithm.TabStop = false;
             this.groupBox_algorithm.Text = "Algorithm";
-            // 
-            // commandButton_initialiseThenTare
-            // 
-            this.commandButton_initialiseThenTare.CommandCode = x_IMU_API.CommandCodes.AlgorithmInitialiseThenTare;
-            this.commandButton_initialiseThenTare.Location = new System.Drawing.Point(469, 20);
-            this.commandButton_initialiseThenTare.Name = "commandButton_initialiseThenTare";
-            this.commandButton_initialiseThenTare.Size = new System.Drawing.Size(147, 23);
-            this.commandButton_initialiseThenTare.TabIndex = 3;
-            this.commandButton_initialiseThenTare.Text = "Initialise Then Tare";
-            this.commandButton_initialiseThenTare.UseVisualStyleBackColor = true;
-            this.commandButton_initialiseThenTare.Click += new System.EventHandler(this.commandButton_Click);
-            // 
-            // commandButton_initialise
-            // 
-            this.commandButton_initialise.CommandCode = x_IMU_API.CommandCodes.AlgorithmInitialise;
-            this.commandButton_initialise.Location = new System.Drawing.Point(10, 20);
-            this.commandButton_initialise.Name = "commandButton_initialise";
-            this.commandButton_initialise.Size = new System.Drawing.Size(147, 23);
-            this.commandButton_initialise.TabIndex = 0;
-            this.commandButton_initialise.Text = "Initialise";
-            this.commandButton_initialise.UseVisualStyleBackColor = true;
-            this.commandButton_initialise.Click += new System.EventHandler(this.commandButton_Click);
-            // 
-            // commandButton_clearTare
-            // 
-            this.commandButton_clearTare.CommandCode = x_IMU_API.CommandCodes.AlgorithmClearTare;
-            this.commandButton_clearTare.Location = new System.Drawing.Point(316, 20);
-            this.commandButton_clearTare.Name = "commandButton_clearTare";
-            this.commandButton_clearTare.Size = new System.Drawing.Size(147, 23);
-            this.commandButton_clearTare.TabIndex = 2;
-            this.commandButton_clearTare.Text = "Clear Tare";
-            this.commandButton_clearTare.UseVisualStyleBackColor = true;
-            this.commandButton_clearTare.Click += new System.EventHandler(this.commandButton_Click);
-            // 
-            // commandButton_tare
-            // 
-            this.commandButton_tare.CommandCode = x_IMU_API.CommandCodes.AlgorithmTare;
-            this.commandButton_tare.Location = new System.Drawing.Point(163, 20);
-            this.commandButton_tare.Name = "commandButton_tare";
-            this.commandButton_tare.Size = new System.Drawing.Size(147, 23);
-            this.commandButton_tare.TabIndex = 1;
-            this.commandButton_tare.Text = "Tare";
-            this.commandButton_tare.UseVisualStyleBackColor = true;
-            this.commandButton_tare.Click += new System.EventHandler(this.commandButton_Click);
             // 
             // groupBox_magnetometerCalibration
             // 
@@ -527,21 +457,10 @@
             this.groupBox_magnetometerCalibration.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_magnetometerCalibration.Location = new System.Drawing.Point(3, 180);
             this.groupBox_magnetometerCalibration.Name = "groupBox_magnetometerCalibration";
-            this.groupBox_magnetometerCalibration.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_magnetometerCalibration.Size = new System.Drawing.Size(820, 59);
             this.groupBox_magnetometerCalibration.TabIndex = 3;
             this.groupBox_magnetometerCalibration.TabStop = false;
             this.groupBox_magnetometerCalibration.Text = "Magnetometer Calibration";
-            // 
-            // commandButton_measMagBiasSens
-            // 
-            this.commandButton_measMagBiasSens.CommandCode = x_IMU_API.CommandCodes.MeasureMagnetometerBiasAndSensitivity;
-            this.commandButton_measMagBiasSens.Location = new System.Drawing.Point(10, 20);
-            this.commandButton_measMagBiasSens.Name = "commandButton_measMagBiasSens";
-            this.commandButton_measMagBiasSens.Size = new System.Drawing.Size(147, 23);
-            this.commandButton_measMagBiasSens.TabIndex = 0;
-            this.commandButton_measMagBiasSens.Text = "Measure Mag. Bias/Sens.";
-            this.commandButton_measMagBiasSens.UseVisualStyleBackColor = true;
-            this.commandButton_measMagBiasSens.Click += new System.EventHandler(this.commandButton_Click);
             // 
             // groupBox_accelerometerCalibration
             // 
@@ -550,32 +469,10 @@
             this.groupBox_accelerometerCalibration.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_accelerometerCalibration.Location = new System.Drawing.Point(3, 121);
             this.groupBox_accelerometerCalibration.Name = "groupBox_accelerometerCalibration";
-            this.groupBox_accelerometerCalibration.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_accelerometerCalibration.Size = new System.Drawing.Size(820, 59);
             this.groupBox_accelerometerCalibration.TabIndex = 2;
             this.groupBox_accelerometerCalibration.TabStop = false;
             this.groupBox_accelerometerCalibration.Text = "Accelerometer Calibration";
-            // 
-            // commandButton_calcAccelBiasSens
-            // 
-            this.commandButton_calcAccelBiasSens.CommandCode = x_IMU_API.CommandCodes.CalculateAccelerometerBiasAndSensitivity;
-            this.commandButton_calcAccelBiasSens.Location = new System.Drawing.Point(163, 20);
-            this.commandButton_calcAccelBiasSens.Name = "commandButton_calcAccelBiasSens";
-            this.commandButton_calcAccelBiasSens.Size = new System.Drawing.Size(147, 23);
-            this.commandButton_calcAccelBiasSens.TabIndex = 1;
-            this.commandButton_calcAccelBiasSens.Text = "Calc. Accel. Bias/Sens.";
-            this.commandButton_calcAccelBiasSens.UseVisualStyleBackColor = true;
-            this.commandButton_calcAccelBiasSens.Click += new System.EventHandler(this.commandButton_Click);
-            // 
-            // commandButton_sampleAccelAxisAt1g
-            // 
-            this.commandButton_sampleAccelAxisAt1g.CommandCode = x_IMU_API.CommandCodes.SampleAccelerometerAxisAt1g;
-            this.commandButton_sampleAccelAxisAt1g.Location = new System.Drawing.Point(10, 20);
-            this.commandButton_sampleAccelAxisAt1g.Name = "commandButton_sampleAccelAxisAt1g";
-            this.commandButton_sampleAccelAxisAt1g.Size = new System.Drawing.Size(147, 23);
-            this.commandButton_sampleAccelAxisAt1g.TabIndex = 0;
-            this.commandButton_sampleAccelAxisAt1g.Text = "Sample Accel. Axis @ ±1 g";
-            this.commandButton_sampleAccelAxisAt1g.UseVisualStyleBackColor = true;
-            this.commandButton_sampleAccelAxisAt1g.Click += new System.EventHandler(this.commandButton_Click);
             // 
             // groupBox_gyroscopeCalibration
             // 
@@ -587,65 +484,10 @@
             this.groupBox_gyroscopeCalibration.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_gyroscopeCalibration.Location = new System.Drawing.Point(3, 62);
             this.groupBox_gyroscopeCalibration.Name = "groupBox_gyroscopeCalibration";
-            this.groupBox_gyroscopeCalibration.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_gyroscopeCalibration.Size = new System.Drawing.Size(820, 59);
             this.groupBox_gyroscopeCalibration.TabIndex = 1;
             this.groupBox_gyroscopeCalibration.TabStop = false;
             this.groupBox_gyroscopeCalibration.Text = "Gyroscope Calibration";
-            // 
-            // commandButton_calcGyroBiasParameters
-            // 
-            this.commandButton_calcGyroBiasParameters.CommandCode = x_IMU_API.CommandCodes.CalculateGyroscopeBiasParameters;
-            this.commandButton_calcGyroBiasParameters.Location = new System.Drawing.Point(622, 20);
-            this.commandButton_calcGyroBiasParameters.Name = "commandButton_calcGyroBiasParameters";
-            this.commandButton_calcGyroBiasParameters.Size = new System.Drawing.Size(147, 23);
-            this.commandButton_calcGyroBiasParameters.TabIndex = 4;
-            this.commandButton_calcGyroBiasParameters.Text = "Calc. Gyro. Bias Parameters";
-            this.commandButton_calcGyroBiasParameters.UseVisualStyleBackColor = true;
-            this.commandButton_calcGyroBiasParameters.Click += new System.EventHandler(this.commandButton_Click);
-            // 
-            // commandButton_sampleGyroAt200dps
-            // 
-            this.commandButton_sampleGyroAt200dps.CommandCode = x_IMU_API.CommandCodes.SampleGyroscopeAxisAt200dps;
-            this.commandButton_sampleGyroAt200dps.Location = new System.Drawing.Point(10, 20);
-            this.commandButton_sampleGyroAt200dps.Name = "commandButton_sampleGyroAt200dps";
-            this.commandButton_sampleGyroAt200dps.Size = new System.Drawing.Size(147, 23);
-            this.commandButton_sampleGyroAt200dps.TabIndex = 0;
-            this.commandButton_sampleGyroAt200dps.Text = "Sample Gyro. @ ±200 ˚/s";
-            this.commandButton_sampleGyroAt200dps.UseVisualStyleBackColor = true;
-            this.commandButton_sampleGyroAt200dps.Click += new System.EventHandler(this.commandButton_Click);
-            // 
-            // commandButton_sampleGyroBiasAtT2
-            // 
-            this.commandButton_sampleGyroBiasAtT2.CommandCode = x_IMU_API.CommandCodes.SampleGyroscopeBiasTemp2;
-            this.commandButton_sampleGyroBiasAtT2.Location = new System.Drawing.Point(469, 20);
-            this.commandButton_sampleGyroBiasAtT2.Name = "commandButton_sampleGyroBiasAtT2";
-            this.commandButton_sampleGyroBiasAtT2.Size = new System.Drawing.Size(147, 23);
-            this.commandButton_sampleGyroBiasAtT2.TabIndex = 3;
-            this.commandButton_sampleGyroBiasAtT2.Text = "Sample Gyro. Bias @ T2";
-            this.commandButton_sampleGyroBiasAtT2.UseVisualStyleBackColor = true;
-            this.commandButton_sampleGyroBiasAtT2.Click += new System.EventHandler(this.commandButton_Click);
-            // 
-            // commandButton_calculateGyroSensitivity
-            // 
-            this.commandButton_calculateGyroSensitivity.CommandCode = x_IMU_API.CommandCodes.CalculateGyroscopeSensitivity;
-            this.commandButton_calculateGyroSensitivity.Location = new System.Drawing.Point(163, 20);
-            this.commandButton_calculateGyroSensitivity.Name = "commandButton_calculateGyroSensitivity";
-            this.commandButton_calculateGyroSensitivity.Size = new System.Drawing.Size(147, 23);
-            this.commandButton_calculateGyroSensitivity.TabIndex = 1;
-            this.commandButton_calculateGyroSensitivity.Text = "Calculate Gyro. Sensitivity";
-            this.commandButton_calculateGyroSensitivity.UseVisualStyleBackColor = true;
-            this.commandButton_calculateGyroSensitivity.Click += new System.EventHandler(this.commandButton_Click);
-            // 
-            // commandButtonbutton_sampleGyroBiasAtT1
-            // 
-            this.commandButtonbutton_sampleGyroBiasAtT1.CommandCode = x_IMU_API.CommandCodes.SampleGyroscopeBiasTemp1;
-            this.commandButtonbutton_sampleGyroBiasAtT1.Location = new System.Drawing.Point(316, 20);
-            this.commandButtonbutton_sampleGyroBiasAtT1.Name = "commandButtonbutton_sampleGyroBiasAtT1";
-            this.commandButtonbutton_sampleGyroBiasAtT1.Size = new System.Drawing.Size(147, 23);
-            this.commandButtonbutton_sampleGyroBiasAtT1.TabIndex = 2;
-            this.commandButtonbutton_sampleGyroBiasAtT1.Text = "Sample Gyro. Bias @ T1";
-            this.commandButtonbutton_sampleGyroBiasAtT1.UseVisualStyleBackColor = true;
-            this.commandButtonbutton_sampleGyroBiasAtT1.Click += new System.EventHandler(this.commandButton_Click);
             // 
             // groupBox_general
             // 
@@ -656,55 +498,10 @@
             this.groupBox_general.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_general.Location = new System.Drawing.Point(3, 3);
             this.groupBox_general.Name = "groupBox_general";
-            this.groupBox_general.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_general.Size = new System.Drawing.Size(820, 59);
             this.groupBox_general.TabIndex = 0;
             this.groupBox_general.TabStop = false;
             this.groupBox_general.Text = "General";
-            // 
-            // commandButton_resetSleepTimer
-            // 
-            this.commandButton_resetSleepTimer.CommandCode = x_IMU_API.CommandCodes.ResetSleepTimer;
-            this.commandButton_resetSleepTimer.Location = new System.Drawing.Point(469, 20);
-            this.commandButton_resetSleepTimer.Name = "commandButton_resetSleepTimer";
-            this.commandButton_resetSleepTimer.Size = new System.Drawing.Size(147, 23);
-            this.commandButton_resetSleepTimer.TabIndex = 3;
-            this.commandButton_resetSleepTimer.Text = "Reset Sleep Timer";
-            this.commandButton_resetSleepTimer.UseVisualStyleBackColor = true;
-            this.commandButton_resetSleepTimer.Click += new System.EventHandler(this.commandButton_Click);
-            // 
-            // commandButton_sleep
-            // 
-            this.commandButton_sleep.CommandCode = x_IMU_API.CommandCodes.Sleep;
-            this.commandButton_sleep.Location = new System.Drawing.Point(316, 20);
-            this.commandButton_sleep.Name = "commandButton_sleep";
-            this.commandButton_sleep.Size = new System.Drawing.Size(147, 23);
-            this.commandButton_sleep.TabIndex = 2;
-            this.commandButton_sleep.Text = "Sleep";
-            this.commandButton_sleep.UseVisualStyleBackColor = true;
-            this.commandButton_sleep.Click += new System.EventHandler(this.commandButton_Click);
-            // 
-            // commandButton_reset
-            // 
-            this.commandButton_reset.CommandCode = x_IMU_API.CommandCodes.Reset;
-            this.commandButton_reset.Location = new System.Drawing.Point(163, 20);
-            this.commandButton_reset.Name = "commandButton_reset";
-            this.commandButton_reset.Size = new System.Drawing.Size(147, 23);
-            this.commandButton_reset.TabIndex = 1;
-            this.commandButton_reset.Text = "Reset";
-            this.commandButton_reset.UseVisualStyleBackColor = true;
-            this.commandButton_reset.Click += new System.EventHandler(this.commandButton_Click);
-            this.commandButton_reset.MouseClick += new System.Windows.Forms.MouseEventHandler(this.commandButton_Click);
-            // 
-            // commandButton_factoryReset
-            // 
-            this.commandButton_factoryReset.CommandCode = x_IMU_API.CommandCodes.FactoryReset;
-            this.commandButton_factoryReset.Location = new System.Drawing.Point(10, 20);
-            this.commandButton_factoryReset.Name = "commandButton_factoryReset";
-            this.commandButton_factoryReset.Size = new System.Drawing.Size(147, 23);
-            this.commandButton_factoryReset.TabIndex = 0;
-            this.commandButton_factoryReset.Text = "Factory Reset";
-            this.commandButton_factoryReset.UseVisualStyleBackColor = true;
-            this.commandButton_factoryReset.Click += new System.EventHandler(this.commandButton_Click);
             // 
             // tabPage_viewSensorData
             // 
@@ -715,7 +512,7 @@
             this.tabPage_viewSensorData.Location = new System.Drawing.Point(4, 22);
             this.tabPage_viewSensorData.Name = "tabPage_viewSensorData";
             this.tabPage_viewSensorData.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_viewSensorData.Size = new System.Drawing.Size(832, 410);
+            this.tabPage_viewSensorData.Size = new System.Drawing.Size(826, 366);
             this.tabPage_viewSensorData.TabIndex = 3;
             this.tabPage_viewSensorData.Text = "View Sensor Data";
             this.tabPage_viewSensorData.UseVisualStyleBackColor = true;
@@ -731,45 +528,17 @@
             this.groupBox_orientationData.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_orientationData.Location = new System.Drawing.Point(3, 121);
             this.groupBox_orientationData.Name = "groupBox_orientationData";
-            this.groupBox_orientationData.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_orientationData.Size = new System.Drawing.Size(820, 59);
             this.groupBox_orientationData.TabIndex = 2;
             this.groupBox_orientationData.TabStop = false;
             this.groupBox_orientationData.Text = "Orientation Data";
-            // 
-            // showHideButton_eulerAnglesGraph
-            // 
-            this.showHideButton_eulerAnglesGraph.FalsePrefixText = "Show ";
-            this.showHideButton_eulerAnglesGraph.Location = new System.Drawing.Point(163, 20);
-            this.showHideButton_eulerAnglesGraph.Name = "showHideButton_eulerAnglesGraph";
-            this.showHideButton_eulerAnglesGraph.Object = null;
-            this.showHideButton_eulerAnglesGraph.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_eulerAnglesGraph.SuffixText = "Euler Anlges Graph";
-            this.showHideButton_eulerAnglesGraph.TabIndex = 1;
-            this.showHideButton_eulerAnglesGraph.Text = "Show Euler Anlges Graph";
-            this.showHideButton_eulerAnglesGraph.ToggleState = false;
-            this.showHideButton_eulerAnglesGraph.TruePrefixText = "Hide ";
-            this.showHideButton_eulerAnglesGraph.UseVisualStyleBackColor = true;
-            // 
-            // showHideButton_3Dcuboid
-            // 
-            this.showHideButton_3Dcuboid.FalsePrefixText = "Show ";
-            this.showHideButton_3Dcuboid.Location = new System.Drawing.Point(10, 20);
-            this.showHideButton_3Dcuboid.Name = "showHideButton_3Dcuboid";
-            this.showHideButton_3Dcuboid.Object = null;
-            this.showHideButton_3Dcuboid.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_3Dcuboid.SuffixText = "3D Cuboid";
-            this.showHideButton_3Dcuboid.TabIndex = 0;
-            this.showHideButton_3Dcuboid.Text = "Show 3D Cuboid";
-            this.showHideButton_3Dcuboid.ToggleState = false;
-            this.showHideButton_3Dcuboid.TruePrefixText = "Hide ";
-            this.showHideButton_3Dcuboid.UseVisualStyleBackColor = true;
             // 
             // label_orientationDataLegendPsi
             // 
             this.label_orientationDataLegendPsi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_orientationDataLegendPsi.AutoSize = true;
             this.label_orientationDataLegendPsi.ForeColor = System.Drawing.Color.Blue;
-            this.label_orientationDataLegendPsi.Location = new System.Drawing.Point(801, 24);
+            this.label_orientationDataLegendPsi.Location = new System.Drawing.Point(795, 24);
             this.label_orientationDataLegendPsi.Name = "label_orientationDataLegendPsi";
             this.label_orientationDataLegendPsi.Size = new System.Drawing.Size(15, 13);
             this.label_orientationDataLegendPsi.TabIndex = 45;
@@ -780,7 +549,7 @@
             this.label_orientationDataLegendTheta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_orientationDataLegendTheta.AutoSize = true;
             this.label_orientationDataLegendTheta.ForeColor = System.Drawing.Color.Lime;
-            this.label_orientationDataLegendTheta.Location = new System.Drawing.Point(782, 24);
+            this.label_orientationDataLegendTheta.Location = new System.Drawing.Point(776, 24);
             this.label_orientationDataLegendTheta.Name = "label_orientationDataLegendTheta";
             this.label_orientationDataLegendTheta.Size = new System.Drawing.Size(13, 13);
             this.label_orientationDataLegendTheta.TabIndex = 44;
@@ -791,7 +560,7 @@
             this.label_orientationDataLegendPhi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_orientationDataLegendPhi.AutoSize = true;
             this.label_orientationDataLegendPhi.ForeColor = System.Drawing.Color.Red;
-            this.label_orientationDataLegendPhi.Location = new System.Drawing.Point(761, 24);
+            this.label_orientationDataLegendPhi.Location = new System.Drawing.Point(755, 24);
             this.label_orientationDataLegendPhi.Name = "label_orientationDataLegendPhi";
             this.label_orientationDataLegendPhi.Size = new System.Drawing.Size(15, 13);
             this.label_orientationDataLegendPhi.TabIndex = 43;
@@ -801,7 +570,7 @@
             // 
             this.label_orientationDataLegend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_orientationDataLegend.AutoSize = true;
-            this.label_orientationDataLegend.Location = new System.Drawing.Point(709, 24);
+            this.label_orientationDataLegend.Location = new System.Drawing.Point(703, 24);
             this.label_orientationDataLegend.Name = "label_orientationDataLegend";
             this.label_orientationDataLegend.Size = new System.Drawing.Size(46, 13);
             this.label_orientationDataLegend.TabIndex = 42;
@@ -819,59 +588,17 @@
             this.groupBox_inertialAndMagneticData.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_inertialAndMagneticData.Location = new System.Drawing.Point(3, 62);
             this.groupBox_inertialAndMagneticData.Name = "groupBox_inertialAndMagneticData";
-            this.groupBox_inertialAndMagneticData.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_inertialAndMagneticData.Size = new System.Drawing.Size(820, 59);
             this.groupBox_inertialAndMagneticData.TabIndex = 1;
             this.groupBox_inertialAndMagneticData.TabStop = false;
             this.groupBox_inertialAndMagneticData.Text = "Inertial And Magnetic Sensor Data";
-            // 
-            // showHideButton_magnetometerGraph
-            // 
-            this.showHideButton_magnetometerGraph.FalsePrefixText = "Show ";
-            this.showHideButton_magnetometerGraph.Location = new System.Drawing.Point(316, 20);
-            this.showHideButton_magnetometerGraph.Name = "showHideButton_magnetometerGraph";
-            this.showHideButton_magnetometerGraph.Object = null;
-            this.showHideButton_magnetometerGraph.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_magnetometerGraph.SuffixText = "Magnetometer Graph";
-            this.showHideButton_magnetometerGraph.TabIndex = 2;
-            this.showHideButton_magnetometerGraph.Text = "Show Magnetometer Graph";
-            this.showHideButton_magnetometerGraph.ToggleState = false;
-            this.showHideButton_magnetometerGraph.TruePrefixText = "Hide ";
-            this.showHideButton_magnetometerGraph.UseVisualStyleBackColor = true;
-            // 
-            // showHideButton_accelerometerGraph
-            // 
-            this.showHideButton_accelerometerGraph.FalsePrefixText = "Show ";
-            this.showHideButton_accelerometerGraph.Location = new System.Drawing.Point(163, 20);
-            this.showHideButton_accelerometerGraph.Name = "showHideButton_accelerometerGraph";
-            this.showHideButton_accelerometerGraph.Object = null;
-            this.showHideButton_accelerometerGraph.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_accelerometerGraph.SuffixText = "Accelerometer Graph";
-            this.showHideButton_accelerometerGraph.TabIndex = 1;
-            this.showHideButton_accelerometerGraph.Text = "Show Accelerometer Graph";
-            this.showHideButton_accelerometerGraph.ToggleState = false;
-            this.showHideButton_accelerometerGraph.TruePrefixText = "Hide ";
-            this.showHideButton_accelerometerGraph.UseVisualStyleBackColor = true;
-            // 
-            // showHideButton_gyroscopeGraph
-            // 
-            this.showHideButton_gyroscopeGraph.FalsePrefixText = "Show ";
-            this.showHideButton_gyroscopeGraph.Location = new System.Drawing.Point(10, 20);
-            this.showHideButton_gyroscopeGraph.Name = "showHideButton_gyroscopeGraph";
-            this.showHideButton_gyroscopeGraph.Object = null;
-            this.showHideButton_gyroscopeGraph.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_gyroscopeGraph.SuffixText = "Gyroscope Graph";
-            this.showHideButton_gyroscopeGraph.TabIndex = 0;
-            this.showHideButton_gyroscopeGraph.Text = "Show Gyroscope Graph";
-            this.showHideButton_gyroscopeGraph.ToggleState = false;
-            this.showHideButton_gyroscopeGraph.TruePrefixText = "Hide ";
-            this.showHideButton_gyroscopeGraph.UseVisualStyleBackColor = true;
             // 
             // label_inertialAndMagneticDataZ
             // 
             this.label_inertialAndMagneticDataZ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_inertialAndMagneticDataZ.AutoSize = true;
             this.label_inertialAndMagneticDataZ.ForeColor = System.Drawing.Color.Blue;
-            this.label_inertialAndMagneticDataZ.Location = new System.Drawing.Point(802, 25);
+            this.label_inertialAndMagneticDataZ.Location = new System.Drawing.Point(796, 25);
             this.label_inertialAndMagneticDataZ.Name = "label_inertialAndMagneticDataZ";
             this.label_inertialAndMagneticDataZ.Size = new System.Drawing.Size(14, 13);
             this.label_inertialAndMagneticDataZ.TabIndex = 41;
@@ -882,7 +609,7 @@
             this.label_inertialAndMagneticDataY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_inertialAndMagneticDataY.AutoSize = true;
             this.label_inertialAndMagneticDataY.ForeColor = System.Drawing.Color.Lime;
-            this.label_inertialAndMagneticDataY.Location = new System.Drawing.Point(782, 25);
+            this.label_inertialAndMagneticDataY.Location = new System.Drawing.Point(776, 25);
             this.label_inertialAndMagneticDataY.Name = "label_inertialAndMagneticDataY";
             this.label_inertialAndMagneticDataY.Size = new System.Drawing.Size(14, 13);
             this.label_inertialAndMagneticDataY.TabIndex = 40;
@@ -893,7 +620,7 @@
             this.label_inertialAndMagneticDataX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_inertialAndMagneticDataX.AutoSize = true;
             this.label_inertialAndMagneticDataX.ForeColor = System.Drawing.Color.Red;
-            this.label_inertialAndMagneticDataX.Location = new System.Drawing.Point(762, 25);
+            this.label_inertialAndMagneticDataX.Location = new System.Drawing.Point(756, 25);
             this.label_inertialAndMagneticDataX.Name = "label_inertialAndMagneticDataX";
             this.label_inertialAndMagneticDataX.Size = new System.Drawing.Size(14, 13);
             this.label_inertialAndMagneticDataX.TabIndex = 39;
@@ -903,7 +630,7 @@
             // 
             this.label_inertialAndMagneticDataLegend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_inertialAndMagneticDataLegend.AutoSize = true;
-            this.label_inertialAndMagneticDataLegend.Location = new System.Drawing.Point(710, 25);
+            this.label_inertialAndMagneticDataLegend.Location = new System.Drawing.Point(704, 25);
             this.label_inertialAndMagneticDataLegend.Name = "label_inertialAndMagneticDataLegend";
             this.label_inertialAndMagneticDataLegend.Size = new System.Drawing.Size(46, 13);
             this.label_inertialAndMagneticDataLegend.TabIndex = 38;
@@ -916,38 +643,10 @@
             this.groupBox_batteryAndThermometerData.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_batteryAndThermometerData.Location = new System.Drawing.Point(3, 3);
             this.groupBox_batteryAndThermometerData.Name = "groupBox_batteryAndThermometerData";
-            this.groupBox_batteryAndThermometerData.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_batteryAndThermometerData.Size = new System.Drawing.Size(820, 59);
             this.groupBox_batteryAndThermometerData.TabIndex = 0;
             this.groupBox_batteryAndThermometerData.TabStop = false;
             this.groupBox_batteryAndThermometerData.Text = "Battery And Thermometer Data";
-            // 
-            // showHideButton_thermometerGraph
-            // 
-            this.showHideButton_thermometerGraph.FalsePrefixText = "Show ";
-            this.showHideButton_thermometerGraph.Location = new System.Drawing.Point(163, 20);
-            this.showHideButton_thermometerGraph.Name = "showHideButton_thermometerGraph";
-            this.showHideButton_thermometerGraph.Object = null;
-            this.showHideButton_thermometerGraph.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_thermometerGraph.SuffixText = "Thermometer Graph";
-            this.showHideButton_thermometerGraph.TabIndex = 1;
-            this.showHideButton_thermometerGraph.Text = "Show Thermometer Graph";
-            this.showHideButton_thermometerGraph.ToggleState = false;
-            this.showHideButton_thermometerGraph.TruePrefixText = "Hide ";
-            this.showHideButton_thermometerGraph.UseVisualStyleBackColor = true;
-            // 
-            // showHideButton_batteryGraph
-            // 
-            this.showHideButton_batteryGraph.FalsePrefixText = "Show ";
-            this.showHideButton_batteryGraph.Location = new System.Drawing.Point(10, 20);
-            this.showHideButton_batteryGraph.Name = "showHideButton_batteryGraph";
-            this.showHideButton_batteryGraph.Object = null;
-            this.showHideButton_batteryGraph.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_batteryGraph.SuffixText = "Battery Graph";
-            this.showHideButton_batteryGraph.TabIndex = 0;
-            this.showHideButton_batteryGraph.Text = "Show Battery Graph";
-            this.showHideButton_batteryGraph.ToggleState = false;
-            this.showHideButton_batteryGraph.TruePrefixText = "Hide ";
-            this.showHideButton_batteryGraph.UseVisualStyleBackColor = true;
             // 
             // tabPage_auxillaryPort
             // 
@@ -958,7 +657,7 @@
             this.tabPage_auxillaryPort.Location = new System.Drawing.Point(4, 22);
             this.tabPage_auxillaryPort.Name = "tabPage_auxillaryPort";
             this.tabPage_auxillaryPort.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_auxillaryPort.Size = new System.Drawing.Size(832, 410);
+            this.tabPage_auxillaryPort.Size = new System.Drawing.Size(826, 366);
             this.tabPage_auxillaryPort.TabIndex = 14;
             this.tabPage_auxillaryPort.Text = "Auxillary Port";
             this.tabPage_auxillaryPort.UseVisualStyleBackColor = true;
@@ -976,7 +675,7 @@
             this.groupBox_ADXL345bus.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_ADXL345bus.Location = new System.Drawing.Point(3, 180);
             this.groupBox_ADXL345bus.Name = "groupBox_ADXL345bus";
-            this.groupBox_ADXL345bus.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_ADXL345bus.Size = new System.Drawing.Size(820, 59);
             this.groupBox_ADXL345bus.TabIndex = 3;
             this.groupBox_ADXL345bus.TabStop = false;
             this.groupBox_ADXL345bus.Text = "AXDL345 Bus";
@@ -986,7 +685,7 @@
             this.label_ADXL345busZ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_ADXL345busZ.AutoSize = true;
             this.label_ADXL345busZ.ForeColor = System.Drawing.Color.Blue;
-            this.label_ADXL345busZ.Location = new System.Drawing.Point(806, 25);
+            this.label_ADXL345busZ.Location = new System.Drawing.Point(800, 25);
             this.label_ADXL345busZ.Name = "label_ADXL345busZ";
             this.label_ADXL345busZ.Size = new System.Drawing.Size(14, 13);
             this.label_ADXL345busZ.TabIndex = 45;
@@ -997,7 +696,7 @@
             this.label_ADXL345busY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_ADXL345busY.AutoSize = true;
             this.label_ADXL345busY.ForeColor = System.Drawing.Color.Lime;
-            this.label_ADXL345busY.Location = new System.Drawing.Point(786, 25);
+            this.label_ADXL345busY.Location = new System.Drawing.Point(780, 25);
             this.label_ADXL345busY.Name = "label_ADXL345busY";
             this.label_ADXL345busY.Size = new System.Drawing.Size(14, 13);
             this.label_ADXL345busY.TabIndex = 44;
@@ -1008,7 +707,7 @@
             this.label_ADXL345busX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_ADXL345busX.AutoSize = true;
             this.label_ADXL345busX.ForeColor = System.Drawing.Color.Red;
-            this.label_ADXL345busX.Location = new System.Drawing.Point(766, 25);
+            this.label_ADXL345busX.Location = new System.Drawing.Point(760, 25);
             this.label_ADXL345busX.Name = "label_ADXL345busX";
             this.label_ADXL345busX.Size = new System.Drawing.Size(14, 13);
             this.label_ADXL345busX.TabIndex = 43;
@@ -1018,67 +717,11 @@
             // 
             this.label_ADXL345busLegend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_ADXL345busLegend.AutoSize = true;
-            this.label_ADXL345busLegend.Location = new System.Drawing.Point(714, 25);
+            this.label_ADXL345busLegend.Location = new System.Drawing.Point(708, 25);
             this.label_ADXL345busLegend.Name = "label_ADXL345busLegend";
             this.label_ADXL345busLegend.Size = new System.Drawing.Size(46, 13);
             this.label_ADXL345busLegend.TabIndex = 42;
             this.label_ADXL345busLegend.Text = "Legend:";
-            // 
-            // showHideButton_ADXL345Dgraph
-            // 
-            this.showHideButton_ADXL345Dgraph.FalsePrefixText = "Show ";
-            this.showHideButton_ADXL345Dgraph.Location = new System.Drawing.Point(469, 20);
-            this.showHideButton_ADXL345Dgraph.Name = "showHideButton_ADXL345Dgraph";
-            this.showHideButton_ADXL345Dgraph.Object = null;
-            this.showHideButton_ADXL345Dgraph.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_ADXL345Dgraph.SuffixText = "ADXL345 D Graph";
-            this.showHideButton_ADXL345Dgraph.TabIndex = 11;
-            this.showHideButton_ADXL345Dgraph.Text = "Show ADXL345 D Graph";
-            this.showHideButton_ADXL345Dgraph.ToggleState = false;
-            this.showHideButton_ADXL345Dgraph.TruePrefixText = "Hide ";
-            this.showHideButton_ADXL345Dgraph.UseVisualStyleBackColor = true;
-            // 
-            // showHideButton_ADXL345Agraph
-            // 
-            this.showHideButton_ADXL345Agraph.FalsePrefixText = "Show ";
-            this.showHideButton_ADXL345Agraph.Location = new System.Drawing.Point(10, 20);
-            this.showHideButton_ADXL345Agraph.Name = "showHideButton_ADXL345Agraph";
-            this.showHideButton_ADXL345Agraph.Object = null;
-            this.showHideButton_ADXL345Agraph.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_ADXL345Agraph.SuffixText = "ADXL345 A Graph";
-            this.showHideButton_ADXL345Agraph.TabIndex = 8;
-            this.showHideButton_ADXL345Agraph.Text = "Show ADXL345 A Graph";
-            this.showHideButton_ADXL345Agraph.ToggleState = false;
-            this.showHideButton_ADXL345Agraph.TruePrefixText = "Hide ";
-            this.showHideButton_ADXL345Agraph.UseVisualStyleBackColor = true;
-            // 
-            // showHideButton_ADXL345Bgraph
-            // 
-            this.showHideButton_ADXL345Bgraph.FalsePrefixText = "Show ";
-            this.showHideButton_ADXL345Bgraph.Location = new System.Drawing.Point(163, 20);
-            this.showHideButton_ADXL345Bgraph.Name = "showHideButton_ADXL345Bgraph";
-            this.showHideButton_ADXL345Bgraph.Object = null;
-            this.showHideButton_ADXL345Bgraph.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_ADXL345Bgraph.SuffixText = "ADXL345 B Graph";
-            this.showHideButton_ADXL345Bgraph.TabIndex = 9;
-            this.showHideButton_ADXL345Bgraph.Text = "Show ADXL345 B Graph";
-            this.showHideButton_ADXL345Bgraph.ToggleState = false;
-            this.showHideButton_ADXL345Bgraph.TruePrefixText = "Hide ";
-            this.showHideButton_ADXL345Bgraph.UseVisualStyleBackColor = true;
-            // 
-            // showHideButton_ADXL345Cgraph
-            // 
-            this.showHideButton_ADXL345Cgraph.FalsePrefixText = "Show ";
-            this.showHideButton_ADXL345Cgraph.Location = new System.Drawing.Point(316, 20);
-            this.showHideButton_ADXL345Cgraph.Name = "showHideButton_ADXL345Cgraph";
-            this.showHideButton_ADXL345Cgraph.Object = null;
-            this.showHideButton_ADXL345Cgraph.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_ADXL345Cgraph.SuffixText = "ADXL345 C Graph";
-            this.showHideButton_ADXL345Cgraph.TabIndex = 10;
-            this.showHideButton_ADXL345Cgraph.Text = "Show ADXL345 C Graph";
-            this.showHideButton_ADXL345Cgraph.ToggleState = false;
-            this.showHideButton_ADXL345Cgraph.TruePrefixText = "Hide ";
-            this.showHideButton_ADXL345Cgraph.UseVisualStyleBackColor = true;
             // 
             // groupBox_PWMoutput
             // 
@@ -1086,24 +729,10 @@
             this.groupBox_PWMoutput.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_PWMoutput.Location = new System.Drawing.Point(3, 121);
             this.groupBox_PWMoutput.Name = "groupBox_PWMoutput";
-            this.groupBox_PWMoutput.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_PWMoutput.Size = new System.Drawing.Size(820, 59);
             this.groupBox_PWMoutput.TabIndex = 2;
             this.groupBox_PWMoutput.TabStop = false;
             this.groupBox_PWMoutput.Text = "PWM Output";
-            // 
-            // showHideButton_PWMoutputPanel
-            // 
-            this.showHideButton_PWMoutputPanel.FalsePrefixText = "Show ";
-            this.showHideButton_PWMoutputPanel.Location = new System.Drawing.Point(10, 20);
-            this.showHideButton_PWMoutputPanel.Name = "showHideButton_PWMoutputPanel";
-            this.showHideButton_PWMoutputPanel.Object = null;
-            this.showHideButton_PWMoutputPanel.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_PWMoutputPanel.SuffixText = "PWM Output Panel";
-            this.showHideButton_PWMoutputPanel.TabIndex = 5;
-            this.showHideButton_PWMoutputPanel.Text = "Show PWM Output Panel";
-            this.showHideButton_PWMoutputPanel.ToggleState = false;
-            this.showHideButton_PWMoutputPanel.TruePrefixText = "Hide ";
-            this.showHideButton_PWMoutputPanel.UseVisualStyleBackColor = true;
             // 
             // groupBox_analogueInput
             // 
@@ -1117,7 +746,7 @@
             this.groupBox_analogueInput.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_analogueInput.Location = new System.Drawing.Point(3, 62);
             this.groupBox_analogueInput.Name = "groupBox_analogueInput";
-            this.groupBox_analogueInput.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_analogueInput.Size = new System.Drawing.Size(820, 59);
             this.groupBox_analogueInput.TabIndex = 1;
             this.groupBox_analogueInput.TabStop = false;
             this.groupBox_analogueInput.Text = "Analogue Input";
@@ -1127,7 +756,7 @@
             this.label_analogueInputAX0246.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_analogueInputAX0246.AutoSize = true;
             this.label_analogueInputAX0246.ForeColor = System.Drawing.Color.Red;
-            this.label_analogueInputAX0246.Location = new System.Drawing.Point(706, 25);
+            this.label_analogueInputAX0246.Location = new System.Drawing.Point(700, 25);
             this.label_analogueInputAX0246.Name = "label_analogueInputAX0246";
             this.label_analogueInputAX0246.Size = new System.Drawing.Size(54, 13);
             this.label_analogueInputAX0246.TabIndex = 48;
@@ -1138,7 +767,7 @@
             this.label_analogueInputAX1357.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_analogueInputAX1357.AutoSize = true;
             this.label_analogueInputAX1357.ForeColor = System.Drawing.Color.Blue;
-            this.label_analogueInputAX1357.Location = new System.Drawing.Point(766, 25);
+            this.label_analogueInputAX1357.Location = new System.Drawing.Point(760, 25);
             this.label_analogueInputAX1357.Name = "label_analogueInputAX1357";
             this.label_analogueInputAX1357.Size = new System.Drawing.Size(54, 13);
             this.label_analogueInputAX1357.TabIndex = 47;
@@ -1148,67 +777,11 @@
             // 
             this.label_analogueInputLegend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_analogueInputLegend.AutoSize = true;
-            this.label_analogueInputLegend.Location = new System.Drawing.Point(654, 25);
+            this.label_analogueInputLegend.Location = new System.Drawing.Point(648, 25);
             this.label_analogueInputLegend.Name = "label_analogueInputLegend";
             this.label_analogueInputLegend.Size = new System.Drawing.Size(46, 13);
             this.label_analogueInputLegend.TabIndex = 46;
             this.label_analogueInputLegend.Text = "Legend:";
-            // 
-            // showHideButton_AX6andAX7graph
-            // 
-            this.showHideButton_AX6andAX7graph.FalsePrefixText = "Show ";
-            this.showHideButton_AX6andAX7graph.Location = new System.Drawing.Point(469, 20);
-            this.showHideButton_AX6andAX7graph.Name = "showHideButton_AX6andAX7graph";
-            this.showHideButton_AX6andAX7graph.Object = null;
-            this.showHideButton_AX6andAX7graph.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_AX6andAX7graph.SuffixText = "AX6 And AX7 Graph";
-            this.showHideButton_AX6andAX7graph.TabIndex = 7;
-            this.showHideButton_AX6andAX7graph.Text = "Show AX6 And AX7 Graph";
-            this.showHideButton_AX6andAX7graph.ToggleState = false;
-            this.showHideButton_AX6andAX7graph.TruePrefixText = "Hide ";
-            this.showHideButton_AX6andAX7graph.UseVisualStyleBackColor = true;
-            // 
-            // showHideButton_AX0andAX1graph
-            // 
-            this.showHideButton_AX0andAX1graph.FalsePrefixText = "Show ";
-            this.showHideButton_AX0andAX1graph.Location = new System.Drawing.Point(10, 20);
-            this.showHideButton_AX0andAX1graph.Name = "showHideButton_AX0andAX1graph";
-            this.showHideButton_AX0andAX1graph.Object = null;
-            this.showHideButton_AX0andAX1graph.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_AX0andAX1graph.SuffixText = "AX0 And AX1 Graph";
-            this.showHideButton_AX0andAX1graph.TabIndex = 4;
-            this.showHideButton_AX0andAX1graph.Text = "Show AX0 And AX1 Graph";
-            this.showHideButton_AX0andAX1graph.ToggleState = false;
-            this.showHideButton_AX0andAX1graph.TruePrefixText = "Hide ";
-            this.showHideButton_AX0andAX1graph.UseVisualStyleBackColor = true;
-            // 
-            // showHideButton_AX4andAX5graph
-            // 
-            this.showHideButton_AX4andAX5graph.FalsePrefixText = "Show ";
-            this.showHideButton_AX4andAX5graph.Location = new System.Drawing.Point(316, 20);
-            this.showHideButton_AX4andAX5graph.Name = "showHideButton_AX4andAX5graph";
-            this.showHideButton_AX4andAX5graph.Object = null;
-            this.showHideButton_AX4andAX5graph.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_AX4andAX5graph.SuffixText = "AX4 And AX5 Graph";
-            this.showHideButton_AX4andAX5graph.TabIndex = 6;
-            this.showHideButton_AX4andAX5graph.Text = "Show AX4 And AX5 Graph";
-            this.showHideButton_AX4andAX5graph.ToggleState = false;
-            this.showHideButton_AX4andAX5graph.TruePrefixText = "Hide ";
-            this.showHideButton_AX4andAX5graph.UseVisualStyleBackColor = true;
-            // 
-            // showHideButton_AX2andAX3graph
-            // 
-            this.showHideButton_AX2andAX3graph.FalsePrefixText = "Show ";
-            this.showHideButton_AX2andAX3graph.Location = new System.Drawing.Point(163, 20);
-            this.showHideButton_AX2andAX3graph.Name = "showHideButton_AX2andAX3graph";
-            this.showHideButton_AX2andAX3graph.Object = null;
-            this.showHideButton_AX2andAX3graph.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_AX2andAX3graph.SuffixText = "AX2 And AX3 Graph";
-            this.showHideButton_AX2andAX3graph.TabIndex = 5;
-            this.showHideButton_AX2andAX3graph.Text = "Show AX2 And AX3 Graph";
-            this.showHideButton_AX2andAX3graph.ToggleState = false;
-            this.showHideButton_AX2andAX3graph.TruePrefixText = "Hide ";
-            this.showHideButton_AX2andAX3graph.UseVisualStyleBackColor = true;
             // 
             // groupBox_digitalIO
             // 
@@ -1216,24 +789,10 @@
             this.groupBox_digitalIO.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_digitalIO.Location = new System.Drawing.Point(3, 3);
             this.groupBox_digitalIO.Name = "groupBox_digitalIO";
-            this.groupBox_digitalIO.Size = new System.Drawing.Size(826, 59);
+            this.groupBox_digitalIO.Size = new System.Drawing.Size(820, 59);
             this.groupBox_digitalIO.TabIndex = 0;
             this.groupBox_digitalIO.TabStop = false;
             this.groupBox_digitalIO.Text = "Digital I/O";
-            // 
-            // showHideButton_digitalIOpanel
-            // 
-            this.showHideButton_digitalIOpanel.FalsePrefixText = "Show ";
-            this.showHideButton_digitalIOpanel.Location = new System.Drawing.Point(10, 20);
-            this.showHideButton_digitalIOpanel.Name = "showHideButton_digitalIOpanel";
-            this.showHideButton_digitalIOpanel.Object = null;
-            this.showHideButton_digitalIOpanel.Size = new System.Drawing.Size(147, 23);
-            this.showHideButton_digitalIOpanel.SuffixText = "Digital I/O Panel";
-            this.showHideButton_digitalIOpanel.TabIndex = 4;
-            this.showHideButton_digitalIOpanel.Text = "Show Digital I/O Panel";
-            this.showHideButton_digitalIOpanel.ToggleState = false;
-            this.showHideButton_digitalIOpanel.TruePrefixText = "Hide ";
-            this.showHideButton_digitalIOpanel.UseVisualStyleBackColor = true;
             // 
             // tabPage_dataLogger
             // 
@@ -1241,7 +800,7 @@
             this.tabPage_dataLogger.Location = new System.Drawing.Point(4, 22);
             this.tabPage_dataLogger.Name = "tabPage_dataLogger";
             this.tabPage_dataLogger.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_dataLogger.Size = new System.Drawing.Size(832, 410);
+            this.tabPage_dataLogger.Size = new System.Drawing.Size(826, 366);
             this.tabPage_dataLogger.TabIndex = 13;
             this.tabPage_dataLogger.Text = "Data Logger";
             this.tabPage_dataLogger.UseVisualStyleBackColor = true;
@@ -1255,30 +814,15 @@
             this.groupBox_logReceivedDataToFile.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_logReceivedDataToFile.Location = new System.Drawing.Point(3, 3);
             this.groupBox_logReceivedDataToFile.Name = "groupBox_logReceivedDataToFile";
-            this.groupBox_logReceivedDataToFile.Size = new System.Drawing.Size(826, 60);
+            this.groupBox_logReceivedDataToFile.Size = new System.Drawing.Size(820, 60);
             this.groupBox_logReceivedDataToFile.TabIndex = 0;
             this.groupBox_logReceivedDataToFile.TabStop = false;
             this.groupBox_logReceivedDataToFile.Text = "Log Received Data To File";
             // 
-            // toggleButton_dataLoggerStartStopLogging
-            // 
-            this.toggleButton_dataLoggerStartStopLogging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.toggleButton_dataLoggerStartStopLogging.FalsePrefixText = "Start ";
-            this.toggleButton_dataLoggerStartStopLogging.Location = new System.Drawing.Point(725, 22);
-            this.toggleButton_dataLoggerStartStopLogging.Name = "toggleButton_dataLoggerStartStopLogging";
-            this.toggleButton_dataLoggerStartStopLogging.Size = new System.Drawing.Size(95, 23);
-            this.toggleButton_dataLoggerStartStopLogging.SuffixText = "Logging";
-            this.toggleButton_dataLoggerStartStopLogging.TabIndex = 2;
-            this.toggleButton_dataLoggerStartStopLogging.Text = "Start Logging";
-            this.toggleButton_dataLoggerStartStopLogging.ToggleState = false;
-            this.toggleButton_dataLoggerStartStopLogging.TruePrefixText = "Stop ";
-            this.toggleButton_dataLoggerStartStopLogging.UseVisualStyleBackColor = true;
-            this.toggleButton_dataLoggerStartStopLogging.Click += new System.EventHandler(this.toggleButton_dataLoggerStartStopLogging_Click);
-            // 
             // button_dataLoggerBrowse
             // 
             this.button_dataLoggerBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_dataLoggerBrowse.Location = new System.Drawing.Point(624, 22);
+            this.button_dataLoggerBrowse.Location = new System.Drawing.Point(618, 22);
             this.button_dataLoggerBrowse.Name = "button_dataLoggerBrowse";
             this.button_dataLoggerBrowse.Size = new System.Drawing.Size(95, 23);
             this.button_dataLoggerBrowse.TabIndex = 1;
@@ -1301,7 +845,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_dataLoggerFilePath.Location = new System.Drawing.Point(64, 24);
             this.textBox_dataLoggerFilePath.Name = "textBox_dataLoggerFilePath";
-            this.textBox_dataLoggerFilePath.Size = new System.Drawing.Size(554, 20);
+            this.textBox_dataLoggerFilePath.Size = new System.Drawing.Size(548, 20);
             this.textBox_dataLoggerFilePath.TabIndex = 0;
             // 
             // tabPage_SDcard
@@ -1310,7 +854,7 @@
             this.tabPage_SDcard.Location = new System.Drawing.Point(4, 22);
             this.tabPage_SDcard.Name = "tabPage_SDcard";
             this.tabPage_SDcard.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_SDcard.Size = new System.Drawing.Size(832, 410);
+            this.tabPage_SDcard.Size = new System.Drawing.Size(826, 366);
             this.tabPage_SDcard.TabIndex = 12;
             this.tabPage_SDcard.Text = "SD Card";
             this.tabPage_SDcard.UseVisualStyleBackColor = true;
@@ -1324,7 +868,7 @@
             this.groupBox_binaryFileConverter.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_binaryFileConverter.Location = new System.Drawing.Point(3, 3);
             this.groupBox_binaryFileConverter.Name = "groupBox_binaryFileConverter";
-            this.groupBox_binaryFileConverter.Size = new System.Drawing.Size(826, 60);
+            this.groupBox_binaryFileConverter.Size = new System.Drawing.Size(820, 60);
             this.groupBox_binaryFileConverter.TabIndex = 0;
             this.groupBox_binaryFileConverter.TabStop = false;
             this.groupBox_binaryFileConverter.Text = "Binary File Converter";
@@ -1332,7 +876,7 @@
             // button_convertBinaryFileBrowse
             // 
             this.button_convertBinaryFileBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_convertBinaryFileBrowse.Location = new System.Drawing.Point(624, 22);
+            this.button_convertBinaryFileBrowse.Location = new System.Drawing.Point(618, 22);
             this.button_convertBinaryFileBrowse.Name = "button_convertBinaryFileBrowse";
             this.button_convertBinaryFileBrowse.Size = new System.Drawing.Size(95, 23);
             this.button_convertBinaryFileBrowse.TabIndex = 1;
@@ -1355,13 +899,13 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_convertBinaryFileFilePath.Location = new System.Drawing.Point(64, 24);
             this.textBox_convertBinaryFileFilePath.Name = "textBox_convertBinaryFileFilePath";
-            this.textBox_convertBinaryFileFilePath.Size = new System.Drawing.Size(554, 20);
+            this.textBox_convertBinaryFileFilePath.Size = new System.Drawing.Size(548, 20);
             this.textBox_convertBinaryFileFilePath.TabIndex = 0;
             // 
             // button_convertBinaryFileConvert
             // 
             this.button_convertBinaryFileConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_convertBinaryFileConvert.Location = new System.Drawing.Point(725, 22);
+            this.button_convertBinaryFileConvert.Location = new System.Drawing.Point(719, 22);
             this.button_convertBinaryFileConvert.Name = "button_convertBinaryFileConvert";
             this.button_convertBinaryFileConvert.Size = new System.Drawing.Size(95, 23);
             this.button_convertBinaryFileConvert.TabIndex = 2;
@@ -1377,7 +921,7 @@
             this.tabPage_hardIronCalibration.Location = new System.Drawing.Point(4, 22);
             this.tabPage_hardIronCalibration.Name = "tabPage_hardIronCalibration";
             this.tabPage_hardIronCalibration.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_hardIronCalibration.Size = new System.Drawing.Size(832, 410);
+            this.tabPage_hardIronCalibration.Size = new System.Drawing.Size(826, 366);
             this.tabPage_hardIronCalibration.TabIndex = 10;
             this.tabPage_hardIronCalibration.Text = "Hard-Iron Calibration";
             this.tabPage_hardIronCalibration.UseVisualStyleBackColor = true;
@@ -1391,7 +935,7 @@
             this.groupBox_step3hardIronCalibrationAlgorithm.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_step3hardIronCalibrationAlgorithm.Location = new System.Drawing.Point(3, 123);
             this.groupBox_step3hardIronCalibrationAlgorithm.Name = "groupBox_step3hardIronCalibrationAlgorithm";
-            this.groupBox_step3hardIronCalibrationAlgorithm.Size = new System.Drawing.Size(826, 60);
+            this.groupBox_step3hardIronCalibrationAlgorithm.Size = new System.Drawing.Size(820, 60);
             this.groupBox_step3hardIronCalibrationAlgorithm.TabIndex = 2;
             this.groupBox_step3hardIronCalibrationAlgorithm.TabStop = false;
             this.groupBox_step3hardIronCalibrationAlgorithm.Text = "Step 3 - Run Hard-Iron Calibration Algorithm";
@@ -1399,7 +943,7 @@
             // button_hardIronCalBrowse
             // 
             this.button_hardIronCalBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_hardIronCalBrowse.Location = new System.Drawing.Point(624, 22);
+            this.button_hardIronCalBrowse.Location = new System.Drawing.Point(618, 22);
             this.button_hardIronCalBrowse.Name = "button_hardIronCalBrowse";
             this.button_hardIronCalBrowse.Size = new System.Drawing.Size(95, 23);
             this.button_hardIronCalBrowse.TabIndex = 1;
@@ -1422,13 +966,13 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_hardIronCalFilePath.Location = new System.Drawing.Point(64, 24);
             this.textBox_hardIronCalFilePath.Name = "textBox_hardIronCalFilePath";
-            this.textBox_hardIronCalFilePath.Size = new System.Drawing.Size(554, 20);
+            this.textBox_hardIronCalFilePath.Size = new System.Drawing.Size(548, 20);
             this.textBox_hardIronCalFilePath.TabIndex = 0;
             // 
             // button_hardIronCalRun
             // 
             this.button_hardIronCalRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_hardIronCalRun.Location = new System.Drawing.Point(725, 22);
+            this.button_hardIronCalRun.Location = new System.Drawing.Point(719, 22);
             this.button_hardIronCalRun.Name = "button_hardIronCalRun";
             this.button_hardIronCalRun.Size = new System.Drawing.Size(95, 23);
             this.button_hardIronCalRun.TabIndex = 2;
@@ -1445,30 +989,15 @@
             this.groupBox_step2collectHardIronCalibrationDataSet.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_step2collectHardIronCalibrationDataSet.Location = new System.Drawing.Point(3, 63);
             this.groupBox_step2collectHardIronCalibrationDataSet.Name = "groupBox_step2collectHardIronCalibrationDataSet";
-            this.groupBox_step2collectHardIronCalibrationDataSet.Size = new System.Drawing.Size(826, 60);
+            this.groupBox_step2collectHardIronCalibrationDataSet.Size = new System.Drawing.Size(820, 60);
             this.groupBox_step2collectHardIronCalibrationDataSet.TabIndex = 1;
             this.groupBox_step2collectHardIronCalibrationDataSet.TabStop = false;
             this.groupBox_step2collectHardIronCalibrationDataSet.Text = "Step 2 - Collect Hard-Iron Calibration Dataset";
             // 
-            // toggleButton_collectHardIronCalDatasetStartStopLogging
-            // 
-            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.toggleButton_collectHardIronCalDatasetStartStopLogging.FalsePrefixText = "Start ";
-            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Location = new System.Drawing.Point(725, 22);
-            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Name = "toggleButton_collectHardIronCalDatasetStartStopLogging";
-            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Size = new System.Drawing.Size(95, 23);
-            this.toggleButton_collectHardIronCalDatasetStartStopLogging.SuffixText = "Logging";
-            this.toggleButton_collectHardIronCalDatasetStartStopLogging.TabIndex = 2;
-            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Text = "Start Logging";
-            this.toggleButton_collectHardIronCalDatasetStartStopLogging.ToggleState = false;
-            this.toggleButton_collectHardIronCalDatasetStartStopLogging.TruePrefixText = "Stop ";
-            this.toggleButton_collectHardIronCalDatasetStartStopLogging.UseVisualStyleBackColor = true;
-            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Click += new System.EventHandler(this.toggleButton_collectHardIronCalDatasetStartStopLogging_Click);
-            // 
             // button_collectHardIronCalDatasetBrowse
             // 
             this.button_collectHardIronCalDatasetBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_collectHardIronCalDatasetBrowse.Location = new System.Drawing.Point(624, 22);
+            this.button_collectHardIronCalDatasetBrowse.Location = new System.Drawing.Point(618, 22);
             this.button_collectHardIronCalDatasetBrowse.Name = "button_collectHardIronCalDatasetBrowse";
             this.button_collectHardIronCalDatasetBrowse.Size = new System.Drawing.Size(95, 23);
             this.button_collectHardIronCalDatasetBrowse.TabIndex = 1;
@@ -1491,7 +1020,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_collectHardIronCalDatasetFilePath.Location = new System.Drawing.Point(63, 24);
             this.textBox_collectHardIronCalDatasetFilePath.Name = "textBox_collectHardIronCalDatasetFilePath";
-            this.textBox_collectHardIronCalDatasetFilePath.Size = new System.Drawing.Size(554, 20);
+            this.textBox_collectHardIronCalDatasetFilePath.Size = new System.Drawing.Size(548, 20);
             this.textBox_collectHardIronCalDatasetFilePath.TabIndex = 0;
             this.textBox_collectHardIronCalDatasetFilePath.TextChanged += new System.EventHandler(this.textBox_collectHardIronCalDatasetFilePath_TextChanged);
             // 
@@ -1501,7 +1030,7 @@
             this.groupBox_step1ClearHardIronBiasRegisters.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_step1ClearHardIronBiasRegisters.Location = new System.Drawing.Point(3, 3);
             this.groupBox_step1ClearHardIronBiasRegisters.Name = "groupBox_step1ClearHardIronBiasRegisters";
-            this.groupBox_step1ClearHardIronBiasRegisters.Size = new System.Drawing.Size(826, 60);
+            this.groupBox_step1ClearHardIronBiasRegisters.Size = new System.Drawing.Size(820, 60);
             this.groupBox_step1ClearHardIronBiasRegisters.TabIndex = 0;
             this.groupBox_step1ClearHardIronBiasRegisters.TabStop = false;
             this.groupBox_step1ClearHardIronBiasRegisters.Text = "Step 1 - Clear Hard-Iron Bias Registers";
@@ -1523,7 +1052,7 @@
             this.tabPage_uploadFirmware.Location = new System.Drawing.Point(4, 22);
             this.tabPage_uploadFirmware.Name = "tabPage_uploadFirmware";
             this.tabPage_uploadFirmware.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_uploadFirmware.Size = new System.Drawing.Size(832, 410);
+            this.tabPage_uploadFirmware.Size = new System.Drawing.Size(826, 366);
             this.tabPage_uploadFirmware.TabIndex = 5;
             this.tabPage_uploadFirmware.Text = "Upload Firmware";
             this.tabPage_uploadFirmware.UseVisualStyleBackColor = true;
@@ -1537,7 +1066,7 @@
             this.groupBox_bootloader.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_bootloader.Location = new System.Drawing.Point(3, 3);
             this.groupBox_bootloader.Name = "groupBox_bootloader";
-            this.groupBox_bootloader.Size = new System.Drawing.Size(826, 60);
+            this.groupBox_bootloader.Size = new System.Drawing.Size(820, 60);
             this.groupBox_bootloader.TabIndex = 0;
             this.groupBox_bootloader.TabStop = false;
             this.groupBox_bootloader.Text = "Bootloader";
@@ -1545,7 +1074,7 @@
             // button_bootloaderBrowse
             // 
             this.button_bootloaderBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_bootloaderBrowse.Location = new System.Drawing.Point(624, 22);
+            this.button_bootloaderBrowse.Location = new System.Drawing.Point(618, 22);
             this.button_bootloaderBrowse.Name = "button_bootloaderBrowse";
             this.button_bootloaderBrowse.Size = new System.Drawing.Size(95, 23);
             this.button_bootloaderBrowse.TabIndex = 1;
@@ -1568,13 +1097,13 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_bootloaderFilePath.Location = new System.Drawing.Point(64, 24);
             this.textBox_bootloaderFilePath.Name = "textBox_bootloaderFilePath";
-            this.textBox_bootloaderFilePath.Size = new System.Drawing.Size(554, 20);
+            this.textBox_bootloaderFilePath.Size = new System.Drawing.Size(548, 20);
             this.textBox_bootloaderFilePath.TabIndex = 0;
             // 
             // button_bootloaderUpload
             // 
             this.button_bootloaderUpload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_bootloaderUpload.Location = new System.Drawing.Point(725, 22);
+            this.button_bootloaderUpload.Location = new System.Drawing.Point(719, 22);
             this.button_bootloaderUpload.Name = "button_bootloaderUpload";
             this.button_bootloaderUpload.Size = new System.Drawing.Size(95, 23);
             this.button_bootloaderUpload.TabIndex = 2;
@@ -1598,7 +1127,7 @@
             this.tabPage_about.Location = new System.Drawing.Point(4, 22);
             this.tabPage_about.Name = "tabPage_about";
             this.tabPage_about.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_about.Size = new System.Drawing.Size(832, 410);
+            this.tabPage_about.Size = new System.Drawing.Size(826, 366);
             this.tabPage_about.TabIndex = 2;
             this.tabPage_about.Text = "About";
             this.tabPage_about.UseVisualStyleBackColor = true;
@@ -1695,12 +1224,484 @@
             this.label_GUIversion.TabIndex = 23;
             this.label_GUIversion.Text = "GUI version:";
             // 
+            // toggleButton_openClosePort
+            // 
+            this.toggleButton_openClosePort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.toggleButton_openClosePort.FalsePrefixText = "Open ";
+            this.toggleButton_openClosePort.Location = new System.Drawing.Point(714, 20);
+            this.toggleButton_openClosePort.Name = "toggleButton_openClosePort";
+            this.toggleButton_openClosePort.Size = new System.Drawing.Size(100, 23);
+            this.toggleButton_openClosePort.SuffixText = "Port";
+            this.toggleButton_openClosePort.TabIndex = 2;
+            this.toggleButton_openClosePort.Text = "Open Port";
+            this.toggleButton_openClosePort.ToggleState = false;
+            this.toggleButton_openClosePort.TruePrefixText = "Close ";
+            this.toggleButton_openClosePort.UseVisualStyleBackColor = true;
+            this.toggleButton_openClosePort.Click += new System.EventHandler(this.toggleButton_openClosePort_Click);
+            // 
+            // registerTreeView
+            // 
+            this.registerTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.registerTreeView.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.registerTreeView.Location = new System.Drawing.Point(3, 3);
+            this.registerTreeView.Name = "registerTreeView";
+            this.registerTreeView.RefreshPending = false;
+            this.registerTreeView.Size = new System.Drawing.Size(820, 360);
+            this.registerTreeView.TabIndex = 0;
+            this.registerTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.registerTreeView_registers_NodeMouseClick);
+            // 
+            // commandButton_initialiseThenTare
+            // 
+            this.commandButton_initialiseThenTare.CommandCode = x_IMU_API.CommandCodes.AlgorithmInitialiseThenTare;
+            this.commandButton_initialiseThenTare.Location = new System.Drawing.Point(469, 20);
+            this.commandButton_initialiseThenTare.Name = "commandButton_initialiseThenTare";
+            this.commandButton_initialiseThenTare.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_initialiseThenTare.TabIndex = 3;
+            this.commandButton_initialiseThenTare.Text = "Initialise Then Tare";
+            this.commandButton_initialiseThenTare.UseVisualStyleBackColor = true;
+            this.commandButton_initialiseThenTare.Click += new System.EventHandler(this.commandButton_Click);
+            // 
+            // commandButton_initialise
+            // 
+            this.commandButton_initialise.CommandCode = x_IMU_API.CommandCodes.AlgorithmInitialise;
+            this.commandButton_initialise.Location = new System.Drawing.Point(10, 20);
+            this.commandButton_initialise.Name = "commandButton_initialise";
+            this.commandButton_initialise.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_initialise.TabIndex = 0;
+            this.commandButton_initialise.Text = "Initialise";
+            this.commandButton_initialise.UseVisualStyleBackColor = true;
+            this.commandButton_initialise.Click += new System.EventHandler(this.commandButton_Click);
+            // 
+            // commandButton_clearTare
+            // 
+            this.commandButton_clearTare.CommandCode = x_IMU_API.CommandCodes.AlgorithmClearTare;
+            this.commandButton_clearTare.Location = new System.Drawing.Point(316, 20);
+            this.commandButton_clearTare.Name = "commandButton_clearTare";
+            this.commandButton_clearTare.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_clearTare.TabIndex = 2;
+            this.commandButton_clearTare.Text = "Clear Tare";
+            this.commandButton_clearTare.UseVisualStyleBackColor = true;
+            this.commandButton_clearTare.Click += new System.EventHandler(this.commandButton_Click);
+            // 
+            // commandButton_tare
+            // 
+            this.commandButton_tare.CommandCode = x_IMU_API.CommandCodes.AlgorithmTare;
+            this.commandButton_tare.Location = new System.Drawing.Point(163, 20);
+            this.commandButton_tare.Name = "commandButton_tare";
+            this.commandButton_tare.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_tare.TabIndex = 1;
+            this.commandButton_tare.Text = "Tare";
+            this.commandButton_tare.UseVisualStyleBackColor = true;
+            this.commandButton_tare.Click += new System.EventHandler(this.commandButton_Click);
+            // 
+            // commandButton_measMagBiasSens
+            // 
+            this.commandButton_measMagBiasSens.CommandCode = x_IMU_API.CommandCodes.MeasureMagnetometerBiasAndSensitivity;
+            this.commandButton_measMagBiasSens.Location = new System.Drawing.Point(10, 20);
+            this.commandButton_measMagBiasSens.Name = "commandButton_measMagBiasSens";
+            this.commandButton_measMagBiasSens.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_measMagBiasSens.TabIndex = 0;
+            this.commandButton_measMagBiasSens.Text = "Measure Mag. Bias/Sens.";
+            this.commandButton_measMagBiasSens.UseVisualStyleBackColor = true;
+            this.commandButton_measMagBiasSens.Click += new System.EventHandler(this.commandButton_Click);
+            // 
+            // commandButton_calcAccelBiasSens
+            // 
+            this.commandButton_calcAccelBiasSens.CommandCode = x_IMU_API.CommandCodes.CalculateAccelerometerBiasAndSensitivity;
+            this.commandButton_calcAccelBiasSens.Location = new System.Drawing.Point(163, 20);
+            this.commandButton_calcAccelBiasSens.Name = "commandButton_calcAccelBiasSens";
+            this.commandButton_calcAccelBiasSens.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_calcAccelBiasSens.TabIndex = 1;
+            this.commandButton_calcAccelBiasSens.Text = "Calc. Accel. Bias/Sens.";
+            this.commandButton_calcAccelBiasSens.UseVisualStyleBackColor = true;
+            this.commandButton_calcAccelBiasSens.Click += new System.EventHandler(this.commandButton_Click);
+            // 
+            // commandButton_sampleAccelAxisAt1g
+            // 
+            this.commandButton_sampleAccelAxisAt1g.CommandCode = x_IMU_API.CommandCodes.SampleAccelerometerAxisAt1g;
+            this.commandButton_sampleAccelAxisAt1g.Location = new System.Drawing.Point(10, 20);
+            this.commandButton_sampleAccelAxisAt1g.Name = "commandButton_sampleAccelAxisAt1g";
+            this.commandButton_sampleAccelAxisAt1g.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_sampleAccelAxisAt1g.TabIndex = 0;
+            this.commandButton_sampleAccelAxisAt1g.Text = "Sample Accel. Axis @ ±1 g";
+            this.commandButton_sampleAccelAxisAt1g.UseVisualStyleBackColor = true;
+            this.commandButton_sampleAccelAxisAt1g.Click += new System.EventHandler(this.commandButton_Click);
+            // 
+            // commandButton_calcGyroBiasParameters
+            // 
+            this.commandButton_calcGyroBiasParameters.CommandCode = x_IMU_API.CommandCodes.CalculateGyroscopeBiasParameters;
+            this.commandButton_calcGyroBiasParameters.Location = new System.Drawing.Point(622, 20);
+            this.commandButton_calcGyroBiasParameters.Name = "commandButton_calcGyroBiasParameters";
+            this.commandButton_calcGyroBiasParameters.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_calcGyroBiasParameters.TabIndex = 4;
+            this.commandButton_calcGyroBiasParameters.Text = "Calc. Gyro. Bias Parameters";
+            this.commandButton_calcGyroBiasParameters.UseVisualStyleBackColor = true;
+            this.commandButton_calcGyroBiasParameters.Click += new System.EventHandler(this.commandButton_Click);
+            // 
+            // commandButton_sampleGyroAt200dps
+            // 
+            this.commandButton_sampleGyroAt200dps.CommandCode = x_IMU_API.CommandCodes.SampleGyroscopeAxisAt200dps;
+            this.commandButton_sampleGyroAt200dps.Location = new System.Drawing.Point(10, 20);
+            this.commandButton_sampleGyroAt200dps.Name = "commandButton_sampleGyroAt200dps";
+            this.commandButton_sampleGyroAt200dps.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_sampleGyroAt200dps.TabIndex = 0;
+            this.commandButton_sampleGyroAt200dps.Text = "Sample Gyro. @ ±200 ˚/s";
+            this.commandButton_sampleGyroAt200dps.UseVisualStyleBackColor = true;
+            this.commandButton_sampleGyroAt200dps.Click += new System.EventHandler(this.commandButton_Click);
+            // 
+            // commandButton_sampleGyroBiasAtT2
+            // 
+            this.commandButton_sampleGyroBiasAtT2.CommandCode = x_IMU_API.CommandCodes.SampleGyroscopeBiasTemp2;
+            this.commandButton_sampleGyroBiasAtT2.Location = new System.Drawing.Point(469, 20);
+            this.commandButton_sampleGyroBiasAtT2.Name = "commandButton_sampleGyroBiasAtT2";
+            this.commandButton_sampleGyroBiasAtT2.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_sampleGyroBiasAtT2.TabIndex = 3;
+            this.commandButton_sampleGyroBiasAtT2.Text = "Sample Gyro. Bias @ T2";
+            this.commandButton_sampleGyroBiasAtT2.UseVisualStyleBackColor = true;
+            this.commandButton_sampleGyroBiasAtT2.Click += new System.EventHandler(this.commandButton_Click);
+            // 
+            // commandButton_calculateGyroSensitivity
+            // 
+            this.commandButton_calculateGyroSensitivity.CommandCode = x_IMU_API.CommandCodes.CalculateGyroscopeSensitivity;
+            this.commandButton_calculateGyroSensitivity.Location = new System.Drawing.Point(163, 20);
+            this.commandButton_calculateGyroSensitivity.Name = "commandButton_calculateGyroSensitivity";
+            this.commandButton_calculateGyroSensitivity.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_calculateGyroSensitivity.TabIndex = 1;
+            this.commandButton_calculateGyroSensitivity.Text = "Calculate Gyro. Sensitivity";
+            this.commandButton_calculateGyroSensitivity.UseVisualStyleBackColor = true;
+            this.commandButton_calculateGyroSensitivity.Click += new System.EventHandler(this.commandButton_Click);
+            // 
+            // commandButtonbutton_sampleGyroBiasAtT1
+            // 
+            this.commandButtonbutton_sampleGyroBiasAtT1.CommandCode = x_IMU_API.CommandCodes.SampleGyroscopeBiasTemp1;
+            this.commandButtonbutton_sampleGyroBiasAtT1.Location = new System.Drawing.Point(316, 20);
+            this.commandButtonbutton_sampleGyroBiasAtT1.Name = "commandButtonbutton_sampleGyroBiasAtT1";
+            this.commandButtonbutton_sampleGyroBiasAtT1.Size = new System.Drawing.Size(147, 23);
+            this.commandButtonbutton_sampleGyroBiasAtT1.TabIndex = 2;
+            this.commandButtonbutton_sampleGyroBiasAtT1.Text = "Sample Gyro. Bias @ T1";
+            this.commandButtonbutton_sampleGyroBiasAtT1.UseVisualStyleBackColor = true;
+            this.commandButtonbutton_sampleGyroBiasAtT1.Click += new System.EventHandler(this.commandButton_Click);
+            // 
+            // commandButton_resetSleepTimer
+            // 
+            this.commandButton_resetSleepTimer.CommandCode = x_IMU_API.CommandCodes.ResetSleepTimer;
+            this.commandButton_resetSleepTimer.Location = new System.Drawing.Point(469, 20);
+            this.commandButton_resetSleepTimer.Name = "commandButton_resetSleepTimer";
+            this.commandButton_resetSleepTimer.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_resetSleepTimer.TabIndex = 3;
+            this.commandButton_resetSleepTimer.Text = "Reset Sleep Timer";
+            this.commandButton_resetSleepTimer.UseVisualStyleBackColor = true;
+            this.commandButton_resetSleepTimer.Click += new System.EventHandler(this.commandButton_Click);
+            // 
+            // commandButton_sleep
+            // 
+            this.commandButton_sleep.CommandCode = x_IMU_API.CommandCodes.Sleep;
+            this.commandButton_sleep.Location = new System.Drawing.Point(316, 20);
+            this.commandButton_sleep.Name = "commandButton_sleep";
+            this.commandButton_sleep.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_sleep.TabIndex = 2;
+            this.commandButton_sleep.Text = "Sleep";
+            this.commandButton_sleep.UseVisualStyleBackColor = true;
+            this.commandButton_sleep.Click += new System.EventHandler(this.commandButton_Click);
+            // 
+            // commandButton_reset
+            // 
+            this.commandButton_reset.CommandCode = x_IMU_API.CommandCodes.Reset;
+            this.commandButton_reset.Location = new System.Drawing.Point(163, 20);
+            this.commandButton_reset.Name = "commandButton_reset";
+            this.commandButton_reset.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_reset.TabIndex = 1;
+            this.commandButton_reset.Text = "Reset";
+            this.commandButton_reset.UseVisualStyleBackColor = true;
+            this.commandButton_reset.Click += new System.EventHandler(this.commandButton_Click);
+            this.commandButton_reset.MouseClick += new System.Windows.Forms.MouseEventHandler(this.commandButton_Click);
+            // 
+            // commandButton_factoryReset
+            // 
+            this.commandButton_factoryReset.CommandCode = x_IMU_API.CommandCodes.FactoryReset;
+            this.commandButton_factoryReset.Location = new System.Drawing.Point(10, 20);
+            this.commandButton_factoryReset.Name = "commandButton_factoryReset";
+            this.commandButton_factoryReset.Size = new System.Drawing.Size(147, 23);
+            this.commandButton_factoryReset.TabIndex = 0;
+            this.commandButton_factoryReset.Text = "Factory Reset";
+            this.commandButton_factoryReset.UseVisualStyleBackColor = true;
+            this.commandButton_factoryReset.Click += new System.EventHandler(this.commandButton_Click);
+            // 
+            // showHideButton_eulerAnglesGraph
+            // 
+            this.showHideButton_eulerAnglesGraph.FalsePrefixText = "Show ";
+            this.showHideButton_eulerAnglesGraph.Location = new System.Drawing.Point(163, 20);
+            this.showHideButton_eulerAnglesGraph.Name = "showHideButton_eulerAnglesGraph";
+            this.showHideButton_eulerAnglesGraph.Object = null;
+            this.showHideButton_eulerAnglesGraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_eulerAnglesGraph.SuffixText = "Euler Angles Graph";
+            this.showHideButton_eulerAnglesGraph.TabIndex = 1;
+            this.showHideButton_eulerAnglesGraph.Text = "Show Euler Angles Graph";
+            this.showHideButton_eulerAnglesGraph.ToggleState = false;
+            this.showHideButton_eulerAnglesGraph.TruePrefixText = "Hide ";
+            this.showHideButton_eulerAnglesGraph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_3Dcuboid
+            // 
+            this.showHideButton_3Dcuboid.FalsePrefixText = "Show ";
+            this.showHideButton_3Dcuboid.Location = new System.Drawing.Point(10, 20);
+            this.showHideButton_3Dcuboid.Name = "showHideButton_3Dcuboid";
+            this.showHideButton_3Dcuboid.Object = null;
+            this.showHideButton_3Dcuboid.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_3Dcuboid.SuffixText = "3D Cuboid";
+            this.showHideButton_3Dcuboid.TabIndex = 0;
+            this.showHideButton_3Dcuboid.Text = "Show 3D Cuboid";
+            this.showHideButton_3Dcuboid.ToggleState = false;
+            this.showHideButton_3Dcuboid.TruePrefixText = "Hide ";
+            this.showHideButton_3Dcuboid.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_magnetometerGraph
+            // 
+            this.showHideButton_magnetometerGraph.FalsePrefixText = "Show ";
+            this.showHideButton_magnetometerGraph.Location = new System.Drawing.Point(316, 20);
+            this.showHideButton_magnetometerGraph.Name = "showHideButton_magnetometerGraph";
+            this.showHideButton_magnetometerGraph.Object = null;
+            this.showHideButton_magnetometerGraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_magnetometerGraph.SuffixText = "Magnetometer Graph";
+            this.showHideButton_magnetometerGraph.TabIndex = 2;
+            this.showHideButton_magnetometerGraph.Text = "Show Magnetometer Graph";
+            this.showHideButton_magnetometerGraph.ToggleState = false;
+            this.showHideButton_magnetometerGraph.TruePrefixText = "Hide ";
+            this.showHideButton_magnetometerGraph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_accelerometerGraph
+            // 
+            this.showHideButton_accelerometerGraph.FalsePrefixText = "Show ";
+            this.showHideButton_accelerometerGraph.Location = new System.Drawing.Point(163, 20);
+            this.showHideButton_accelerometerGraph.Name = "showHideButton_accelerometerGraph";
+            this.showHideButton_accelerometerGraph.Object = null;
+            this.showHideButton_accelerometerGraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_accelerometerGraph.SuffixText = "Accelerometer Graph";
+            this.showHideButton_accelerometerGraph.TabIndex = 1;
+            this.showHideButton_accelerometerGraph.Text = "Show Accelerometer Graph";
+            this.showHideButton_accelerometerGraph.ToggleState = false;
+            this.showHideButton_accelerometerGraph.TruePrefixText = "Hide ";
+            this.showHideButton_accelerometerGraph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_gyroscopeGraph
+            // 
+            this.showHideButton_gyroscopeGraph.FalsePrefixText = "Show ";
+            this.showHideButton_gyroscopeGraph.Location = new System.Drawing.Point(10, 20);
+            this.showHideButton_gyroscopeGraph.Name = "showHideButton_gyroscopeGraph";
+            this.showHideButton_gyroscopeGraph.Object = null;
+            this.showHideButton_gyroscopeGraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_gyroscopeGraph.SuffixText = "Gyroscope Graph";
+            this.showHideButton_gyroscopeGraph.TabIndex = 0;
+            this.showHideButton_gyroscopeGraph.Text = "Show Gyroscope Graph";
+            this.showHideButton_gyroscopeGraph.ToggleState = false;
+            this.showHideButton_gyroscopeGraph.TruePrefixText = "Hide ";
+            this.showHideButton_gyroscopeGraph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_thermometerGraph
+            // 
+            this.showHideButton_thermometerGraph.FalsePrefixText = "Show ";
+            this.showHideButton_thermometerGraph.Location = new System.Drawing.Point(163, 20);
+            this.showHideButton_thermometerGraph.Name = "showHideButton_thermometerGraph";
+            this.showHideButton_thermometerGraph.Object = null;
+            this.showHideButton_thermometerGraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_thermometerGraph.SuffixText = "Thermometer Graph";
+            this.showHideButton_thermometerGraph.TabIndex = 1;
+            this.showHideButton_thermometerGraph.Text = "Show Thermometer Graph";
+            this.showHideButton_thermometerGraph.ToggleState = false;
+            this.showHideButton_thermometerGraph.TruePrefixText = "Hide ";
+            this.showHideButton_thermometerGraph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_batteryGraph
+            // 
+            this.showHideButton_batteryGraph.FalsePrefixText = "Show ";
+            this.showHideButton_batteryGraph.Location = new System.Drawing.Point(10, 20);
+            this.showHideButton_batteryGraph.Name = "showHideButton_batteryGraph";
+            this.showHideButton_batteryGraph.Object = null;
+            this.showHideButton_batteryGraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_batteryGraph.SuffixText = "Battery Graph";
+            this.showHideButton_batteryGraph.TabIndex = 0;
+            this.showHideButton_batteryGraph.Text = "Show Battery Graph";
+            this.showHideButton_batteryGraph.ToggleState = false;
+            this.showHideButton_batteryGraph.TruePrefixText = "Hide ";
+            this.showHideButton_batteryGraph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_ADXL345Dgraph
+            // 
+            this.showHideButton_ADXL345Dgraph.FalsePrefixText = "Show ";
+            this.showHideButton_ADXL345Dgraph.Location = new System.Drawing.Point(469, 20);
+            this.showHideButton_ADXL345Dgraph.Name = "showHideButton_ADXL345Dgraph";
+            this.showHideButton_ADXL345Dgraph.Object = null;
+            this.showHideButton_ADXL345Dgraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_ADXL345Dgraph.SuffixText = "ADXL345 D Graph";
+            this.showHideButton_ADXL345Dgraph.TabIndex = 11;
+            this.showHideButton_ADXL345Dgraph.Text = "Show ADXL345 D Graph";
+            this.showHideButton_ADXL345Dgraph.ToggleState = false;
+            this.showHideButton_ADXL345Dgraph.TruePrefixText = "Hide ";
+            this.showHideButton_ADXL345Dgraph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_ADXL345Agraph
+            // 
+            this.showHideButton_ADXL345Agraph.FalsePrefixText = "Show ";
+            this.showHideButton_ADXL345Agraph.Location = new System.Drawing.Point(10, 20);
+            this.showHideButton_ADXL345Agraph.Name = "showHideButton_ADXL345Agraph";
+            this.showHideButton_ADXL345Agraph.Object = null;
+            this.showHideButton_ADXL345Agraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_ADXL345Agraph.SuffixText = "ADXL345 A Graph";
+            this.showHideButton_ADXL345Agraph.TabIndex = 8;
+            this.showHideButton_ADXL345Agraph.Text = "Show ADXL345 A Graph";
+            this.showHideButton_ADXL345Agraph.ToggleState = false;
+            this.showHideButton_ADXL345Agraph.TruePrefixText = "Hide ";
+            this.showHideButton_ADXL345Agraph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_ADXL345Bgraph
+            // 
+            this.showHideButton_ADXL345Bgraph.FalsePrefixText = "Show ";
+            this.showHideButton_ADXL345Bgraph.Location = new System.Drawing.Point(163, 20);
+            this.showHideButton_ADXL345Bgraph.Name = "showHideButton_ADXL345Bgraph";
+            this.showHideButton_ADXL345Bgraph.Object = null;
+            this.showHideButton_ADXL345Bgraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_ADXL345Bgraph.SuffixText = "ADXL345 B Graph";
+            this.showHideButton_ADXL345Bgraph.TabIndex = 9;
+            this.showHideButton_ADXL345Bgraph.Text = "Show ADXL345 B Graph";
+            this.showHideButton_ADXL345Bgraph.ToggleState = false;
+            this.showHideButton_ADXL345Bgraph.TruePrefixText = "Hide ";
+            this.showHideButton_ADXL345Bgraph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_ADXL345Cgraph
+            // 
+            this.showHideButton_ADXL345Cgraph.FalsePrefixText = "Show ";
+            this.showHideButton_ADXL345Cgraph.Location = new System.Drawing.Point(316, 20);
+            this.showHideButton_ADXL345Cgraph.Name = "showHideButton_ADXL345Cgraph";
+            this.showHideButton_ADXL345Cgraph.Object = null;
+            this.showHideButton_ADXL345Cgraph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_ADXL345Cgraph.SuffixText = "ADXL345 C Graph";
+            this.showHideButton_ADXL345Cgraph.TabIndex = 10;
+            this.showHideButton_ADXL345Cgraph.Text = "Show ADXL345 C Graph";
+            this.showHideButton_ADXL345Cgraph.ToggleState = false;
+            this.showHideButton_ADXL345Cgraph.TruePrefixText = "Hide ";
+            this.showHideButton_ADXL345Cgraph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_PWMoutputPanel
+            // 
+            this.showHideButton_PWMoutputPanel.FalsePrefixText = "Show ";
+            this.showHideButton_PWMoutputPanel.Location = new System.Drawing.Point(10, 20);
+            this.showHideButton_PWMoutputPanel.Name = "showHideButton_PWMoutputPanel";
+            this.showHideButton_PWMoutputPanel.Object = null;
+            this.showHideButton_PWMoutputPanel.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_PWMoutputPanel.SuffixText = "PWM Output Panel";
+            this.showHideButton_PWMoutputPanel.TabIndex = 5;
+            this.showHideButton_PWMoutputPanel.Text = "Show PWM Output Panel";
+            this.showHideButton_PWMoutputPanel.ToggleState = false;
+            this.showHideButton_PWMoutputPanel.TruePrefixText = "Hide ";
+            this.showHideButton_PWMoutputPanel.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_AX6andAX7graph
+            // 
+            this.showHideButton_AX6andAX7graph.FalsePrefixText = "Show ";
+            this.showHideButton_AX6andAX7graph.Location = new System.Drawing.Point(469, 20);
+            this.showHideButton_AX6andAX7graph.Name = "showHideButton_AX6andAX7graph";
+            this.showHideButton_AX6andAX7graph.Object = null;
+            this.showHideButton_AX6andAX7graph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_AX6andAX7graph.SuffixText = "AX6 And AX7 Graph";
+            this.showHideButton_AX6andAX7graph.TabIndex = 7;
+            this.showHideButton_AX6andAX7graph.Text = "Show AX6 And AX7 Graph";
+            this.showHideButton_AX6andAX7graph.ToggleState = false;
+            this.showHideButton_AX6andAX7graph.TruePrefixText = "Hide ";
+            this.showHideButton_AX6andAX7graph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_AX0andAX1graph
+            // 
+            this.showHideButton_AX0andAX1graph.FalsePrefixText = "Show ";
+            this.showHideButton_AX0andAX1graph.Location = new System.Drawing.Point(10, 20);
+            this.showHideButton_AX0andAX1graph.Name = "showHideButton_AX0andAX1graph";
+            this.showHideButton_AX0andAX1graph.Object = null;
+            this.showHideButton_AX0andAX1graph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_AX0andAX1graph.SuffixText = "AX0 And AX1 Graph";
+            this.showHideButton_AX0andAX1graph.TabIndex = 4;
+            this.showHideButton_AX0andAX1graph.Text = "Show AX0 And AX1 Graph";
+            this.showHideButton_AX0andAX1graph.ToggleState = false;
+            this.showHideButton_AX0andAX1graph.TruePrefixText = "Hide ";
+            this.showHideButton_AX0andAX1graph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_AX4andAX5graph
+            // 
+            this.showHideButton_AX4andAX5graph.FalsePrefixText = "Show ";
+            this.showHideButton_AX4andAX5graph.Location = new System.Drawing.Point(316, 20);
+            this.showHideButton_AX4andAX5graph.Name = "showHideButton_AX4andAX5graph";
+            this.showHideButton_AX4andAX5graph.Object = null;
+            this.showHideButton_AX4andAX5graph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_AX4andAX5graph.SuffixText = "AX4 And AX5 Graph";
+            this.showHideButton_AX4andAX5graph.TabIndex = 6;
+            this.showHideButton_AX4andAX5graph.Text = "Show AX4 And AX5 Graph";
+            this.showHideButton_AX4andAX5graph.ToggleState = false;
+            this.showHideButton_AX4andAX5graph.TruePrefixText = "Hide ";
+            this.showHideButton_AX4andAX5graph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_AX2andAX3graph
+            // 
+            this.showHideButton_AX2andAX3graph.FalsePrefixText = "Show ";
+            this.showHideButton_AX2andAX3graph.Location = new System.Drawing.Point(163, 20);
+            this.showHideButton_AX2andAX3graph.Name = "showHideButton_AX2andAX3graph";
+            this.showHideButton_AX2andAX3graph.Object = null;
+            this.showHideButton_AX2andAX3graph.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_AX2andAX3graph.SuffixText = "AX2 And AX3 Graph";
+            this.showHideButton_AX2andAX3graph.TabIndex = 5;
+            this.showHideButton_AX2andAX3graph.Text = "Show AX2 And AX3 Graph";
+            this.showHideButton_AX2andAX3graph.ToggleState = false;
+            this.showHideButton_AX2andAX3graph.TruePrefixText = "Hide ";
+            this.showHideButton_AX2andAX3graph.UseVisualStyleBackColor = true;
+            // 
+            // showHideButton_digitalIOpanel
+            // 
+            this.showHideButton_digitalIOpanel.FalsePrefixText = "Show ";
+            this.showHideButton_digitalIOpanel.Location = new System.Drawing.Point(10, 20);
+            this.showHideButton_digitalIOpanel.Name = "showHideButton_digitalIOpanel";
+            this.showHideButton_digitalIOpanel.Object = null;
+            this.showHideButton_digitalIOpanel.Size = new System.Drawing.Size(147, 23);
+            this.showHideButton_digitalIOpanel.SuffixText = "Digital I/O Panel";
+            this.showHideButton_digitalIOpanel.TabIndex = 4;
+            this.showHideButton_digitalIOpanel.Text = "Show Digital I/O Panel";
+            this.showHideButton_digitalIOpanel.ToggleState = false;
+            this.showHideButton_digitalIOpanel.TruePrefixText = "Hide ";
+            this.showHideButton_digitalIOpanel.UseVisualStyleBackColor = true;
+            // 
+            // toggleButton_dataLoggerStartStopLogging
+            // 
+            this.toggleButton_dataLoggerStartStopLogging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.toggleButton_dataLoggerStartStopLogging.FalsePrefixText = "Start ";
+            this.toggleButton_dataLoggerStartStopLogging.Location = new System.Drawing.Point(719, 22);
+            this.toggleButton_dataLoggerStartStopLogging.Name = "toggleButton_dataLoggerStartStopLogging";
+            this.toggleButton_dataLoggerStartStopLogging.Size = new System.Drawing.Size(95, 23);
+            this.toggleButton_dataLoggerStartStopLogging.SuffixText = "Logging";
+            this.toggleButton_dataLoggerStartStopLogging.TabIndex = 2;
+            this.toggleButton_dataLoggerStartStopLogging.Text = "Start Logging";
+            this.toggleButton_dataLoggerStartStopLogging.ToggleState = false;
+            this.toggleButton_dataLoggerStartStopLogging.TruePrefixText = "Stop ";
+            this.toggleButton_dataLoggerStartStopLogging.UseVisualStyleBackColor = true;
+            this.toggleButton_dataLoggerStartStopLogging.Click += new System.EventHandler(this.toggleButton_dataLoggerStartStopLogging_Click);
+            // 
+            // toggleButton_collectHardIronCalDatasetStartStopLogging
+            // 
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.FalsePrefixText = "Start ";
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Location = new System.Drawing.Point(719, 22);
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Name = "toggleButton_collectHardIronCalDatasetStartStopLogging";
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Size = new System.Drawing.Size(95, 23);
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.SuffixText = "Logging";
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.TabIndex = 2;
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Text = "Start Logging";
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.ToggleState = false;
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.TruePrefixText = "Stop ";
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.UseVisualStyleBackColor = true;
+            this.toggleButton_collectHardIronCalDatasetStartStopLogging.Click += new System.EventHandler(this.toggleButton_collectHardIronCalDatasetStartStopLogging_Click);
+            // 
             // Form_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(840, 436);
+            this.ClientSize = new System.Drawing.Size(834, 392);
             this.Controls.Add(this.tabControl_main);
+            this.MinimumSize = new System.Drawing.Size(850, 430);
             this.Name = "Form_main";
             this.Text = "Form_main";
             this.Load += new System.EventHandler(this.Form_main_Load);
@@ -2348,9 +2349,7 @@
             registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("38400");
             registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("57600");
             registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("115200");
-            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("23400");
-            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("460800");
-            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("921600");
+            registerTreeNodeComboBox_UARTbaudRate.ComboBox.Items.Add("234000");
             registerTreeNodeComboBox_UARThardwareFlowControl = new RegisterTreeNodeComboBox(x_IMU_API.RegisterAddresses.UARThardwareFlowControl, "Hardware Flow Control:");
             registerTreeNodeComboBox_UARThardwareFlowControl.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             registerTreeNodeComboBox_UARThardwareFlowControl.ComboBox.Width = 50;
@@ -2758,6 +2757,8 @@
 
         #endregion
 
+
         #endregion
+
     }
 }
