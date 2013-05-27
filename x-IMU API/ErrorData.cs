@@ -84,6 +84,8 @@ namespace x_IMU_API
                 case (ErrorCodes.AcceleroemterAxisNotAt1g): return "Acceleroemter axis not at ±1 g. Operation aborted.";
                 case (ErrorCodes.MagnetometerSaturation): return "Magnetometer saturation occurred. Operation aborted."; 
                 case (ErrorCodes.IncorrectAuxillaryPortMode): return "Auxiliary port in incorrect mode.";
+                case (ErrorCodes.UARTreceiveBufferOverrun): return "UART receive buffer overrun.";
+                case (ErrorCodes.UARTtransmitBufferOverrun): return "UART transmit buffer overrun."; 
                 default: return "";
             }
         }

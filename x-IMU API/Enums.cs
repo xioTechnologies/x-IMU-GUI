@@ -10,7 +10,7 @@ namespace x_IMU_API
     /// </summary>
     public enum CompatibleFirmwareVersions
     {
-        v8_x = 8
+        v9_x = 9
     }
 
     /// <summary>
@@ -69,7 +69,9 @@ namespace x_IMU_API
         GyroscopeNotStationary,
         AcceleroemterAxisNotAt1g,
         MagnetometerSaturation,
-        IncorrectAuxillaryPortMode
+        IncorrectAuxillaryPortMode,
+        UARTreceiveBufferOverrun,
+        UARTtransmitBufferOverrun
     }
 
     /// <summary>
@@ -258,6 +260,8 @@ namespace x_IMU_API
         ADXL345DbiasX,
         ADXL345DbiasY,
         ADXL345DbiasZ,
+        UARTbaudRate,
+        UARThardwareFlowControl,
         NumRegisters
     }
 
@@ -365,7 +369,8 @@ namespace x_IMU_API
         Rate32Hz,
         Rate64Hz,
         Rate128Hz,
-        Rate256Hz
+        Rate256Hz,
+        Rate512Hz
     }
 
     /// <summary>
@@ -426,6 +431,40 @@ namespace x_IMU_API
         In0Out1234567,
         Out01234567
     }
+
+    /// <summary>
+    /// UART baud rate register values.
+    /// </summary>
+    /// <remarks>
+    /// A matching enumeration exists in firmware source.
+    /// </remarks> 
+    public enum UARTbaudRates
+    {
+        UARTbaudRate2400,
+        UARTbaudRate4800,
+        UARTbaudRate7200,
+        UARTbaudRate9600,
+        UARTbaudRate14400,
+        UARTbaudRate19200,
+        UARTbaudRate38400,
+        UARTbaudRate57600,
+        UARTbaudRate115200,
+        UARTbaudRate230400,
+        UARTbaudRate460800,
+        UARTbaudRate921600
+    };
+
+    /// <summary>
+    /// UART hardware flow control register values.
+    /// </summary>
+    /// <remarks>
+    /// A matching enumeration exists in firmware source.
+    /// </remarks> 
+    public enum UARThardwareFlowControl
+    {
+        Off,
+        On,
+    };
 
     #endregion
 }
