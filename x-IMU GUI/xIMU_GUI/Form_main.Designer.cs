@@ -53,7 +53,7 @@
             this.label_receivedDateTime = new System.Windows.Forms.Label();
             this.tabPage_commands = new System.Windows.Forms.TabPage();
             this.groupBox_receivedCommandMessages = new System.Windows.Forms.GroupBox();
-            this.checkBox_displayReceivedCommandMessages = new System.Windows.Forms.CheckBox();
+            this.checkBox_displayCommandConfirmations = new System.Windows.Forms.CheckBox();
             this.groupBox_algorithm = new System.Windows.Forms.GroupBox();
             this.button_clearTare = new System.Windows.Forms.Button();
             this.button_tare = new System.Windows.Forms.Button();
@@ -404,7 +404,7 @@
             // 
             // groupBox_receivedCommandMessages
             // 
-            this.groupBox_receivedCommandMessages.Controls.Add(this.checkBox_displayReceivedCommandMessages);
+            this.groupBox_receivedCommandMessages.Controls.Add(this.checkBox_displayCommandConfirmations);
             this.groupBox_receivedCommandMessages.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox_receivedCommandMessages.Location = new System.Drawing.Point(3, 180);
             this.groupBox_receivedCommandMessages.Name = "groupBox_receivedCommandMessages";
@@ -413,17 +413,17 @@
             this.groupBox_receivedCommandMessages.TabStop = false;
             this.groupBox_receivedCommandMessages.Text = "Received Command Messages";
             // 
-            // checkBox_displayReceivedCommandMessages
+            // checkBox_displayCommandConfirmations
             // 
-            this.checkBox_displayReceivedCommandMessages.AutoSize = true;
-            this.checkBox_displayReceivedCommandMessages.Checked = true;
-            this.checkBox_displayReceivedCommandMessages.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_displayReceivedCommandMessages.Location = new System.Drawing.Point(10, 24);
-            this.checkBox_displayReceivedCommandMessages.Name = "checkBox_displayReceivedCommandMessages";
-            this.checkBox_displayReceivedCommandMessages.Size = new System.Drawing.Size(279, 17);
-            this.checkBox_displayReceivedCommandMessages.TabIndex = 0;
-            this.checkBox_displayReceivedCommandMessages.Text = "Display received command messages in message box";
-            this.checkBox_displayReceivedCommandMessages.UseVisualStyleBackColor = true;
+            this.checkBox_displayCommandConfirmations.AutoSize = true;
+            this.checkBox_displayCommandConfirmations.Checked = true;
+            this.checkBox_displayCommandConfirmations.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_displayCommandConfirmations.Location = new System.Drawing.Point(10, 24);
+            this.checkBox_displayCommandConfirmations.Name = "checkBox_displayCommandConfirmations";
+            this.checkBox_displayCommandConfirmations.Size = new System.Drawing.Size(250, 17);
+            this.checkBox_displayCommandConfirmations.TabIndex = 0;
+            this.checkBox_displayCommandConfirmations.Text = "Display command confirmations in message box";
+            this.checkBox_displayCommandConfirmations.UseVisualStyleBackColor = true;
             // 
             // groupBox_algorithm
             // 
@@ -1395,7 +1395,7 @@
         private System.Windows.Forms.Button button_tare;
         private System.Windows.Forms.Button button_clearTare;
         private System.Windows.Forms.GroupBox groupBox_receivedCommandMessages;
-        private System.Windows.Forms.CheckBox checkBox_displayReceivedCommandMessages;
+        private System.Windows.Forms.CheckBox checkBox_displayCommandConfirmations;
         private System.Windows.Forms.TabPage tabPage_hardIronCalibration;
         private System.Windows.Forms.GroupBox groupBox_hardIronCalibrationAlgorithm;
         private System.Windows.Forms.Button button_hardIronCalBrowse;

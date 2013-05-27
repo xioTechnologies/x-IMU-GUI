@@ -29,7 +29,7 @@
     <ProductName>x-IMU GUI</ProductName>
     <PublisherName>x-io Technologies</PublisherName>
     <ApplicationRevision>10</ApplicationRevision>
-    <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>5.0.0.10</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -82,7 +82,7 @@
     <Reference Include="Tao.Platform.Windows">
       <HintPath>Tao\Tao.Platform.Windows.dll</HintPath>
     </Reference>
-    <Reference Include="xIMU_API, Version=4.0.4124.30709, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="xIMU_API, Version=5.0.4133.25234, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>xIMU_API\xIMU_API.dll</HintPath>
     </Reference>
@@ -99,8 +99,9 @@
     <Compile Include="Form_main.Designer.cs">
       <DependentUpon>Form_main.cs</DependentUpon>
     </Compile>
-    <Compile Include="MessageBoxThread.cs" />
+    <Compile Include="PassiveMessageBox.cs" />
     <Compile Include="Oscilloscope.cs" />
+    <Compile Include="ProcessDialog.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form_main.resx">

@@ -23,6 +23,11 @@ namespace xIMU_GUI
         private xIMU_API.xIMUserial xIMUserial;
 
         /// <summary>
+        /// Progress dialog used to display and enable cancellation of auto connect process.
+        /// </summary>
+        private ProgressDialog autoConnectProgressDialog;
+
+        /// <summary>
         /// For update timer used to periodically update form data
         /// </summary>
         private System.Windows.Forms.Timer formUpdateTimer;
@@ -158,6 +163,9 @@ namespace xIMU_GUI
             formUpdateTimer.Interval = 50;
             formUpdateTimer.Tick += new EventHandler(formUpdateTimer_Tick);
             formUpdateTimer.Start();
+
+            // Auto connect on start up
+            AutoConnect();
         }
 
         /// <summary>
@@ -212,6 +220,29 @@ namespace xIMU_GUI
         #region Serial port
 
         /// <summary>
+        /// Button click event to refresh port names combo box.
+        /// </summary>
+        private void button_refreshList_Click(object sender, EventArgs e)
+        {
+            refreshCOMportList();
+        }
+
+        /// <summary>
+        /// Adds available port names to the port name combo box and selects the last in the list.
+        /// </summary>
+        private void refreshCOMportList()
+        {
+            string[] aviablePorts = xIMU_API.xIMUserial.GetPortNames();
+            comboBox_portName.Items.Clear();
+            comboBox_portName.Items.Add("Auto");
+            for (int i = 0; i < aviablePorts.Length; i++)
+            {
+                comboBox_portName.Items.Add(aviablePorts[i]);
+            }
+            comboBox_portName.SelectedIndex = 0;
+        }
+
+        /// <summary>
         /// Toggles the open/closed state of the serial port.  Exceptions shown message box.
         /// </summary>
         private void button_openPort_Click(object sender, EventArgs e)
@@ -225,8 +256,16 @@ namespace xIMU_GUI
                     button_openPort.Enabled = false;
                     button_openPort.Text = "Opening...";
                     this.Update();
-                    xIMUserial.PortName = comboBox_portName.Text;
-                    xIMUserial.Open();
+                    if (string.Equals(comboBox_portName.Text, "Auto", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        AutoConnect();
+                        return;
+                    }
+                    else
+                    {
+                        xIMUserial.PortName = comboBox_portName.Text;
+                        xIMUserial.Open();
+                    }
                     button_openPort.Text = "Close Port";
                     button_openPort.Enabled = true;
                 }
@@ -249,25 +288,84 @@ namespace xIMU_GUI
         }
 
         /// <summary>
-        /// Button click event to refresh port names combo box.
+        /// Automatically connect to the first x-IMU found using the PortScanner.
         /// </summary>
-        private void button_refreshList_Click(object sender, EventArgs e)
+        private void AutoConnect()
         {
-            refreshCOMportList();
+            // Set form control states
+            comboBox_portName.Enabled = false;
+            button_refreshList.Enabled = false;
+            button_openPort.Enabled = false;
+            button_openPort.Text = "Opening...";
+
+            // Create process dialog
+            autoConnectProgressDialog = new ProgressDialog(this.Handle);
+            autoConnectProgressDialog.Title = "Auto Connect";
+            autoConnectProgressDialog.CancelMessage = "Cancelling...";
+            autoConnectProgressDialog.Line1 = "Searching for x-IMU";
+            autoConnectProgressDialog.Line3 = "Initialising x-IMU port scanner.";
+            autoConnectProgressDialog.ShowDialog();
+            autoConnectProgressDialog.Value = 101;     // set value >100 after show, for continuous animation.
+
+            // Create port scanner
+            xIMU_API.PortScanner portScanner = new xIMU_API.PortScanner();
+            portScanner.ProgressChanged += new xIMU_API.PortScanner.onProgressChanged(portScanner_ProgressChanged);
+            portScanner.Completed += new xIMU_API.PortScanner.onCompleted(portScanner_Completed);
+            portScanner.DontGiveUp = true;
+            portScanner.FirstResultOnly = true;
+            portScanner.RunAsynsScan();
         }
 
         /// <summary>
-        /// Adds available port names to the port name combo box and selects the last in the list.
+        /// Port scanner progress change event to update progress dialog and poll user cancel.
         /// </summary>
-        private void refreshCOMportList()
+        private void portScanner_ProgressChanged(object sender, xIMU_API.ScanProgressChangedEventArgs e)
         {
-            string[] aviablePorts = xIMU_API.xIMUserial.GetPortNames();
-            comboBox_portName.Items.Clear();
-            for (int i = 0; i < aviablePorts.Length; i++)
+            this.EndInvoke(this.BeginInvoke(new MethodInvoker(delegate
             {
-                comboBox_portName.Items.Add(aviablePorts[i]);
+                if (autoConnectProgressDialog.HasUserCancelled)
+                {
+                    ((xIMU_API.PortScanner)sender).CancelAnsycScan();
+                }
+                else
+                {
+                    autoConnectProgressDialog.Line3 = e.ProgressMessage;
+                }
+            })));
+        }
+
+        /// <summary>
+        /// PortScanner complete event to set form control states and open serial port if successful.
+        /// </summary>
+        private void portScanner_Completed(object sender, xIMU_API.RunScanCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Cancelled)
+                {
+                    throw new Exception();
+                }
+                xIMUserial.PortName = e.PortAssignments[0].PortName;
+                xIMUserial.Open();
+                this.EndInvoke(this.BeginInvoke(new MethodInvoker(delegate
+                {
+                    button_openPort.Text = "Close Port";
+                    button_openPort.Enabled = true;
+                    autoConnectProgressDialog.CloseDialog();
+                })));
+                PassiveMessageBox.Show("Connected to x-IMU " + e.PortAssignments[0].DeviceID + " on " + e.PortAssignments[0].PortName + ".", "Message", MessageBoxIcon.Information);
             }
-            comboBox_portName.SelectedIndex = comboBox_portName.Items.Count - 1;
+            catch
+            {
+                this.EndInvoke(this.BeginInvoke(new MethodInvoker(delegate
+                {
+                    button_openPort.Text = "Open Port";
+                    comboBox_portName.Enabled = true;
+                    button_refreshList.Enabled = true;
+                    button_openPort.Enabled = true;
+                    autoConnectProgressDialog.CloseDialog();
+                })));
+            }
         }
 
         #endregion
@@ -279,8 +377,7 @@ namespace xIMU_GUI
         /// </summary>
         private void xIMUserial_ErrorMessageReceived(object sender, xIMU_API.ErrorData e)
         {
-            if (e.ErrorCode == (ushort)xIMU_API.ErrorCodes.TransmitBufferOvun) return;      // ignore transmit buffer overrun errors as may be frequent with poor Bluetooth reception
-            MessageBoxThread.Show("Error: " + e.GetMessage(), "Message From x-IMU", MessageBoxIcon.Error);
+            PassiveMessageBox.Show("Error: " + e.GetMessage(), "Message From x-IMU", MessageBoxIcon.Error);
         }
 
         #endregion
@@ -765,14 +862,14 @@ namespace xIMU_GUI
                     {
                         if (!Enum.IsDefined(typeof(xIMU_API.CompatibleFirmwareVersions), Convert.ToInt32(appendedTextBoxTreeNode_FirmVersionMajorNum.TextBox.Text)))
                         {
-                            MessageBoxThread.Show("The detected firmware version is not fully compatible with this software version.", "Warning", MessageBoxIcon.Warning);
+                            PassiveMessageBox.Show("The detected firmware version is not fully compatible with this software version.", "Warning", MessageBoxIcon.Warning);
                         }
                     }
                 }
             }
             catch
             {
-                MessageBoxThread.Show("Invalid register address (0x" + string.Format("{0:X4}", registerData.Address) + ") and/or value (0x" + string.Format("{0:X4}", registerData.Value) + ")", "Error", MessageBoxIcon.Error);
+                PassiveMessageBox.Show("Invalid register address (0x" + string.Format("{0:X4}", registerData.Address) + ") and/or value (0x" + string.Format("{0:X4}", registerData.Value) + ")", "Error", MessageBoxIcon.Error);
             }
         }
 
@@ -1055,9 +1152,9 @@ namespace xIMU_GUI
         /// </summary>
         private void xIMUserial_CommandMessageReceived(object sender, xIMU_API.CommandData e)
         {
-            if (checkBox_displayReceivedCommandMessages.Checked)
+            if (checkBox_displayCommandConfirmations.Checked)
             {
-                MessageBoxThread.Show("Command confirmed: " + e.GetMessage(), "Message From x-IMU", MessageBoxIcon.Information);
+                PassiveMessageBox.Show("Command confirmed: " + e.GetMessage(), "Message From x-IMU", MessageBoxIcon.Information);
             }
         }
 
@@ -1388,8 +1485,10 @@ namespace xIMU_GUI
                 }
             }
             if (filesCreated == "") filesCreated = "\rNone.";
-            MessageBoxThread.Show("Total packets read:\t\t\t\t" + Convert.ToString(packetCount.TotalPacketsRead) + "\r" +
+            PassiveMessageBox.Show("Total packets read:\t\t\t\t" + Convert.ToString(packetCount.TotalPacketsRead) + "\r" +
                                   "Packet read errors:\t\t\t\t" + Convert.ToString(packetCount.PacketsReadErrors) + "\r" +
+                                  "Error packets read:\t\t\t\t" + Convert.ToString(packetCount.ErrorPacketsRead) + "\r" +
+                                  "Command packets read:\t\t\t" + Convert.ToString(packetCount.CommandPacketsRead) + "\r" +
                                   "Date/time packets read:\t\t\t" + Convert.ToString(packetCount.DateTimeDataPacketsRead) + "\r" +
                                   "Raw battery and thermometer packets read:\t" + Convert.ToString(packetCount.RawBattThermDataPacketsRead) + "\r" +
                                   "Calibrated battery and thermometer packets read:\t" + Convert.ToString(packetCount.CalBattThermDataPacketsRead) + "\r" +
@@ -1568,11 +1667,11 @@ namespace xIMU_GUI
                 hardIronCalDataFiles = null;;
                 if (numPackets == 0)
                 {
-                    MessageBoxThread.Show("No calibrated inertial/magnetic data packets were received.  File not created.", "Message", MessageBoxIcon.Warning);
+                    PassiveMessageBox.Show("No calibrated inertial/magnetic data packets were received.  File not created.", "Message", MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    MessageBoxThread.Show("Calibrated inertial/magnetic packets received: " + Convert.ToString(numPackets) + ".\r"+
+                    PassiveMessageBox.Show("Calibrated inertial/magnetic packets received: " + Convert.ToString(numPackets) + ".\r"+
                                           "File created: " + fileNames[0], "Message", MessageBoxIcon.Information);
                 }
                 button_collectHardIronCalDatasetBrowse.Enabled = true;
@@ -1654,7 +1753,7 @@ namespace xIMU_GUI
                 {
                     throw new Exception("Port is closed.");
                 }
-                MessageBoxThread.Show("Hard-iron calibration complete.  The magnetometer hard-iron bias registers have been updated.", "Message", MessageBoxIcon.Information);
+                PassiveMessageBox.Show("Hard-iron calibration complete.  The magnetometer hard-iron bias registers have been updated.", "Message", MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
