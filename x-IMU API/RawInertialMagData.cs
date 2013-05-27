@@ -21,7 +21,7 @@ namespace xIMU_API
         #region Properties
 
         /// <summary>
-        /// Raw gyroscope ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Gets or sets the raw gyroscope ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </summary>
         public short[] Gyroscope
         {
@@ -36,7 +36,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Raw accelerometer ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Gets or sets the raw accelerometer ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </summary>
         public short[] Accelerometer
         {
@@ -51,7 +51,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Raw magnetometer ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Gets or sets the raw magnetometer ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </summary>
         public short[] Magnetometer
         {

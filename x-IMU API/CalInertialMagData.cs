@@ -21,7 +21,7 @@ namespace xIMU_API
         #region Properties
 
         /// <summary>
-        /// Calibrated gyroscope data in degrees per second.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Gets or sets the calibrated gyroscope data in degrees per second.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </summary>
         public float[] Gyroscope
         {
@@ -36,7 +36,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Calibrated accelerometer data in 'g'.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Gets or sets the calibrated accelerometer data in 'g'.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </summary>
         public float[] Accelerometer
         {
@@ -51,7 +51,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Calibrated magnetometer data in Gauss.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+        /// Gets or sets the calibrated magnetometer data in Gauss.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </summary>
         public float[] Magnetometer
         {

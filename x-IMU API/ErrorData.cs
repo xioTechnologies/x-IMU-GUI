@@ -19,7 +19,7 @@ namespace xIMU_API
         #region Properties
 
         /// <summary>
-        /// Error code. Must be defined in <see cref="ErrorCodes"/>.
+        /// Gets or sets the error code. Must be defined in <see cref="ErrorCodes"/>.
         /// </summary>
         /// <exception cref="System.Exception">
         /// Thrown if invalid error code specifed.

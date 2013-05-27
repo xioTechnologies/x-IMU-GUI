@@ -55,7 +55,6 @@ namespace xIMU_API
         /// <param name="error">
         /// Error <see cref="Exception"/> if occured
         /// </param>
-        /// </param>
         /// <param name="cancelled">
         /// Value indicating whether the asynchronous scan was cancelled.
         /// </param>

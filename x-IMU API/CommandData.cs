@@ -19,7 +19,7 @@ namespace xIMU_API
         #region Properties
 
         /// <summary>
-        /// Command code.  Must be defined in <see cref="CommandCodes"/>.
+        /// Gets or sets the command code.  Must be defined in <see cref="CommandCodes"/>.
         /// </summary>
         /// <exception cref="System.Exception">
         /// Thrown if invalid command code specifed.

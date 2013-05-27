@@ -20,7 +20,7 @@ namespace xIMU_API
         #region Properties
 
         /// <summary>
-        /// Raw battery voltage ADC data in LSBs.
+        /// Gets or sets the raw battery voltage ADC data in LSBs.
         /// </summary>
         public short BatteryVoltage
         {
@@ -35,7 +35,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Raw Thermometer ADC data in LSBs.
+        /// Gets or sets the raw Thermometer ADC data in LSBs.
         /// </summary>
         public short Thermometer
         {

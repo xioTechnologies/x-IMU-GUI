@@ -154,13 +154,14 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// BackgroundWorker DoWork event to run Read as new process.
+        /// BackgroundWorker DoWork event to run DoRead as new process.
         /// </summary>
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
                 DoRead(true);
+                OnAsyncReadCompleted(new AsyncReadCompletedEventArgs(PacketCounter, null, backgroundWorker.CancellationPending));
             }
             catch (Exception ex)
             {
@@ -172,7 +173,7 @@ namespace xIMU_API
         /// Reads file. Interpreted packets are provided in individual events.
         /// </summary>
         /// <param name="isAsync">
-        /// Enables OnProgressChanged and OnReadCompleted events for use when called within background worker.
+        /// Enables OnAsyncReadProgressChanged event for use when called within background worker.
         /// </param>
         private void DoRead(bool isAsync)
         {
@@ -231,8 +232,8 @@ namespace xIMU_API
                     if (dataObject != null)                                         // if packet successfully deconstructed
                     {
                         OnxIMUdataRead(dataObject);
-                        if (dataObject is ErrorData) { OnErrorMessageRead((ErrorData)dataObject); privPacketCounter.ErrorPacketsRead++; }
-                        else if (dataObject is CommandData) { OnCommandMessageRead((CommandData)dataObject); privPacketCounter.CommandPacketsRead++; }
+                        if (dataObject is ErrorData) { OnErrorDataRead((ErrorData)dataObject); privPacketCounter.ErrorPacketsRead++; }
+                        else if (dataObject is CommandData) { OnCommandDataRead((CommandData)dataObject); privPacketCounter.CommandPacketsRead++; }
                         else if (dataObject is RegisterData) { OnRegisterDataRead((RegisterData)dataObject); privPacketCounter.RegisterDataPacketsRead++; }
                         else if (dataObject is DateTimeData) { OnDateTimeDataRead((DateTimeData)dataObject); privPacketCounter.DateTimeDataPacketsRead++; }
                         else if (dataObject is RawBattThermData) { OnRawBattThermDataRead((RawBattThermData)dataObject); privPacketCounter.RawBattThermDataPacketsRead++; }
@@ -245,10 +246,6 @@ namespace xIMU_API
                     }
                     readBufferIndex = 0;                                            // reset buffer.
                 }
-            }
-            if (isAsync)
-            {
-                OnAsyncReadCompleted(new AsyncReadCompletedEventArgs(PacketCounter, null, backgroundWorker.CancellationPending));
             }
         }
 
@@ -264,13 +261,13 @@ namespace xIMU_API
         public event onxIMUdataRead xIMUdataRead;
         protected virtual void OnxIMUdataRead(xIMUdata e) { if (xIMUdataRead != null) xIMUdataRead(this, e); }
 
-        public delegate void onErrorMessageRead(object sender, ErrorData e);
-        public event onErrorMessageRead ErrorMessageRead;
-        protected virtual void OnErrorMessageRead(ErrorData e) { if (ErrorMessageRead != null) ErrorMessageRead(this, e); }
+        public delegate void onErrorDataRead(object sender, ErrorData e);
+        public event onErrorDataRead ErrorDataRead;
+        protected virtual void OnErrorDataRead(ErrorData e) { if (ErrorDataRead != null) ErrorDataRead(this, e); }
 
-        public delegate void onCommandMessageRead(object sender, CommandData e);
-        public event onCommandMessageRead CommandMessageRead;
-        protected virtual void OnCommandMessageRead(CommandData e) { if (CommandMessageRead != null) CommandMessageRead(this, e); }
+        public delegate void onCommandDataRead(object sender, CommandData e);
+        public event onCommandDataRead CommandDataRead;
+        protected virtual void OnCommandDataRead(CommandData e) { if (CommandDataRead != null) CommandDataRead(this, e); }
 
         public delegate void onRegisterDataRead(object sender, RegisterData e);
         public event onRegisterDataRead RegisterDataRead;

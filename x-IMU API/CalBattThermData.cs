@@ -20,7 +20,7 @@ namespace xIMU_API
         #region Properties
 
         /// <summary>
-        /// Calibrated battery voltage data in volts.
+        /// Gets or sets the calibrated battery voltage data in volts.
         /// </summary>
         public float BatteryVoltage
         {
@@ -35,7 +35,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Calibrated thermometer data degrees Celsius.
+        /// Gets or sets the calibrated thermometer data degrees Celsius.
         /// </summary>
         public float Thermometer
         {

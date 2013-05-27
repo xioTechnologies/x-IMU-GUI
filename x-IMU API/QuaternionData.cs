@@ -22,7 +22,7 @@ namespace xIMU_API
         #region Properties
 
         /// <summary>
-        /// Quaternion. Must of 4 elements. Each element must be of value -1 to +1.  Vector will be normalised.
+        /// Gets or sets the quaternion. Must of 4 elements. Vector will be normalised.
         /// </summary>
         /// <exception cref="System.Exception">
         /// Thrown if invalid quaternion specified.

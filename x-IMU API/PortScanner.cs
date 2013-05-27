@@ -110,7 +110,18 @@ namespace xIMU_API
         #region Methods
 
         /// <summary>
-        /// Runs asynchronous port scan.
+        /// Scans ports for x-IMUs.
+        /// </summary>
+        /// <returns>
+        /// Array of <see cref="PortAssignments"/> found during the scan.
+        /// </returns>
+        public PortAssignment[] Scan()
+        {
+            return DoScan(false);
+        }
+
+        /// <summary>
+        /// Runs asynchronous scans ports for x-IMUs.  Progress and results provided in OnAsyncScanProgressChanged and OnAsyncScanCompleted events.
         /// </summary>
         public void RunAsynsScan()
         {
@@ -133,11 +144,27 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// BackgroundWorker DoWork event to run port scan in new process.
+        /// BackgroundWorker DoWork event to run DoScan as new process.
         /// </summary>
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            List<PortAssignment> portAsignmentsList = new List<PortAssignment>();
+            PortAssignment[] portAssignments;
+            portAssignments = DoScan(true);
+            OnAsyncScanCompleted(new AsyncScanCompletedEventArgs(portAssignments, CancellationPending));
+        }
+
+        /// <summary>
+        /// Scans ports for x-IMUs.
+        /// </summary>
+        /// <param name="isAsync">
+        /// Enables OnAsyncScanProgressChanged event for use when called within background worker.
+        /// </param>
+        /// <returns>
+        /// Array of <see cref="PortAssignments"/> found during the scan.
+        /// </returns>
+        private PortAssignment[] DoScan(bool isAsync)
+        {
+            List<PortAssignment> portAssignmentsList = new List<PortAssignment>();
             do
             {
                 // Get list of available port names
@@ -146,17 +173,24 @@ namespace xIMU_API
                 {
                     if (DontGiveUp)
                     {
-                        OnProgressChanged(new ScanProgressChangedEventArgs(0, "No ports found. Retry in 1 second..."));
+                        if (isAsync)
+                        {
+                            OnAsyncScanProgressChanged(new AsyncScanProgressChangedEventArgs(0, "No ports found. Retry in 1 second..."));
+                        }
                         Thread.Sleep(1000);
                     }
                     else
                     {
-                        OnProgressChanged(new ScanProgressChangedEventArgs(100, "No ports found."));
+                        if (isAsync)
+                        {
+                            OnAsyncScanProgressChanged(new AsyncScanProgressChangedEventArgs(0, "No ports found."));
+                        }
+                        break;
                     }
                 }
                 else
                 {
-                    int progressPercent;
+                    int progressPercent = 0;
                     string progressMessage;
 
                     // Augment list with other potential port names as Bluetooth port names may have an extra numerical character appended
@@ -187,9 +221,11 @@ namespace xIMU_API
                     {
                         progressMessage += portNames[i] + (i < (portNames.Count - 1) ? ", " : ".");
                     }
-                    progressPercent = (int)(Math.Round(100d * (1d/ (1d + (3d * (portNames.Count + 1))))));
-                    OnProgressChanged(new ScanProgressChangedEventArgs(progressPercent, progressMessage));
-
+                    if (isAsync)
+                    {
+                        progressPercent = (int)(Math.Round(100d * (1d / (1d + (3d * (portNames.Count + 1))))));
+                        OnAsyncScanProgressChanged(new AsyncScanProgressChangedEventArgs(progressPercent, progressMessage));
+                    }
                     // Scan for x-IMU on each port
                     for (int i = 0; i < portNames.Count; i++)
                     {
@@ -201,8 +237,11 @@ namespace xIMU_API
                             {
                                 break;
                             }
-                            progressPercent = (int)(Math.Round(100d * ((1d + (i * 3d) + 1d) / (1d + (3d * (portNames.Count + 1))))));
-                            OnProgressChanged(new ScanProgressChangedEventArgs(progressPercent, "Opening " + portNames[i] + "..."));
+                            if (isAsync)
+                            {
+                                progressPercent = (int)(Math.Round(100d * ((1d + (i * 3d) + 1d) / (1d + (3d * (portNames.Count + 1))))));
+                                OnAsyncScanProgressChanged(new AsyncScanProgressChangedEventArgs(progressPercent, "Opening " + portNames[i] + "..."));
+                            }
                             xIMUserialobj = new xIMUserial(portNames[i]);
                             xIMUserialobj.RegisterDataReceived += new xIMU_API.xIMUserial.onRegisterDataReceived(xIMUserialobj_RegisterDataReceived);
                             xIMUserialobj.Open();
@@ -212,8 +251,11 @@ namespace xIMU_API
                             {
                                 break;
                             }
-                            progressPercent = (int)(Math.Round(100d * ((1d + (i * 3d) + 2d) / (1d + (3d* (portNames.Count + 1))))));
-                            OnProgressChanged(new ScanProgressChangedEventArgs(progressPercent, "Reading device ID..."));
+                            if (isAsync)
+                            {
+                                progressPercent = (int)(Math.Round(100d * ((1d + (i * 3d) + 2d) / (1d + (3d * (portNames.Count + 1))))));
+                                OnAsyncScanProgressChanged(new AsyncScanProgressChangedEventArgs(progressPercent, "Reading device ID..."));
+                            }
                             receivedDeviceID = null;
                             xIMUserialobj.SendReadRegisterPacket(new RegisterData(RegisterAddresses.DeviceID));
                             Thread.Sleep(500);
@@ -227,9 +269,12 @@ namespace xIMU_API
                             {
                                 break;
                             }
-                            progressPercent = (int)(Math.Round(100d * ((1d + (i * 3d) + 3d) / (1d + (3d * (portNames.Count + 1))))));
-                            OnProgressChanged(new ScanProgressChangedEventArgs(progressPercent, "Found x-IMU " + receivedDeviceID + "."));
-                            portAsignmentsList.Add(new PortAssignment(portNames[i], receivedDeviceID));
+                            if (isAsync)
+                            {
+                                progressPercent = (int)(Math.Round(100d * ((1d + (i * 3d) + 3d) / (1d + (3d * (portNames.Count + 1))))));
+                                OnAsyncScanProgressChanged(new AsyncScanProgressChangedEventArgs(progressPercent, "Found x-IMU " + receivedDeviceID + "."));
+                            }
+                            portAssignmentsList.Add(new PortAssignment(portNames[i], receivedDeviceID));
                             if (FirstResultOnly)
                             {
                                 break;
@@ -237,7 +282,10 @@ namespace xIMU_API
                         }
                         catch (Exception ex)
                         {
-                            OnProgressChanged(new ScanProgressChangedEventArgs(progressPercent, "Failed: " + ex.Message));
+                            if (isAsync)
+                            {
+                                OnAsyncScanProgressChanged(new AsyncScanProgressChangedEventArgs(progressPercent, "Failed: " + ex.Message));
+                            }
                         }
                         finally
                         {
@@ -248,9 +296,8 @@ namespace xIMU_API
                         }
                     }
                 }
-            } while ((portAsignmentsList.Count == 0) && DontGiveUp && !CancellationPending);
-            OnProgressChanged(new ScanProgressChangedEventArgs(100, "Complete."));
-            OnCompleted(new RunScanCompletedEventArgs(portAsignmentsList.ToArray(), CancellationPending));
+            } while ((portAssignmentsList.Count == 0) && DontGiveUp && !CancellationPending);
+            return portAssignmentsList.ToArray();
         }
 
         /// <summary>
@@ -264,13 +311,13 @@ namespace xIMU_API
             }
         }
 
-        public delegate void onProgressChanged(object sender, ScanProgressChangedEventArgs e);
-        public event onProgressChanged ProgressChanged;
-        protected virtual void OnProgressChanged(ScanProgressChangedEventArgs e) { if (ProgressChanged != null) ProgressChanged(this, e); }
+        public delegate void onAsyncScanProgressChanged(object sender, AsyncScanProgressChangedEventArgs e);
+        public event onAsyncScanProgressChanged AsyncScanProgressChanged;
+        protected virtual void OnAsyncScanProgressChanged(AsyncScanProgressChangedEventArgs e) { if (AsyncScanProgressChanged != null) AsyncScanProgressChanged(this, e); }
 
-        public delegate void onCompleted(object sender, RunScanCompletedEventArgs e);
-        public event onCompleted Completed;
-        protected virtual void OnCompleted(RunScanCompletedEventArgs e) { if (Completed != null) Completed(this, e); }
+        public delegate void onAsyncScanCompleted(object sender, AsyncScanCompletedEventArgs e);
+        public event onAsyncScanCompleted AsyncScanCompleted;
+        protected virtual void OnAsyncScanCompleted(AsyncScanCompletedEventArgs e) { if (AsyncScanCompleted != null) AsyncScanCompleted(this, e); }
 
         #endregion
     }

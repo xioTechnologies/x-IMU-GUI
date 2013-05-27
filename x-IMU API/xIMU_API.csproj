@@ -54,7 +54,8 @@
     <Compile Include="PacketConstruction.cs" />
     <Compile Include="PacketCount.cs" />
     <Compile Include="PacketEncoding.cs" />
-    <Compile Include="PortAsignment.cs" />
+    <Compile Include="PortAssignment.cs" />
+    <Compile Include="DigitalPortBits.cs" />
     <Compile Include="PortScanner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuaternionData.cs" />
@@ -63,8 +64,8 @@
     <Compile Include="AsyncReadCompletedEventArgs.cs" />
     <Compile Include="AsyncReadProgressChangedEventArgs.cs" />
     <Compile Include="RegisterData.cs" />
-    <Compile Include="RunScanCompletedEventArgs.cs" />
-    <Compile Include="ScanProgressChangedEventArgs.cs" />
+    <Compile Include="AsyncScanCompletedEventArgs.cs" />
+    <Compile Include="AsyncScanProgressChangedEventArgs.cs" />
     <Compile Include="xIMUdata.cs" />
     <Compile Include="xIMUfile.cs" />
     <Compile Include="xIMUserial.cs" />

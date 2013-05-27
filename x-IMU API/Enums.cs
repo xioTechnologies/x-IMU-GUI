@@ -229,7 +229,7 @@ namespace xIMU_API
     /// <remarks>
     /// A matching enumeration exists in firmware source.
     /// </remarks> 
-    enum ButtonModes
+    public enum ButtonModes
     {
         Disabled,
         ResetDevice,
@@ -300,7 +300,7 @@ namespace xIMU_API
     /// <remarks>
     /// A matching enumeration exists in firmware source.
     /// </remarks> 
-    enum DateTimeOutputRates
+    public enum DateTimeOutputRates
     {
         OnResetOnly,
         Rate1Hz,
@@ -332,7 +332,7 @@ namespace xIMU_API
     /// <remarks>
     /// A matching enumeration exists in firmware source.
     /// </remarks> 
-    enum MotionTrigWakeUpModes
+    public enum MotionTrigWakeUpModes
     {
         Disabled,
         LowSensitivity,
@@ -345,7 +345,7 @@ namespace xIMU_API
     /// <remarks>
     /// A matching enumeration exists in firmware source.
     /// </remarks> 
-    enum BluetoothPowerModes
+    public enum BluetoothPowerModes
     {
         Disabled,
         Enabled
@@ -357,7 +357,7 @@ namespace xIMU_API
     /// <remarks>
     /// A matching enumeration exists in firmware source.
     /// </remarks> 
-    enum auxiliaryPortModes
+    public enum auxiliaryPortModes
     {
         Disabled,
         DigitalIO
@@ -369,7 +369,7 @@ namespace xIMU_API
     /// <remarks>
     /// A matching enumeration exists in firmware source.
     /// </remarks> 
-    enum DigitalIOdirections
+    public enum DigitalIOdirections
     {
         In01234567,
         In0123456Out7,
@@ -388,7 +388,7 @@ namespace xIMU_API
     /// <remarks>
     /// A matching enumeration exists in firmware source.
     /// </remarks> 
-    enum DigitalIOoutputRates
+    public enum DigitalIOoutputRates
     {
         OnChangeOnly,
         Rate1Hz,

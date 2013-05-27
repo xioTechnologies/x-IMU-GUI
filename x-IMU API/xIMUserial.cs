@@ -251,8 +251,8 @@ namespace xIMU_API
                     if (dataObject != null)                                         // if packet successfully deconstructed
                     {
                         OnxIMUdataReceived(dataObject);
-                        if (dataObject is ErrorData) { OnErrorMessageReceived((ErrorData)dataObject); privPacketCounter.ErrorPacketsRead++; }
-                        else if (dataObject is CommandData) { OnCommandMessageReceived((CommandData)dataObject); privPacketCounter.CommandPacketsRead++; }
+                        if (dataObject is ErrorData) { OnErrorDataReceived((ErrorData)dataObject); privPacketCounter.ErrorPacketsRead++; }
+                        else if (dataObject is CommandData) { OnCommandDataReceived((CommandData)dataObject); privPacketCounter.CommandPacketsRead++; }
                         else if (dataObject is RegisterData) { OnRegisterDataReceived((RegisterData)dataObject); privPacketCounter.RegisterDataPacketsRead++; }
                         else if (dataObject is DateTimeData) { OnDateTimeDataReceived((DateTimeData)dataObject); privPacketCounter.DateTimeDataPacketsRead++; }
                         else if (dataObject is RawBattThermData) { OnRawBattThermDataReceived((RawBattThermData)dataObject); privPacketCounter.RawBattThermDataPacketsRead++; }
@@ -272,13 +272,13 @@ namespace xIMU_API
         public event onxIMUdataReceived xIMUdataReceived;
         protected virtual void OnxIMUdataReceived(xIMUdata e) { if (xIMUdataReceived != null) xIMUdataReceived(this, e); }
 
-        public delegate void onErrorMessageReceived(object sender, ErrorData e);
-        public event onErrorMessageReceived ErrorMessageReceived;
-        protected virtual void OnErrorMessageReceived(ErrorData e) { if (ErrorMessageReceived != null) ErrorMessageReceived(this, e); }
+        public delegate void onErrorDataReceived(object sender, ErrorData e);
+        public event onErrorDataReceived ErrorDataReceived;
+        protected virtual void OnErrorDataReceived(ErrorData e) { if (ErrorDataReceived != null) ErrorDataReceived(this, e); }
 
-        public delegate void onCommandMessageReceived(object sender, CommandData e);
-        public event onCommandMessageReceived CommandMessageReceived;
-        protected virtual void OnCommandMessageReceived(CommandData e) { if (CommandMessageReceived != null) CommandMessageReceived(this, e); }
+        public delegate void onCommandDataReceived(object sender, CommandData e);
+        public event onCommandDataReceived CommandDataReceived;
+        protected virtual void OnCommandDataReceived(CommandData e) { if (CommandDataReceived != null) CommandDataReceived(this, e); }
 
         public delegate void onRegisterDataReceived(object sender, RegisterData e);
         public event onRegisterDataReceived RegisterDataReceived;

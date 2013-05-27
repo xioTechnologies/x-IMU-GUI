@@ -256,7 +256,7 @@ namespace xIMU_API
                     {
                         throw new Exception("Invalid number of bytes for packet header.");
                     }
-                    return new DigitalIOdata(new DigitalIOdata.PortData(decodedPacket[1]), new DigitalIOdata.PortData(decodedPacket[2]));
+                    return new DigitalIOdata(new DigitalPortBits(decodedPacket[1]), new DigitalPortBits(decodedPacket[2]));
                 default:
                     throw new Exception("Unknown packet header.");
             }

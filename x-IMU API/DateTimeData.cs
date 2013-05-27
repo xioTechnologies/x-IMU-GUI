@@ -24,7 +24,7 @@ namespace xIMU_API
         #region Properties
 
         /// <summary>
-        /// Year. Must be of value 2000 2099.
+        /// Gets or sets the year. Must be of value 2000 2099.
         /// </summary>
         /// <exception cref="System.Exception">
         /// Thrown if invalid year specified.
@@ -46,7 +46,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Month. Must be of value 1 to 12.
+        /// Gets or sets the month. Must be of value 1 to 12.
         /// </summary>
         /// <exception cref="System.Exception">
         /// Thrown if invalid month specified.
@@ -68,7 +68,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Date. Must be of value 1 to 31.
+        /// Gets or sets the date. Must be of value 1 to 31.
         /// </summary>
         /// <exception cref="System.Exception">
         /// Thrown if invalid date specified.
@@ -90,7 +90,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Hours. Must be of value 0 to 23.
+        /// Gets or sets the hours. Must be of value 0 to 23.
         /// </summary>
         /// <exception cref="System.Exception">
         /// Thrown if invalid hours specified.
@@ -112,7 +112,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Minutes. Must be of value 0 to 59.
+        /// Gets or sets the minutes. Must be of value 0 to 59.
         /// </summary>
         /// <exception cref="System.Exception">
         /// Thrown if invalid minutes specified.
@@ -134,7 +134,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Seconds. Must be of value 0 to 59.
+        /// Gets or sets the seconds. Must be of value 0 to 59.
         /// </summary>
         /// <exception cref="System.Exception">
         /// Thrown if invalid seconds specified.
@@ -156,7 +156,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// <see cref="DateTime"/> object representation of data.
+        /// Gets or sets a <see cref="DateTime"/> object representation of data.
         /// </summary>
         public DateTime DateTimeObject
         {

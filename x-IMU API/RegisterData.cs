@@ -20,7 +20,7 @@ namespace xIMU_API
         #region Properties
 
         /// <summary>
-        /// 16-bit register address.  Must be defined in <see cref="RegisterAddresses"/>.
+        /// Gets or sets the 16-bit register address.  Must be defined in <see cref="RegisterAddresses"/>.
         /// </summary>
         public ushort Address
         {
@@ -36,7 +36,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// 16-bit register value.
+        /// Gets or sets the 16-bit register value.
         /// </summary>
         public ushort Value
         {
@@ -51,7 +51,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Floating-point representation of 16-bit register value when interpreted as fixed-point.
+        /// Gets or sets the floating-point representation of 16-bit register value when interpreted as fixed-point.
         /// </summary>
         public float floatValue
         {

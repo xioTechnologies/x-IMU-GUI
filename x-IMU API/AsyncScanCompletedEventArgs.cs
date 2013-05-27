@@ -8,13 +8,13 @@ namespace xIMU_API
     /// <summary>
     /// Run scan completed event arguments class.
     /// </summary>
-    public class RunScanCompletedEventArgs
+    public class AsyncScanCompletedEventArgs
     {
         private PortAssignment[] privPortAssignments;
         private bool privCancelled;
 
         /// <summary>
-        /// Gets an array of <see cref="PortAsignments"/> found during the scan.
+        /// Gets an array of <see cref="PortAssignments"/> found during the scan.
         /// </summary>
         public PortAssignment[] PortAssignments
         {
@@ -36,17 +36,17 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="RunScanCompletedEventArgs"/> class.
+        /// Initialises a new instance of the <see cref="AsyncScanCompletedEventArgs"/> class.
         /// </summary>
-        /// <param name="portAsignments">
-        /// Array of <see cref="portAsignments"/> found during the scan.
+        /// <param name="portAssignments">
+        /// Array of <see cref="portAssignments"/> found during the scan.
         /// </param>
         /// <param name="cancelled">
         /// Value indicating whether the asynchronous scan was cancelled.
         /// </param>
-        public RunScanCompletedEventArgs(PortAssignment[] portAsignments, bool cancelled)
+        public AsyncScanCompletedEventArgs(PortAssignment[] portAssignments, bool cancelled)
         {
-            privPortAssignments = portAsignments;
+            privPortAssignments = portAssignments;
             privCancelled = cancelled;
         }
     }

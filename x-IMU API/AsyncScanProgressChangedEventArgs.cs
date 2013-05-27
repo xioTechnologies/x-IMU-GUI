@@ -8,7 +8,7 @@ namespace xIMU_API
     /// <summary>
     /// Scan process changed event arguments class.
     /// </summary>
-    public class ScanProgressChangedEventArgs
+    public class AsyncScanProgressChangedEventArgs
     {
         private int privProgressPercentage;
         private string privProgressMessage;
@@ -36,7 +36,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="ScanProgressChangedEventArgs"/> class.
+        /// Initialises a new instance of the <see cref="AsyncScanProgressChangedEventArgs"/> class.
         /// </summary>
         /// <param name="progressPercentage">
         /// Progress percentage.
@@ -44,7 +44,7 @@ namespace xIMU_API
         /// <param name="progressMessage">
         /// Progress message.
         /// </param>
-        public ScanProgressChangedEventArgs(int progressPercentage, string progressMessage)
+        public AsyncScanProgressChangedEventArgs(int progressPercentage, string progressMessage)
         {
             privProgressPercentage = progressPercentage;
             privProgressMessage = progressMessage;
