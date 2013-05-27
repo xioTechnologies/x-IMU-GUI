@@ -28,8 +28,8 @@
     <ErrorReportUrl>http://www.x-io.co.uk</ErrorReportUrl>
     <ProductName>x-IMU GUI</ProductName>
     <PublisherName>x-io Technologies</PublisherName>
-    <ApplicationRevision>10</ApplicationRevision>
-    <ApplicationVersion>5.0.0.10</ApplicationVersion>
+    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationVersion>5.1.0.11</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>

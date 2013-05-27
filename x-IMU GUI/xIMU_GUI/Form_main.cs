@@ -243,48 +243,68 @@ namespace xIMU_GUI
         }
 
         /// <summary>
-        /// Toggles the open/closed state of the serial port.  Exceptions shown message box.
+        /// Toggles the open/closed state of the serial port.
         /// </summary>
         private void button_openPort_Click(object sender, EventArgs e)
         {
             if (button_openPort.Text == "Open Port")
             {
-                try
-                {
-                    comboBox_portName.Enabled = false;
-                    button_refreshList.Enabled = false;
-                    button_openPort.Enabled = false;
-                    button_openPort.Text = "Opening...";
-                    this.Update();
-                    if (string.Equals(comboBox_portName.Text, "Auto", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        AutoConnect();
-                        return;
-                    }
-                    else
-                    {
-                        xIMUserial.PortName = comboBox_portName.Text;
-                        xIMUserial.Open();
-                    }
-                    button_openPort.Text = "Close Port";
-                    button_openPort.Enabled = true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    button_openPort.Text = "Open Port";
-                    comboBox_portName.Enabled = true;
-                    button_refreshList.Enabled = true;
-                    button_openPort.Enabled = true;
-                }
+                OpenPort();
             }
             else if (button_openPort.Text == "Close Port")
             {
-                xIMUserial.Close();
+                ClosePort();
+            }
+        }
+
+        /// <summary>
+        /// Opens x-IMU serial port and sets form controls. Exceptions shown message box.
+        /// </summary>
+        private void OpenPort()
+        {
+            try
+            {
+                comboBox_portName.Enabled = false;
+                button_refreshList.Enabled = false;
+                button_openPort.Enabled = false;
+                button_openPort.Text = "Opening...";
+                this.Update();
+                if (string.Equals(comboBox_portName.Text, "Auto", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    AutoConnect();
+                    return;
+                }
+                else
+                {
+                    xIMUserial.PortName = comboBox_portName.Text;
+                    xIMUserial.Open();
+                }
+                button_openPort.Text = "Close Port";
+                button_openPort.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                button_openPort.Text = "Open Port";
                 comboBox_portName.Enabled = true;
                 button_refreshList.Enabled = true;
-                button_openPort.Text = "Open Port";
+                button_openPort.Enabled = true;
             }
+        }
+
+        /// <summary>
+        /// Closes x-IMU serial port and sets form controls.
+        /// </summary>
+        private void ClosePort()
+        {
+            try
+            {
+                xIMUserial.Close();
+            }
+            catch { }
+            comboBox_portName.Enabled = true;
+            button_refreshList.Enabled = true;
+            button_openPort.Text = "Open Port";
         }
 
         /// <summary>
@@ -300,7 +320,7 @@ namespace xIMU_GUI
 
             // Create process dialog
             autoConnectProgressDialog = new ProgressDialog(this.Handle);
-            autoConnectProgressDialog.Title = "Auto Connect";
+            autoConnectProgressDialog.Title = "Auto Connecting";
             autoConnectProgressDialog.CancelMessage = "Cancelling...";
             autoConnectProgressDialog.Line1 = "Searching for x-IMU";
             autoConnectProgressDialog.Line3 = "Initialising x-IMU port scanner.";
@@ -345,12 +365,10 @@ namespace xIMU_GUI
                 {
                     throw new Exception();
                 }
-                xIMUserial.PortName = e.PortAssignments[0].PortName;
-                xIMUserial.Open();
                 this.EndInvoke(this.BeginInvoke(new MethodInvoker(delegate
                 {
-                    button_openPort.Text = "Close Port";
-                    button_openPort.Enabled = true;
+                    comboBox_portName.Text = e.PortAssignments[0].PortName;
+                    OpenPort();
                     autoConnectProgressDialog.CloseDialog();
                 })));
                 PassiveMessageBox.Show("Connected to x-IMU " + e.PortAssignments[0].DeviceID + " on " + e.PortAssignments[0].PortName + ".", "Message", MessageBoxIcon.Information);
@@ -359,10 +377,7 @@ namespace xIMU_GUI
             {
                 this.EndInvoke(this.BeginInvoke(new MethodInvoker(delegate
                 {
-                    button_openPort.Text = "Open Port";
-                    comboBox_portName.Enabled = true;
-                    button_refreshList.Enabled = true;
-                    button_openPort.Enabled = true;
+                    ClosePort();
                     autoConnectProgressDialog.CloseDialog();
                 })));
             }
@@ -528,19 +543,14 @@ namespace xIMU_GUI
             openFileDialog.Filter = "x-IMU Binary Files (*.bin)|*.bin|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                var thread = new Thread(
-                  () =>
-                  {
-                      xIMU_API.xIMUfile xIMUfile = new xIMU_API.xIMUfile(openFileDialog.FileName.ToString());
-                      xIMUfile.RegisterDataRead += new xIMU_API.xIMUfile.onRegisterDataRead(xIMUfile_RegisterDataRead);
-                      xIMUfile.Read();
-                      if (xIMUfile.PacketCounter.PacketsReadErrors != 0)
-                      {
-                          MessageBox.Show(Convert.ToString(xIMUfile.PacketCounter.PacketsReadErrors) + " read errors occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                      }
-                      xIMUfile.Close();
-                  });
-                thread.Start();
+                xIMU_API.xIMUfile xIMUfile = new xIMU_API.xIMUfile(openFileDialog.FileName.ToString());
+                xIMUfile.RegisterDataRead += new xIMU_API.xIMUfile.onRegisterDataRead(xIMUfile_RegisterDataRead);
+                xIMUfile.Read();
+                if (xIMUfile.PacketCounter.PacketsReadErrors != 0)
+                {
+                    MessageBox.Show(Convert.ToString(xIMUfile.PacketCounter.PacketsReadErrors) + " read errors occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                xIMUfile.Close();
             }
         }
 
@@ -1486,20 +1496,20 @@ namespace xIMU_GUI
             }
             if (filesCreated == "") filesCreated = "\rNone.";
             PassiveMessageBox.Show("Total packets read:\t\t\t\t" + Convert.ToString(packetCount.TotalPacketsRead) + "\r" +
-                                  "Packet read errors:\t\t\t\t" + Convert.ToString(packetCount.PacketsReadErrors) + "\r" +
-                                  "Error packets read:\t\t\t\t" + Convert.ToString(packetCount.ErrorPacketsRead) + "\r" +
-                                  "Command packets read:\t\t\t" + Convert.ToString(packetCount.CommandPacketsRead) + "\r" +
-                                  "Date/time packets read:\t\t\t" + Convert.ToString(packetCount.DateTimeDataPacketsRead) + "\r" +
-                                  "Raw battery and thermometer packets read:\t" + Convert.ToString(packetCount.RawBattThermDataPacketsRead) + "\r" +
-                                  "Calibrated battery and thermometer packets read:\t" + Convert.ToString(packetCount.CalBattThermDataPacketsRead) + "\r" +
-                                  "Raw inertial/magnetic packets read:\t\t" + Convert.ToString(packetCount.RawInertialMagDataPacketsRead) + "\r" +
-                                  "Calibrated inertial/magnetic packets read:\t\t" + Convert.ToString(packetCount.CalInertialMagDataPacketsRead) + "\r" +
-                                  "Quaternion packets read:\t\t\t" + Convert.ToString(packetCount.QuaternionDataPacketsRead) + "\r" +
-                                  "Digital I/O packets read:\t\t\t" + Convert.ToString(packetCount.DigitalIODataPacketsRead) + "\r\r" +
-                                  "Files created:" +
-                                  filesCreated,
-                                  caption,
-                                  MessageBoxIcon.Information);
+                                   "Packet read errors:\t\t\t\t" + Convert.ToString(packetCount.PacketsReadErrors) + "\r" +
+                                   "Error packets read:\t\t\t\t" + Convert.ToString(packetCount.ErrorPacketsRead) + "\r" +
+                                   "Command packets read:\t\t\t" + Convert.ToString(packetCount.CommandPacketsRead) + "\r" +
+                                   "Date/time packets read:\t\t\t" + Convert.ToString(packetCount.DateTimeDataPacketsRead) + "\r" +
+                                   "Raw battery and thermometer packets read:\t" + Convert.ToString(packetCount.RawBattThermDataPacketsRead) + "\r" +
+                                   "Calibrated battery and thermometer packets read:\t" + Convert.ToString(packetCount.CalBattThermDataPacketsRead) + "\r" +
+                                   "Raw inertial/magnetic packets read:\t\t" + Convert.ToString(packetCount.RawInertialMagDataPacketsRead) + "\r" +
+                                   "Calibrated inertial/magnetic packets read:\t\t" + Convert.ToString(packetCount.CalInertialMagDataPacketsRead) + "\r" +
+                                   "Quaternion packets read:\t\t\t" + Convert.ToString(packetCount.QuaternionDataPacketsRead) + "\r" +
+                                   "Digital I/O packets read:\t\t\t" + Convert.ToString(packetCount.DigitalIODataPacketsRead) + "\r\r" +
+                                   "Files created:" +
+                                   filesCreated,
+                                   caption,
+                                   MessageBoxIcon.Information);
         }
 
         #endregion
@@ -1781,15 +1791,6 @@ namespace xIMU_GUI
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Select Firmware Hex File";
             openFileDialog.Filter = "HEX Files|*.hex";
-            try
-            {
-                openFileDialog.InitialDirectory = Path.GetDirectoryName(textBox_bootloaderFilePath.Text);
-                openFileDialog.FileName = Path.GetFileName(textBox_bootloaderFilePath.Text);
-            }
-            catch
-            {
-                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            }
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 textBox_bootloaderFilePath.Text = openFileDialog.FileName.ToString();
@@ -1808,14 +1809,18 @@ namespace xIMU_GUI
                 return;
             }
 
-            // Error if serial port already open
-            if (xIMUserial.IsOpen)
+            // Error if selected port name = "Auto"
+            if (string.Equals(comboBox_portName.Text, "Auto", StringComparison.CurrentCultureIgnoreCase))
             {
-                MessageBox.Show("Serial port must be closed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Port name \"Auto\" cannot be used for bootloading.  Please select the port name assigned to the USB connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            MessageBox.Show("Do not disconnect or switch off the x-IMU while firmware is being uploaded.  Doing so may permanently damage the x-IMU.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            // User confirmation
+            if (MessageBox.Show("Do not disconnect or switch off the x-IMU while firmware is being uploaded as this may permanently damage the x-IMU.", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Cancel)
+            {
+                return;
+            }
 
             // Disable bootloader form controls
             textBox_bootloaderFilePath.Enabled = false;
@@ -1823,6 +1828,15 @@ namespace xIMU_GUI
             button_bootloaderUpload.Enabled = false;
             button_bootloaderUpload.Text = "Uploading...";
             this.Update();
+
+            // Close port is currently open
+            bool reopenPort = false;
+            if (xIMUserial.IsOpen)
+            {
+                ClosePort();
+                reopenPort = true;
+
+            }
 
             // Perform firmware upload procedure
             try
@@ -1851,6 +1865,12 @@ namespace xIMU_GUI
             button_bootloaderBrowse.Enabled = true;
             button_bootloaderUpload.Enabled = true;
             button_bootloaderUpload.Text = "Upload";
+
+            // Re-open port if was closed prior to bootload
+            if (reopenPort)
+            {
+                OpenPort();
+            }
         }
 
         #endregion
