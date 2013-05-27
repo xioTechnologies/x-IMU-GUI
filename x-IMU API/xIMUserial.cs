@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO.Ports;
 
-namespace xIMU_API
+namespace x_IMU_API
 {
     /// <summary>
     /// x-IMU serial class.
@@ -38,7 +38,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Gets a value indicated the open or closed value of the serial port.
+        /// Gets a value indicating the open or closed status of the serial port.
         /// </summary>
         public bool IsOpen
         {
@@ -64,7 +64,7 @@ namespace xIMU_API
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:xIMUserial"/> class.
+        /// Initializes a new instance of the <see cref="xIMUserial"/> class.
         /// </summary>
         public xIMUserial()
             : this("COM1")
@@ -72,7 +72,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:xIMUserial"/> class.
+        /// Initializes a new instance of the <see cref="xIMUserial"/> class.
         /// </summary>
         /// <param name="portName">
         /// Name of the port the x-IMU appears as (for example, COM1).
@@ -90,7 +90,7 @@ namespace xIMU_API
 
         #endregion
 
-        #region Methods
+        #region General methods
 
         /// <summary>
         /// Opens a new serial port communication and resets statistics counters.
@@ -187,12 +187,23 @@ namespace xIMU_API
         /// <summary>
         /// Sends digital IO packet to set digital output states.
         /// </summary>
-        /// <param name="digitalIOData">
-        /// <see cref="DigitalIOData"/> instance containing output states to be set.
+        /// <param name="digitalIOdata">
+        /// Digital IO data representing digital output states to be set.
         /// </param>
-        public void SendDigitalIOPacket(DigitalIOdata digitalIOData)
+        public void SendDigitalIOPacket(DigitalIOdata digitalIOdata)
         {
-            SendByteArray(PacketConstruction.ConstructDigitalIOPacket(digitalIOData));
+            SendByteArray(PacketConstruction.ConstructDigitalIOpacket(digitalIOdata));
+        }
+
+        /// <summary>
+        /// Sends PWM output packet to set PWM duty cycles.
+        /// </summary>
+        /// <param name="_PWMoutputData">
+        /// PWM output data representing PWM duty cycles to be set.
+        /// </param>
+        public void SendPWMoutputPacket(PWMoutputData _PWMoutputData)
+        {
+            SendByteArray(PacketConstruction.ConstructPWMoutputPacket(_PWMoutputData));
         }
 
         /// <summary>
@@ -253,14 +264,19 @@ namespace xIMU_API
                         OnxIMUdataReceived(dataObject);
                         if (dataObject is ErrorData) { OnErrorDataReceived((ErrorData)dataObject); privPacketCounter.ErrorPacketsRead++; }
                         else if (dataObject is CommandData) { OnCommandDataReceived((CommandData)dataObject); privPacketCounter.CommandPacketsRead++; }
-                        else if (dataObject is RegisterData) { OnRegisterDataReceived((RegisterData)dataObject); privPacketCounter.RegisterDataPacketsRead++; }
-                        else if (dataObject is DateTimeData) { OnDateTimeDataReceived((DateTimeData)dataObject); privPacketCounter.DateTimeDataPacketsRead++; }
-                        else if (dataObject is RawBattThermData) { OnRawBattThermDataReceived((RawBattThermData)dataObject); privPacketCounter.RawBattThermDataPacketsRead++; }
-                        else if (dataObject is CalBattThermData) { OnCalBattThermDataReceived((CalBattThermData)dataObject); privPacketCounter.CalBattThermDataPacketsRead++; }
-                        else if (dataObject is RawInertialMagData) { OnRawInertialMagDataReceived((RawInertialMagData)dataObject); privPacketCounter.RawInertialMagDataPacketsRead++; }
-                        else if (dataObject is CalInertialMagData) { OnCalInertialMagDataReceived((CalInertialMagData)dataObject); privPacketCounter.CalInertialMagDataPacketsRead++; }
-                        else if (dataObject is QuaternionData) { OnQuaternionDataReceived((QuaternionData)dataObject); privPacketCounter.QuaternionDataPacketsRead++; }
-                        else if (dataObject is DigitalIOdata) { OnDigitalIODataReceived((DigitalIOdata)dataObject); privPacketCounter.DigitalIODataPacketsRead++; }
+                        else if (dataObject is RegisterData) { OnRegisterDataReceived((RegisterData)dataObject); privPacketCounter.RegisterPacketsRead++; }
+                        else if (dataObject is DateTimeData) { OnDateTimeDataReceived((DateTimeData)dataObject); privPacketCounter.DateTimePacketsRead++; }
+                        else if (dataObject is RawBattThermData) { OnRawBattThermDataReceived((RawBattThermData)dataObject); privPacketCounter.RawBattThermPacketsRead++; }
+                        else if (dataObject is CalBattThermData) { OnCalBattThermDataReceived((CalBattThermData)dataObject); privPacketCounter.CalBattThermPacketsRead++; }
+                        else if (dataObject is RawInertialMagData) { OnRawInertialMagDataReceived((RawInertialMagData)dataObject); privPacketCounter.RawInertialMagPacketsRead++; }
+                        else if (dataObject is CalInertialMagData) { OnCalInertialMagDataReceived((CalInertialMagData)dataObject); privPacketCounter.CalInertialMagPacketsRead++; }
+                        else if (dataObject is QuaternionData) { OnQuaternionDataReceived((QuaternionData)dataObject); privPacketCounter.QuaternionPacketsRead++; }
+                        else if (dataObject is DigitalIOdata) { OnDigitalIODataReceived((DigitalIOdata)dataObject); privPacketCounter.DigitalIOPacketsRead++; }
+                        else if (dataObject is RawAnalogueInputData) { OnRawAnalogueInputDataReceived((RawAnalogueInputData)dataObject); privPacketCounter.RawAnalogueInputPacketsRead++; }
+                        else if (dataObject is CalAnalogueInputData) { OnCalAnalogueInputDataReceived((CalAnalogueInputData)dataObject); privPacketCounter.CalAnalogueInputPacketsRead++; }
+                        else if (dataObject is PWMoutputData) { OnPWMoutputDataReceived((PWMoutputData)dataObject); privPacketCounter.PWMoutputPacketsRead++; }
+                        else if (dataObject is RawADXL345busData) { OnRawADXL345busDataReceived((RawADXL345busData)dataObject); privPacketCounter.RawADXL345busPacketsRead++; }
+                        else if (dataObject is CalADXL345busData) { OnCalADXL345busDataReceived((CalADXL345busData)dataObject); privPacketCounter.CalADXL345busPacketsRead++; }
                         privPacketCounter.TotalPacketsRead++;
                     }
                     receiveBufferIndex = 0;                                         // reset buffer.
@@ -311,6 +327,26 @@ namespace xIMU_API
         public delegate void onDigitalIODataReceived(object sender, DigitalIOdata e);
         public event onDigitalIODataReceived DigitalIODataReceived;
         protected virtual void OnDigitalIODataReceived(DigitalIOdata e) { if (DigitalIODataReceived != null) DigitalIODataReceived(this, e); }
+
+        public delegate void onRawAnalogueInputDataReceived(object sender, RawAnalogueInputData e);
+        public event onRawAnalogueInputDataReceived RawAnalogueInputDataReceived;
+        protected virtual void OnRawAnalogueInputDataReceived(RawAnalogueInputData e) { if (RawAnalogueInputDataReceived != null) RawAnalogueInputDataReceived(this, e); }
+
+        public delegate void onCalAnalogueInputDataReceived(object sender, CalAnalogueInputData e);
+        public event onCalAnalogueInputDataReceived CalAnalogueInputDataReceived;
+        protected virtual void OnCalAnalogueInputDataReceived(CalAnalogueInputData e) { if (CalAnalogueInputDataReceived != null) CalAnalogueInputDataReceived(this, e); }
+
+        public delegate void onPWMoutputDataReceived(object sender, PWMoutputData e);
+        public event onPWMoutputDataReceived PWMoutputDataReceived;
+        protected virtual void OnPWMoutputDataReceived(PWMoutputData e) { if (PWMoutputDataReceived != null) PWMoutputDataReceived(this, e); }
+
+        public delegate void onRawADXL345busDataReceived(object sender, RawADXL345busData e);
+        public event onRawADXL345busDataReceived RawADXL345busDataReceived;
+        protected virtual void OnRawADXL345busDataReceived(RawADXL345busData e) { if (RawADXL345busDataReceived != null) RawADXL345busDataReceived(this, e); }
+
+        public delegate void onCalADXL345busDataReceived(object sender, CalADXL345busData e);
+        public event onCalADXL345busDataReceived CalADXL345busDataReceived;
+        protected virtual void OnCalADXL345busDataReceived(CalADXL345busData e) { if (CalADXL345busDataReceived != null) CalADXL345busDataReceived(this, e); }
 
         #endregion
     }

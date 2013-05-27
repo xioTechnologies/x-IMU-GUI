@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using System.ComponentModel;
 
-namespace xIMU_API
+namespace x_IMU_API
 {
     /// <summary>
     /// x-IMU file class.
@@ -50,7 +50,7 @@ namespace xIMU_API
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:xIMUfile"/> class. Opens or creates file.
+        /// Initializes a new instance of the <see cref="xIMUfile"/> class. Opens or creates file.
         /// </summary>
         /// <param name="filePath">
         /// Path of file.
@@ -61,7 +61,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:xIMUfile"/> class.
+        /// Initializes a new instance of the <see cref="xIMUfile"/> class.
         /// </summary>
         /// <param name="filePath">
         /// Path of file.
@@ -234,14 +234,19 @@ namespace xIMU_API
                         OnxIMUdataRead(dataObject);
                         if (dataObject is ErrorData) { OnErrorDataRead((ErrorData)dataObject); privPacketCounter.ErrorPacketsRead++; }
                         else if (dataObject is CommandData) { OnCommandDataRead((CommandData)dataObject); privPacketCounter.CommandPacketsRead++; }
-                        else if (dataObject is RegisterData) { OnRegisterDataRead((RegisterData)dataObject); privPacketCounter.RegisterDataPacketsRead++; }
-                        else if (dataObject is DateTimeData) { OnDateTimeDataRead((DateTimeData)dataObject); privPacketCounter.DateTimeDataPacketsRead++; }
-                        else if (dataObject is RawBattThermData) { OnRawBattThermDataRead((RawBattThermData)dataObject); privPacketCounter.RawBattThermDataPacketsRead++; }
-                        else if (dataObject is CalBattThermData) { OnCalBattThermDataRead((CalBattThermData)dataObject); privPacketCounter.CalBattThermDataPacketsRead++; }
-                        else if (dataObject is RawInertialMagData) { OnRawInertialMagDataRead((RawInertialMagData)dataObject); privPacketCounter.RawInertialMagDataPacketsRead++; }
-                        else if (dataObject is CalInertialMagData) { OnCalInertialMagDataRead((CalInertialMagData)dataObject); privPacketCounter.CalInertialMagDataPacketsRead++; }
-                        else if (dataObject is QuaternionData) { OnQuaternionDataRead((QuaternionData)dataObject); privPacketCounter.QuaternionDataPacketsRead++; }
-                        else if (dataObject is DigitalIOdata) { OnDigitalIODataRead((DigitalIOdata)dataObject); privPacketCounter.DigitalIODataPacketsRead++; }
+                        else if (dataObject is RegisterData) { OnRegisterDataRead((RegisterData)dataObject); privPacketCounter.RegisterPacketsRead++; }
+                        else if (dataObject is DateTimeData) { OnDateTimeDataRead((DateTimeData)dataObject); privPacketCounter.DateTimePacketsRead++; }
+                        else if (dataObject is RawBattThermData) { OnRawBattThermDataRead((RawBattThermData)dataObject); privPacketCounter.RawBattThermPacketsRead++; }
+                        else if (dataObject is CalBattThermData) { OnCalBattThermDataRead((CalBattThermData)dataObject); privPacketCounter.CalBattThermPacketsRead++; }
+                        else if (dataObject is RawInertialMagData) { OnRawInertialMagDataRead((RawInertialMagData)dataObject); privPacketCounter.RawInertialMagPacketsRead++; }
+                        else if (dataObject is CalInertialMagData) { OnCalInertialMagDataRead((CalInertialMagData)dataObject); privPacketCounter.CalInertialMagPacketsRead++; }
+                        else if (dataObject is QuaternionData) { OnQuaternionDataRead((QuaternionData)dataObject); privPacketCounter.QuaternionPacketsRead++; }
+                        else if (dataObject is DigitalIOdata) { OnDigitalIODataRead((DigitalIOdata)dataObject); privPacketCounter.DigitalIOPacketsRead++; }
+                        else if (dataObject is RawAnalogueInputData) { OnRawAnalogueInputDataReceived((RawAnalogueInputData)dataObject); privPacketCounter.RawAnalogueInputPacketsRead++; }
+                        else if (dataObject is CalAnalogueInputData) { OnCalAnalogueInputDataReceived((CalAnalogueInputData)dataObject); privPacketCounter.CalAnalogueInputPacketsRead++; }
+                        else if (dataObject is PWMoutputData) { OnPWMoutputDataRead((PWMoutputData)dataObject); privPacketCounter.PWMoutputPacketsRead++; }
+                        else if (dataObject is RawADXL345busData) { OnRawADXL345busDataRead((RawADXL345busData)dataObject); privPacketCounter.RawADXL345busPacketsRead++; }
+                        else if (dataObject is CalADXL345busData) { OnCalADXL345busDataRead((CalADXL345busData)dataObject); privPacketCounter.CalADXL345busPacketsRead++; }
                         privPacketCounter.TotalPacketsRead++;
                     }
                     readBufferIndex = 0;                                            // reset buffer.
@@ -300,6 +305,26 @@ namespace xIMU_API
         public delegate void onDigitalIODataRead(object sender, DigitalIOdata e);
         public event onDigitalIODataRead DigitalIODataRead;
         protected virtual void OnDigitalIODataRead(DigitalIOdata e) { if (DigitalIODataRead != null) DigitalIODataRead(this, e); }
+
+        public delegate void onRawAnalogueInputDataReceived(object sender, RawAnalogueInputData e);
+        public event onRawAnalogueInputDataReceived RawAnalogueInputDataReceived;
+        protected virtual void OnRawAnalogueInputDataReceived(RawAnalogueInputData e) { if (RawAnalogueInputDataReceived != null) RawAnalogueInputDataReceived(this, e); }
+
+        public delegate void onCalAnalogueInputDataReceived(object sender, CalAnalogueInputData e);
+        public event onCalAnalogueInputDataReceived CalAnalogueInputDataReceived;
+        protected virtual void OnCalAnalogueInputDataReceived(CalAnalogueInputData e) { if (CalAnalogueInputDataReceived != null) CalAnalogueInputDataReceived(this, e); }
+
+        public delegate void onPWMoutputDataRead(object sender, PWMoutputData e);
+        public event onPWMoutputDataRead PWMoutputDataRead;
+        protected virtual void OnPWMoutputDataRead(PWMoutputData e) { if (PWMoutputDataRead != null) PWMoutputDataRead(this, e); }
+
+        public delegate void onRawADXL345busDataRead(object sender, RawADXL345busData e);
+        public event onRawADXL345busDataRead RawADXL345busDataRead;
+        protected virtual void OnRawADXL345busDataRead(RawADXL345busData e) { if (RawADXL345busDataRead != null) RawADXL345busDataRead(this, e); }
+
+        public delegate void onCalADXL345busDataRead(object sender, CalADXL345busData e);
+        public event onCalADXL345busDataRead CalADXL345busDataRead;
+        protected virtual void OnCalADXL345busDataRead(CalADXL345busData e) { if (CalADXL345busDataRead != null) CalADXL345busDataRead(this, e); }
 
         #endregion
     }

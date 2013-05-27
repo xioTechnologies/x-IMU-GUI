@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("xIMU_API")]
+[assembly: AssemblyTitle("x-IMU API")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("x-io Technologies Limited")]
-[assembly: AssemblyProduct("xIMU_API")]
+[assembly: AssemblyProduct("x-IMU API")]
 [assembly: AssemblyCopyright("Copyright © x-io Technologies Limited 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b63a398c-5265-470d-bd55-9fbdc6324b04")]
+[assembly: Guid("d696ed9a-66ae-4209-a43f-c58de6317d7b")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,6 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("9.0.*")]
+[assembly: AssemblyVersion("10.0.*")]
 //[assembly: AssemblyFileVersion("1.0.0.0")]
+

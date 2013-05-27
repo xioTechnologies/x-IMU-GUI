@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xIMU_API
+namespace x_IMU_API
 {
     /// <summary>
     /// Register data class.
@@ -180,6 +180,12 @@ namespace xIMU_API
                 case ((ushort)RegisterAddresses.GyroSensitivityX): return Qvals.GyroSensitivity;
                 case ((ushort)RegisterAddresses.GyroSensitivityY): return Qvals.GyroSensitivity;
                 case ((ushort)RegisterAddresses.GyroSensitivityZ): return Qvals.GyroSensitivity;
+                case ((ushort)RegisterAddresses.GyroSampledPlus200dpsX): return Qvals.GyroSampled200dps;
+                case ((ushort)RegisterAddresses.GyroSampledPlus200dpsY): return Qvals.GyroSampled200dps;
+                case ((ushort)RegisterAddresses.GyroSampledPlus200dpsZ): return Qvals.GyroSampled200dps;
+                case ((ushort)RegisterAddresses.GyroSampledMinus200dpsX): return Qvals.GyroSampled200dps;
+                case ((ushort)RegisterAddresses.GyroSampledMinus200dpsY): return Qvals.GyroSampled200dps;
+                case ((ushort)RegisterAddresses.GyroSampledMinus200dpsZ): return Qvals.GyroSampled200dps;
                 case ((ushort)RegisterAddresses.GyroBiasX): return Qvals.GyroBias;
                 case ((ushort)RegisterAddresses.GyroBiasY): return Qvals.GyroBias;
                 case ((ushort)RegisterAddresses.GyroBiasZ): return Qvals.GyroBias;
@@ -200,6 +206,12 @@ namespace xIMU_API
                 case ((ushort)RegisterAddresses.AccelBiasX): return Qvals.AccelBias;
                 case ((ushort)RegisterAddresses.AccelBiasY): return Qvals.AccelBias;
                 case ((ushort)RegisterAddresses.AccelBiasZ): return Qvals.AccelBias;
+                case ((ushort)RegisterAddresses.AccelSampledPlus1gX): return Qvals.AccelSampled1g;
+                case ((ushort)RegisterAddresses.AccelSampledPlus1gY): return Qvals.AccelSampled1g;
+                case ((ushort)RegisterAddresses.AccelSampledPlus1gZ): return Qvals.AccelSampled1g;
+                case ((ushort)RegisterAddresses.AccelSampledMinus1gX): return Qvals.AccelSampled1g;
+                case ((ushort)RegisterAddresses.AccelSampledMinus1gY): return Qvals.AccelSampled1g;
+                case ((ushort)RegisterAddresses.AccelSampledMinus1gZ): return Qvals.AccelSampled1g;
                 case ((ushort)RegisterAddresses.MagSensitivityX): return Qvals.MagSensitivity;
                 case ((ushort)RegisterAddresses.MagSensitivityY): return Qvals.MagSensitivity;
                 case ((ushort)RegisterAddresses.MagSensitivityZ): return Qvals.MagSensitivity;
@@ -215,11 +227,37 @@ namespace xIMU_API
                 case ((ushort)RegisterAddresses.AlgorithmInitPeriod): return Qvals.AlgorithmInitPeriod;
                 case ((ushort)RegisterAddresses.AlgorithmMinValidMag): return Qvals.CalibratedMag;
                 case ((ushort)RegisterAddresses.AlgorithmMaxValidMag): return Qvals.CalibratedMag;
-                case ((ushort)RegisterAddresses.TareQuat0): return Qvals.Quaternion;
-                case ((ushort)RegisterAddresses.TareQuat1): return Qvals.Quaternion;
-                case ((ushort)RegisterAddresses.TareQuat2): return Qvals.Quaternion;
-                case ((ushort)RegisterAddresses.TareQuat3): return Qvals.Quaternion;
+                case ((ushort)RegisterAddresses.AlgorithmTareQuat0): return Qvals.Quaternion;
+                case ((ushort)RegisterAddresses.AlgorithmTareQuat1): return Qvals.Quaternion;
+                case ((ushort)RegisterAddresses.AlgorithmTareQuat2): return Qvals.Quaternion;
+                case ((ushort)RegisterAddresses.AlgorithmTareQuat3): return Qvals.Quaternion;
                 case ((ushort)RegisterAddresses.BattShutdownVoltage): return Qvals.CalibratedBatt;
+                case ((ushort)RegisterAddresses.AnalogueInputSensitivity): return Qvals.AnalogueInputSensitivity;
+                case ((ushort)RegisterAddresses.AnalogueInputBias): return Qvals.AnalogueInputBias;
+                case ((ushort)RegisterAddresses.ADXL345AsensitivityX): return Qvals.ADXL345busSensitivity;
+                case ((ushort)RegisterAddresses.ADXL345AsensitivityY): return Qvals.ADXL345busSensitivity;
+                case ((ushort)RegisterAddresses.ADXL345AsensitivityZ): return Qvals.ADXL345busSensitivity;
+                case ((ushort)RegisterAddresses.ADXL345AbiasX): return Qvals.ADXL345busBias;
+                case ((ushort)RegisterAddresses.ADXL345AbiasY): return Qvals.ADXL345busBias;
+                case ((ushort)RegisterAddresses.ADXL345AbiasZ): return Qvals.ADXL345busBias;
+                case ((ushort)RegisterAddresses.ADXL345BsensitivityX): return Qvals.ADXL345busSensitivity;
+                case ((ushort)RegisterAddresses.ADXL345BsensitivityY): return Qvals.ADXL345busSensitivity;
+                case ((ushort)RegisterAddresses.ADXL345BsensitivityZ): return Qvals.ADXL345busSensitivity;
+                case ((ushort)RegisterAddresses.ADXL345BbiasX): return Qvals.ADXL345busBias;
+                case ((ushort)RegisterAddresses.ADXL345BbiasY): return Qvals.ADXL345busBias;
+                case ((ushort)RegisterAddresses.ADXL345BbiasZ): return Qvals.ADXL345busBias;
+                case ((ushort)RegisterAddresses.ADXL345CsensitivityX): return Qvals.ADXL345busSensitivity;
+                case ((ushort)RegisterAddresses.ADXL345CsensitivityY): return Qvals.ADXL345busSensitivity;
+                case ((ushort)RegisterAddresses.ADXL345CsensitivityZ): return Qvals.ADXL345busSensitivity;
+                case ((ushort)RegisterAddresses.ADXL345CbiasX): return Qvals.ADXL345busBias;
+                case ((ushort)RegisterAddresses.ADXL345CbiasY): return Qvals.ADXL345busBias;
+                case ((ushort)RegisterAddresses.ADXL345CbiasZ): return Qvals.ADXL345busBias;
+                case ((ushort)RegisterAddresses.ADXL345DsensitivityX): return Qvals.ADXL345busSensitivity;
+                case ((ushort)RegisterAddresses.ADXL345DsensitivityY): return Qvals.ADXL345busSensitivity;
+                case ((ushort)RegisterAddresses.ADXL345DsensitivityZ): return Qvals.ADXL345busSensitivity;
+                case ((ushort)RegisterAddresses.ADXL345DbiasX): return Qvals.ADXL345busBias;
+                case ((ushort)RegisterAddresses.ADXL345DbiasY): return Qvals.ADXL345busBias;
+                case ((ushort)RegisterAddresses.ADXL345DbiasZ): return Qvals.ADXL345busBias;
                 default: throw new Exception("Register address does not have associated Qval");
             }
         }

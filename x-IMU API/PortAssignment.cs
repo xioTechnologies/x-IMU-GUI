@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xIMU_API
+namespace x_IMU_API
 {
     /// <summary>
     /// Port asignment class.

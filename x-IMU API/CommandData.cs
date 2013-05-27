@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xIMU_API
+namespace x_IMU_API
 {
     /// <summary>
     /// Command data class.
@@ -81,27 +81,32 @@ namespace xIMU_API
         /// <summary>
         /// Gets message associated with command code.
         /// </summary>
+        /// <returns>
+        /// Message.
+        /// </returns>
         public string GetMessage()
         {
-            string message = "Unknown command.";
             switch (CommandCode)
             {
-                case ((int)CommandCodes.NullCommand): message = "Null command."; break;
-                case ((int)CommandCodes.Reset): message = "Reset."; break;
-                case ((int)CommandCodes.Sleep): message = "Sleep."; break;
-                case ((int)CommandCodes.ResetSleepTimer): message = "Reset sleep timer."; break;
-                case ((int)CommandCodes.SampleGyroBiasTemp1): message = "Sample gyroscope bias at temperature 1."; break;
-                case ((int)CommandCodes.SampleGyroBiasTemp2): message = "Sample gyroscope bias at temperature 2."; break;
-                case ((int)CommandCodes.CalcGyroBiasParams): message = "Calculate gyroscope bias parameters."; break;
-                case ((int)CommandCodes.MeasureMagBiasAndSens): message = "Measure magnetometer bias and sensitivity."; break;
-                case ((int)CommandCodes.LookupAccelBiasAndSens): message = "Lookup accelerometer bias and sensitivity."; break;
-                case ((int)CommandCodes.AlgorithmInit): message = "Algorithm initialise."; break;
-                case ((int)CommandCodes.AlgorithmTare): message = "Algorithm tare."; break;
-                case ((int)CommandCodes.AlgorithmClearTare): message = "Algorithm clear tare."; break;
-                case ((int)CommandCodes.AlgorithmInitThenTare): message = "Algorithm initialise then tare."; break;
-                default: break;
+                case ((int)CommandCodes.NullCommand): return "Null command.";
+                case ((int)CommandCodes.FactoryReset): return "Factory reset.";
+                case ((int)CommandCodes.Reset): return "Reset."; 
+                case ((int)CommandCodes.Sleep): return "Sleep."; 
+                case ((int)CommandCodes.ResetSleepTimer): return "Reset sleep timer.";
+                case ((int)CommandCodes.SampleGyroscopeAxisAt200dps): return "Sample gyroscope axis at ±200 dps.";
+                case ((int)CommandCodes.CalcGyroscopeSensitivity): return "Calculate gyroscope sensitivity."; 
+                case ((int)CommandCodes.SampleGyroscopeBiasTemp1): return "Sample gyroscope bias at temperature 1."; 
+                case ((int)CommandCodes.SampleGyroscopeBiasTemp2): return "Sample gyroscope bias at temperature 2."; 
+                case ((int)CommandCodes.CalcGyroscopeBiasParameters): return "Calculate gyroscope bias parameters."; 
+                case ((int)CommandCodes.SampleAccelerometerAxisAt1g): return "Sample accelerometer axis at ±1 g.";
+                case ((int)CommandCodes.CalcAccelerometerBiasAndSens): return "Calculate accelerometer bias and sensitivity";
+                case ((int)CommandCodes.MeasureMagnetometerBiasAndSens): return "Measure magnetometer bias and sensitivity.";
+                case ((int)CommandCodes.AlgorithmInitialise): return "Algorithm initialise."; 
+                case ((int)CommandCodes.AlgorithmTare): return "Algorithm tare."; 
+                case ((int)CommandCodes.AlgorithmClearTare): return "Algorithm clear tare."; 
+                case ((int)CommandCodes.AlgorithmInitialiseThenTare): return "Algorithm initialise then tare."; 
+                default: return "";
             }
-            return message;
         }
 
         #endregion

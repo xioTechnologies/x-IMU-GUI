@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xIMU_API
+namespace x_IMU_API
 {
     #region Compatible firmware versions
 
@@ -12,7 +12,7 @@ namespace xIMU_API
     /// </summary>
     public enum CompatibleFirmwareVersions
     {
-        v5_x = 5
+        v6_x = 6
     }
 
     #endregion
@@ -38,7 +38,12 @@ namespace xIMU_API
         RawInertialMagData,
         CalInertialMagData,
         QuaternionData,
-        DigitalIOData
+        DigitalIOdata,
+        RawAnalogueInputData,
+        CalAnalogueInputData,
+        PWMoutputData,
+        RawADXL345busData,
+        CalADXL345busData,
     }
 
     #endregion
@@ -54,6 +59,7 @@ namespace xIMU_API
     public enum ErrorCodes
     {
         NoError,
+        FactoryResetFailed,
         LowBattery,
         USBreceiveBufferOverrun,
         USBtransmitBufferOverrun,
@@ -69,7 +75,9 @@ namespace xIMU_API
         RegisterReadOnly,
         InvalidRegisterValue,
         InvalidCommand,
+        GyroscopeAxisNotAt200dps,
         GyroscopeNotStationary,
+        AcceleroemterAxisNotAt1g,
         MagnetometerSaturation,
         IncorrectAuxillaryPortMode
     }
@@ -87,18 +95,22 @@ namespace xIMU_API
     public enum CommandCodes
     {
         NullCommand,
+        FactoryReset,
         Reset,
         Sleep,
         ResetSleepTimer,
-        SampleGyroBiasTemp1,
-        SampleGyroBiasTemp2,
-        CalcGyroBiasParams,
-        LookupAccelBiasAndSens,
-        MeasureMagBiasAndSens,
-        AlgorithmInit,
+        SampleGyroscopeAxisAt200dps,
+        CalcGyroscopeSensitivity,
+        SampleGyroscopeBiasTemp1,
+        SampleGyroscopeBiasTemp2,
+        CalcGyroscopeBiasParameters,
+        SampleAccelerometerAxisAt1g,
+        CalcAccelerometerBiasAndSens,
+        MeasureMagnetometerBiasAndSens,
+        AlgorithmInitialise,
         AlgorithmTare,
         AlgorithmClearTare,
-        AlgorithmInitThenTare
+        AlgorithmInitialiseThenTare
     }
 
     #endregion
@@ -123,11 +135,13 @@ namespace xIMU_API
         BattBias = 8,
         ThermSensitivity = 6,
         ThermBias = 0,
-        GyroSensitivity = 10,
-        GyroBias = 8,
-        GyroBiasTempSens = 10,
+        GyroSensitivity = 7,
+        GyroSampled200dps = 0,
+        GyroBias = 6,
+        GyroBiasTempSens = 13,
         AccelSensitivity = 4,
         AccelBias = 8,
+        AccelSampled1g = 4,
         MagSensitivity = 4,
         MagBias = 8,
         MagHardIronBias = 11,
@@ -135,7 +149,13 @@ namespace xIMU_API
         AlgorithmKi = 14,
         AlgorithmInitKp = 6,
         AlgorithmInitPeriod = 8,
-        CalibratedAnalogueInput = 12
+        CalibratedAnalogueInput = 12,
+        AnalogueInputSensitivity = 4,
+        PWMoutput = 15,
+        AnalogueInputBias = 8,
+        CalibratedADXL345 = 10,
+        ADXL345busSensitivity = 4,
+        ADXL345busBias = 8,
     }
 
     #endregion
@@ -158,9 +178,16 @@ namespace xIMU_API
         BattBias,
         ThermSensitivity,
         ThermBias,
+        GyroFullScale,
         GyroSensitivityX,
         GyroSensitivityY,
         GyroSensitivityZ,
+        GyroSampledPlus200dpsX,
+        GyroSampledPlus200dpsY,
+        GyroSampledPlus200dpsZ,
+        GyroSampledMinus200dpsX,
+        GyroSampledMinus200dpsY,
+        GyroSampledMinus200dpsZ,
         GyroBiasX,
         GyroBiasY,
         GyroBiasZ,
@@ -182,6 +209,12 @@ namespace xIMU_API
         AccelBiasX,
         AccelBiasY,
         AccelBiasZ,
+        AccelSampledPlus1gX,
+        AccelSampledPlus1gY,
+        AccelSampledPlus1gZ,
+        AccelSampledMinus1gX,
+        AccelSampledMinus1gY,
+        AccelSampledMinus1gZ,
         MagFullScale,
         MagSensitivityX,
         MagSensitivityY,
@@ -197,10 +230,12 @@ namespace xIMU_API
         AlgorithmKi,
         AlgorithmInitKp,
         AlgorithmInitPeriod,
-        TareQuat0,
-        TareQuat1,
-        TareQuat2,
-        TareQuat3,
+        AlgorithmMinValidMag,
+        AlgorithmMaxValidMag,
+        AlgorithmTareQuat0,
+        AlgorithmTareQuat1,
+        AlgorithmTareQuat2,
+        AlgorithmTareQuat3,
         SensorDataMode,
         DateTimeOutputRate,
         BattThermOutputRate,
@@ -214,8 +249,37 @@ namespace xIMU_API
         AuxiliaryPortMode,
         DigitalIOdirection,
         DigitalIOoutputRate,
-        AlgorithmMinValidMag,
-        AlgorithmMaxValidMag,
+        AnalogueInputDataMode,
+        AnalogueInputDataRate,
+        AnalogueInputSensitivity,
+        AnalogueInputBias,
+        PWMoutputFrequency,
+        ADXL345busDataMode,
+        ADXL345busDataRate,
+        ADXL345AsensitivityX,
+        ADXL345AsensitivityY,
+        ADXL345AsensitivityZ,
+        ADXL345AbiasX,
+        ADXL345AbiasY,
+        ADXL345AbiasZ,
+        ADXL345BsensitivityX,
+        ADXL345BsensitivityY,
+        ADXL345BsensitivityZ,
+        ADXL345BbiasX,
+        ADXL345BbiasY,
+        ADXL345BbiasZ,
+        ADXL345CsensitivityX,
+        ADXL345CsensitivityY,
+        ADXL345CsensitivityZ,
+        ADXL345CbiasX,
+        ADXL345CbiasY,
+        ADXL345CbiasZ,
+        ADXL345DsensitivityX,
+        ADXL345DsensitivityY,
+        ADXL345DsensitivityZ,
+        ADXL345DbiasX,
+        ADXL345DbiasY,
+        ADXL345DbiasZ,
         NumRegisters
     }
 
@@ -232,11 +296,25 @@ namespace xIMU_API
     public enum ButtonModes
     {
         Disabled,
-        ResetDevice,
+        Reset,
         SleepWake,
-        AlgorithmInit,
+        AlgorithmInitialise,
         AlgorithmTare,
-        AlgorithmInitThenTare
+        AlgorithmInitialiseThenTare
+    }
+
+    /// <summary>
+    /// Accelerometer full-scale register values.
+    /// </summary>
+    /// <remarks>
+    /// A matching enumeration exists in firmware source.
+    /// </remarks> 
+    public enum GyroscopeFullScales
+    {
+        FullScalePlusMinus250dps,
+        FullScalePlusMinus500dps,
+        FullScalePlusMinus1000dps,
+        FullScalePlusMinus2000dps
     }
 
     /// <summary>
@@ -295,18 +373,6 @@ namespace xIMU_API
     }
 
     /// <summary>
-    /// Date/time data output rate register values.
-    /// </summary>
-    /// <remarks>
-    /// A matching enumeration exists in firmware source.
-    /// </remarks> 
-    public enum DateTimeOutputRates
-    {
-        OnResetOnly,
-        Rate1Hz,
-    }
-
-    /// <summary>
     /// Data output rate register values.
     /// </summary>
     /// <remarks>
@@ -360,7 +426,10 @@ namespace xIMU_API
     public enum auxiliaryPortModes
     {
         Disabled,
-        DigitalIO
+        DigitalIO,
+        AnalogueInput,
+        PWMoutput,
+        ADXL345bus
     }
 
     /// <summary>
@@ -380,26 +449,6 @@ namespace xIMU_API
         In01Out234567,
         In0Out1234567,
         Out01234567
-    }
-
-    /// <summary>
-    /// Digital I/O output rate register values.
-    /// </summary>
-    /// <remarks>
-    /// A matching enumeration exists in firmware source.
-    /// </remarks> 
-    public enum DigitalIOoutputRates
-    {
-        OnChangeOnly,
-        Rate1Hz,
-        Rate2Hz,
-        Rate4Hz,
-        Rate8Hz,
-        Rate16Hz,
-        Rate32Hz,
-        Rate64Hz,
-        Rate128Hz,
-        Rate256Hz
     }
 
     #endregion

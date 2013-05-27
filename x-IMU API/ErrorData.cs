@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xIMU_API
+namespace x_IMU_API
 {
     /// <summary>
     /// Error data class.
@@ -81,33 +81,37 @@ namespace xIMU_API
         /// <summary>
         /// Message associated with error code.
         /// </summary>
+        /// <returns>
+        /// Message.
+        /// </returns>
         public string GetMessage()
         {
-            string message = "Unknown error.";
             switch (ErrorCode)
             {
-                case ((int)ErrorCodes.NoError): message = "No error."; break;
-                case ((int)ErrorCodes.LowBattery): message = "Low battery."; break;
-                case ((int)ErrorCodes.USBreceiveBufferOverrun): message = "USB receive buffer overrun."; break;
-                case ((int)ErrorCodes.USBtransmitBufferOverrun): message = "USB transmit buffer overrun."; break;
-                case ((int)ErrorCodes.BluetoothReceiveBufferOverrun): message = "Bluetooth receive buffer overrun."; break;
-                case ((int)ErrorCodes.BluetoothTransmitBufferOverrun): message = "Bluetooth transmit buffer overrun."; break;
-                case ((int)ErrorCodes.SDcardWriteBufferOverrun): message = "SD card write buffer overrun."; break;
-                case ((int)ErrorCodes.TooFewBytesInPacket): message = "Too few bytes in packet."; break;
-                case ((int)ErrorCodes.TooManyBytesInPacket): message = "Too many bytes in packet."; break;
-                case ((int)ErrorCodes.InvalidChecksum): message = "Invalid checksum."; break;
-                case ((int)ErrorCodes.UnknownHeader): message = "Unknown packet header."; break;
-                case ((int)ErrorCodes.InvalidNumBytesForPacketHeader): message = "Invalid number of bytes for packet header."; break;
-                case ((int)ErrorCodes.InvalidRegisterAddress): message = "Invalid register address."; break;
-                case ((int)ErrorCodes.RegisterReadOnly): message = "Cannot write to read-only register."; break;
-                case ((int)ErrorCodes.InvalidRegisterValue): message = "Invalid register value."; break;
-                case ((int)ErrorCodes.InvalidCommand): message = "Invalid command."; break;
-                case ((int)ErrorCodes.GyroscopeNotStationary): message = "Gyroscope not stationary. Calibration aborted."; break;
-                case ((int)ErrorCodes.MagnetometerSaturation): message = "Magnetometer saturation occurred. Calibration aborted."; break;
-                case ((int)ErrorCodes.IncorrectAuxillaryPortMode): message = "Auxiliary port in incorrect mode."; break;
-                default: break;
+                case ((int)ErrorCodes.NoError): return "No error.";
+                case ((int)ErrorCodes.FactoryResetFailed): return "Factory reset failed.";
+                case ((int)ErrorCodes.LowBattery): return "Low battery."; 
+                case ((int)ErrorCodes.USBreceiveBufferOverrun): return "USB receive buffer overrun."; 
+                case ((int)ErrorCodes.USBtransmitBufferOverrun): return "USB transmit buffer overrun."; 
+                case ((int)ErrorCodes.BluetoothReceiveBufferOverrun): return "Bluetooth receive buffer overrun."; 
+                case ((int)ErrorCodes.BluetoothTransmitBufferOverrun): return "Bluetooth transmit buffer overrun."; 
+                case ((int)ErrorCodes.SDcardWriteBufferOverrun): return "SD card write buffer overrun."; 
+                case ((int)ErrorCodes.TooFewBytesInPacket): return "Too few bytes in packet."; 
+                case ((int)ErrorCodes.TooManyBytesInPacket): return "Too many bytes in packet."; 
+                case ((int)ErrorCodes.InvalidChecksum): return "Invalid checksum."; 
+                case ((int)ErrorCodes.UnknownHeader): return "Unknown packet header."; 
+                case ((int)ErrorCodes.InvalidNumBytesForPacketHeader): return "Invalid number of bytes for packet header."; 
+                case ((int)ErrorCodes.InvalidRegisterAddress): return "Invalid register address."; 
+                case ((int)ErrorCodes.RegisterReadOnly): return "Cannot write to read-only register."; 
+                case ((int)ErrorCodes.InvalidRegisterValue): return "Invalid register value."; 
+                case ((int)ErrorCodes.InvalidCommand): return "Invalid command.";
+                case ((int)ErrorCodes.GyroscopeAxisNotAt200dps): return "Gyroscope axis not at 200 ˚/s. Operation aborted.";
+                case ((int)ErrorCodes.GyroscopeNotStationary): return "Gyroscope not stationary. Operation aborted.";
+                case ((int)ErrorCodes.AcceleroemterAxisNotAt1g): return "Acceleroemter axis not at ±1 g. Operation aborted.";
+                case ((int)ErrorCodes.MagnetometerSaturation): return "Magnetometer saturation occurred. Operation aborted."; 
+                case ((int)ErrorCodes.IncorrectAuxillaryPortMode): return "Auxiliary port in incorrect mode.";
+                default: return "";
             }
-            return message;
         }
 
         #endregion

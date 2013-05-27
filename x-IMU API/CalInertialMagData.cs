@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xIMU_API
+namespace x_IMU_API
 {
     /// <summary>
     /// Calibrated gyroscope, accelerometer and magnetometer data class.
@@ -103,6 +103,9 @@ namespace xIMU_API
         /// <summary>
         /// Converts data to string of Comma Separated Variables.
         /// </summary>
+        /// <returns>
+        /// CSV line.
+        /// </returns>
         public string ConvertToCSV()
         {
             return Convert.ToString(Gyroscope[0]) + "," + Convert.ToString(Gyroscope[1]) + "," + Convert.ToString(Gyroscope[2]) + "," +

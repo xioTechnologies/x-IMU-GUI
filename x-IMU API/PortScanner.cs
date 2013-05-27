@@ -5,7 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Threading;
 
-namespace xIMU_API
+namespace x_IMU_API
 {
     /// <summary>
     /// Port scanner class.
@@ -243,7 +243,7 @@ namespace xIMU_API
                                 OnAsyncScanProgressChanged(new AsyncScanProgressChangedEventArgs(progressPercent, "Opening " + portNames[i] + "..."));
                             }
                             xIMUserialobj = new xIMUserial(portNames[i]);
-                            xIMUserialobj.RegisterDataReceived += new xIMU_API.xIMUserial.onRegisterDataReceived(xIMUserialobj_RegisterDataReceived);
+                            xIMUserialobj.RegisterDataReceived += new x_IMU_API.xIMUserial.onRegisterDataReceived(xIMUserialobj_RegisterDataReceived);
                             xIMUserialobj.Open();
 
                             // Read device ID

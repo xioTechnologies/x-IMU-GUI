@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0EB083D0-C074-45C4-BD00-31B5AA94A244}</ProjectGuid>
+    <ProjectGuid>{73229026-45DB-444C-963C-963D8E755FFB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>xIMU_API</RootNamespace>
-    <AssemblyName>xIMU_API</AssemblyName>
+    <RootNamespace>x_IMU_API</RootNamespace>
+    <AssemblyName>x-IMU API</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -30,7 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\xIMU_API.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\x-IMU API.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -42,12 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CSVfileWriter.cs" />
+    <Compile Include="AsyncReadCompletedEventArgs.cs" />
+    <Compile Include="AsyncReadProgressChangedEventArgs.cs" />
+    <Compile Include="AsyncScanCompletedEventArgs.cs" />
+    <Compile Include="AsyncScanProgressChangedEventArgs.cs" />
+    <Compile Include="CalADXL345busData.cs" />
+    <Compile Include="CalAnalogueInputData.cs" />
     <Compile Include="CalBattThermData.cs" />
     <Compile Include="CalInertialMagData.cs" />
     <Compile Include="CommandData.cs" />
+    <Compile Include="CSVfileWriter.cs" />
     <Compile Include="DateTimeData.cs" />
     <Compile Include="DigitalIOdata.cs" />
+    <Compile Include="DigitalPortBits.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ErrorData.cs" />
     <Compile Include="FixedFloat.cs" />
@@ -55,17 +62,15 @@
     <Compile Include="PacketCount.cs" />
     <Compile Include="PacketEncoding.cs" />
     <Compile Include="PortAssignment.cs" />
-    <Compile Include="DigitalPortBits.cs" />
     <Compile Include="PortScanner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PWMoutputData.cs" />
     <Compile Include="QuaternionData.cs" />
+    <Compile Include="RawADXL345busData.cs" />
+    <Compile Include="RawAnalogueInputData.cs" />
     <Compile Include="RawBattThermData.cs" />
     <Compile Include="RawInertialMagData.cs" />
-    <Compile Include="AsyncReadCompletedEventArgs.cs" />
-    <Compile Include="AsyncReadProgressChangedEventArgs.cs" />
     <Compile Include="RegisterData.cs" />
-    <Compile Include="AsyncScanCompletedEventArgs.cs" />
-    <Compile Include="AsyncScanProgressChangedEventArgs.cs" />
     <Compile Include="xIMUdata.cs" />
     <Compile Include="xIMUfile.cs" />
     <Compile Include="xIMUserial.cs" />

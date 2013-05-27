@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace xIMU_API
+namespace x_IMU_API
 {
     /// <summary>
     /// CSV files class.
@@ -55,6 +55,11 @@ namespace xIMU_API
             RotationMatrix,
             EulerAngles,
             DigitalIO,
+            RawAnalogueInput,
+            CalAnalogueInput,
+            PWMoutput,
+            CalADXL345bus,
+            RawADXL345bus,
             NumberOfFiles
         }
 
@@ -78,7 +83,7 @@ namespace xIMU_API
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:CSVfileWriter"/> class.
+        /// Initializes a new instance of the <see cref="CSVfileWriter"/> class.
         /// </summary>
         /// <param name="fileBasePath">
         /// Base path of file.  File name automatically extended with appropriate identifier and file extension.
@@ -97,18 +102,23 @@ namespace xIMU_API
             writesEnabled = true;
             streamWriters = new StreamWriter[(int)FileIndexes.NumberOfFiles];
             CSVheadings = new string[(int)FileIndexes.NumberOfFiles];
-            CSVheadings[(int)FileIndexes.Errors] = "Packet Number,Code,Message";
-            CSVheadings[(int)FileIndexes.Commands] = "Packet Number,Code,Message";
+            CSVheadings[(int)FileIndexes.Errors] = "Packet Number,Error Code,Error Message";
+            CSVheadings[(int)FileIndexes.Commands] = "Packet Number,Command Code,Command Message";
             CSVheadings[(int)FileIndexes.Registers] = "Packet Number,Address,Value,Float Value,Name";
             CSVheadings[(int)FileIndexes.DateTime] = "Packet Number,Date/Time";
             CSVheadings[(int)FileIndexes.RawBattTherm] = "Packet Number,Battery voltage (lsb),Thermometer (lsb)";
-            CSVheadings[(int)FileIndexes.CalBattTherm] = "Packet Number,Battery voltage (V),Thermometer (degC)";
+            CSVheadings[(int)FileIndexes.CalBattTherm] = "Packet Number,Battery voltage (V),Thermometer (˚C)";
             CSVheadings[(int)FileIndexes.RawInertialMagnetic] = "Packet Number,Gyroscope X (lsb),Gyroscope Y (lsb),Gyroscope Z (lsb),Accelerometer X (lsb),Accelerometer Y (lsb),Accelerometer Z (lsb),Magnetometer X (lsb),Magnetometer Y (lsb),Magnetometer Z (lsb)";
             CSVheadings[(int)FileIndexes.CalInertialMagnetic] = "Packet Number,Gyroscope X (deg/s),Gyroscope Y (deg/s),Gyroscope Z (deg/s),Accelerometer X (g),Accelerometer Y (g),Accelerometer Z (g),Magnetometer X (G),Magnetometer Y (G),Magnetometer Z (G)";
             CSVheadings[(int)FileIndexes.Quaternion] = "Packet Number,Element 1, Element 2, Element 3, Element 4";
             CSVheadings[(int)FileIndexes.RotationMatrix] = "Packet Number,Element 11, Element 12, Element 13, Element 21, Element 22, Element 23, Element 31, Element 32, Element 33";
-            CSVheadings[(int)FileIndexes.EulerAngles] = "Packet Number,Roll | Phi | X (deg), Pitch | Theta | Y (deg), Yaw | Psi | Z (deg)";
+            CSVheadings[(int)FileIndexes.EulerAngles] = "Packet Number,Roll | Phi | X (degrees), Pitch | Theta | Y (degrees), Yaw | Psi | Z (degrees)";
             CSVheadings[(int)FileIndexes.DigitalIO] = "Packet Number,AX0 Direction, AX1 Direction, AX2 Direction, AX3 Direction, AX4 Direction, AX5 Direction, AX6 Direction, AX7 Direction, AX0 State, AX1 State, AX2 State, AX3 State, AX4 State, AX5 State, AX6 State, AX7 State,";
+            CSVheadings[(int)FileIndexes.RawAnalogueInput] = "Packet Number,AX0 (lsb),AX1 (lsb),AX2 (lsb),AX3 (lsb),AX4 (lsb),AX5 (lsb),AX6 (lsb),AX7 (lsb)";
+            CSVheadings[(int)FileIndexes.CalAnalogueInput] = "Packet Number,AX0 (V),AX1 (V),AX2 (V),AX3 (V),AX4 (V),AX5 (V),AX6 (V),AX7 (V)";
+            CSVheadings[(int)FileIndexes.PWMoutput] = "Packet Number,AX0,AX2,AX4,AX6";
+            CSVheadings[(int)FileIndexes.RawADXL345bus] = "Packet Number,ADXL345 A X (lsb), ADXL345 A Y (lsb), ADXL345 A Z (lsb),ADXL345 B X (lsb), ADXL345 B Y (lsb), ADXL345 B Z (lsb),ADXL345 C X (lsb), ADXL345 C Y (lsb), ADXL345 C Z (lsb),ADXL345 D X (lsb), ADXL345 D Y (lsb), ADXL345 D Z (lsb)";
+            CSVheadings[(int)FileIndexes.CalADXL345bus] = "Packet Number,ADXL345 A X (g), ADXL345 A Y (g), ADXL345 A Z (g),ADXL345 B X (g), ADXL345 B Y (g), ADXL345 B Z (g),ADXL345 C X (g), ADXL345 C Y (g), ADXL345 C Z (g),ADXL345 D X (g), ADXL345 D Y (g), ADXL345 D Z (g)";
         }
 
         #endregion
@@ -133,6 +143,11 @@ namespace xIMU_API
             else if (xIMUdataObject is CalInertialMagData) WriteCalInertialMagData((CalInertialMagData)xIMUdataObject);
             else if (xIMUdataObject is QuaternionData) WriteQuaternionData((QuaternionData)xIMUdataObject);
             else if (xIMUdataObject is DigitalIOdata) WriteDigitalIOdata((DigitalIOdata)xIMUdataObject);
+            else if (xIMUdataObject is RawAnalogueInputData) WriteRawAnalogueInputData((RawAnalogueInputData)xIMUdataObject);
+            else if (xIMUdataObject is CalAnalogueInputData) WriteCalAnalogueInputData((CalAnalogueInputData)xIMUdataObject);
+            else if (xIMUdataObject is PWMoutputData) WritePWMoutputData((PWMoutputData)xIMUdataObject);
+            else if (xIMUdataObject is RawADXL345busData) WriteRawADXL345busData((RawADXL345busData)xIMUdataObject);
+            else if (xIMUdataObject is CalADXL345busData) WriteCalADXL345busData((CalADXL345busData)xIMUdataObject);
             else
             {
                 throw new Exception("xIMUdata object unhandled.");
@@ -147,16 +162,7 @@ namespace xIMU_API
         /// </param>
         public void WriteErrorData(ErrorData errorData)
         {
-            if (writesEnabled)
-            {
-                if (streamWriters[(int)FileIndexes.Errors] == null)
-                {
-                    streamWriters[(int)FileIndexes.Errors] = new System.IO.StreamWriter(FileBasePath + "_" + FileIndexes.Errors.ToString() + ".csv", false);
-                    streamWriters[(int)FileIndexes.Errors].WriteLine(CSVheadings[(int)FileIndexes.Errors]);
-                }
-                streamWriters[(int)FileIndexes.Errors].WriteLine(Convert.ToString(packetNumber) + "," + Convert.ToString(errorData.ErrorCode) + "," + errorData.GetMessage());
-                packetNumber++;
-            }
+            WriteCSVlineAtFileIndex(errorData.ErrorCode.ToString() + "," + errorData.GetMessage(), FileIndexes.Errors);
         }
 
         /// <summary>
@@ -167,16 +173,7 @@ namespace xIMU_API
         /// </param>
         public void WriteCommandData(CommandData commandData)
         {
-            if (writesEnabled)
-            {
-                if (streamWriters[(int)FileIndexes.Commands] == null)
-                {
-                    streamWriters[(int)FileIndexes.Commands] = new System.IO.StreamWriter(FileBasePath + "_" + FileIndexes.Commands.ToString() + ".csv", false);
-                    streamWriters[(int)FileIndexes.Commands].WriteLine(CSVheadings[(int)FileIndexes.Commands]);
-                }
-                streamWriters[(int)FileIndexes.Commands].WriteLine(Convert.ToString(packetNumber) + "," + Convert.ToString(commandData.CommandCode) + "," + commandData.GetMessage());
-                packetNumber++;
-            }
+            WriteCSVlineAtFileIndex(commandData.CommandCode.ToString() + "," + commandData.GetMessage(), FileIndexes.Commands);
         }
 
         /// <summary>
@@ -187,24 +184,13 @@ namespace xIMU_API
         /// </param>
         public void WriteRegisterData(RegisterData registerData)
         {
-            if (writesEnabled)
+            float floatValue = (float)registerData.Value;
+            try
             {
-                if (streamWriters[(int)FileIndexes.Registers] == null)
-                {
-                    streamWriters[(int)FileIndexes.Registers] = new System.IO.StreamWriter(FileBasePath + "_" + FileIndexes.Registers.ToString() + ".csv", false);
-                    streamWriters[(int)FileIndexes.Registers].WriteLine(CSVheadings[(int)FileIndexes.Registers]);
-                }
-                float floatValue = (float)registerData.Value;
-                try
-                {
-                    floatValue = registerData.floatValue;
-                }
-                catch { }
-                streamWriters[(int)FileIndexes.Registers].WriteLine(Convert.ToString(packetNumber) + "," + Convert.ToString(registerData.Address) + "," +
-                                                                    Convert.ToString(registerData.Value) + "," + Convert.ToString(floatValue) + "," +
-                                                                    Enum.GetName(typeof(RegisterAddresses), registerData.Address));
-                packetNumber++;
+                floatValue = registerData.floatValue;
             }
+            catch { }
+            WriteCSVlineAtFileIndex(registerData.Address.ToString() + "," + registerData.Value.ToString() + "," + floatValue.ToString() + "," + Enum.GetName(typeof(RegisterAddresses), registerData.Address), FileIndexes.Registers);
         }
 
         /// <summary>
@@ -215,16 +201,7 @@ namespace xIMU_API
         /// </param>
         public void WriteDateTimeData(DateTimeData dateTimeData)
         {
-            if (writesEnabled)
-            {
-                if (streamWriters[(int)FileIndexes.DateTime] == null)
-                {
-                    streamWriters[(int)FileIndexes.DateTime] = new System.IO.StreamWriter(FileBasePath + "_" + FileIndexes.DateTime.ToString() + ".csv", false);
-                    streamWriters[(int)FileIndexes.DateTime].WriteLine(CSVheadings[(int)FileIndexes.DateTime]);
-                }
-                streamWriters[(int)FileIndexes.DateTime].WriteLine(Convert.ToString(packetNumber) + "," + dateTimeData.ConvertToString());
-                packetNumber++;
-            }
+            WriteCSVlineAtFileIndex(dateTimeData.ConvertToString(), FileIndexes.DateTime);
         }
 
         /// <summary>
@@ -235,16 +212,7 @@ namespace xIMU_API
         /// </param>
         public void WriteRawBattThermData(RawBattThermData rawBattThermData)
         {
-            if (writesEnabled)
-            {
-                if (streamWriters[(int)FileIndexes.RawBattTherm] == null)
-                {
-                    streamWriters[(int)FileIndexes.RawBattTherm] = new System.IO.StreamWriter(FileBasePath + "_" + FileIndexes.RawBattTherm.ToString() + ".csv", false);
-                    streamWriters[(int)FileIndexes.RawBattTherm].WriteLine(CSVheadings[(int)FileIndexes.RawBattTherm]);
-                }
-                streamWriters[(int)FileIndexes.RawBattTherm].WriteLine(Convert.ToString(packetNumber) + "," + rawBattThermData.ConvertToCSV());
-                packetNumber++;
-            }
+            WriteCSVlineAtFileIndex(rawBattThermData.ConvertToCSV(), FileIndexes.RawBattTherm);
         }
 
         /// <summary>
@@ -255,16 +223,7 @@ namespace xIMU_API
         /// </param>
         public void WriteCalBattThermData(CalBattThermData calBattThermData)
         {
-            if (writesEnabled)
-            {
-                if (streamWriters[(int)FileIndexes.CalBattTherm] == null)
-                {
-                    streamWriters[(int)FileIndexes.CalBattTherm] = new System.IO.StreamWriter(FileBasePath + "_" + FileIndexes.CalBattTherm.ToString() + ".csv", false);
-                    streamWriters[(int)FileIndexes.CalBattTherm].WriteLine(CSVheadings[(int)FileIndexes.CalBattTherm]);
-                }
-                streamWriters[(int)FileIndexes.CalBattTherm].WriteLine(Convert.ToString(packetNumber) + "," + calBattThermData.ConvertToCSV());
-                packetNumber++;
-            }
+            WriteCSVlineAtFileIndex(calBattThermData.ConvertToCSV(), FileIndexes.CalBattTherm);
         }
 
         /// <summary>
@@ -275,16 +234,7 @@ namespace xIMU_API
         /// </param>
         public void WriteRawInertialMagData(RawInertialMagData rawInertialMagData)
         {
-            if (writesEnabled)
-            {
-                if (streamWriters[(int)FileIndexes.RawInertialMagnetic] == null)
-                {
-                    streamWriters[(int)FileIndexes.RawInertialMagnetic] = new System.IO.StreamWriter(FileBasePath + "_" + FileIndexes.RawInertialMagnetic.ToString() + ".csv", false);
-                    streamWriters[(int)FileIndexes.RawInertialMagnetic].WriteLine(CSVheadings[(int)FileIndexes.RawInertialMagnetic]);
-                }
-                streamWriters[(int)FileIndexes.RawInertialMagnetic].WriteLine(Convert.ToString(packetNumber) + "," + rawInertialMagData.ConvertToCSV());
-                packetNumber++;
-            }
+            WriteCSVlineAtFileIndex(rawInertialMagData.ConvertToCSV(), FileIndexes.RawInertialMagnetic);
         }
 
         /// <summary>
@@ -295,16 +245,7 @@ namespace xIMU_API
         /// </param>
         public void WriteCalInertialMagData(CalInertialMagData calInertialMagData)
         {
-            if (writesEnabled)
-            {
-                if (streamWriters[(int)FileIndexes.CalInertialMagnetic] == null)
-                {
-                    streamWriters[(int)FileIndexes.CalInertialMagnetic] = new System.IO.StreamWriter(FileBasePath + "_" + FileIndexes.CalInertialMagnetic.ToString() + ".csv", false);
-                    streamWriters[(int)FileIndexes.CalInertialMagnetic].WriteLine(CSVheadings[(int)FileIndexes.CalInertialMagnetic]);
-                }
-                streamWriters[(int)FileIndexes.CalInertialMagnetic].WriteLine(Convert.ToString(packetNumber) + "," + calInertialMagData.ConvertToCSV());
-                packetNumber++;
-            }
+            WriteCSVlineAtFileIndex(calInertialMagData.ConvertToCSV(), FileIndexes.CalInertialMagnetic);
         }
 
         /// <summary>
@@ -315,28 +256,9 @@ namespace xIMU_API
         /// </param>
         public void WriteQuaternionData(QuaternionData quaternionData)
         {
-            if (writesEnabled)
-            {
-                if (streamWriters[(int)FileIndexes.Quaternion] == null)
-                {
-                    streamWriters[(int)FileIndexes.Quaternion] = new System.IO.StreamWriter(FileBasePath + "_" + FileIndexes.Quaternion.ToString() + ".csv", false);
-                    streamWriters[(int)FileIndexes.Quaternion].WriteLine(CSVheadings[(int)FileIndexes.Quaternion]);
-                }
-                streamWriters[(int)FileIndexes.Quaternion].WriteLine(Convert.ToString(packetNumber) + "," + quaternionData.ConvertToCSV());
-                if (streamWriters[(int)FileIndexes.RotationMatrix] == null)
-                {
-                    streamWriters[(int)FileIndexes.RotationMatrix] = new System.IO.StreamWriter(FileBasePath + "_" + FileIndexes.RotationMatrix.ToString() + ".csv", false);
-                    streamWriters[(int)FileIndexes.RotationMatrix].WriteLine(CSVheadings[(int)FileIndexes.RotationMatrix]);
-                }
-                streamWriters[(int)FileIndexes.RotationMatrix].WriteLine(Convert.ToString(packetNumber) + "," + quaternionData.ConvertToRotationMatrixCSV());
-                if (streamWriters[(int)FileIndexes.EulerAngles] == null)
-                {
-                    streamWriters[(int)FileIndexes.EulerAngles] = new System.IO.StreamWriter(FileBasePath + "_" + FileIndexes.EulerAngles.ToString() + ".csv", false);
-                    streamWriters[(int)FileIndexes.EulerAngles].WriteLine(CSVheadings[(int)FileIndexes.EulerAngles]);
-                }
-                streamWriters[(int)FileIndexes.EulerAngles].WriteLine(Convert.ToString(packetNumber) + "," + quaternionData.ConvertToEulerAnglesCSV());
-                packetNumber++;
-            }
+            WriteCSVlineAtFileIndex(quaternionData.ConvertToCSV(), FileIndexes.Quaternion);
+            WriteCSVlineAtFileIndex(quaternionData.ConvertToRotationMatrixCSV(), FileIndexes.RotationMatrix);
+            WriteCSVlineAtFileIndex(quaternionData.ConvertToEulerAnglesCSV(), FileIndexes.EulerAngles);
         }
 
         /// <summary>
@@ -347,14 +269,83 @@ namespace xIMU_API
         /// </param>
         public void WriteDigitalIOdata(DigitalIOdata digitalIOdata)
         {
+            WriteCSVlineAtFileIndex(digitalIOdata.ConvertToCSV(), FileIndexes.DigitalIO);
+        }
+
+        /// <summary>
+        /// Writes raw analogue input data to CSV file.  Will create new file if required.
+        /// </summary>
+        /// <param name="rawAnalogueInputData">
+        /// Raw analogue input data.
+        /// </param>
+        public void WriteRawAnalogueInputData(RawAnalogueInputData rawAnalogueInputData)
+        {
+            WriteCSVlineAtFileIndex(rawAnalogueInputData.ConvertToCSV(), FileIndexes.RawAnalogueInput);
+        }
+
+        /// <summary>
+        /// Writes calibrated analogue input data to CSV file.  Will create new file if required.
+        /// </summary>
+        /// <param name="calAnalogueInputData">
+        /// Calibrated analogue input data.
+        /// </param>
+        public void WriteCalAnalogueInputData(CalAnalogueInputData calAnalogueInputData)
+        {
+            WriteCSVlineAtFileIndex(calAnalogueInputData.ConvertToCSV(), FileIndexes.CalAnalogueInput);
+        }
+
+        /// <summary>
+        /// Writes PWMoutput data to CSV file.  Will create new file if required.
+        /// </summary>
+        /// <param name="_PWMoutputData">
+        /// Calibrated analogue input data.
+        /// </param>
+        public void WritePWMoutputData(PWMoutputData _PWMoutputData)
+        {
+            WriteCSVlineAtFileIndex(_PWMoutputData.ConvertToCSV(), FileIndexes.PWMoutput);
+        }
+
+        /// <summary>
+        /// Writes raw ADXL345 bus data to CSV file.  Will create new file if required.
+        /// </summary>
+        /// <param name="rawADXL345busData">
+        /// Raw ADXL345 bus data.
+        /// </param>
+        public void WriteRawADXL345busData(RawADXL345busData rawADXL345busData)
+        {
+            WriteCSVlineAtFileIndex(rawADXL345busData.ConvertToCSV(), FileIndexes.RawADXL345bus);
+        }
+
+        /// <summary>
+        /// Writes calibrate ADXL345 bus data to CSV file.  Will create new file if required.
+        /// </summary>
+        /// <param name="calADXL345busData">
+        /// Cal ADXL345 bus data.
+        /// </param>
+        public void WriteCalADXL345busData(CalADXL345busData calADXL345busData)
+        {
+            WriteCSVlineAtFileIndex(calADXL345busData.ConvertToCSV(), FileIndexes.CalADXL345bus);
+        }
+
+        /// <summary>
+        /// Writes CSV line to file according to specfied fileIndex.
+        /// </summary>
+        /// <param name="CSVline">
+        /// CSV line.  First CSV is packet number.
+        /// </param>
+        /// <param name="fileIndex">
+        /// file index.
+        /// </param>
+        private void WriteCSVlineAtFileIndex(string CSVline, FileIndexes fileIndex)
+        {
             if (writesEnabled)
             {
-                if (streamWriters[(int)FileIndexes.DigitalIO] == null)
+                if (streamWriters[(int)fileIndex] == null)
                 {
-                    streamWriters[(int)FileIndexes.DigitalIO] = new System.IO.StreamWriter(FileBasePath + "_" + FileIndexes.DigitalIO.ToString() + ".csv", false);
-                    streamWriters[(int)FileIndexes.DigitalIO].WriteLine(CSVheadings[(int)FileIndexes.DigitalIO]);
+                    streamWriters[(int)fileIndex] = new System.IO.StreamWriter(FileBasePath + "_" + fileIndex.ToString() + ".csv", false);
+                    streamWriters[(int)fileIndex].WriteLine(CSVheadings[(int)fileIndex]);
                 }
-                streamWriters[(int)FileIndexes.DigitalIO].WriteLine(Convert.ToString(packetNumber) + "," + digitalIOdata.ConvertToCSV());
+                streamWriters[(int)fileIndex].WriteLine(Convert.ToString(packetNumber) + "," + CSVline);
                 packetNumber++;
             }
         }

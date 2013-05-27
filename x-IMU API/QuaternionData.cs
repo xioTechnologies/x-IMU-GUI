@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xIMU_API
+namespace x_IMU_API
 {
     /// <summary>
     /// Quaternion data class.
@@ -108,9 +108,9 @@ namespace xIMU_API
         /// Converts data to rotation matrix.
         /// </summary>
         /// <remarks>
-        /// Elements 0 to 2 represent columns 1 to 3 of row 1.
-        /// Elements 3 to 5 represent columns 1 to 3 of row 2.
-        /// Elements 6 to 8 represent columns 1 to 3 of row 3.
+        /// The 1st to 3rd elements represent columns 1 to 3 of row 1.
+        /// The 4th to 5th elements represent columns 1 to 3 of row 2.
+        /// The 6th to 8th elements represent columns 1 to 3 of row 3.
         /// </remarks>
         public float[] ConvertToRotationMatrix()
         {
@@ -123,9 +123,9 @@ namespace xIMU_API
             float R31 = 2 * (Quaternion[1] * Quaternion[3] + Quaternion[0] * Quaternion[2]);
             float R32 = 2 * (Quaternion[2] * Quaternion[3] - Quaternion[0] * Quaternion[1]);
             float R33 = 2 * Quaternion[0] * Quaternion[0] - 1 + 2 * Quaternion[3] * Quaternion[3];
-            return new float[] { R11, R21, R31,
-                                 R12, R22, R32,
-                                 R13, R23, R33 };
+            return new float[] { R11, R12, R13,
+                                 R21, R22, R23,
+                                 R31, R32, R33 };
         }
 
         /// <summary>
@@ -142,6 +142,9 @@ namespace xIMU_API
         /// <summary>
         /// Converts data to string of Comma Separated Variables.
         /// </summary>
+        /// <returns>
+        /// CSV line.
+        /// </returns>
         public string ConvertToCSV()
         {
             return Convert.ToString(Quaternion[0]) + "," + Convert.ToString(Quaternion[1]) + "," + Convert.ToString(Quaternion[2]) + "," + Convert.ToString(Quaternion[3]);
@@ -150,10 +153,13 @@ namespace xIMU_API
         /// <summary>
         /// Converts data to string of Comma Separated Variables representaing the elements of a rotation matrix.
         /// </summary>
+        /// <returns>
+        /// CSV line.
+        /// </returns>
         /// <remarks>
-        /// First to third values represent columns 1 to 3 of row 1.
-        /// Forth to fifth values represent columns 1 to 3 of row 2.
-        /// Sixth to eighth values represent columns 1 to 3 of row 3.
+        /// The 1st to 3rd values represent columns 1 to 3 of row 1.
+        /// The 4th to 5th values represent columns 1 to 3 of row 2.
+        /// The 6th to 8th values represent columns 1 to 3 of row 3.
         /// </remarks>
         public string ConvertToRotationMatrixCSV()
         {
@@ -166,6 +172,9 @@ namespace xIMU_API
         /// <summary>
         /// Converts data to string of Comma Separated Variables representaing the XYZ Euler angles (in degrees).
         /// </summary>
+        /// <returns>
+        /// CSV line.
+        /// </returns>
         public string ConvertToEulerAnglesCSV()
         {
             float[] euler = ConvertToEulerAngles();

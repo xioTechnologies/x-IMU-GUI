@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xIMU_API
+namespace x_IMU_API
 {
     /// <summary>
     /// Packet count class tracks number of packets read and written.
@@ -18,21 +18,27 @@ namespace xIMU_API
             TotalPacketsRead,
             ErrorPacketsRead,
             CommandPacketsRead,
-            RegisterDataPacketsRead,
-            DateTimeDataPacketsRead,
-            RawBattThermDataPacketsRead,
-            CalBattThermDataPacketsRead,
-            RawInertialMagDataPacketsRead,
-            CalInertialMagDataPacketsRead,
-            QuaternionDataPacketsRead,
-            DigitalIODataPacketsRead,
+            RegisterPacketsRead,
+            DateTimePacketsRead,
+            RawBattThermPacketsRead,
+            CalBattThermPacketsRead,
+            RawInertialMagPacketsRead,
+            CalInertialMagPacketsRead,
+            QuaternionPacketsRead,
+            DigitalIOPacketsRead,
+            RawAnalogueInputPacketsRead,
+            CalAnalogueInputPacketsRead,
+            PWMoutputPacketsRead,
+            RawADXL345busPacketsRead,
+            CalADXL345busPacketsRead,
             TotalPacketsWritten,
             CommandPacketsWritten,
             ReadRegisterPacketsWritten,
             WriteRegisterPacketsWritten,
             ReadDateTimePacketsWritten,
             WriteDateTimePacketsWritten,
-            DigitalIODataPacketsWritten,
+            DigitalIOPacketsWritten,
+            PWMoutputPacketsWritten,
             NumIndexes
         }
 
@@ -67,42 +73,67 @@ namespace xIMU_API
         /// <summary>
         /// Gets or sets the number of register data packets read.
         /// </summary>
-        public int RegisterDataPacketsRead { get { return array[(int)index.RegisterDataPacketsRead]; } set { array[(int)index.RegisterDataPacketsRead] = value; } }
+        public int RegisterPacketsRead { get { return array[(int)index.RegisterPacketsRead]; } set { array[(int)index.RegisterPacketsRead] = value; } }
 
         /// <summary>
         /// Gets or sets the number of date/time data packets read.
         /// </summary>
-        public int DateTimeDataPacketsRead { get { return array[(int)index.DateTimeDataPacketsRead]; } set { array[(int)index.DateTimeDataPacketsRead] = value; } }
+        public int DateTimePacketsRead { get { return array[(int)index.DateTimePacketsRead]; } set { array[(int)index.DateTimePacketsRead] = value; } }
 
         /// <summary>
         /// Gets or sets the number of raw battery and thermometer data packets read.
         /// </summary>
-        public int RawBattThermDataPacketsRead { get { return array[(int)index.RawBattThermDataPacketsRead]; } set { array[(int)index.RawBattThermDataPacketsRead] = value; } }
+        public int RawBattThermPacketsRead { get { return array[(int)index.RawBattThermPacketsRead]; } set { array[(int)index.RawBattThermPacketsRead] = value; } }
 
         /// <summary>
         /// Gets or sets the number of calibration battery and thermometer data packets read.
         /// </summary>
-        public int CalBattThermDataPacketsRead { get { return array[(int)index.CalBattThermDataPacketsRead]; } set { array[(int)index.CalBattThermDataPacketsRead] = value; } }
+        public int CalBattThermPacketsRead { get { return array[(int)index.CalBattThermPacketsRead]; } set { array[(int)index.CalBattThermPacketsRead] = value; } }
 
         /// <summary>
         /// Gets or sets the number of raw inertial/magnetic data packets read.
         /// </summary>
-        public int RawInertialMagDataPacketsRead { get { return array[(int)index.RawInertialMagDataPacketsRead]; } set { array[(int)index.RawInertialMagDataPacketsRead] = value; } }
+        public int RawInertialMagPacketsRead { get { return array[(int)index.RawInertialMagPacketsRead]; } set { array[(int)index.RawInertialMagPacketsRead] = value; } }
 
         /// <summary>
         /// Gets or sets the number of calibrated inertial/magnetic data packets read.
         /// </summary>
-        public int CalInertialMagDataPacketsRead { get { return array[(int)index.CalInertialMagDataPacketsRead]; } set { array[(int)index.CalInertialMagDataPacketsRead] = value; } }
+        public int CalInertialMagPacketsRead { get { return array[(int)index.CalInertialMagPacketsRead]; } set { array[(int)index.CalInertialMagPacketsRead] = value; } }
 
         /// <summary>
         /// Gets or sets the number of quaternion packets read.
         /// </summary>
-        public int QuaternionDataPacketsRead { get { return array[(int)index.QuaternionDataPacketsRead]; } set { array[(int)index.QuaternionDataPacketsRead] = value; } }
+        public int QuaternionPacketsRead { get { return array[(int)index.QuaternionPacketsRead]; } set { array[(int)index.QuaternionPacketsRead] = value; } }
 
         /// <summary>
         /// Gets or sets the number of digital I/O data packets read.
         /// </summary>
-        public int DigitalIODataPacketsRead { get { return array[(int)index.DigitalIODataPacketsRead]; } set { array[(int)index.DigitalIODataPacketsRead] = value; } }
+        public int DigitalIOPacketsRead { get { return array[(int)index.DigitalIOPacketsRead]; } set { array[(int)index.DigitalIOPacketsRead] = value; } }
+
+        /// <summary>
+        /// Gets or sets the number of digital I/O data packets received.
+        /// </summary>
+        public int RawAnalogueInputPacketsRead { get { return array[(int)index.RawAnalogueInputPacketsRead]; } set { array[(int)index.RawAnalogueInputPacketsRead] = value; } }
+
+        /// <summary>
+        /// Gets or sets the number of digital I/O data packets received.
+        /// </summary>
+        public int CalAnalogueInputPacketsRead { get { return array[(int)index.CalAnalogueInputPacketsRead]; } set { array[(int)index.CalAnalogueInputPacketsRead] = value; } }
+
+        /// <summary>
+        /// Gets or sets the number of PWM output data packets received.
+        /// </summary>
+        public int PWMoutputPacketsRead { get { return array[(int)index.PWMoutputPacketsRead]; } set { array[(int)index.PWMoutputPacketsRead] = value; } }
+
+        /// <summary>
+        /// Gets or sets the number of digital I/O data packets received.
+        /// </summary>
+        public int RawADXL345busPacketsRead { get { return array[(int)index.RawADXL345busPacketsRead]; } set { array[(int)index.RawADXL345busPacketsRead] = value; } }
+
+        /// <summary>
+        /// Gets or sets the number of digital I/O data packets received.
+        /// </summary>
+        public int CalADXL345busPacketsRead { get { return array[(int)index.CalADXL345busPacketsRead]; } set { array[(int)index.CalADXL345busPacketsRead] = value; } }
 
         #endregion
 
@@ -141,7 +172,12 @@ namespace xIMU_API
         /// <summary>
         /// Gets or sets the number of digital I/O data packets written.
         /// </summary>
-        public int DigitalIODataPacketsWritten { get { return array[(int)index.DigitalIODataPacketsWritten]; } set { array[(int)index.DigitalIODataPacketsWritten] = value; } }
+        public int DigitalIOPacketsWritten { get { return array[(int)index.DigitalIOPacketsWritten]; } set { array[(int)index.DigitalIOPacketsWritten] = value; } }
+
+        /// <summary>
+        /// Gets or sets the number of PWM output data packets received.
+        /// </summary>
+        public int PWMoutputPacketsWritten { get { return array[(int)index.PWMoutputPacketsWritten]; } set { array[(int)index.PWMoutputPacketsWritten] = value; } }
 
         #endregion
 

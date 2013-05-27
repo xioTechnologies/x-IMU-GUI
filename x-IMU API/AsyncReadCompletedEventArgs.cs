@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace xIMU_API
+namespace x_IMU_API
 {
     /// <summary>
     /// Asynchronous read completed event arguments class.
@@ -26,7 +26,7 @@ namespace xIMU_API
         }
 
         /// <summary>
-        /// Gets error <see cref="Exception"/> if occured.
+        /// Gets error <see cref="Exception"/> if occurred.
         /// </summary>
         public Exception Error
         {
@@ -53,7 +53,7 @@ namespace xIMU_API
         /// <param name="packetCounter">
         /// <see cref="PacketCount"/> data of read.
         /// <param name="error">
-        /// Error <see cref="Exception"/> if occured
+        /// Error <see cref="Exception"/> if occurred
         /// </param>
         /// <param name="cancelled">
         /// Value indicating whether the asynchronous scan was cancelled.
