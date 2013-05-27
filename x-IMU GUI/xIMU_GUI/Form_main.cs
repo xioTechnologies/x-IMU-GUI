@@ -169,7 +169,7 @@ namespace xIMU_GUI
 
             #region Set constant form control values
 
-            this.Text += " v" + Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString();
+            this.Text += " " + Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString();
             label_GUIversionNum.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             label_APIversionNum.Text = FileVersionInfo.GetVersionInfo("xIMU_API.dll").FileVersion.ToString();
             label_compatibleFirmwareVersionNums.Text = "";
