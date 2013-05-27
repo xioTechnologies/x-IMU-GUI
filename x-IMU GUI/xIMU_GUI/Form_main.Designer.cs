@@ -1692,6 +1692,10 @@
             appendedComboBoxTreeNode_battThermOutputRate.ComboBox.Items.Add("4 Hz");
             appendedComboBoxTreeNode_battThermOutputRate.ComboBox.Items.Add("8 Hz");
             appendedComboBoxTreeNode_battThermOutputRate.ComboBox.Items.Add("16 Hz");
+            appendedComboBoxTreeNode_battThermOutputRate.ComboBox.Items.Add("32 Hz");
+            appendedComboBoxTreeNode_battThermOutputRate.ComboBox.Items.Add("64 Hz");
+            appendedComboBoxTreeNode_battThermOutputRate.ComboBox.Items.Add("128 Hz");
+            appendedComboBoxTreeNode_battThermOutputRate.ComboBox.Items.Add("256 Hz");
             appendedComboBoxTreeNode_inertialMagOutputRate = new AppendedTreeNodeComboBox("Inertial and Magnetic Data Rate:");
             appendedComboBoxTreeNode_inertialMagOutputRate.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             appendedComboBoxTreeNode_inertialMagOutputRate.ComboBox.Width = 80;

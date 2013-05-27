@@ -4,481 +4,6 @@
         <name>xIMU_API</name>
     </assembly>
     <members>
-        <member name="T:xIMU_API.ScanProgressChangedEventArgs">
-            <summary>
-            Scan process changed event arguments class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.ScanProgressChangedEventArgs.#ctor(System.Int32,System.String)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.ScanProgressChangedEventArgs"/> class.
-            </summary>
-            <param name="progressPercentage">
-            Progress percentage.
-            </param>
-            <param name="progressMessage">
-            Progress message.
-            </param>
-        </member>
-        <member name="P:xIMU_API.ScanProgressChangedEventArgs.ProgressPercentage">
-            <summary>
-            Gets the progress percentage.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.ScanProgressChangedEventArgs.ProgressMessage">
-            <summary>
-            Gets the progress message.
-            </summary>
-        </member>
-        <member name="T:xIMU_API.PortScanner">
-            <summary>
-            Port scanner class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.PortScanner.#ctor">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.PortScanner"/> class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.PortScanner.#ctor(System.Boolean,System.Boolean)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.PortScanner"/> class.
-            </summary>
-            <param name="firstResultOnly">
-            Value that controls whether the scan will end on finding the first x-IMU.
-            </param>
-            <param name="dontGiveUp">
-            Value that controls whether the scan will continue indefinitely until at least one x-IMU has been found.
-            </param>
-        </member>
-        <member name="M:xIMU_API.PortScanner.RunAsynsScan">
-            <summary>
-            Runs asynchronous port scan.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.PortScanner.CancelAnsycScan">
-            <summary>
-            Requests cancelation of pending background port scan process.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.PortScanner.backgroundWorker_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
-            <summary>
-            BackgroundWorker DoWork event to run port scan in new process.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.PortScanner.xIMUserialobj_RegisterDataReceived(System.Object,xIMU_API.RegisterData)">
-            <summary>
-            Register data received event to read x-IMU device ID.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PortScanner.FirstResultOnly">
-            <summary>
-            Gets or sets a value that controls whether the scan will end on finding the first x-IMU.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PortScanner.DontGiveUp">
-            <summary>
-            Gets or sets a value that controls whether the scan will continue indefinitely until at least one x-IMU has been found.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PortScanner.CancellationPending">
-            <summary>
-            Gets a value indicating whether the application has requested cancelation of asynchronous port scan process.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PortScanner.IsBusy">
-            <summary>
-            Gets a value indicating whether the <see cref="T:xIMU_API.PortScanner"/> is running an asynchronous scan.
-            </summary>
-        </member>
-        <member name="T:xIMU_API.RawInertialMagData">
-            <summary>
-            Raw gyroscope, accelerometer and magnetometer data class.
-            </summary>
-        </member>
-        <member name="T:xIMU_API.xIMUdata">
-            <summary>
-            x-IMU data class.  Base class cannot be instantiated.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.RawInertialMagData.#ctor">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.RawInertialMagData"/> class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.RawInertialMagData.#ctor(System.Int16[],System.Int16[],System.Int16[])">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.RawInertialMagData"/> class.
-            </summary>
-            <param name="gyroscope">
-            Raw gyroscope ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
-            </param>
-            <param name="accelerometer">
-            Raw accelerometer ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
-            </param>  
-            <param name="magnetometer">
-            Raw magnetometer ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
-            </param>  
-        </member>
-        <member name="M:xIMU_API.RawInertialMagData.ConvertToCSV">
-            <summary>
-            Converts data to string of Comma Separated Variables.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.RawInertialMagData.Gyroscope">
-            <summary>
-            Raw gyroscope ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.RawInertialMagData.Accelerometer">
-            <summary>
-            Raw accelerometer ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.RawInertialMagData.Magnetometer">
-            <summary>
-            Raw magnetometer ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
-            </summary>
-        </member>
-        <member name="T:xIMU_API.CommandData">
-            <summary>
-            Command data class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.CommandData.#ctor">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.CommandData"/> class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.CommandData.#ctor(xIMU_API.CommandCodes)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.CommandData"/> class.
-            </summary>
-            <param name="commandCode">
-            Command code. See <see cref="T:xIMU_API.CommandCodes"/>.
-            </param>
-        </member>
-        <member name="M:xIMU_API.CommandData.#ctor(System.UInt16)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.CommandData"/> class.
-            </summary>
-            <param name="commandCode">
-            Command code. Must be defined in <see cref="T:xIMU_API.CommandCodes"/>.
-            </param>
-        </member>
-        <member name="M:xIMU_API.CommandData.GetMessage">
-            <summary>
-            Gets message associated with command code.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.CommandData.CommandCode">
-            <summary>
-            Command code.  Must be defined in <see cref="T:xIMU_API.CommandCodes"/>.
-            </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid command code specifed.
-            </exception>
-        </member>
-        <member name="T:xIMU_API.PacketEncoding">
-            <summary>
-            Packet encoding class.  Contains static methods for packet encoding and decoding.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.PacketEncoding.EncodePacket(System.Byte[])">
-            <summary>
-            Encodes packet with consecutive right shifts so that the msb of each encoded byte is clear. The msb of the final byte is set to indicate the end of the packet.
-            </summary>
-            <param name="decodedPacket">
-            The decoded packet contents to be encoded.
-            </param>
-            <returns>
-            The encoded packet.
-            </returns> 
-        </member>
-        <member name="M:xIMU_API.PacketEncoding.RightShiftByteArray(System.Byte[])">
-            <summary>
-            Right shifts a byte array by 1 bit.  The lsb of byte x becomes the msb of byte x+1.
-            </summary>
-            <param name="byteArray">
-            The byte array to be right shifted.
-            </param>
-            <returns>
-            The right shifted byte array.
-            </returns> 
-        </member>
-        <member name="M:xIMU_API.PacketEncoding.DecodePacket(System.Byte[])">
-            <summary>
-            Decodes a packet with consecutive left shifts so that the msb of each encoded byte is removed.
-            </summary>
-            <param name="encodedPacket">
-            The endcoded packet to be decoded.
-            </param>
-            <returns>
-            The decoded packet.
-            </returns> 
-        </member>
-        <member name="M:xIMU_API.PacketEncoding.LeftShiftByteArray(System.Byte[])">
-            <summary>
-            Left shifts a byte array by 1 bit.  The msb of byte x becomes the lsb of byte x-1.
-            </summary>
-            <param name="byteArray">
-            The byte array to be left shifted.
-            </param>
-            <returns>
-            The left shifted byte array.
-            </returns> 
-        </member>
-        <member name="T:xIMU_API.PacketCount">
-            <summary>
-            Packet count class tracks number of packets read and written.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.PacketCount.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:xIMU_API.PacketCount"/> class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.PacketCount.#ctor(xIMU_API.PacketCount)">
-            <summary>
-            Initializes a new instance of the <see cref="T:xIMU_API.PacketCount"/> class.
-            </summary>
-            <param name="packetCount">
-            Existing instance of <see cref="T:xIMU_API.PacketCount"/> to copy.
-            </param>
-        </member>
-        <member name="M:xIMU_API.PacketCount.Reset">
-            <summary>
-            Resets all packet counts to zero.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.PacketCount.Difference(xIMU_API.PacketCount)">
-            <summary>
-            Returns the difference between the current and previous packet count.
-            </summary>
-            <param name="previousPacketCount">
-            Previous packet count.
-            </param>
-            <returns>
-            Difference between the current and previous packet count.
-            </returns>
-        </member>
-        <member name="P:xIMU_API.PacketCount.PacketsReadErrors">
-            <summary>
-            Gets or sets the number of packet read errors.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PacketCount.TotalPacketsRead">
-            <summary>
-            Gets or sets the total number of packets read.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PacketCount.ErrorPacketsRead">
-            <summary>
-            Gets or sets the number of error data packets read.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PacketCount.CommandPacketsRead">
-            <summary>
-            Gets or sets the number of command data packets read.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PacketCount.RegisterDataPacketsRead">
-            <summary>
-            Gets or sets the number of register data packets read.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PacketCount.DateTimeDataPacketsRead">
-            <summary>
-            Gets or sets the number of date/time data packets read.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PacketCount.RawBattThermDataPacketsRead">
-            <summary>
-            Gets or sets the number of raw battery and thermometer data packets read.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PacketCount.CalBattThermDataPacketsRead">
-            <summary>
-            Gets or sets the number of calibration battery and thermometer data packets read.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PacketCount.RawInertialMagDataPacketsRead">
-            <summary>
-            Gets or sets the number of raw inertial/magnetic data packets read.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PacketCount.CalInertialMagDataPacketsRead">
-            <summary>
-            Gets or sets the number of calibrated inertial/magnetic data packets read.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PacketCount.QuaternionDataPacketsRead">
-            <summary>
-            Gets or sets the number of quaternion packets read.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PacketCount.DigitalIODataPacketsRead">
-            <summary>
-            Gets or sets the number of digital I/O data packets read.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.PacketCount.TotalPacketsWritten">
-            <summary>
-            Gets or sets the total number of packets written.
-            </summary>  
-        </member>
-        <member name="P:xIMU_API.PacketCount.CommandPacketsWritten">
-            <summary>
-            Gets or sets the number of command packets written.
-            </summary>  
-        </member>
-        <member name="P:xIMU_API.PacketCount.ReadRegisterPacketsWritten">
-            <summary>
-            Gets or sets the number of read register packets written.
-            </summary>  
-        </member>
-        <member name="P:xIMU_API.PacketCount.WriteRegisterPacketsWritten">
-            <summary>
-            Gets or sets the number of write register packets written.
-            </summary>  
-        </member>
-        <member name="P:xIMU_API.PacketCount.ReadDateTimePacketsWritten">
-            <summary>
-            Gets or sets the number of read date/time packets written.
-            </summary>  
-        </member>
-        <member name="P:xIMU_API.PacketCount.WriteDateTimePacketsWritten">
-            <summary>
-            Gets or sets the number of write date/time packets written.
-            </summary>  
-        </member>
-        <member name="P:xIMU_API.PacketCount.DigitalIODataPacketsWritten">
-            <summary>
-            Gets or sets the number of digital I/O data packets written.
-            </summary>
-        </member>
-        <member name="T:xIMU_API.ErrorData">
-            <summary>
-            Error data class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.ErrorData.#ctor">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.ErrorData"/> class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.ErrorData.#ctor(xIMU_API.ErrorCodes)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.ErrorData"/> class.
-            </summary>
-            <param name="errorCode">
-            Error code. See <see cref="T:xIMU_API.ErrorCodes"/>.
-            </param>
-        </member>
-        <member name="M:xIMU_API.ErrorData.#ctor(System.UInt16)">
-            <summary>
-            Initialises a new instance of the ErrorData class.
-            </summary>
-            <param name="errorCode">
-            Error code. Must be defined in <see cref="T:xIMU_API.ErrorCodes"/>.
-            </param>
-        </member>
-        <member name="M:xIMU_API.ErrorData.GetMessage">
-            <summary>
-            Message associated with error code.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.ErrorData.ErrorCode">
-            <summary>
-            Error code. Must be defined in <see cref="T:xIMU_API.ErrorCodes"/>.
-            </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid error code specifed.
-            </exception>
-        </member>
-        <member name="T:xIMU_API.QuaternionData">
-            <summary>
-            Quaternion data class.
-            </summary>
-            <remarks>
-            See http://www.x-io.co.uk/res/doc/quaternions.pdf for more information on quaternions.
-            </remarks>
-        </member>
-        <member name="M:xIMU_API.QuaternionData.#ctor">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.QuaternionData"/> class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.QuaternionData.#ctor(System.Single[])">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.QuaternionData"/> class.
-            </summary>
-            <param name="quaternion">
-            Quaternion. Must of 4 elements. Each element must be of value -1 to +1.
-            </param>
-        </member>
-        <member name="M:xIMU_API.QuaternionData.Rad2Deg(System.Single)">
-            <summary>
-            Converts from radians to degrees.
-            </summary>
-            <param name="radians">
-            Angular quantity in radians.
-            </param> 
-            <returns>
-            Angular quantity in degrees.
-            </returns>
-        </member>
-        <member name="M:xIMU_API.QuaternionData.ConvertToConjugate">
-            <summary>
-            Returns the quaternion conjugate.
-            </summary>
-            <returns>
-            Quaternion conjugate.
-            </returns>
-        </member>
-        <member name="M:xIMU_API.QuaternionData.ConvertToRotationMatrix">
-            <summary>
-            Converts data to rotation matrix.
-            </summary>
-            <remarks>
-            Elements 0 to 2 represent columns 1 to 3 of row 1.
-            Elements 3 to 5 represent columns 1 to 3 of row 2.
-            Elements 6 to 8 represent columns 1 to 3 of row 3.
-            </remarks>
-        </member>
-        <member name="M:xIMU_API.QuaternionData.ConvertToEulerAngles">
-            <summary>
-            Converts data to XYZ Euler angles (in degrees).
-            </summary>
-        </member>
-        <member name="M:xIMU_API.QuaternionData.ConvertToCSV">
-            <summary>
-            Converts data to string of Comma Separated Variables.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.QuaternionData.ConvertToRotationMatrixCSV">
-            <summary>
-            Converts data to string of Comma Separated Variables representaing the elements of a rotation matrix.
-            </summary>
-            <remarks>
-            First to third values represent columns 1 to 3 of row 1.
-            Forth to fifth values represent columns 1 to 3 of row 2.
-            Sixth to eighth values represent columns 1 to 3 of row 3.
-            </remarks>
-        </member>
-        <member name="M:xIMU_API.QuaternionData.ConvertToEulerAnglesCSV">
-            <summary>
-            Converts data to string of Comma Separated Variables representaing the XYZ Euler angles (in degrees).
-            </summary>
-        </member>
-        <member name="P:xIMU_API.QuaternionData.Quaternion">
-            <summary>
-            Quaternion. Must of 4 elements. Each element must be of value -1 to +1.  Vector will be normalised.
-            </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid quaternion specified.
-            </exception>
-        </member>
         <member name="T:xIMU_API.xIMUserial">
             <summary>
             x-IMU serial class.
@@ -585,6 +110,94 @@
             Gets the packet count data object.
             </summary>
         </member>
+        <member name="T:xIMU_API.QuaternionData">
+            <summary>
+            Quaternion data class.
+            </summary>
+            <remarks>
+            See http://www.x-io.co.uk/res/doc/quaternions.pdf for more information on quaternions.
+            </remarks>
+        </member>
+        <member name="T:xIMU_API.xIMUdata">
+            <summary>
+            x-IMU data class.  Base class cannot be instantiated.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.#ctor">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.QuaternionData"/> class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.#ctor(System.Single[])">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.QuaternionData"/> class.
+            </summary>
+            <param name="quaternion">
+            Quaternion. Must of 4 elements. Each element must be of value -1 to +1.
+            </param>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.Rad2Deg(System.Single)">
+            <summary>
+            Converts from radians to degrees.
+            </summary>
+            <param name="radians">
+            Angular quantity in radians.
+            </param> 
+            <returns>
+            Angular quantity in degrees.
+            </returns>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.ConvertToConjugate">
+            <summary>
+            Returns the quaternion conjugate.
+            </summary>
+            <returns>
+            Quaternion conjugate.
+            </returns>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.ConvertToRotationMatrix">
+            <summary>
+            Converts data to rotation matrix.
+            </summary>
+            <remarks>
+            Elements 0 to 2 represent columns 1 to 3 of row 1.
+            Elements 3 to 5 represent columns 1 to 3 of row 2.
+            Elements 6 to 8 represent columns 1 to 3 of row 3.
+            </remarks>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.ConvertToEulerAngles">
+            <summary>
+            Converts data to XYZ Euler angles (in degrees).
+            </summary>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.ConvertToCSV">
+            <summary>
+            Converts data to string of Comma Separated Variables.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.ConvertToRotationMatrixCSV">
+            <summary>
+            Converts data to string of Comma Separated Variables representaing the elements of a rotation matrix.
+            </summary>
+            <remarks>
+            First to third values represent columns 1 to 3 of row 1.
+            Forth to fifth values represent columns 1 to 3 of row 2.
+            Sixth to eighth values represent columns 1 to 3 of row 3.
+            </remarks>
+        </member>
+        <member name="M:xIMU_API.QuaternionData.ConvertToEulerAnglesCSV">
+            <summary>
+            Converts data to string of Comma Separated Variables representaing the XYZ Euler angles (in degrees).
+            </summary>
+        </member>
+        <member name="P:xIMU_API.QuaternionData.Quaternion">
+            <summary>
+            Quaternion. Must of 4 elements. Each element must be of value -1 to +1.  Vector will be normalised.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid quaternion specified.
+            </exception>
+        </member>
         <member name="T:xIMU_API.PortAssignment">
             <summary>
             Port asignment class.
@@ -609,179 +222,6 @@
         <member name="P:xIMU_API.PortAssignment.DeviceID">
             <summary>
             Gets the device ID of x-IMU.
-            </summary>
-        </member>
-        <member name="T:xIMU_API.CalInertialMagData">
-            <summary>
-            Calibrated gyroscope, accelerometer and magnetometer data class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.CalInertialMagData.#ctor">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.CalInertialMagData"/> class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.CalInertialMagData.#ctor(System.Single[],System.Single[],System.Single[])">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.CalInertialMagData"/> class.
-            </summary>
-            <param name="gyroscope">
-            Calibrated gyroscope data in degrees per second.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
-            </param>
-            <param name="accelerometer">
-            Calibrated accelerometer data in 'g'.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
-            </param>  
-            <param name="magnetometer">
-            Calibrated magnetometer data in Gauss.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
-            </param>  
-        </member>
-        <member name="M:xIMU_API.CalInertialMagData.ConvertToCSV">
-            <summary>
-            Converts data to string of Comma Separated Variables.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.CalInertialMagData.Gyroscope">
-            <summary>
-            Calibrated gyroscope data in degrees per second.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.CalInertialMagData.Accelerometer">
-            <summary>
-            Calibrated accelerometer data in 'g'.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.CalInertialMagData.Magnetometer">
-            <summary>
-            Calibrated magnetometer data in Gauss.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
-            </summary>
-        </member>
-        <member name="T:xIMU_API.FixedFloat">
-            <summary>
-            16-bit fixed-point / floating-point conversion class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.FixedFloat.FixedToFloat(System.Int16,xIMU_API.Qvals)">
-            <summary>
-            Returns floating-point value from specified 16-bit fixed-point.
-            </summary>
-            <param name="fixedValue">
-            16-bit fixed-point value.
-            </param>
-            <param name="q">
-            Number of fraction bits. See <see cref="T:xIMU_API.Qvals"/>.
-            </param>
-            <returns>
-            Floating-point number.
-            </returns>
-        </member>
-        <member name="M:xIMU_API.FixedFloat.FloatToFixed(System.Single,xIMU_API.Qvals)">
-            <summary>
-            Returns 16-bit fixed-point value from specified floating-point value with saturation.
-            </summary>
-            <param name="floatValue">
-            Floating-point representation of 16-bit fixed-point value.
-            </param>
-            <param name="q">
-            Number of fraction bits. See <see cref="T:xIMU_API.Qvals"/>.
-            </param>
-            <returns>
-            16-bit fixed-point value.
-            </returns>
-        </member>
-        <member name="T:xIMU_API.RegisterData">
-            <summary>
-            Register data class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.RegisterData.#ctor">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.RegisterData.#ctor(System.UInt16)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
-            </summary>
-            <param name="address">
-            16-bit register address. Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
-            </param>
-        </member>
-        <member name="M:xIMU_API.RegisterData.#ctor(xIMU_API.RegisterAddresses)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
-            </summary>
-            <param name="registerAddress">
-            Register address. See <see cref="T:xIMU_API.RegisterAddresses"/>.
-            </param>
-        </member>
-        <member name="M:xIMU_API.RegisterData.#ctor(System.UInt16,System.Single)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
-            </summary>
-            <param name="address">
-            16-bit register address. Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
-            </param>
-            <param name="floatValue">
-            Floating-point representation of 16-bit fixed-point value.
-            </param>
-        </member>
-        <member name="M:xIMU_API.RegisterData.#ctor(xIMU_API.RegisterAddresses,System.Single)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
-            </summary>
-            <param name="registerAddress">
-            Register address. See <see cref="T:xIMU_API.RegisterAddresses"/>.
-            </param>
-            <param name="floatValue">
-            Floating-point representation of 16-bit fixed-point value.
-            </param>
-        </member>
-        <member name="M:xIMU_API.RegisterData.#ctor(System.UInt16,System.UInt16)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
-            </summary>
-            <param name="address">
-            16-bit register address. Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
-            </param>
-            <param name="value">
-            16-bit register value.
-            </param>
-        </member>
-        <member name="M:xIMU_API.RegisterData.LookupQval">
-            <summary>
-            Returns <see cref="T:xIMU_API.Qvals"/> associated with register address.
-            </summary>
-            <returns>
-            <see cref="T:xIMU_API.Qvals"/> associated with register address.
-            </returns>
-        </member>
-        <member name="M:xIMU_API.RegisterData.LookupQval(System.UInt16)">
-            <summary>
-            Returns <see cref="T:xIMU_API.Qvals"/> associated with specified register address.
-            </summary>
-            <param name="address">
-            Register address.
-            </param>
-            <returns>
-            <see cref="T:xIMU_API.Qvals"/> associated with register address.
-            </returns>
-            <exception cref="T:System.Exception">
-            Thrown if register address does not have associated <see cref="T:xIMU_API.Qvals"/>.
-            </exception>
-        </member>
-        <member name="P:xIMU_API.RegisterData.Address">
-            <summary>
-            16-bit register address.  Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.RegisterData.Value">
-            <summary>
-            16-bit register value.
-            </summary>
-        </member>
-        <member name="P:xIMU_API.RegisterData.floatValue">
-            <summary>
-            Floating-point representation of 16-bit register value when interpreted as fixed-point.
             </summary>
         </member>
         <member name="T:xIMU_API.RawBattThermData">
@@ -819,6 +259,39 @@
             <summary>
             Raw Thermometer ADC data in LSBs.
             </summary>
+        </member>
+        <member name="T:xIMU_API.FixedFloat">
+            <summary>
+            16-bit fixed-point / floating-point conversion class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.FixedFloat.FixedToFloat(System.Int16,xIMU_API.Qvals)">
+            <summary>
+            Returns floating-point value from specified 16-bit fixed-point.
+            </summary>
+            <param name="fixedValue">
+            16-bit fixed-point value.
+            </param>
+            <param name="q">
+            Number of fraction bits. See <see cref="T:xIMU_API.Qvals"/>.
+            </param>
+            <returns>
+            Floating-point number.
+            </returns>
+        </member>
+        <member name="M:xIMU_API.FixedFloat.FloatToFixed(System.Single,xIMU_API.Qvals)">
+            <summary>
+            Returns 16-bit fixed-point value from specified floating-point value with saturation.
+            </summary>
+            <param name="floatValue">
+            Floating-point representation of 16-bit fixed-point value.
+            </param>
+            <param name="q">
+            Number of fraction bits. See <see cref="T:xIMU_API.Qvals"/>.
+            </param>
+            <returns>
+            16-bit fixed-point value.
+            </returns>
         </member>
         <member name="T:xIMU_API.xIMUfile">
             <summary>
@@ -880,107 +353,246 @@
             Gets the packet count data object.
             </summary>
         </member>
-        <member name="T:xIMU_API.DateTimeData">
+        <member name="T:xIMU_API.PortScanner">
             <summary>
-            Date/Time data class.
+            Port scanner class.
             </summary>
         </member>
-        <member name="M:xIMU_API.DateTimeData.#ctor">
+        <member name="M:xIMU_API.PortScanner.#ctor">
             <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.DateTimeData"/> class.
+            Initialises a new instance of the <see cref="T:xIMU_API.PortScanner"/> class.
             </summary>
         </member>
-        <member name="M:xIMU_API.DateTimeData.#ctor(System.DateTime)">
+        <member name="M:xIMU_API.PortScanner.#ctor(System.Boolean,System.Boolean)">
             <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.DateTimeData"/> class.
+            Initialises a new instance of the <see cref="T:xIMU_API.PortScanner"/> class.
             </summary>
-            <param name="dateTime">
-            <see cref="T:System.DateTime"/> object.
+            <param name="firstResultOnly">
+            Value that controls whether the scan will end on finding the first x-IMU.
+            </param>
+            <param name="dontGiveUp">
+            Value that controls whether the scan will continue indefinitely until at least one x-IMU has been found.
             </param>
         </member>
-        <member name="M:xIMU_API.DateTimeData.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:xIMU_API.PortScanner.RunAsynsScan">
             <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.DateTimeData"/> class.
+            Runs asynchronous port scan.
             </summary>
-            <param name="year">
-            Year. Must be of value 2000 2099.
-            </param>
-            <param name="month">
-            Month. Must be of value 1 to 12.
-            </param>
-            <param name="date">
-            Date. Must be of value 1 to 31.
-            </param>
-            <param name="hours">
-            Hours. Must be of value 0 to 23.
-            </param>
-            <param name="minutes">
-            Minutes. Must be of value 0 to 59.
-            </param>
-            <param name="seconds">
-            Seconds. Must be of value 0 to 59.
+        </member>
+        <member name="M:xIMU_API.PortScanner.CancelAnsycScan">
+            <summary>
+            Requests cancelation of pending background port scan process.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.PortScanner.backgroundWorker_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            BackgroundWorker DoWork event to run port scan in new process.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.PortScanner.xIMUserialobj_RegisterDataReceived(System.Object,xIMU_API.RegisterData)">
+            <summary>
+            Register data received event to read x-IMU device ID.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PortScanner.FirstResultOnly">
+            <summary>
+            Gets or sets a value that controls whether the scan will end on finding the first x-IMU.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PortScanner.DontGiveUp">
+            <summary>
+            Gets or sets a value that controls whether the scan will continue indefinitely until at least one x-IMU has been found.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PortScanner.CancellationPending">
+            <summary>
+            Gets a value indicating whether the application has requested cancelation of asynchronous port scan process.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PortScanner.IsBusy">
+            <summary>
+            Gets a value indicating whether the <see cref="T:xIMU_API.PortScanner"/> is running an asynchronous scan.
+            </summary>
+        </member>
+        <member name="T:xIMU_API.CompatibleFirmwareVersions">
+            <summary>
+            Compatible firmware versions.  Only major number required.
+            </summary>
+        </member>
+        <member name="T:xIMU_API.PacketHeaders">
+            <summary>
+            Packet headers.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks>
+        </member>
+        <member name="T:xIMU_API.ErrorCodes">
+            <summary>
+            Error codes.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.CommandCodes">
+            <summary>
+            Command codes.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.Qvals">
+            <summary>
+            Number of fractional bits used by fixed-point representations.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.RegisterAddresses">
+            <summary>
+            Register addresses.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.ButtonModes">
+            <summary>
+            Button mode register values.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.AccelerometerFullScales">
+            <summary>
+            Accelerometer full-scale register values.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.MagnetometerFullScales">
+            <summary>
+            Magnetometer full-scale register values.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.AlgorithmModes">
+            <summary>
+            Algorithm mode register values.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.SensorDataModes">
+            <summary>
+            Data mode register values.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.DateTimeOutputRates">
+            <summary>
+            Date/time data output rate register values.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.DataOutputRates">
+            <summary>
+            Data output rate register values.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.MotionTrigWakeUpModes">
+            <summary>
+            Motion triggered wake up mode register values.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.BluetoothPowerModes">
+            <summary>
+            Bluetooth power mode register values.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.auxiliaryPortModes">
+            <summary>
+            Auxiliary Port mode register values.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.DigitalIOdirections">
+            <summary>
+            Digital I/O direction register values.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.DigitalIOoutputRates">
+            <summary>
+            Digital I/O output rate register values.
+            </summary>
+            <remarks>
+            A matching enumeration exists in firmware source.
+            </remarks> 
+        </member>
+        <member name="T:xIMU_API.CommandData">
+            <summary>
+            Command data class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.CommandData.#ctor">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.CommandData"/> class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.CommandData.#ctor(xIMU_API.CommandCodes)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.CommandData"/> class.
+            </summary>
+            <param name="commandCode">
+            Command code. See <see cref="T:xIMU_API.CommandCodes"/>.
             </param>
         </member>
-        <member name="M:xIMU_API.DateTimeData.ConvertToString">
+        <member name="M:xIMU_API.CommandData.#ctor(System.UInt16)">
             <summary>
-            Converts date/time data to string.
+            Initialises a new instance of the <see cref="T:xIMU_API.CommandData"/> class.
             </summary>
-            <returns>
-            Date/time data as string.
-            </returns>
+            <param name="commandCode">
+            Command code. Must be defined in <see cref="T:xIMU_API.CommandCodes"/>.
+            </param>
         </member>
-        <member name="P:xIMU_API.DateTimeData.Year">
+        <member name="M:xIMU_API.CommandData.GetMessage">
             <summary>
-            Year. Must be of value 2000 2099.
+            Gets message associated with command code.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.CommandData.CommandCode">
+            <summary>
+            Command code.  Must be defined in <see cref="T:xIMU_API.CommandCodes"/>.
             </summary>
             <exception cref="T:System.Exception">
-            Thrown if invalid year specified.
+            Thrown if invalid command code specifed.
             </exception>
-        </member>
-        <member name="P:xIMU_API.DateTimeData.Month">
-            <summary>
-            Month. Must be of value 1 to 12.
-            </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid month specified.
-            </exception>
-        </member>
-        <member name="P:xIMU_API.DateTimeData.Date">
-            <summary>
-            Date. Must be of value 1 to 31.
-            </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid date specified.
-            </exception>
-        </member>
-        <member name="P:xIMU_API.DateTimeData.Hours">
-            <summary>
-            Hours. Must be of value 0 to 23.
-            </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid hours specified.
-            </exception>
-        </member>
-        <member name="P:xIMU_API.DateTimeData.Minutes">
-            <summary>
-            Minutes. Must be of value 0 to 59.
-            </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid minutes specified.
-            </exception>
-        </member>
-        <member name="P:xIMU_API.DateTimeData.Seconds">
-            <summary>
-            Seconds. Must be of value 0 to 59.
-            </summary>
-            <exception cref="T:System.Exception">
-            Thrown if invalid seconds specified.
-            </exception>
-        </member>
-        <member name="P:xIMU_API.DateTimeData.DateTimeObject">
-            <summary>
-            <see cref="T:System.DateTime"/> object representation of data.
-            </summary>
         </member>
         <member name="T:xIMU_API.CalBattThermData">
             <summary>
@@ -1125,6 +737,296 @@
             MSB and LSB combined to create a short.
             </returns>
         </member>
+        <member name="T:xIMU_API.RunScanCompletedEventArgs">
+            <summary>
+            Run scan completed event arguments class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.RunScanCompletedEventArgs.#ctor(xIMU_API.PortAssignment[],System.Boolean)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.RunScanCompletedEventArgs"/> class.
+            </summary>
+            <param name="portAsignments">
+            Array of <see cref="!:portAsignments"/> found during the scan.
+            </param>
+            <param name="cancelled">
+            Value indicating whether the asynchronous scan was cancelled.
+            </param>
+        </member>
+        <member name="P:xIMU_API.RunScanCompletedEventArgs.PortAssignments">
+            <summary>
+            Gets an array of <see cref="!:PortAsignments"/> found during the scan.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.RunScanCompletedEventArgs.Cancelled">
+            <summary>
+            Gets a value indicating whether the asynchronous scan was cancelled.
+            </summary>
+        </member>
+        <member name="T:xIMU_API.PacketCount">
+            <summary>
+            Packet count class tracks number of packets read and written.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.PacketCount.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:xIMU_API.PacketCount"/> class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.PacketCount.#ctor(xIMU_API.PacketCount)">
+            <summary>
+            Initializes a new instance of the <see cref="T:xIMU_API.PacketCount"/> class.
+            </summary>
+            <param name="packetCount">
+            Existing instance of <see cref="T:xIMU_API.PacketCount"/> to copy.
+            </param>
+        </member>
+        <member name="M:xIMU_API.PacketCount.Reset">
+            <summary>
+            Resets all packet counts to zero.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.PacketCount.Difference(xIMU_API.PacketCount)">
+            <summary>
+            Returns the difference between the current and previous packet count.
+            </summary>
+            <param name="previousPacketCount">
+            Previous packet count.
+            </param>
+            <returns>
+            Difference between the current and previous packet count.
+            </returns>
+        </member>
+        <member name="P:xIMU_API.PacketCount.PacketsReadErrors">
+            <summary>
+            Gets or sets the number of packet read errors.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PacketCount.TotalPacketsRead">
+            <summary>
+            Gets or sets the total number of packets read.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PacketCount.ErrorPacketsRead">
+            <summary>
+            Gets or sets the number of error data packets read.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PacketCount.CommandPacketsRead">
+            <summary>
+            Gets or sets the number of command data packets read.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PacketCount.RegisterDataPacketsRead">
+            <summary>
+            Gets or sets the number of register data packets read.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PacketCount.DateTimeDataPacketsRead">
+            <summary>
+            Gets or sets the number of date/time data packets read.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PacketCount.RawBattThermDataPacketsRead">
+            <summary>
+            Gets or sets the number of raw battery and thermometer data packets read.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PacketCount.CalBattThermDataPacketsRead">
+            <summary>
+            Gets or sets the number of calibration battery and thermometer data packets read.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PacketCount.RawInertialMagDataPacketsRead">
+            <summary>
+            Gets or sets the number of raw inertial/magnetic data packets read.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PacketCount.CalInertialMagDataPacketsRead">
+            <summary>
+            Gets or sets the number of calibrated inertial/magnetic data packets read.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PacketCount.QuaternionDataPacketsRead">
+            <summary>
+            Gets or sets the number of quaternion packets read.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PacketCount.DigitalIODataPacketsRead">
+            <summary>
+            Gets or sets the number of digital I/O data packets read.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.PacketCount.TotalPacketsWritten">
+            <summary>
+            Gets or sets the total number of packets written.
+            </summary>  
+        </member>
+        <member name="P:xIMU_API.PacketCount.CommandPacketsWritten">
+            <summary>
+            Gets or sets the number of command packets written.
+            </summary>  
+        </member>
+        <member name="P:xIMU_API.PacketCount.ReadRegisterPacketsWritten">
+            <summary>
+            Gets or sets the number of read register packets written.
+            </summary>  
+        </member>
+        <member name="P:xIMU_API.PacketCount.WriteRegisterPacketsWritten">
+            <summary>
+            Gets or sets the number of write register packets written.
+            </summary>  
+        </member>
+        <member name="P:xIMU_API.PacketCount.ReadDateTimePacketsWritten">
+            <summary>
+            Gets or sets the number of read date/time packets written.
+            </summary>  
+        </member>
+        <member name="P:xIMU_API.PacketCount.WriteDateTimePacketsWritten">
+            <summary>
+            Gets or sets the number of write date/time packets written.
+            </summary>  
+        </member>
+        <member name="P:xIMU_API.PacketCount.DigitalIODataPacketsWritten">
+            <summary>
+            Gets or sets the number of digital I/O data packets written.
+            </summary>
+        </member>
+        <member name="T:xIMU_API.RegisterData">
+            <summary>
+            Register data class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.RegisterData.#ctor">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.RegisterData.#ctor(System.UInt16)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
+            </summary>
+            <param name="address">
+            16-bit register address. Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
+            </param>
+        </member>
+        <member name="M:xIMU_API.RegisterData.#ctor(xIMU_API.RegisterAddresses)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
+            </summary>
+            <param name="registerAddress">
+            Register address. See <see cref="T:xIMU_API.RegisterAddresses"/>.
+            </param>
+        </member>
+        <member name="M:xIMU_API.RegisterData.#ctor(System.UInt16,System.Single)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
+            </summary>
+            <param name="address">
+            16-bit register address. Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
+            </param>
+            <param name="floatValue">
+            Floating-point representation of 16-bit fixed-point value.
+            </param>
+        </member>
+        <member name="M:xIMU_API.RegisterData.#ctor(xIMU_API.RegisterAddresses,System.Single)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
+            </summary>
+            <param name="registerAddress">
+            Register address. See <see cref="T:xIMU_API.RegisterAddresses"/>.
+            </param>
+            <param name="floatValue">
+            Floating-point representation of 16-bit fixed-point value.
+            </param>
+        </member>
+        <member name="M:xIMU_API.RegisterData.#ctor(System.UInt16,System.UInt16)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.RegisterData"/> class.
+            </summary>
+            <param name="address">
+            16-bit register address. Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
+            </param>
+            <param name="value">
+            16-bit register value.
+            </param>
+        </member>
+        <member name="M:xIMU_API.RegisterData.LookupQval">
+            <summary>
+            Returns <see cref="T:xIMU_API.Qvals"/> associated with register address.
+            </summary>
+            <returns>
+            <see cref="T:xIMU_API.Qvals"/> associated with register address.
+            </returns>
+        </member>
+        <member name="M:xIMU_API.RegisterData.LookupQval(System.UInt16)">
+            <summary>
+            Returns <see cref="T:xIMU_API.Qvals"/> associated with specified register address.
+            </summary>
+            <param name="address">
+            Register address.
+            </param>
+            <returns>
+            <see cref="T:xIMU_API.Qvals"/> associated with register address.
+            </returns>
+            <exception cref="T:System.Exception">
+            Thrown if register address does not have associated <see cref="T:xIMU_API.Qvals"/>.
+            </exception>
+        </member>
+        <member name="P:xIMU_API.RegisterData.Address">
+            <summary>
+            16-bit register address.  Must be defined in <see cref="T:xIMU_API.RegisterAddresses"/>.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.RegisterData.Value">
+            <summary>
+            16-bit register value.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.RegisterData.floatValue">
+            <summary>
+            Floating-point representation of 16-bit register value when interpreted as fixed-point.
+            </summary>
+        </member>
+        <member name="T:xIMU_API.ErrorData">
+            <summary>
+            Error data class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.ErrorData.#ctor">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.ErrorData"/> class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.ErrorData.#ctor(xIMU_API.ErrorCodes)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.ErrorData"/> class.
+            </summary>
+            <param name="errorCode">
+            Error code. See <see cref="T:xIMU_API.ErrorCodes"/>.
+            </param>
+        </member>
+        <member name="M:xIMU_API.ErrorData.#ctor(System.UInt16)">
+            <summary>
+            Initialises a new instance of the ErrorData class.
+            </summary>
+            <param name="errorCode">
+            Error code. Must be defined in <see cref="T:xIMU_API.ErrorCodes"/>.
+            </param>
+        </member>
+        <member name="M:xIMU_API.ErrorData.GetMessage">
+            <summary>
+            Message associated with error code.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.ErrorData.ErrorCode">
+            <summary>
+            Error code. Must be defined in <see cref="T:xIMU_API.ErrorCodes"/>.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid error code specifed.
+            </exception>
+        </member>
         <member name="T:xIMU_API.DigitalIOdata">
             <summary>
             Digital I/O data class.
@@ -1245,171 +1147,74 @@
             8-bit port value.  lsb = AX0, msb = AX7.
             </summary>
         </member>
-        <member name="T:xIMU_API.CompatibleFirmwareVersions">
+        <member name="T:xIMU_API.ScanProgressChangedEventArgs">
             <summary>
-            Compatible firmware versions.  Only major number required.
+            Scan process changed event arguments class.
             </summary>
         </member>
-        <member name="T:xIMU_API.PacketHeaders">
+        <member name="M:xIMU_API.ScanProgressChangedEventArgs.#ctor(System.Int32,System.String)">
             <summary>
-            Packet headers.
+            Initialises a new instance of the <see cref="T:xIMU_API.ScanProgressChangedEventArgs"/> class.
             </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks>
-        </member>
-        <member name="T:xIMU_API.ErrorCodes">
-            <summary>
-            Error codes.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.CommandCodes">
-            <summary>
-            Command codes.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.Qvals">
-            <summary>
-            Number of fractional bits used by fixed-point representations.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.RegisterAddresses">
-            <summary>
-            Register addresses.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.ButtonModes">
-            <summary>
-            Button mode register values.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.AccelerometerFullScales">
-            <summary>
-            Accelerometer full-scale register values.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.MagnetometerFullScales">
-            <summary>
-            Magnetometer full-scale register values.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.AlgorithmModes">
-            <summary>
-            Algorithm mode register values.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.SensorDataModes">
-            <summary>
-            Data mode register values.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.DateTimeOutputRates">
-            <summary>
-            Date/time data output rate register values.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.DataOutputRates">
-            <summary>
-            Data output rate register values.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.MotionTrigWakeUpModes">
-            <summary>
-            Motion triggered wake up mode register values.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.BluetoothPowerModes">
-            <summary>
-            Bluetooth power mode register values.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.auxiliaryPortModes">
-            <summary>
-            Auxiliary Port mode register values.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.DigitalIOdirections">
-            <summary>
-            Digital I/O direction register values.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.DigitalIOoutputRates">
-            <summary>
-            Digital I/O output rate register values.
-            </summary>
-            <remarks>
-            A matching enumeration exists in firmware source.
-            </remarks> 
-        </member>
-        <member name="T:xIMU_API.RunScanCompletedEventArgs">
-            <summary>
-            Run scan completed event arguments class.
-            </summary>
-        </member>
-        <member name="M:xIMU_API.RunScanCompletedEventArgs.#ctor(xIMU_API.PortAssignment[],System.Boolean)">
-            <summary>
-            Initialises a new instance of the <see cref="T:xIMU_API.RunScanCompletedEventArgs"/> class.
-            </summary>
-            <param name="portAsignments">
-            Array of <see cref="!:portAsignments"/> found during the scan.
+            <param name="progressPercentage">
+            Progress percentage.
             </param>
-            <param name="cancelled">
-            Value indicating whether the asynchronous scan was cancelled.
+            <param name="progressMessage">
+            Progress message.
             </param>
         </member>
-        <member name="P:xIMU_API.RunScanCompletedEventArgs.PortAssignments">
+        <member name="P:xIMU_API.ScanProgressChangedEventArgs.ProgressPercentage">
             <summary>
-            Gets an array of <see cref="!:PortAsignments"/> found during the scan.
+            Gets the progress percentage.
             </summary>
         </member>
-        <member name="P:xIMU_API.RunScanCompletedEventArgs.Cancelled">
+        <member name="P:xIMU_API.ScanProgressChangedEventArgs.ProgressMessage">
             <summary>
-            Gets a value indicating whether the asynchronous scan was cancelled.
+            Gets the progress message.
+            </summary>
+        </member>
+        <member name="T:xIMU_API.RawInertialMagData">
+            <summary>
+            Raw gyroscope, accelerometer and magnetometer data class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.RawInertialMagData.#ctor">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.RawInertialMagData"/> class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.RawInertialMagData.#ctor(System.Int16[],System.Int16[],System.Int16[])">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.RawInertialMagData"/> class.
+            </summary>
+            <param name="gyroscope">
+            Raw gyroscope ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+            </param>
+            <param name="accelerometer">
+            Raw accelerometer ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+            </param>  
+            <param name="magnetometer">
+            Raw magnetometer ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+            </param>  
+        </member>
+        <member name="M:xIMU_API.RawInertialMagData.ConvertToCSV">
+            <summary>
+            Converts data to string of Comma Separated Variables.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.RawInertialMagData.Gyroscope">
+            <summary>
+            Raw gyroscope ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.RawInertialMagData.Accelerometer">
+            <summary>
+            Raw accelerometer ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.RawInertialMagData.Magnetometer">
+            <summary>
+            Raw magnetometer ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
             </summary>
         </member>
         <member name="T:xIMU_API.ASCIIdataFiles">
@@ -1537,6 +1342,201 @@
             <summary>
             Index of each file within array.  Each label is used as part of file name.
             </summary>
+        </member>
+        <member name="T:xIMU_API.DateTimeData">
+            <summary>
+            Date/Time data class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.DateTimeData.#ctor">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.DateTimeData"/> class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.DateTimeData.#ctor(System.DateTime)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.DateTimeData"/> class.
+            </summary>
+            <param name="dateTime">
+            <see cref="T:System.DateTime"/> object.
+            </param>
+        </member>
+        <member name="M:xIMU_API.DateTimeData.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.DateTimeData"/> class.
+            </summary>
+            <param name="year">
+            Year. Must be of value 2000 2099.
+            </param>
+            <param name="month">
+            Month. Must be of value 1 to 12.
+            </param>
+            <param name="date">
+            Date. Must be of value 1 to 31.
+            </param>
+            <param name="hours">
+            Hours. Must be of value 0 to 23.
+            </param>
+            <param name="minutes">
+            Minutes. Must be of value 0 to 59.
+            </param>
+            <param name="seconds">
+            Seconds. Must be of value 0 to 59.
+            </param>
+        </member>
+        <member name="M:xIMU_API.DateTimeData.ConvertToString">
+            <summary>
+            Converts date/time data to string.
+            </summary>
+            <returns>
+            Date/time data as string.
+            </returns>
+        </member>
+        <member name="P:xIMU_API.DateTimeData.Year">
+            <summary>
+            Year. Must be of value 2000 2099.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid year specified.
+            </exception>
+        </member>
+        <member name="P:xIMU_API.DateTimeData.Month">
+            <summary>
+            Month. Must be of value 1 to 12.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid month specified.
+            </exception>
+        </member>
+        <member name="P:xIMU_API.DateTimeData.Date">
+            <summary>
+            Date. Must be of value 1 to 31.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid date specified.
+            </exception>
+        </member>
+        <member name="P:xIMU_API.DateTimeData.Hours">
+            <summary>
+            Hours. Must be of value 0 to 23.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid hours specified.
+            </exception>
+        </member>
+        <member name="P:xIMU_API.DateTimeData.Minutes">
+            <summary>
+            Minutes. Must be of value 0 to 59.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid minutes specified.
+            </exception>
+        </member>
+        <member name="P:xIMU_API.DateTimeData.Seconds">
+            <summary>
+            Seconds. Must be of value 0 to 59.
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if invalid seconds specified.
+            </exception>
+        </member>
+        <member name="P:xIMU_API.DateTimeData.DateTimeObject">
+            <summary>
+            <see cref="T:System.DateTime"/> object representation of data.
+            </summary>
+        </member>
+        <member name="T:xIMU_API.CalInertialMagData">
+            <summary>
+            Calibrated gyroscope, accelerometer and magnetometer data class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.CalInertialMagData.#ctor">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.CalInertialMagData"/> class.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.CalInertialMagData.#ctor(System.Single[],System.Single[],System.Single[])">
+            <summary>
+            Initialises a new instance of the <see cref="T:xIMU_API.CalInertialMagData"/> class.
+            </summary>
+            <param name="gyroscope">
+            Calibrated gyroscope data in degrees per second.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+            </param>
+            <param name="accelerometer">
+            Calibrated accelerometer data in 'g'.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+            </param>  
+            <param name="magnetometer">
+            Calibrated magnetometer data in Gauss.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+            </param>  
+        </member>
+        <member name="M:xIMU_API.CalInertialMagData.ConvertToCSV">
+            <summary>
+            Converts data to string of Comma Separated Variables.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.CalInertialMagData.Gyroscope">
+            <summary>
+            Calibrated gyroscope data in degrees per second.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.CalInertialMagData.Accelerometer">
+            <summary>
+            Calibrated accelerometer data in 'g'.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+            </summary>
+        </member>
+        <member name="P:xIMU_API.CalInertialMagData.Magnetometer">
+            <summary>
+            Calibrated magnetometer data in Gauss.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
+            </summary>
+        </member>
+        <member name="T:xIMU_API.PacketEncoding">
+            <summary>
+            Packet encoding class.  Contains static methods for packet encoding and decoding.
+            </summary>
+        </member>
+        <member name="M:xIMU_API.PacketEncoding.EncodePacket(System.Byte[])">
+            <summary>
+            Encodes packet with consecutive right shifts so that the msb of each encoded byte is clear. The msb of the final byte is set to indicate the end of the packet.
+            </summary>
+            <param name="decodedPacket">
+            The decoded packet contents to be encoded.
+            </param>
+            <returns>
+            The encoded packet.
+            </returns> 
+        </member>
+        <member name="M:xIMU_API.PacketEncoding.RightShiftByteArray(System.Byte[])">
+            <summary>
+            Right shifts a byte array by 1 bit.  The lsb of byte x becomes the msb of byte x+1.
+            </summary>
+            <param name="byteArray">
+            The byte array to be right shifted.
+            </param>
+            <returns>
+            The right shifted byte array.
+            </returns> 
+        </member>
+        <member name="M:xIMU_API.PacketEncoding.DecodePacket(System.Byte[])">
+            <summary>
+            Decodes a packet with consecutive left shifts so that the msb of each encoded byte is removed.
+            </summary>
+            <param name="encodedPacket">
+            The endcoded packet to be decoded.
+            </param>
+            <returns>
+            The decoded packet.
+            </returns> 
+        </member>
+        <member name="M:xIMU_API.PacketEncoding.LeftShiftByteArray(System.Byte[])">
+            <summary>
+            Left shifts a byte array by 1 bit.  The msb of byte x becomes the lsb of byte x-1.
+            </summary>
+            <param name="byteArray">
+            The byte array to be left shifted.
+            </param>
+            <returns>
+            The left shifted byte array.
+            </returns> 
         </member>
     </members>
 </doc>

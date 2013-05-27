@@ -108,14 +108,14 @@ namespace xIMU_GUI
         private void Form_main_Load(object sender, EventArgs e)
         {
             // Create peripheral GUI objects
-            battOscilloscope = Oscilloscope.CreateScope("ScopeSettings/battOscilloscope_settings.ini", "");
-            thermOscilloscope = Oscilloscope.CreateScope("ScopeSettings/thermOscilloscope_settings.ini", "");
-            gyroOscilloscope = Oscilloscope.CreateScope("ScopeSettings/gyroOscilloscope_settings.ini", "");
-            accelOscilloscope = Oscilloscope.CreateScope("ScopeSettings/accelOscilloscope_settings.ini", "");
-            magOscilloscope = Oscilloscope.CreateScope("ScopeSettings/magOscilloscope_settings.ini", "");
-            eulerOscilloscope = Oscilloscope.CreateScope("ScopeSettings/eulerOscilloscope_settings.ini", "");
-            cuboid3D = new Cuboid3D(new float[] { 6, 4, 2 }, new string[] { @"CuboidImages\Right.png", @"CuboidImages\Left.png", @"CuboidImages\Back.png",
-                                                                            @"CuboidImages\Front.png", @"CuboidImages\Top.png", @"CuboidImages\Bottom.png"});
+            battOscilloscope = Oscilloscope.CreateScope("Oscilloscope/battOscilloscope_settings.ini", "");
+            thermOscilloscope = Oscilloscope.CreateScope("Oscilloscope/thermOscilloscope_settings.ini", "");
+            gyroOscilloscope = Oscilloscope.CreateScope("Oscilloscope/gyroOscilloscope_settings.ini", "");
+            accelOscilloscope = Oscilloscope.CreateScope("Oscilloscope/accelOscilloscope_settings.ini", "");
+            magOscilloscope = Oscilloscope.CreateScope("Oscilloscope/magOscilloscope_settings.ini", "");
+            eulerOscilloscope = Oscilloscope.CreateScope("Oscilloscope/eulerOscilloscope_settings.ini", "");
+            cuboid3D = new Cuboid3D(new float[] { 6, 4, 2 }, new string[] { "Cuboid3D/Right.png", "Cuboid3D/Left.png", "Cuboid3D/Back.png",
+                                                                            "Cuboid3D/Front.png", "Cuboid3D/Top.png", "Cuboid3D/Bottom.png"});
             digitalIOpanel = new DigitalIOpanel();
             digitalIOpanel.StateChanged += new DigitalIOpanel.onStateChanged(digitalIOpanel_StateChanged);
 
@@ -873,7 +873,8 @@ namespace xIMU_GUI
                     {
                         if (!Enum.IsDefined(typeof(xIMU_API.CompatibleFirmwareVersions), Convert.ToInt32(appendedTextBoxTreeNode_FirmVersionMajorNum.TextBox.Text)))
                         {
-                            PassiveMessageBox.Show("The detected firmware version is not fully compatible with this software version.", "Warning", MessageBoxIcon.Warning);
+                            PassiveMessageBox.Show("The detected x-IMU firmware version is not fully compatible with this version of the x-IMU GUI and API.\r\n\r\n" +
+                                                   "Please download and install the latest x-IMU software and firmware available at: www.x-io.co.uk.", "Warning", MessageBoxIcon.Warning);
                         }
                     }
                 }
@@ -1818,7 +1819,9 @@ namespace xIMU_GUI
             }
 
             // User confirmation
-            if (MessageBox.Show("Do not disconnect or switch off the x-IMU while firmware is being uploaded as this may permanently damage the x-IMU.", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Cancel)
+            if (MessageBox.Show("Please ensure that the selected port name is the port assigned to the x-IMU USB connection else the upload will fail.\r\n\r\n" +
+                                "The new firmware will be uploaded to the x-IMU and the current firmware will be lost.\r\n\r\n" +
+                                "Do not switch off or disconnect the x-IMU while firmware is being uploaded as this may permanently damage the x-IMU.", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Cancel)
             {
                 return;
             }
@@ -1849,7 +1852,7 @@ namespace xIMU_GUI
                 tempxIMUserial.Close();
 
                 // Run external bootloader process
-                ProcessStartInfo processInfo = new ProcessStartInfo("16-Bit Flash Programmer.exe");
+                ProcessStartInfo processInfo = new ProcessStartInfo("Bootloader/16-Bit Flash Programmer.exe");
                 processInfo.Arguments = "-i " + "\\\\.\\" + comboBox_portName.Text + " -b 115200 \"" + textBox_bootloaderFilePath.Text + "\"";
                 processInfo.UseShellExecute = false;
                 Process process = Process.Start(processInfo);

@@ -27,8 +27,8 @@
     <SupportUrl>http://www.x-io.co.uk</SupportUrl>
     <ProductName>x-IMU GUI</ProductName>
     <PublisherName>x-io Technologies</PublisherName>
-    <ApplicationRevision>12</ApplicationRevision>
-    <ApplicationVersion>5.2.0.12</ApplicationVersion>
+    <ApplicationRevision>13</ApplicationRevision>
+    <ApplicationVersion>5.3.0.13</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -76,21 +76,18 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Tao.OpenGl">
-      <HintPath>Tao\Tao.OpenGl.dll</HintPath>
+      <HintPath>Cuboid3D\Tao.OpenGl.dll</HintPath>
     </Reference>
     <Reference Include="Tao.Platform.Windows">
-      <HintPath>Tao\Tao.Platform.Windows.dll</HintPath>
+      <HintPath>Cuboid3D\Tao.Platform.Windows.dll</HintPath>
     </Reference>
-    <Reference Include="xIMU_API, Version=5.0.4133.25234, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="xIMU_API, Version=6.0.4138.25778, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>xIMU_API\xIMU_API.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppendedTreeView.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Cuboid3D.cs" />
+    <Compile Include="Cuboid3D\Cuboid3D.cs" />
     <Compile Include="DigitalIOpanel.cs" />
     <Compile Include="Form_main.cs">
       <SubType>Form</SubType>
@@ -98,9 +95,12 @@
     <Compile Include="Form_main.Designer.cs">
       <DependentUpon>Form_main.cs</DependentUpon>
     </Compile>
-    <Compile Include="PassiveMessageBox.cs" />
-    <Compile Include="Oscilloscope.cs" />
-    <Compile Include="ProcessDialog.cs" />
+    <Compile Include="GeneralPurpose\AppendedTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GeneralPurpose\PassiveMessageBox.cs" />
+    <Compile Include="GeneralPurpose\ProcessDialog.cs" />
+    <Compile Include="Oscilloscope\Oscilloscope.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form_main.resx">
@@ -116,7 +116,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Content Include="16-Bit Flash Programmer.exe">
+    <Content Include="Bootloader\16-Bit Flash Programmer.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="HardIronCal\HardIronCal.exe">
@@ -128,22 +128,19 @@
     <Content Include="HardIronCal\MathNet.Numerics.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Osc_DLL.dll">
+    <Content Include="Oscilloscope\accelOscilloscope_settings.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ScopeSettings\accelOscilloscope_settings.ini">
+    <Content Include="Oscilloscope\battOscilloscope_settings.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ScopeSettings\battOscilloscope_settings.ini">
+    <Content Include="Oscilloscope\eulerOscilloscope_settings.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ScopeSettings\eulerOscilloscope_settings.ini">
+    <Content Include="Oscilloscope\gyroOscilloscope_settings.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ScopeSettings\gyroOscilloscope_settings.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ScopeSettings\magOscilloscope_settings.ini">
+    <Content Include="Oscilloscope\magOscilloscope_settings.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="app.config" />
@@ -156,28 +153,31 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="ScopeSettings\thermOscilloscope_settings.ini">
+    <Content Include="Oscilloscope\Osc_DLL.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Oscilloscope\thermOscilloscope_settings.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="xIMU_GUI_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CuboidImages\Back.png">
+    <Content Include="Cuboid3D\Back.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CuboidImages\Bottom.png">
+    <Content Include="Cuboid3D\Bottom.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CuboidImages\Front.png">
+    <Content Include="Cuboid3D\Front.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CuboidImages\Left.png">
+    <Content Include="Cuboid3D\Left.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CuboidImages\Right.png">
+    <Content Include="Cuboid3D\Right.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="CuboidImages\Top.png">
+    <Content Include="Cuboid3D\Top.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -204,6 +204,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
