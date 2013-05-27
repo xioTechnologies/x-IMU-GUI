@@ -8,7 +8,7 @@ namespace x_IMU_API
     /// <summary>
     /// Raw gyroscope, accelerometer and magnetometer data class.
     /// </summary>
-    public class RawInertialMagData : xIMUdata
+    public class RawInertialMagneticData : xIMUdata
     {
         #region Variables
 
@@ -70,15 +70,15 @@ namespace x_IMU_API
         #region Constructors
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="RawInertialMagData"/> class.
+        /// Initialises a new instance of the <see cref="RawInertialMagneticData"/> class.
         /// </summary>
-        public RawInertialMagData()
+        public RawInertialMagneticData()
             : this(new short[3] { 0, 0, 0 }, new short[3] { 0, 0, 0 }, new short[3] { 0, 0, 0 })
         {
         }
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="RawInertialMagData"/> class.
+        /// Initialises a new instance of the <see cref="RawInertialMagneticData"/> class.
         /// </summary>
         /// <param name="gyroscope">
         /// Raw gyroscope ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
@@ -89,7 +89,7 @@ namespace x_IMU_API
         /// <param name="magnetometer">
         /// Raw magnetometer ADC data in LSBs.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </param>  
-        public RawInertialMagData(short[] gyroscope, short[] accelerometer, short[] magnetometer)
+        public RawInertialMagneticData(short[] gyroscope, short[] accelerometer, short[] magnetometer)
         {
             Gyroscope = gyroscope;
             Accelerometer = accelerometer;

@@ -139,8 +139,8 @@ namespace x_IMU_API
             else if (xIMUdataObject is DateTimeData) WriteDateTimeData((DateTimeData)xIMUdataObject);
             else if (xIMUdataObject is RawBattThermData) WriteRawBattThermData((RawBattThermData)xIMUdataObject);
             else if (xIMUdataObject is CalBattThermData) WriteCalBattThermData((CalBattThermData)xIMUdataObject);
-            else if (xIMUdataObject is RawInertialMagData) WriteRawInertialMagData((RawInertialMagData)xIMUdataObject);
-            else if (xIMUdataObject is CalInertialMagData) WriteCalInertialMagData((CalInertialMagData)xIMUdataObject);
+            else if (xIMUdataObject is RawInertialMagneticData) WriteRawInertialMagneticData((RawInertialMagneticData)xIMUdataObject);
+            else if (xIMUdataObject is CalInertialMagneticData) WriteCalInertialMagneticData((CalInertialMagneticData)xIMUdataObject);
             else if (xIMUdataObject is QuaternionData) WriteQuaternionData((QuaternionData)xIMUdataObject);
             else if (xIMUdataObject is DigitalIOdata) WriteDigitalIOdata((DigitalIOdata)xIMUdataObject);
             else if (xIMUdataObject is RawAnalogueInputData) WriteRawAnalogueInputData((RawAnalogueInputData)xIMUdataObject);
@@ -229,23 +229,23 @@ namespace x_IMU_API
         /// <summary>
         /// Writes raw inertial/magnetic data to CSV file.  Will create new file if required.
         /// </summary>
-        /// <param name="rawInertialMagData">
+        /// <param name="rawInertialMagneticData">
         /// x-IMU raw inertial/magnetic data.
         /// </param>
-        public void WriteRawInertialMagData(RawInertialMagData rawInertialMagData)
+        public void WriteRawInertialMagneticData(RawInertialMagneticData rawInertialMagneticData)
         {
-            WriteCSVlineAtFileIndex(rawInertialMagData.ConvertToCSV(), FileIndexes.RawInertialMagnetic);
+            WriteCSVlineAtFileIndex(rawInertialMagneticData.ConvertToCSV(), FileIndexes.RawInertialMagnetic);
         }
 
         /// <summary>
         /// Writes calibrated inertial/magnetic data to CSV file.  Will create new file if required.
         /// </summary>
-        /// <param name="calInertialMagData">
+        /// <param name="calInertialMagneticData">
         /// x-IMU calibrated inertial/magnetic data.
         /// </param>
-        public void WriteCalInertialMagData(CalInertialMagData calInertialMagData)
+        public void WriteCalInertialMagneticData(CalInertialMagneticData calInertialMagneticData)
         {
-            WriteCSVlineAtFileIndex(calInertialMagData.ConvertToCSV(), FileIndexes.CalInertialMagnetic);
+            WriteCSVlineAtFileIndex(calInertialMagneticData.ConvertToCSV(), FileIndexes.CalInertialMagnetic);
         }
 
         /// <summary>

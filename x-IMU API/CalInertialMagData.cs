@@ -8,7 +8,7 @@ namespace x_IMU_API
     /// <summary>
     /// Calibrated gyroscope, accelerometer and magnetometer data class.
     /// </summary>
-    public class CalInertialMagData : xIMUdata
+    public class CalInertialMagneticData : xIMUdata
     {
         #region Variables
 
@@ -70,15 +70,15 @@ namespace x_IMU_API
         #region Constructors
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="CalInertialMagData"/> class.
+        /// Initialises a new instance of the <see cref="CalInertialMagneticData"/> class.
         /// </summary>
-        public CalInertialMagData()
+        public CalInertialMagneticData()
             : this(new float[3] { 0, 0, 0 }, new float[3] { 0, 0, 0 }, new float[3] { 0, 0, 0 })
         {
         }
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="CalInertialMagData"/> class.
+        /// Initialises a new instance of the <see cref="CalInertialMagneticData"/> class.
         /// </summary>
         /// <param name="gyroscope">
         /// Calibrated gyroscope data in degrees per second.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
@@ -89,7 +89,7 @@ namespace x_IMU_API
         /// <param name="magnetometer">
         /// Calibrated magnetometer data in Gauss.  Elements 0, 1 and 2 represent the sensor x, y and z axes respectively.
         /// </param>  
-        public CalInertialMagData(float[] gyroscope, float[] accelerometer, float[] magnetometer)
+        public CalInertialMagneticData(float[] gyroscope, float[] accelerometer, float[] magnetometer)
         {
             Gyroscope = gyroscope;
             Accelerometer = accelerometer;

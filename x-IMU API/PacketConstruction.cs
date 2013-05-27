@@ -257,20 +257,20 @@ namespace x_IMU_API
                     }
                     return new CalBattThermData(FixedFloat.FixedToFloat(Concat(decodedPacket[1], decodedPacket[2]), Qvals.CalibratedBatt),
                                                 FixedFloat.FixedToFloat(Concat(decodedPacket[3], decodedPacket[4]), Qvals.CalibratedTherm));
-                case ((byte)PacketHeaders.RawInertialMagData):
+                case ((byte)PacketHeaders.RawInertialMagneticData):
                     if (decodedPacket.Length != 20)
                     {
                         throw new Exception("Invalid number of bytes for packet header.");
                     }
-                    return new RawInertialMagData(new short[] { Concat(decodedPacket[1], decodedPacket[2]), Concat(decodedPacket[3], decodedPacket[4]), Concat(decodedPacket[5], decodedPacket[6]) },
+                    return new RawInertialMagneticData(new short[] { Concat(decodedPacket[1], decodedPacket[2]), Concat(decodedPacket[3], decodedPacket[4]), Concat(decodedPacket[5], decodedPacket[6]) },
                                                   new short[] { Concat(decodedPacket[7], decodedPacket[8]), Concat(decodedPacket[9], decodedPacket[10]), Concat(decodedPacket[11], decodedPacket[12]) },
                                                   new short[] { Concat(decodedPacket[13], decodedPacket[14]), Concat(decodedPacket[15], decodedPacket[16]), Concat(decodedPacket[17], decodedPacket[18]) });
-                case ((byte)PacketHeaders.CalInertialMagData):
+                case ((byte)PacketHeaders.CalInertialMagneticData):
                     if (decodedPacket.Length != 20)
                     {
                         throw new Exception("Invalid number of bytes for packet header.");
                     }
-                    return new CalInertialMagData(new float[] { FixedFloat.FixedToFloat(Concat(decodedPacket[1], decodedPacket[2]), Qvals.CalibratedGyro), FixedFloat.FixedToFloat(Concat(decodedPacket[3], decodedPacket[4]), Qvals.CalibratedGyro), FixedFloat.FixedToFloat(Concat(decodedPacket[5], decodedPacket[6]), Qvals.CalibratedGyro) },
+                    return new CalInertialMagneticData(new float[] { FixedFloat.FixedToFloat(Concat(decodedPacket[1], decodedPacket[2]), Qvals.CalibratedGyro), FixedFloat.FixedToFloat(Concat(decodedPacket[3], decodedPacket[4]), Qvals.CalibratedGyro), FixedFloat.FixedToFloat(Concat(decodedPacket[5], decodedPacket[6]), Qvals.CalibratedGyro) },
                                                   new float[] { FixedFloat.FixedToFloat(Concat(decodedPacket[7], decodedPacket[8]), Qvals.CalibratedAccel), FixedFloat.FixedToFloat(Concat(decodedPacket[9], decodedPacket[10]), Qvals.CalibratedAccel), FixedFloat.FixedToFloat(Concat(decodedPacket[11], decodedPacket[12]), Qvals.CalibratedAccel) },
                                                   new float[] { FixedFloat.FixedToFloat(Concat(decodedPacket[13], decodedPacket[14]), Qvals.CalibratedMag), FixedFloat.FixedToFloat(Concat(decodedPacket[15], decodedPacket[16]), Qvals.CalibratedMag), FixedFloat.FixedToFloat(Concat(decodedPacket[17], decodedPacket[18]), Qvals.CalibratedMag) });
                 case ((byte)PacketHeaders.QuaternionData):

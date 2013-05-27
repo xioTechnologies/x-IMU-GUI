@@ -12,7 +12,7 @@ namespace x_IMU_API
     /// </summary>
     public enum CompatibleFirmwareVersions
     {
-        v6_x = 6
+        v7_x = 7
     }
 
     #endregion
@@ -35,8 +35,8 @@ namespace x_IMU_API
         WriteDateTime,
         RawBattThermData,
         CalBattThermData,
-        RawInertialMagData,
-        CalInertialMagData,
+        RawInertialMagneticData,
+        CalInertialMagneticData,
         QuaternionData,
         DigitalIOdata,
         RawAnalogueInputData,
@@ -137,24 +137,25 @@ namespace x_IMU_API
         ThermBias = 0,
         GyroSensitivity = 7,
         GyroSampled200dps = 0,
-        GyroBias = 6,
-        GyroBiasTempSens = 13,
+        GyroBiasAt25degC = 3,
+        GyroBiasTempSensitivity = 11,
+        GyroSampledBias = 3,
         AccelSensitivity = 4,
         AccelBias = 8,
         AccelSampled1g = 4,
         MagSensitivity = 4,
         MagBias = 8,
         MagHardIronBias = 11,
-        AlgorithmKp = 8,
-        AlgorithmKi = 14,
-        AlgorithmInitKp = 6,
-        AlgorithmInitPeriod = 8,
+        AlgorithmKp = 11,
+        AlgorithmKi = 15,
+        AlgorithmInitKp = 11,
+        AlgorithmInitPeriod = 11,
         CalibratedAnalogueInput = 12,
         AnalogueInputSensitivity = 4,
-        PWMoutput = 15,
         AnalogueInputBias = 8,
+        PWMoutput = 15,
         CalibratedADXL345 = 10,
-        ADXL345busSensitivity = 4,
+        ADXL345busSensitivity = 6,
         ADXL345busBias = 8,
     }
 
@@ -188,12 +189,12 @@ namespace x_IMU_API
         GyroSampledMinus200dpsX,
         GyroSampledMinus200dpsY,
         GyroSampledMinus200dpsZ,
-        GyroBiasX,
-        GyroBiasY,
-        GyroBiasZ,
-        GyroBiasTempSensX,
-        GyroBiasTempSensY,
-        GyroBiasTempSensZ,
+        GyroBiasAt25degCX,
+        GyroBiasAt25degCY,
+        GyroBiasAt25degCZ,
+        GyroBiasTempSensitivityX,
+        GyroBiasTempSensitivityY,
+        GyroBiasTempSensitivityZ,
         GyroSample1Temp,
         GyroSample1BiasX,
         GyroSample1BiasY,

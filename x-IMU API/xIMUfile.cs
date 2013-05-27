@@ -238,8 +238,8 @@ namespace x_IMU_API
                         else if (dataObject is DateTimeData) { OnDateTimeDataRead((DateTimeData)dataObject); privPacketCounter.DateTimePacketsRead++; }
                         else if (dataObject is RawBattThermData) { OnRawBattThermDataRead((RawBattThermData)dataObject); privPacketCounter.RawBattThermPacketsRead++; }
                         else if (dataObject is CalBattThermData) { OnCalBattThermDataRead((CalBattThermData)dataObject); privPacketCounter.CalBattThermPacketsRead++; }
-                        else if (dataObject is RawInertialMagData) { OnRawInertialMagDataRead((RawInertialMagData)dataObject); privPacketCounter.RawInertialMagPacketsRead++; }
-                        else if (dataObject is CalInertialMagData) { OnCalInertialMagDataRead((CalInertialMagData)dataObject); privPacketCounter.CalInertialMagPacketsRead++; }
+                        else if (dataObject is RawInertialMagneticData) { OnRawInertialMagneticDataRead((RawInertialMagneticData)dataObject); privPacketCounter.RawInertialMagPacketsRead++; }
+                        else if (dataObject is CalInertialMagneticData) { OnCalInertialMagneticDataRead((CalInertialMagneticData)dataObject); privPacketCounter.CalInertialMagPacketsRead++; }
                         else if (dataObject is QuaternionData) { OnQuaternionDataRead((QuaternionData)dataObject); privPacketCounter.QuaternionPacketsRead++; }
                         else if (dataObject is DigitalIOdata) { OnDigitalIODataRead((DigitalIOdata)dataObject); privPacketCounter.DigitalIOPacketsRead++; }
                         else if (dataObject is RawAnalogueInputData) { OnRawAnalogueInputDataReceived((RawAnalogueInputData)dataObject); privPacketCounter.RawAnalogueInputPacketsRead++; }
@@ -290,13 +290,13 @@ namespace x_IMU_API
         public event onCalBattThermDataRead CalBattThermDataRead;
         protected virtual void OnCalBattThermDataRead(CalBattThermData e) { if (CalBattThermDataRead != null) CalBattThermDataRead(this, e); }
 
-        public delegate void onRawInertialMagDataRead(object sender, RawInertialMagData e);
-        public event onRawInertialMagDataRead RawInertialMagDataRead;
-        protected virtual void OnRawInertialMagDataRead(RawInertialMagData e) { if (RawInertialMagDataRead != null) RawInertialMagDataRead(this, e); }
+        public delegate void onRawInertialMagneticDataRead(object sender, RawInertialMagneticData e);
+        public event onRawInertialMagneticDataRead RawInertialMagneticDataRead;
+        protected virtual void OnRawInertialMagneticDataRead(RawInertialMagneticData e) { if (RawInertialMagneticDataRead != null) RawInertialMagneticDataRead(this, e); }
 
-        public delegate void onCalInertialMagDataRead(object sender, CalInertialMagData e);
-        public event onCalInertialMagDataRead CalInertialMagDataRead;
-        protected virtual void OnCalInertialMagDataRead(CalInertialMagData e) { if (CalInertialMagDataRead != null) CalInertialMagDataRead(this, e); }
+        public delegate void onCalInertialMagneticDataRead(object sender, CalInertialMagneticData e);
+        public event onCalInertialMagneticDataRead CalInertialMagneticDataRead;
+        protected virtual void OnCalInertialMagneticDataRead(CalInertialMagneticData e) { if (CalInertialMagneticDataRead != null) CalInertialMagneticDataRead(this, e); }
 
         public delegate void onQuaternionDataRead(object sender, QuaternionData e);
         public event onQuaternionDataRead QuaternionDataRead;
