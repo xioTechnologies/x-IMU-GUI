@@ -1,0 +1,921 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HardIronCal</name>
+    </assembly>
+    <members>
+        <member name="T:HardIronCal.HardIronCalibration">
+            <summary>
+            HardIronCalibration class.  Contains static function to run calibration algorithm.
+            </summary>
+        </member>
+        <member name="M:HardIronCal.HardIronCalibration.Run(System.Double[],System.Double[],System.Double[])">
+            <summary>
+            Runs the hard-iron bias calibration algorithm.  Requires a calibration dataset representing measurements of the Earth's magnetic field as different orientation.
+            </summary>
+            <param name="xData">
+            Magnetometer x-axis measurements representing the calibration dataset.
+            </param>
+            <param name="yData">
+            Magnetometer y-axis measurements representing the calibration dataset.
+            </param>
+            <param name="zData">
+            Magnetometer z-axis measurements representing the calibration dataset.
+            </param>
+            <returns>
+            Returns the estimated hard-iron bias for the x,y,z axis as the 1st to 3rd elements.  The standard deviation
+            of the calibrated sensor measurement of the felid magnitude field magnitude is returned as the 4th element. 
+            </returns>
+            <exception cref="T:System.Exception">
+            Thrown if arrays of X, Y and Z axis measurements are not of equal length.
+            </exception>
+        </member>
+        <member name="M:HardIronCal.HardIronCalibration.calculateBias(System.Double[],System.Double[],System.Double[])">
+            <summary>
+            Calculates the bias error affecting each axis of a tri-axis sensor when provided with a calibration dataset for each axis.
+            </summary>
+            <param name="axisA">
+            Measurements of one of the 3 axes.  The calculated bias for this axis is returned as the first element.
+            </param>
+            <param name="axisB">
+            Measurements of one of the 3 axes.  The calculated bias for this axis is returned as the second element.
+            </param>
+            <param name="axisC">
+            Measurements of one of the 3 axes.  The calculated bias for this axis is returned as the third element.
+            </param>
+            <returns>
+            The calculated bias errors affecting the sensor.  
+            </returns>
+        </member>
+        <member name="T:HardIronCal.CholeskyDecomposition">
+            <summary>Cholesky Decomposition.
+            For a symmetric, positive definite matrix A, the Cholesky decomposition
+            is an lower triangular matrix L so that A = L*L'.
+            If the matrix is not symmetric or positive definite, the constructor
+            returns a partial decomposition and sets an internal flag that may
+            be queried by the isSPD() method.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.CholeskyDecomposition.L">
+            <summary>Array for internal storage of decomposition.
+            @serial internal array storage.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.CholeskyDecomposition.n">
+            <summary>Row and column dimension (square matrix).
+            @serial matrix dimension.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.CholeskyDecomposition.isspd">
+            <summary>Symmetric and positive definite flag.
+            @serial is symmetric and positive definite flag.
+            </summary>
+        </member>
+        <member name="M:HardIronCal.CholeskyDecomposition.#ctor(HardIronCal.GeneralMatrix)">
+            <summary>Cholesky algorithm for symmetric and positive definite matrix.</summary>
+            <param name="Arg">  Square, symmetric matrix.
+            </param>
+            <returns>     Structure to access L and isspd flag.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.CholeskyDecomposition.GetL">
+            <summary>Return triangular factor.</summary>
+            <returns>     L
+            </returns>
+        </member>
+        <member name="M:HardIronCal.CholeskyDecomposition.Solve(HardIronCal.GeneralMatrix)">
+            <summary>Solve A*X = B</summary>
+            <param name="B">  A Matrix with as many rows as A and any number of columns.
+            </param>
+            <returns>     X so that L*L'*X = B
+            </returns>
+            <exception cref="T:System.ArgumentException">  Matrix row dimensions must agree.
+            </exception>
+            <exception cref="T:System.SystemException"> Matrix is not symmetric positive definite.
+            </exception>
+        </member>
+        <member name="P:HardIronCal.CholeskyDecomposition.SPD">
+            <summary>Is the matrix symmetric and positive definite?</summary>
+            <returns>     true if A is symmetric and positive definite.
+            </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:HardIronCal.SingularValueDecomposition" -->
+        <member name="F:HardIronCal.SingularValueDecomposition.U">
+            <summary>Arrays for internal storage of U and V.
+            @serial internal storage of U.
+            @serial internal storage of V.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.SingularValueDecomposition.V">
+            <summary>Arrays for internal storage of U and V.
+            @serial internal storage of U.
+            @serial internal storage of V.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.SingularValueDecomposition.s">
+            <summary>Array for internal storage of singular values.
+            @serial internal storage of singular values.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.SingularValueDecomposition.m">
+            <summary>Row and column dimensions.
+            @serial row dimension.
+            @serial column dimension.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.SingularValueDecomposition.n">
+            <summary>Row and column dimensions.
+            @serial row dimension.
+            @serial column dimension.
+            </summary>
+        </member>
+        <member name="M:HardIronCal.SingularValueDecomposition.#ctor(HardIronCal.GeneralMatrix)">
+            <summary>Construct the singular value decomposition</summary>
+            <param name="Arg">   Rectangular matrix
+            </param>
+            <returns>     Structure to access U, S and V.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.SingularValueDecomposition.GetU">
+            <summary>Return the left singular vectors</summary>
+            <returns>     U
+            </returns>
+        </member>
+        <member name="M:HardIronCal.SingularValueDecomposition.GetV">
+            <summary>Return the right singular vectors</summary>
+            <returns>     V
+            </returns>
+        </member>
+        <member name="M:HardIronCal.SingularValueDecomposition.Norm2">
+            <summary>Two norm</summary>
+            <returns>     max(S)
+            </returns>
+        </member>
+        <member name="M:HardIronCal.SingularValueDecomposition.Condition">
+            <summary>Two norm condition number</summary>
+            <returns>     max(S)/min(S)
+            </returns>
+        </member>
+        <member name="M:HardIronCal.SingularValueDecomposition.Rank">
+            <summary>Effective numerical matrix rank</summary>
+            <returns>     Number of nonnegligible singular values.
+            </returns>
+        </member>
+        <member name="P:HardIronCal.SingularValueDecomposition.SingularValues">
+            <summary>Return the one-dimensional array of singular values</summary>
+            <returns>     diagonal of S.
+            </returns>
+        </member>
+        <member name="P:HardIronCal.SingularValueDecomposition.S">
+            <summary>Return the diagonal matrix of singular values</summary>
+            <returns>     S
+            </returns>
+        </member>
+        <member name="T:HardIronCal.QRDecomposition">
+            <summary>QR Decomposition.
+            For an m-by-n matrix A with m >= n, the QR decomposition is an m-by-n
+            orthogonal matrix Q and an n-by-n upper triangular matrix R so that
+            A = Q*R.
+            
+            The QR decompostion always exists, even if the matrix does not have
+            full rank, so the constructor will never fail.  The primary use of the
+            QR decomposition is in the least squares solution of nonsquare systems
+            of simultaneous linear equations.  This will fail if IsFullRank()
+            returns false.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.QRDecomposition.QR">
+            <summary>Array for internal storage of decomposition.
+            @serial internal array storage.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.QRDecomposition.m">
+            <summary>Row and column dimensions.
+            @serial column dimension.
+            @serial row dimension.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.QRDecomposition.n">
+            <summary>Row and column dimensions.
+            @serial column dimension.
+            @serial row dimension.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.QRDecomposition.Rdiag">
+            <summary>Array for internal storage of diagonal of R.
+            @serial diagonal of R.
+            </summary>
+        </member>
+        <member name="M:HardIronCal.QRDecomposition.#ctor(HardIronCal.GeneralMatrix)">
+            <summary>QR Decomposition, computed by Householder reflections.</summary>
+            <param name="A">   Rectangular matrix
+            </param>
+            <returns>     Structure to access R and the Householder vectors and compute Q.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.QRDecomposition.Solve(HardIronCal.GeneralMatrix)">
+            <summary>Least squares solution of A*X = B</summary>
+            <param name="B">   A Matrix with as many rows as A and any number of columns.
+            </param>
+            <returns>     X that minimizes the two norm of Q*R*X-B.
+            </returns>
+            <exception cref="T:System.ArgumentException"> Matrix row dimensions must agree.
+            </exception>
+            <exception cref="T:System.SystemException"> Matrix is rank deficient.
+            </exception>
+        </member>
+        <member name="P:HardIronCal.QRDecomposition.FullRank">
+            <summary>Is the matrix full rank?</summary>
+            <returns>     true if R, and hence A, has full rank.
+            </returns>
+        </member>
+        <member name="P:HardIronCal.QRDecomposition.H">
+            <summary>Return the Householder vectors</summary>
+            <returns>     Lower trapezoidal matrix whose columns define the reflections
+            </returns>
+        </member>
+        <member name="P:HardIronCal.QRDecomposition.R">
+            <summary>Return the upper triangular factor</summary>
+            <returns>     R
+            </returns>
+        </member>
+        <member name="P:HardIronCal.QRDecomposition.Q">
+            <summary>Generate and return the (economy-sized) orthogonal factor</summary>
+            <returns>     Q
+            </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:HardIronCal.LUDecomposition" -->
+        <member name="F:HardIronCal.LUDecomposition.LU">
+            <summary>Array for internal storage of decomposition.
+            @serial internal array storage.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.LUDecomposition.m">
+            <summary>Row and column dimensions, and pivot sign.
+            @serial column dimension.
+            @serial row dimension.
+            @serial pivot sign.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.LUDecomposition.n">
+            <summary>Row and column dimensions, and pivot sign.
+            @serial column dimension.
+            @serial row dimension.
+            @serial pivot sign.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.LUDecomposition.pivsign">
+            <summary>Row and column dimensions, and pivot sign.
+            @serial column dimension.
+            @serial row dimension.
+            @serial pivot sign.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.LUDecomposition.piv">
+            <summary>Internal storage of pivot vector.
+            @serial pivot vector.
+            </summary>
+        </member>
+        <member name="M:HardIronCal.LUDecomposition.#ctor(HardIronCal.GeneralMatrix)">
+            <summary>LU Decomposition</summary>
+            <param name="A">  Rectangular matrix
+            </param>
+            <returns>     Structure to access L, U and piv.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.LUDecomposition.Determinant">
+            <summary>Determinant</summary>
+            <returns>     det(A)
+            </returns>
+            <exception cref="T:System.ArgumentException">  Matrix must be square
+            </exception>
+        </member>
+        <member name="M:HardIronCal.LUDecomposition.Solve(HardIronCal.GeneralMatrix)">
+            <summary>Solve A*X = B</summary>
+            <param name="B">  A Matrix with as many rows as A and any number of columns.
+            </param>
+            <returns>     X so that L*U*X = B(piv,:)
+            </returns>
+            <exception cref="T:System.ArgumentException"> Matrix row dimensions must agree.
+            </exception>
+            <exception cref="T:System.SystemException"> Matrix is singular.
+            </exception>
+        </member>
+        <member name="P:HardIronCal.LUDecomposition.IsNonSingular">
+            <summary>Is the matrix nonsingular?</summary>
+            <returns>     true if U, and hence A, is nonsingular.
+            </returns>
+        </member>
+        <member name="P:HardIronCal.LUDecomposition.L">
+            <summary>Return lower triangular factor</summary>
+            <returns>     L
+            </returns>
+        </member>
+        <member name="P:HardIronCal.LUDecomposition.U">
+            <summary>Return upper triangular factor</summary>
+            <returns>     U
+            </returns>
+        </member>
+        <member name="P:HardIronCal.LUDecomposition.Pivot">
+            <summary>Return pivot permutation vector</summary>
+            <returns>     piv
+            </returns>
+        </member>
+        <member name="P:HardIronCal.LUDecomposition.DoublePivot">
+            <summary>Return pivot permutation vector as a one-dimensional double array</summary>
+            <returns>     (double) piv
+            </returns>
+        </member>
+        <member name="M:HardIronCal.Maths.Hypot(System.Double,System.Double)">
+            <summary>
+             sqrt(a^2 + b^2) without under/overflow.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:HardIronCal.GeneralMatrix" -->
+        <member name="F:HardIronCal.GeneralMatrix.A">
+            <summary>Array for internal storage of elements.
+            @serial internal array storage.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.GeneralMatrix.m">
+            <summary>Row and column dimensions.
+            @serial row dimension.
+            @serial column dimension.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.GeneralMatrix.n">
+            <summary>Row and column dimensions.
+            @serial row dimension.
+            @serial column dimension.
+            </summary>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.#ctor(System.Int32,System.Int32)">
+            <summary>Construct an m-by-n matrix of zeros. </summary>
+            <param name="m">   Number of rows.
+            </param>
+            <param name="n">   Number of colums.
+            </param>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.#ctor(System.Int32,System.Int32,System.Double)">
+            <summary>Construct an m-by-n constant matrix.</summary>
+            <param name="m">   Number of rows.
+            </param>
+            <param name="n">   Number of colums.
+            </param>
+            <param name="s">   Fill the matrix with this scalar value.
+            </param>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.#ctor(System.Double[][])">
+            <summary>Construct a matrix from a 2-D array.</summary>
+            <param name="A">   Two-dimensional array of doubles.
+            </param>
+            <exception cref="T:System.ArgumentException">   All rows must have the same length
+            </exception>
+            <seealso cref="M:HardIronCal.GeneralMatrix.Create(System.Double[][])">
+            </seealso>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.#ctor(System.Double[][],System.Int32,System.Int32)">
+            <summary>Construct a matrix quickly without checking arguments.</summary>
+            <param name="A">   Two-dimensional array of doubles.
+            </param>
+            <param name="m">   Number of rows.
+            </param>
+            <param name="n">   Number of colums.
+            </param>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.#ctor(System.Double[],System.Int32)">
+            <summary>Construct a matrix from a one-dimensional packed array</summary>
+            <param name="vals">One-dimensional array of doubles, packed by columns (ala Fortran).
+            </param>
+            <param name="m">   Number of rows.
+            </param>
+            <exception cref="T:System.ArgumentException">   Array length must be a multiple of m.
+            </exception>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Create(System.Double[][])">
+            <summary>Construct a matrix from a copy of a 2-D array.</summary>
+            <param name="A">   Two-dimensional array of doubles.
+            </param>
+            <exception cref="T:System.ArgumentException">   All rows must have the same length
+            </exception>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Copy">
+            <summary>Make a deep copy of a matrix</summary>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.GetElement(System.Int32,System.Int32)">
+            <summary>Get a single element.</summary>
+            <param name="i">   Row index.
+            </param>
+            <param name="j">   Column index.
+            </param>
+            <returns>     A(i,j)
+            </returns>
+            <exception cref="T:System.IndexOutOfRangeException">  
+            </exception>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.GetMatrix(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>Get a submatrix.</summary>
+            <param name="i0">  Initial row index
+            </param>
+            <param name="i1">  Final row index
+            </param>
+            <param name="j0">  Initial column index
+            </param>
+            <param name="j1">  Final column index
+            </param>
+            <returns>     A(i0:i1,j0:j1)
+            </returns>
+            <exception cref="T:System.IndexOutOfRangeException">   Submatrix indices
+            </exception>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.GetMatrix(System.Int32[],System.Int32[])">
+            <summary>Get a submatrix.</summary>
+            <param name="r">   Array of row indices.
+            </param>
+            <param name="c">   Array of column indices.
+            </param>
+            <returns>     A(r(:),c(:))
+            </returns>
+            <exception cref="T:System.IndexOutOfRangeException">   Submatrix indices
+            </exception>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.GetMatrix(System.Int32,System.Int32,System.Int32[])">
+            <summary>Get a submatrix.</summary>
+            <param name="i0">  Initial row index
+            </param>
+            <param name="i1">  Final row index
+            </param>
+            <param name="c">   Array of column indices.
+            </param>
+            <returns>     A(i0:i1,c(:))
+            </returns>
+            <exception cref="T:System.IndexOutOfRangeException">   Submatrix indices
+            </exception>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.GetMatrix(System.Int32[],System.Int32,System.Int32)">
+            <summary>Get a submatrix.</summary>
+            <param name="r">   Array of row indices.
+            </param>
+            <param name="j0">  Initial column index
+            </param>
+            <param name="j1">  Final column index
+            </param>
+            <returns>     A(r(:),j0:j1)
+            </returns>
+            <exception cref="T:System.IndexOutOfRangeException">   Submatrix indices
+            </exception>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.SetElement(System.Int32,System.Int32,System.Double)">
+            <summary>Set a single element.</summary>
+            <param name="i">   Row index.
+            </param>
+            <param name="j">   Column index.
+            </param>
+            <param name="s">   A(i,j).
+            </param>
+            <exception cref="T:System.IndexOutOfRangeException">  
+            </exception>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.SetMatrix(System.Int32,System.Int32,System.Int32,System.Int32,HardIronCal.GeneralMatrix)">
+            <summary>Set a submatrix.</summary>
+            <param name="i0">  Initial row index
+            </param>
+            <param name="i1">  Final row index
+            </param>
+            <param name="j0">  Initial column index
+            </param>
+            <param name="j1">  Final column index
+            </param>
+            <param name="X">   A(i0:i1,j0:j1)
+            </param>
+            <exception cref="T:System.IndexOutOfRangeException">  Submatrix indices
+            </exception>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.SetMatrix(System.Int32[],System.Int32[],HardIronCal.GeneralMatrix)">
+            <summary>Set a submatrix.</summary>
+            <param name="r">   Array of row indices.
+            </param>
+            <param name="c">   Array of column indices.
+            </param>
+            <param name="X">   A(r(:),c(:))
+            </param>
+            <exception cref="T:System.IndexOutOfRangeException">  Submatrix indices
+            </exception>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.SetMatrix(System.Int32[],System.Int32,System.Int32,HardIronCal.GeneralMatrix)">
+            <summary>Set a submatrix.</summary>
+            <param name="r">   Array of row indices.
+            </param>
+            <param name="j0">  Initial column index
+            </param>
+            <param name="j1">  Final column index
+            </param>
+            <param name="X">   A(r(:),j0:j1)
+            </param>
+            <exception cref="T:System.IndexOutOfRangeException"> Submatrix indices
+            </exception>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.SetMatrix(System.Int32,System.Int32,System.Int32[],HardIronCal.GeneralMatrix)">
+            <summary>Set a submatrix.</summary>
+            <param name="i0">  Initial row index
+            </param>
+            <param name="i1">  Final row index
+            </param>
+            <param name="c">   Array of column indices.
+            </param>
+            <param name="X">   A(i0:i1,c(:))
+            </param>
+            <exception cref="T:System.IndexOutOfRangeException">  Submatrix indices
+            </exception>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Transpose">
+            <summary>Matrix transpose.</summary>
+            <returns>    A'
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Norm1">
+            <summary>One norm</summary>
+            <returns>    maximum column sum.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Norm2">
+            <summary>Two norm</summary>
+            <returns>    maximum singular value.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.NormInf">
+            <summary>Infinity norm</summary>
+            <returns>    maximum row sum.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.NormF">
+            <summary>Frobenius norm</summary>
+            <returns>    sqrt of sum of squares of all elements.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.UnaryMinus">
+            <summary>Unary minus</summary>
+            <returns>    -A
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Add(HardIronCal.GeneralMatrix)">
+            <summary>C = A + B</summary>
+            <param name="B">   another matrix
+            </param>
+            <returns>     A + B
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.AddEquals(HardIronCal.GeneralMatrix)">
+            <summary>A = A + B</summary>
+            <param name="B">   another matrix
+            </param>
+            <returns>     A + B
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Subtract(HardIronCal.GeneralMatrix)">
+            <summary>C = A - B</summary>
+            <param name="B">   another matrix
+            </param>
+            <returns>     A - B
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.SubtractEquals(HardIronCal.GeneralMatrix)">
+            <summary>A = A - B</summary>
+            <param name="B">   another matrix
+            </param>
+            <returns>     A - B
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.ArrayMultiply(HardIronCal.GeneralMatrix)">
+            <summary>Element-by-element multiplication, C = A.*B</summary>
+            <param name="B">   another matrix
+            </param>
+            <returns>     A.*B
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.ArrayMultiplyEquals(HardIronCal.GeneralMatrix)">
+            <summary>Element-by-element multiplication in place, A = A.*B</summary>
+            <param name="B">   another matrix
+            </param>
+            <returns>     A.*B
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.ArrayRightDivide(HardIronCal.GeneralMatrix)">
+            <summary>Element-by-element right division, C = A./B</summary>
+            <param name="B">   another matrix
+            </param>
+            <returns>     A./B
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.ArrayRightDivideEquals(HardIronCal.GeneralMatrix)">
+            <summary>Element-by-element right division in place, A = A./B</summary>
+            <param name="B">   another matrix
+            </param>
+            <returns>     A./B
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.ArrayLeftDivide(HardIronCal.GeneralMatrix)">
+            <summary>Element-by-element left division, C = A.\B</summary>
+            <param name="B">   another matrix
+            </param>
+            <returns>     A.\B
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.ArrayLeftDivideEquals(HardIronCal.GeneralMatrix)">
+            <summary>Element-by-element left division in place, A = A.\B</summary>
+            <param name="B">   another matrix
+            </param>
+            <returns>     A.\B
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Multiply(System.Double)">
+            <summary>Multiply a matrix by a scalar, C = s*A</summary>
+            <param name="s">   scalar
+            </param>
+            <returns>     s*A
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.MultiplyEquals(System.Double)">
+            <summary>Multiply a matrix by a scalar in place, A = s*A</summary>
+            <param name="s">   scalar
+            </param>
+            <returns>     replace A by s*A
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Multiply(HardIronCal.GeneralMatrix)">
+            <summary>Linear algebraic matrix multiplication, A * B</summary>
+            <param name="B">   another matrix
+            </param>
+            <returns>     Matrix product, A * B
+            </returns>
+            <exception cref="T:System.ArgumentException">  Matrix inner dimensions must agree.
+            </exception>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.op_Addition(HardIronCal.GeneralMatrix,HardIronCal.GeneralMatrix)">
+            <summary>
+             Addition of matrices
+            </summary>
+            <param name="m1"></param>
+            <param name="m2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.op_Subtraction(HardIronCal.GeneralMatrix,HardIronCal.GeneralMatrix)">
+            <summary>
+            Subtraction of matrices
+            </summary>
+            <param name="m1"></param>
+            <param name="m2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.op_Multiply(HardIronCal.GeneralMatrix,HardIronCal.GeneralMatrix)">
+            <summary>
+            Multiplication of matrices
+            </summary>
+            <param name="m1"></param>
+            <param name="m2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.LUD">
+            <summary>LU Decomposition</summary>
+            <returns>     LUDecomposition
+            </returns>
+            <seealso cref="T:HardIronCal.LUDecomposition">
+            </seealso>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.QRD">
+            <summary>QR Decomposition</summary>
+            <returns>     QRDecomposition
+            </returns>
+            <seealso cref="T:HardIronCal.QRDecomposition">
+            </seealso>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.chol">
+            <summary>Cholesky Decomposition</summary>
+            <returns>     CholeskyDecomposition
+            </returns>
+            <seealso cref="T:HardIronCal.CholeskyDecomposition">
+            </seealso>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.SVD">
+            <summary>Singular Value Decomposition</summary>
+            <returns>     SingularValueDecomposition
+            </returns>
+            <seealso cref="T:HardIronCal.SingularValueDecomposition">
+            </seealso>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Eigen">
+            <summary>Eigenvalue Decomposition</summary>
+            <returns>     EigenvalueDecomposition
+            </returns>
+            <seealso cref="T:HardIronCal.EigenvalueDecomposition">
+            </seealso>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Solve(HardIronCal.GeneralMatrix)">
+            <summary>Solve A*X = B</summary>
+            <param name="B">   right hand side
+            </param>
+            <returns>     solution if A is square, least squares solution otherwise
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.SolveTranspose(HardIronCal.GeneralMatrix)">
+            <summary>Solve X*A = B, which is also A'*X' = B'</summary>
+            <param name="B">   right hand side
+            </param>
+            <returns>     solution if A is square, least squares solution otherwise.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Inverse">
+            <summary>Matrix inverse or pseudoinverse</summary>
+            <returns>     inverse(A) if A is square, pseudoinverse otherwise.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Determinant">
+            <summary>GeneralMatrix determinant</summary>
+            <returns>     determinant
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Rank">
+            <summary>GeneralMatrix rank</summary>
+            <returns>     effective numerical rank, obtained from SVD.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Condition">
+            <summary>Matrix condition (2 norm)</summary>
+            <returns>     ratio of largest to smallest singular value.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Trace">
+            <summary>Matrix trace.</summary>
+            <returns>     sum of the diagonal elements.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Random(System.Int32,System.Int32)">
+            <summary>Generate matrix with random elements</summary>
+            <param name="m">   Number of rows.
+            </param>
+            <param name="n">   Number of colums.
+            </param>
+            <returns>     An m-by-n matrix with uniformly distributed random elements.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Identity(System.Int32,System.Int32)">
+            <summary>Generate identity matrix</summary>
+            <param name="m">   Number of rows.
+            </param>
+            <param name="n">   Number of colums.
+            </param>
+            <returns>     An m-by-n matrix with ones on the diagonal and zeros elsewhere.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.CheckMatrixDimensions(HardIronCal.GeneralMatrix)">
+            <summary>Check if size(A) == size(B) *</summary>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Dispose">
+            <summary>
+            Do not make this method virtual.
+            A derived class should not be able to override this method.
+            </summary>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Dispose(System.Boolean)">
+            <summary>
+            Dispose(bool disposing) executes in two distinct scenarios.
+            If disposing equals true, the method has been called directly
+            or indirectly by a user's code. Managed and unmanaged resources
+            can be disposed.
+            If disposing equals false, the method has been called by the 
+            runtime from inside the finalizer and you should not reference 
+            other objects. Only unmanaged resources can be disposed.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Finalize">
+            <summary>
+            This destructor will run only if the Dispose method 
+            does not get called.
+            It gives your base class the opportunity to finalize.
+            Do not provide destructors in types derived from this class.
+            </summary>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.Clone">
+            <summary>Clone the GeneralMatrix object.</summary>
+        </member>
+        <member name="M:HardIronCal.GeneralMatrix.System#Runtime#Serialization#ISerializable#GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            A method called when serializing this class
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="P:HardIronCal.GeneralMatrix.Array">
+            <summary>Access the internal two-dimensional array.</summary>
+            <returns>     Pointer to the two-dimensional array of matrix elements.
+            </returns>
+        </member>
+        <member name="P:HardIronCal.GeneralMatrix.ArrayCopy">
+            <summary>Copy the internal two-dimensional array.</summary>
+            <returns>     Two-dimensional array copy of matrix elements.
+            </returns>
+        </member>
+        <member name="P:HardIronCal.GeneralMatrix.ColumnPackedCopy">
+            <summary>Make a one-dimensional column packed copy of the internal array.</summary>
+            <returns>     Matrix elements packed in a one-dimensional array by columns.
+            </returns>
+        </member>
+        <member name="P:HardIronCal.GeneralMatrix.RowPackedCopy">
+            <summary>Make a one-dimensional row packed copy of the internal array.</summary>
+            <returns>     Matrix elements packed in a one-dimensional array by rows.
+            </returns>
+        </member>
+        <member name="P:HardIronCal.GeneralMatrix.RowDimension">
+            <summary>Get row dimension.</summary>
+            <returns>     m, the number of rows.
+            </returns>
+        </member>
+        <member name="P:HardIronCal.GeneralMatrix.ColumnDimension">
+            <summary>Get column dimension.</summary>
+            <returns>     n, the number of columns.
+            </returns>
+        </member>
+        <member name="T:HardIronCal.EigenvalueDecomposition">
+            <summary>Eigenvalues and eigenvectors of a real matrix. 
+            If A is symmetric, then A = V*D*V' where the eigenvalue matrix D is
+            diagonal and the eigenvector matrix V is orthogonal.
+            I.e. A = V.Multiply(D.Multiply(V.Transpose())) and 
+            V.Multiply(V.Transpose()) equals the identity matrix.
+            If A is not symmetric, then the eigenvalue matrix D is block diagonal
+            with the real eigenvalues in 1-by-1 blocks and any complex eigenvalues,
+            lambda + i*mu, in 2-by-2 blocks, [lambda, mu; -mu, lambda].  The
+            columns of V represent the eigenvectors in the sense that A*V = V*D,
+            i.e. A.Multiply(V) equals V.Multiply(D).  The matrix V may be badly
+            conditioned, or even singular, so the validity of the equation
+            A = V*D*Inverse(V) depends upon V.cond().
+            
+            </summary>
+        </member>
+        <member name="F:HardIronCal.EigenvalueDecomposition.n">
+            <summary>Row and column dimension (square matrix).
+            @serial matrix dimension.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.EigenvalueDecomposition.issymmetric">
+            <summary>Symmetry flag.
+            @serial internal symmetry flag.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.EigenvalueDecomposition.d">
+            <summary>Arrays for internal storage of eigenvalues.
+            @serial internal storage of eigenvalues.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.EigenvalueDecomposition.e">
+            <summary>Arrays for internal storage of eigenvalues.
+            @serial internal storage of eigenvalues.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.EigenvalueDecomposition.V">
+            <summary>Array for internal storage of eigenvectors.
+            @serial internal storage of eigenvectors.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.EigenvalueDecomposition.H">
+            <summary>Array for internal storage of nonsymmetric Hessenberg form.
+            @serial internal storage of nonsymmetric Hessenberg form.
+            </summary>
+        </member>
+        <member name="F:HardIronCal.EigenvalueDecomposition.ort">
+            <summary>Working storage for nonsymmetric algorithm.
+            @serial working storage for nonsymmetric algorithm.
+            </summary>
+        </member>
+        <member name="M:HardIronCal.EigenvalueDecomposition.#ctor(HardIronCal.GeneralMatrix)">
+            <summary>Check for symmetry, then construct the eigenvalue decomposition</summary>
+            <param name="Arg">   Square matrix
+            </param>
+            <returns>     Structure to access D and V.
+            </returns>
+        </member>
+        <member name="M:HardIronCal.EigenvalueDecomposition.GetV">
+            <summary>Return the eigenvector matrix</summary>
+            <returns>     V
+            </returns>
+        </member>
+        <member name="P:HardIronCal.EigenvalueDecomposition.RealEigenvalues">
+            <summary>Return the real parts of the eigenvalues</summary>
+            <returns>     real(diag(D))
+            </returns>
+        </member>
+        <member name="P:HardIronCal.EigenvalueDecomposition.ImagEigenvalues">
+            <summary>Return the imaginary parts of the eigenvalues</summary>
+            <returns>     imag(diag(D))
+            </returns>
+        </member>
+        <member name="P:HardIronCal.EigenvalueDecomposition.D">
+            <summary>Return the block diagonal eigenvalue matrix</summary>
+            <returns>     D
+            </returns>
+        </member>
+    </members>
+</doc>
