@@ -6,12 +6,10 @@ using System.Text;
 namespace x_IMU_API
 {
     /// <summary>
-    /// Packet encoding class.  Contains static methods for packet encoding and decoding.
+    /// Packet encoding class. Contains static methods for packet encoding and decoding.
     /// </summary>
     internal class PacketEncoding
     {
-        #region Packet encoding
-
         /// <summary>
         /// Encodes packet with consecutive right shifts so that the msb of each encoded byte is clear. The msb of the final byte is set to indicate the end of the packet.
         /// </summary>
@@ -37,7 +35,7 @@ namespace x_IMU_API
         }
 
         /// <summary>
-        /// Right shifts a byte array by 1 bit.  The lsb of byte x becomes the msb of byte x+1.
+        /// Right shifts a byte array by 1 bit. The lsb of byte x becomes the msb of byte x+1.
         /// </summary>
         /// <param name="byteArray">
         /// The byte array to be right shifted.
@@ -55,10 +53,6 @@ namespace x_IMU_API
             }
             return byteArray;
         }
-
-        #endregion
-
-        #region Packet decoding
 
         /// <summary>
         /// Decodes a packet with consecutive left shifts so that the msb of each encoded byte is removed.
@@ -83,7 +77,7 @@ namespace x_IMU_API
         }
 
         /// <summary>
-        /// Left shifts a byte array by 1 bit.  The msb of byte x becomes the lsb of byte x-1.
+        /// Left shifts a byte array by 1 bit. The msb of byte x becomes the lsb of byte x-1.
         /// </summary>
         /// <param name="byteArray">
         /// The byte array to be left shifted.
@@ -101,7 +95,5 @@ namespace x_IMU_API
             }
             return byteArray;
         }
-
-        #endregion
     }
 }

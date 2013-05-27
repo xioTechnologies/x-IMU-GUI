@@ -10,82 +10,51 @@ namespace x_IMU_API
     /// </summary>
     public class RawAnalogueInputData : xIMUdata
     {
-        #region Variables
-
-        private short[] privAnaloguePort;
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Raw analogue port ADC data in lsb.  Elements 0 to 7 correspond to channels AX0 to AX7.
-        /// </summary>
-        public short[] AnaloguePort
-        {
-            get
-            {
-                return privAnaloguePort;
-            }
-            set
-            {
-                if (value.Length != 8)
-                {
-                    throw new Exception("Array must be of length 8.");
-                }
-                privAnaloguePort = value;
-            }
-        }
-
         /// <summary>
         /// Gets or sets raw channel AX0 voltage ADC data in lsb.
         /// </summary>
-        public short AX0 { get { return AnaloguePort[0]; } set { AnaloguePort[0] = value; } }
+        public short AX0 { get; set; }
 
         /// <summary>
         /// Gets or sets raw channel AX1 voltage ADC data in lsb.
         /// </summary>
-        public short AX1 { get { return AnaloguePort[1]; } set { AnaloguePort[1] = value; } }
+        public short AX1 { get; set; }
 
         /// <summary>
         /// Gets or sets raw channel AX2 voltage ADC data in lsb.
         /// </summary>
-        public short AX2 { get { return AnaloguePort[2]; } set { AnaloguePort[2] = value; } }
+        public short AX2 { get; set; }
 
         /// <summary>
         /// Gets or sets raw channel AX3 voltage ADC data in lsb.
         /// </summary>
-        public short AX3 { get { return AnaloguePort[3]; } set { AnaloguePort[3] = value; } }
+        public short AX3 { get; set; }
 
         /// <summary>
         /// Gets or sets raw channel AX4 voltage ADC data in lsb.
         /// </summary>
-        public short AX4 { get { return AnaloguePort[4]; } set { AnaloguePort[4] = value; } }
+        public short AX4 { get; set; }
 
         /// <summary>
         /// Gets or sets raw channel AX5 voltage ADC data in lsb.
         /// </summary>
-        public short AX5 { get { return AnaloguePort[5]; } set { AnaloguePort[5] = value; } }
+        public short AX5 { get; set; }
 
         /// <summary>
         /// Gets or sets raw channel AX6 voltage ADC data in lsb.
         /// </summary>
-        public short AX6 { get { return AnaloguePort[6]; } set { AnaloguePort[6] = value; } }
+        public short AX6 { get; set; }
 
         /// <summary>
         /// Gets or sets raw channel AX7 voltage ADC data in lsb.
         /// </summary>
-        public short AX7 { get { return AnaloguePort[7]; } set { AnaloguePort[7] = value; } }
-
-        #endregion
-
-        #region Constructors
+        public short AX7 { get; set; }
 
         /// <summary>
         /// Initialises a new instance of the <see cref="RawAnalogueInputData"/> class.
         /// </summary>
         public RawAnalogueInputData()
-            : this(new short[8] { 0, 0, 0, 0, 0, 0, 0, 0 })
+            : this(0, 0, 0, 0, 0, 0, 0, 0)
         {
         }
 
@@ -116,38 +85,27 @@ namespace x_IMU_API
         /// <param name="AX7">
         /// Raw channel AX7 voltage ADC data in lsb.
         /// </param>
-        public RawAnalogueInputData(short AX0, short AX1, short AX2, short AX3, short AX4, short AX5, short AX6, short AX7)
-            : this(new short[8] { AX0, AX1, AX2, AX3, AX4, AX5, AX6, AX7 })
+        public RawAnalogueInputData(short _AX0, short _AX1, short _AX2, short _AX3, short _AX4, short _AX5, short _AX6, short _AX7)
         {
+            AX0 = _AX0;
+            AX1 = _AX1;
+            AX2 = _AX2;
+            AX3 = _AX3;
+            AX4 = _AX4;
+            AX5 = _AX5;
+            AX6 = _AX6;
+            AX7 = _AX7;
         }
-
-        /// <summary>
-        /// Initialises a new instance of the <see cref="RawAnalogueInputData"/> class.
-        /// </summary>
-        /// <param name="analoguePort">
-        /// Raw analogue port ADC data in lsb.  Elements 0 to 7 correspond to channels AX0 to AX7.
-        /// </param>
-        public RawAnalogueInputData(short[] analoguePort)
-        {
-            AnaloguePort = analoguePort;
-        }
-
-        #endregion
-
-        #region Methods
 
         /// <summary>
         /// Converts data to string of Comma Separated Variables.
         /// </summary>
         /// <returns>
-        /// CSV line.
+        /// CSV text line.
         /// </returns>
-        public string ConvertToCSV()
+        public string ConvertToCSVstring()
         {
-            return Convert.ToString(AnaloguePort[0]) + "," + Convert.ToString(AnaloguePort[1]) + "," + Convert.ToString(AnaloguePort[2]) + "," + Convert.ToString(AnaloguePort[3]) + "," +
-                   Convert.ToString(AnaloguePort[4]) + "," + Convert.ToString(AnaloguePort[5]) + "," + Convert.ToString(AnaloguePort[6]) + "," + Convert.ToString(AnaloguePort[7]);
+            return AX0.ToString() + "," + AX1.ToString() + "," + AX2.ToString() + "," + AX3.ToString() + "," + AX4.ToString() + "," + AX5.ToString() + "," + AX6.ToString() + "," + AX7.ToString();
         }
-
-        #endregion
     }
 }

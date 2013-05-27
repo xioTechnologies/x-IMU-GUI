@@ -10,30 +10,44 @@ namespace x_IMU_API
     /// </summary>
     public class DateTimeData : xIMUdata
     {
-        #region Variables
-
-        private int privYear;
-        private int privMonth;
-        private int privDate;
-        private int privHours;
-        private int privMinutes;
-        private int privSeconds;
-
-        #endregion
-
-        #region Properties
+        /// <summary>
+        /// Private year value.
+        /// </summary>
+        private int year;
 
         /// <summary>
-        /// Gets or sets the year. Must be of value 2000 2099.
+        /// Private month value.
         /// </summary>
-        /// <exception cref="System.Exception">
-        /// Thrown if invalid year specified.
-        /// </exception>
+        private int month;
+
+        /// <summary>
+        /// Private day value.
+        /// </summary>
+        private int day;
+
+        /// <summary>
+        /// Private hours value.
+        /// </summary>
+        private int hours;
+
+        /// <summary>
+        /// Private minutes value.
+        /// </summary>
+        private int minutes;
+
+        /// <summary>
+        /// Private seconds value.
+        /// </summary>
+        private int seconds;
+
+        /// <summary>
+        /// Gets or sets the year. Value must be from 2000 2099.
+        /// </summary>
         public int Year
         {
             get
             {
-                return privYear;
+                return year;
             }
             set
             {
@@ -41,21 +55,18 @@ namespace x_IMU_API
                 {
                     throw new Exception("Year value must 2000 to 2099");
                 }
-                else privYear = value;
+                year = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets the month. Must be of value 1 to 12.
+        /// Gets or sets the month. Value must be from 1 to 12.
         /// </summary>
-        /// <exception cref="System.Exception">
-        /// Thrown if invalid month specified.
-        /// </exception>
         public int Month
         {
             get
             {
-                return privMonth;
+                return month;
             }
             set
             {
@@ -63,21 +74,18 @@ namespace x_IMU_API
                 {
                     throw new Exception("Month value must 1 to 12");
                 }
-                else privMonth = value;
+                month = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets the date. Must be of value 1 to 31.
+        /// Gets or sets the day. Value must be from 1 to 31.
         /// </summary>
-        /// <exception cref="System.Exception">
-        /// Thrown if invalid date specified.
-        /// </exception>
-        public int Date
+        public int Day
         {
             get
             {
-                return privDate;
+                return day;
             }
             set
             {
@@ -85,21 +93,18 @@ namespace x_IMU_API
                 {
                     throw new Exception("Date value must 1 to 31");
                 }
-                else privDate = value;
+                day = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets the hours. Must be of value 0 to 23.
+        /// Gets or sets the hours. Value must be from 0 to 23.
         /// </summary>
-        /// <exception cref="System.Exception">
-        /// Thrown if invalid hours specified.
-        /// </exception>
         public int Hours
         {
             get
             {
-                return privHours;
+                return hours;
             }
             set
             {
@@ -107,21 +112,18 @@ namespace x_IMU_API
                 {
                     throw new Exception("Hours value must 00 to 23");
                 }
-                else privHours = value;
+                hours = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets the minutes. Must be of value 0 to 59.
+        /// Gets or sets the minutes. Value must be from 0 to 59.
         /// </summary>
-        /// <exception cref="System.Exception">
-        /// Thrown if invalid minutes specified.
-        /// </exception>
         public int Minutes
         {
             get
             {
-                return privMinutes;
+                return minutes;
             }
             set
             {
@@ -129,21 +131,18 @@ namespace x_IMU_API
                 {
                     throw new Exception("Minutes value must 0 to 59");
                 }
-                else privMinutes = value;
+                minutes = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets the seconds. Must be of value 0 to 59.
+        /// Gets or sets the seconds. Value must be from 0 to 59.
         /// </summary>
-        /// <exception cref="System.Exception">
-        /// Thrown if invalid seconds specified.
-        /// </exception>
         public int Seconds
         {
             get
             {
-                return privSeconds;
+                return seconds;
             }
             set
             {
@@ -151,33 +150,9 @@ namespace x_IMU_API
                 {
                     throw new Exception("Seconds value must 0 to 59");
                 }
-                else privSeconds = value;
+                seconds = value;
             }
         }
-
-        /// <summary>
-        /// Gets or sets a <see cref="DateTime"/> object representation of data.
-        /// </summary>
-        public DateTime DateTimeObject
-        {
-            get
-            {
-                return new DateTime(Year, Month, Date, Hours, Minutes, Seconds);
-            }
-            set
-            {
-                Year = value.Year;
-                Month = value.Month;
-                Date = value.Day;
-                Hours = value.Hour;
-                Minutes = value.Minute;
-                Seconds = value.Second;
-            }
-        }
-
-        #endregion
-
-        #region Constructors
 
         /// <summary>
         /// Initialises a new instance of the <see cref="DateTimeData"/> class.
@@ -202,48 +177,69 @@ namespace x_IMU_API
         /// Initialises a new instance of the <see cref="DateTimeData"/> class.
         /// </summary>
         /// <param name="year">
-        /// Year. Must be of value 2000 2099.
+        /// Year. Value must be from 2000 2099.
         /// </param>
         /// <param name="month">
-        /// Month. Must be of value 1 to 12.
+        /// Month. Value must be from 1 to 12.
         /// </param>
-        /// <param name="date">
-        /// Date. Must be of value 1 to 31.
+        /// <param name="day">
+        /// Date. Value must be from 1 to 31.
         /// </param>
         /// <param name="hours">
-        /// Hours. Must be of value 0 to 23.
+        /// Hours. Value must be from 0 to 23.
         /// </param>
         /// <param name="minutes">
-        /// Minutes. Must be of value 0 to 59.
+        /// Minutes. Value must be from 0 to 59.
         /// </param>
         /// <param name="seconds">
-        /// Seconds. Must be of value 0 to 59.
+        /// Seconds. Value must be from 0 to 59.
         /// </param>
-        public DateTimeData(int year, int month, int date, int hours, int minutes, int seconds)
+        public DateTimeData(int year, int month, int day, int hours, int minutes, int seconds)
         {
             Year = year;
             Month = month;
-            Date = date;
+            Day = day;
             Hours = hours;
             Minutes = minutes;
             Seconds = seconds;
         }
 
-        #endregion
-
-        #region Methods
-
         /// <summary>
-        /// Converts date/time data to string.
+        /// Converts values to <see cref="DateTime"/> object.
         /// </summary>
         /// <returns>
-        /// Date/time data as string.
+        /// <see cref="DateTime"/>  object.
         /// </returns>
-        public string ConvertToString()
+        public DateTime ConvertToDateTime()
         {
-            return String.Format("{0:F}", DateTimeObject);
+            return new DateTime(Year, Month, Day, Hours, Minutes, Seconds);
         }
 
-        #endregion
+        /// <summary>
+        /// Set values from DateTime object.
+        /// </summary>
+        /// <param name="dateTime">
+        /// <see cref="DateTime"/> object.
+        /// </param>
+        public void SetFromDateTime(DateTime dateTime)
+        {
+            Year = dateTime.Year;
+            Month = dateTime.Month;
+            Day = dateTime.Day;
+            Hours = dateTime.Hour;
+            Minutes = dateTime.Minute;
+            Seconds = dateTime.Second;
+        }
+
+        /// <summary>
+        /// Converts data to string of Comma Separated Variables.
+        /// </summary>
+        /// <returns>
+        /// CSV text line.
+        /// </returns>
+        public string ConvertToCSVstring()
+        {
+            return Year.ToString() + "," + Month.ToString() + "," + Day.ToString() + "," + Hours.ToString() + "," + Minutes.ToString() + "," + Seconds.ToString();
+        }
     }
 }

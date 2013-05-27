@@ -13,13 +13,10 @@ namespace x_IMU_API
     /// </remarks>
     public class QuaternionData : xIMUdata
     {
-        #region Variables
-
-        private float[] privQuaternion;
-
-        #endregion
-
-        #region Properties
+        /// <summary>
+        /// Private quaternion array.
+        /// </summary>
+        private float[] quaternion;
 
         /// <summary>
         /// Gets or sets the quaternion. Must of 4 elements. Vector will be normalised.
@@ -31,7 +28,7 @@ namespace x_IMU_API
         {
             get
             {
-                return privQuaternion;
+                return quaternion;
             }
             set
             {
@@ -40,17 +37,13 @@ namespace x_IMU_API
                     throw new Exception("Quaternion vector must be of 4 elements.");
                 }
                 float norm = (float)Math.Sqrt(value[0] * value[0] + value[1] * value[1] + value[2] * value[2] + value[3] * value[3]);
-                privQuaternion = value;
-                privQuaternion[0] /= norm;
-                privQuaternion[1] /= norm;
-                privQuaternion[2] /= norm;
-                privQuaternion[3] /= norm;
+                quaternion = value;
+                quaternion[0] /= norm;
+                quaternion[1] /= norm;
+                quaternion[2] /= norm;
+                quaternion[3] /= norm;
             }
         }
-
-        #endregion
-
-        #region Constructors
 
         /// <summary>
         /// Initialises a new instance of the <see cref="QuaternionData"/> class.
@@ -71,28 +64,6 @@ namespace x_IMU_API
             Quaternion = quaternion;
         }
 
-        #endregion
-
-        #region Private methods
-
-        /// <summary>
-        /// Converts from radians to degrees.
-        /// </summary>
-        /// <param name="radians">
-        /// Angular quantity in radians.
-        /// </param> 
-        /// <returns>
-        /// Angular quantity in degrees.
-        /// </returns>
-        private float Rad2Deg(float radians)
-        {
-            return 57.2957795130823f * radians;
-        }
-
-        #endregion
-
-        #region Public methods
-
         /// <summary>
         /// Returns the quaternion conjugate.
         /// </summary>
@@ -108,10 +79,8 @@ namespace x_IMU_API
         /// Converts data to rotation matrix.
         /// </summary>
         /// <remarks>
-        /// The 1st to 3rd elements represent columns 1 to 3 of row 1.
-        /// The 4th to 5th elements represent columns 1 to 3 of row 2.
-        /// The 6th to 8th elements represent columns 1 to 3 of row 3.
-        /// </remarks>
+        /// Index order is row major. See http://en.wikipedia.org/wiki/Row-major_order
+        /// </remarks> 
         public float[] ConvertToRotationMatrix()
         {
             float R11 = 2 * Quaternion[0] * Quaternion[0] - 1 + 2 * Quaternion[1] * Quaternion[1];
@@ -129,7 +98,7 @@ namespace x_IMU_API
         }
 
         /// <summary>
-        /// Converts data to XYZ Euler angles (in degrees).
+        /// Converts data to ZYX Euler angles (in degrees).
         /// </summary>
         public float[] ConvertToEulerAngles()
         {
@@ -140,47 +109,57 @@ namespace x_IMU_API
         }
 
         /// <summary>
+        /// Converts from radians to degrees.
+        /// </summary>
+        /// <param name="radians">
+        /// Angular quantity in radians.
+        /// </param> 
+        /// <returns>
+        /// Angular quantity in degrees.
+        /// </returns>
+        private float Rad2Deg(float radians)
+        {
+            return 57.2957795130823f * radians;
+        }
+
+        /// <summary>
         /// Converts data to string of Comma Separated Variables.
         /// </summary>
         /// <returns>
-        /// CSV line.
+        /// CSV text line.
         /// </returns>
-        public string ConvertToCSV()
+        public string ConvertToCSVstring()
         {
-            return Convert.ToString(Quaternion[0]) + "," + Convert.ToString(Quaternion[1]) + "," + Convert.ToString(Quaternion[2]) + "," + Convert.ToString(Quaternion[3]);
+            return Quaternion[0].ToString() + "," + Quaternion[1].ToString() + "," + Quaternion[2].ToString() + "," + Quaternion[3].ToString();
         }
 
         /// <summary>
         /// Converts data to string of Comma Separated Variables representaing the elements of a rotation matrix.
         /// </summary>
         /// <returns>
-        /// CSV line.
+        /// CSV text line.
         /// </returns>
         /// <remarks>
-        /// The 1st to 3rd values represent columns 1 to 3 of row 1.
-        /// The 4th to 5th values represent columns 1 to 3 of row 2.
-        /// The 6th to 8th values represent columns 1 to 3 of row 3.
-        /// </remarks>
-        public string ConvertToRotationMatrixCSV()
+        /// Index order is row major. See http://en.wikipedia.org/wiki/Row-major_order
+        /// </remarks> 
+        public string ConvertToRotationMatrixCSVstring()
         {
             float[] R = ConvertToRotationMatrix();
-            return Convert.ToString(R[0]) + "," + Convert.ToString(R[1]) + "," + Convert.ToString(R[2]) + "," +
-                   Convert.ToString(R[3]) + "," + Convert.ToString(R[4]) + "," + Convert.ToString(R[5]) + "," +
-                   Convert.ToString(R[6]) + "," + Convert.ToString(R[7]) + "," + Convert.ToString(R[8]);
+            return R[0].ToString() + "," + R[1].ToString() + "," + R[2].ToString() + "," +
+                   R[3].ToString() + "," + R[4].ToString() + "," + R[5].ToString() + "," +
+                   R[6].ToString() + "," + R[7].ToString() + "," + R[8].ToString();
         }
 
         /// <summary>
-        /// Converts data to string of Comma Separated Variables representaing the XYZ Euler angles (in degrees).
+        /// Converts data to string of Comma Separated Variables representing the ZYX Euler angles (in degrees).
         /// </summary>
         /// <returns>
-        /// CSV line.
+        /// CSV text line.
         /// </returns>
-        public string ConvertToEulerAnglesCSV()
+        public string ConvertToEulerAnglesCSVstring()
         {
             float[] euler = ConvertToEulerAngles();
-            return Convert.ToString(euler[0]) + "," + Convert.ToString(euler[1]) + "," + Convert.ToString(euler[2]);
+            return euler[0].ToString() + "," + euler[1].ToString() + "," + euler[2].ToString();
         }
-
-        #endregion
     }
 }

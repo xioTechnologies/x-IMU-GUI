@@ -10,50 +10,21 @@ namespace x_IMU_API
     /// </summary>
     public class DigitalIOdata : xIMUdata
     {
-        #region Variables
-
-        private DigitalPortBits privDirection;
-        private DigitalPortBits privState;
-
-        #endregion
-
-        #region Properties
+        /// <summary>
+        /// Gets direction of the digital I/O port. true (1) = input, false (0) = output.
+        /// </summary>
+        public DigitalPortBits Direction { get; private set;}
 
         /// <summary>
-        /// Gets or sets direction of the digital I/O port.  true (1) = input, false (0) = output.
+        /// Gets or sets state of the digital I/O port. true (1) = logic high, false (0) = logic low.
         /// </summary>
-        public DigitalPortBits Direction
-        {
-            get
-            {
-                return privDirection;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets state of the digital I/O port.  true (1) = logic high, false (0) = logic low.
-        /// </summary>
-        public DigitalPortBits State
-        {
-            get
-            {
-                return privState;
-            }
-            set
-            {
-                privState = value;
-            }
-        }
-
-        #endregion
-
-        #region Constructors
+        public DigitalPortBits State { get; set; }
 
         /// <summary>
         /// Initialises a new instance of the <see cref="DigitalIOdata"/> class.
         /// </summary>
         public DigitalIOdata()
-            : this(new DigitalPortBits(), new DigitalPortBits())
+            : this(0, 0)
         {
         }
 
@@ -61,10 +32,10 @@ namespace x_IMU_API
         /// Initialises a new instance of the <see cref="DigitalIOdata"/> class.
         /// </summary>
         /// <param name="state">
-        /// State of the digital I/O port.  true (1) = logic high, false (0) = logic low.
+        /// State of the digital I/O port. true (1) = logic high, false (0) = logic low.
         /// </param>
         public DigitalIOdata(DigitalPortBits state)
-            : this(new DigitalPortBits(), state)
+            : this(0, state.ConvertToByte())
         {
         }
 
@@ -72,42 +43,28 @@ namespace x_IMU_API
         /// Initialises a new instance of the <see cref="DigitalIOdata"/> class.
         /// </summary>     
         /// <param name="direction">
-        /// Direction of the digital I/O port.  true (1) = input, false (0) = output.
+        /// Direction of the digital I/O port. true (1) = input, false (0) = output.
         /// </param>
         /// <param name="state">
-        /// State of the digital I/O port.  true (1) = logic high, false (0) = logic low.
+        /// State of the digital I/O port. true (1) = logic high, false (0) = logic low.
         /// </param>
-        internal DigitalIOdata(DigitalPortBits direction, DigitalPortBits state)
+        internal DigitalIOdata(byte direction, byte state)
         {
-            privDirection = direction;
-            privState = state;
+            Direction = new DigitalPortBits();
+            Direction.SetBitsFromByte(direction);
+            State = new DigitalPortBits();
+            State.SetBitsFromByte(state);
         }
-
-        #endregion
-
-        #region Methods
 
         /// <summary>
         /// Converts data to string of Comma Separated Variables.
         /// </summary>
         /// <returns>
-        /// CSV line.
+        /// CSV text line.
         /// </returns>
-        public string ConvertToCSV()
+        public string ConvertToCSVstring()
         {
-            string CSVline = "";
-            for (int i = 0; i < 8; i++)
-            {
-                CSVline += (privDirection.PortBits[i] ? "1" : "0") + ",";
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                CSVline += privState.PortBits[i] ? "1" : "0";
-                if (i < 7) CSVline += ",";
-            }
-            return CSVline;
+            return Direction.ConvertToCSVstring() + "," + State.ConvertToCSVstring();
         }
-
-        #endregion
     }
 }

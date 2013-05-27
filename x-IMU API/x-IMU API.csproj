@@ -48,8 +48,8 @@
     <Compile Include="AsyncScanProgressChangedEventArgs.cs" />
     <Compile Include="CalADXL345busData.cs" />
     <Compile Include="CalAnalogueInputData.cs" />
-    <Compile Include="CalBattThermData.cs" />
-    <Compile Include="CalInertialMagData.cs" />
+    <Compile Include="CalBatteryAndThermometerData.cs" />
+    <Compile Include="CalInertialAndMagneticData.cs" />
     <Compile Include="CommandData.cs" />
     <Compile Include="CSVfileWriter.cs" />
     <Compile Include="DateTimeData.cs" />
@@ -68,8 +68,8 @@
     <Compile Include="QuaternionData.cs" />
     <Compile Include="RawADXL345busData.cs" />
     <Compile Include="RawAnalogueInputData.cs" />
-    <Compile Include="RawBattThermData.cs" />
-    <Compile Include="RawInertialMagData.cs" />
+    <Compile Include="RawBatteryAndThermometerData.cs" />
+    <Compile Include="RawInertialAndMagneticData.cs" />
     <Compile Include="RegisterData.cs" />
     <Compile Include="xIMUdata.cs" />
     <Compile Include="xIMUfile.cs" />

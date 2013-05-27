@@ -10,30 +10,15 @@ namespace x_IMU_API
     /// </summary>
     public class AsyncScanProgressChangedEventArgs
     {
-        private int privProgressPercentage;
-        private string privProgressMessage;
-
         /// <summary>
         /// Gets the progress percentage.
         /// </summary>
-        public int ProgressPercentage
-        {
-            get
-            {
-                return privProgressPercentage;
-            }
-        }
+        public int ProgressPercentage { get; private set; }
 
         /// <summary>
         /// Gets the progress message.
         /// </summary>
-        public string ProgressMessage
-        {
-            get
-            {
-                return privProgressMessage;
-            }
-        }
+        public string ProgressMessage { get; private set; }
 
         /// <summary>
         /// Initialises a new instance of the <see cref="AsyncScanProgressChangedEventArgs"/> class.
@@ -46,8 +31,8 @@ namespace x_IMU_API
         /// </param>
         public AsyncScanProgressChangedEventArgs(int progressPercentage, string progressMessage)
         {
-            privProgressPercentage = progressPercentage;
-            privProgressMessage = progressMessage;
+            ProgressPercentage = progressPercentage;
+            ProgressMessage = progressMessage;
         }
     }
 }

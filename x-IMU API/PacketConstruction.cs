@@ -43,7 +43,7 @@ namespace x_IMU_API
         public static byte[] ConstructReadRegisterPacket(RegisterData registerData)
         {
             byte[] decodedPacket = new byte[] { (byte)PacketHeaders.ReadRegister,
-                                                (byte)(registerData.Address >> 8),
+                                                (byte)((ushort)registerData.Address >> 8),
                                                 (byte)registerData.Address,
                                                 0};
             decodedPacket = InsertChecksum(decodedPacket);
@@ -62,7 +62,7 @@ namespace x_IMU_API
         public static byte[] ConstructWriteRegisterPacket(RegisterData registerData)
         {
             byte[] decodedPacket = new byte[] { (byte)PacketHeaders.WriteRegister,
-                                                (byte)(registerData.Address >> 8),
+                                                (byte)((ushort)registerData.Address >> 8),
                                                 (byte)registerData.Address,
                                                 (byte)(registerData.Value >> 8),
                                                 (byte)registerData.Value,
@@ -99,7 +99,7 @@ namespace x_IMU_API
             byte[] decodedPacket = new byte[] { (byte)PacketHeaders.WriteDateTime,
                                                 (byte)(((((dateTimeData.Year - 2000) % 100) / 10) << 4) | ((dateTimeData.Year - 2000) % 10)),
                                                 (byte)(((((dateTimeData.Month) % 100) / 10) << 4) | (dateTimeData.Month % 10)),
-                                                (byte)(((((dateTimeData.Date) % 100) / 10) << 4) | (dateTimeData.Date % 10)),
+                                                (byte)(((((dateTimeData.Day) % 100) / 10) << 4) | (dateTimeData.Day % 10)),
                                                 (byte)(((((dateTimeData.Hours) % 100) / 10) << 4) | (dateTimeData.Hours % 10)),
                                                 (byte)(((((dateTimeData.Minutes) % 100) / 10) << 4) | (dateTimeData.Minutes % 10)),
                                                 (byte)(((((dateTimeData.Seconds) % 100) / 10) << 4) | (dateTimeData.Seconds % 10)),
@@ -121,7 +121,7 @@ namespace x_IMU_API
         {
             byte[] decodedPacket = new byte[] { (byte)PacketHeaders.DigitalIOdata,
                                                 0x00,
-                                                digitalIOdata.State.PortByte,
+                                                digitalIOdata.State.ConvertToByte(),
                                                 0};
             decodedPacket = InsertChecksum(decodedPacket);
             return PacketEncoding.EncodePacket(decodedPacket);
@@ -130,27 +130,23 @@ namespace x_IMU_API
         /// <summary>
         /// Constructs an encoded PWM output data packet.
         /// </summary>
-        /// <param name="_PWMoutputData">
+        /// <param name="PWMoutputData">
         /// PWM output data.
         /// </param>
         /// <returns>
         /// Constructed and encoded PWM output data packet.
         /// </returns>
-        public static byte[] ConstructPWMoutputPacket(PWMoutputData _PWMoutputData)
+        public static byte[] ConstructPWMoutputPacket(PWMoutputData PWMoutputData)
         {
-            short AX0short = FixedFloat.FloatToFixed(_PWMoutputData.AX0, Qvals.PWMoutput);
-            short AX2short = FixedFloat.FloatToFixed(_PWMoutputData.AX2, Qvals.PWMoutput);
-            short AX4short = FixedFloat.FloatToFixed(_PWMoutputData.AX4, Qvals.PWMoutput);
-            short AX6short = FixedFloat.FloatToFixed(_PWMoutputData.AX6, Qvals.PWMoutput);
             byte[] decodedPacket = new byte[] { (byte)PacketHeaders.PWMoutputData,
-                                                (byte)(AX0short >> 8),
-                                                (byte)AX0short,
-                                                (byte)(AX2short >> 8),
-                                                (byte)AX2short,
-                                                (byte)(AX4short >> 8),
-                                                (byte)AX4short,
-                                                (byte)(AX6short >> 8),
-                                                (byte)AX6short,
+                                                (byte)(PWMoutputData.AX0 >> 8),
+                                                (byte)PWMoutputData.AX0,
+                                                (byte)(PWMoutputData.AX2 >> 8),
+                                                (byte)PWMoutputData.AX2,
+                                                (byte)(PWMoutputData.AX4 >> 8),
+                                                (byte)PWMoutputData.AX4,
+                                                (byte)(PWMoutputData.AX6 >> 8),
+                                                (byte)PWMoutputData.AX6,
                                                 0};
             decodedPacket = InsertChecksum(decodedPacket);
             return PacketEncoding.EncodePacket(decodedPacket);
@@ -215,7 +211,7 @@ namespace x_IMU_API
             // Interpret packet according to header
             switch (decodedPacket[0])
             {
-                case ((byte)PacketHeaders.ErrorMessage):
+                case ((byte)PacketHeaders.Error):
                     if (decodedPacket.Length != 4)
                     {
                         throw new Exception("Invalid number of bytes for packet header.");
@@ -244,35 +240,35 @@ namespace x_IMU_API
                                             (int)(10 * ((decodedPacket[4] & 0xF0) >> 4) + (decodedPacket[4] & 0x0F)),
                                             (int)(10 * ((decodedPacket[5] & 0xF0) >> 4) + (decodedPacket[5] & 0x0F)),
                                             (int)(10 * ((decodedPacket[6] & 0xF0) >> 4) + (decodedPacket[6] & 0x0F)));
-                case ((byte)PacketHeaders.RawBattThermData):
+                case ((byte)PacketHeaders.RawBatteryAndThermometerData):
                     if (decodedPacket.Length != 6)
                     {
                         throw new Exception("Invalid number of bytes for packet header.");
                     }
-                    return new RawBattThermData(Concat(decodedPacket[1], decodedPacket[2]), Concat(decodedPacket[3], decodedPacket[4]));
-                case ((byte)PacketHeaders.CalBattThermData):
+                    return new RawBatteryAndThermometerData(Concat(decodedPacket[1], decodedPacket[2]), Concat(decodedPacket[3], decodedPacket[4]));
+                case ((byte)PacketHeaders.CalBatteryAndThermometerData):
                     if (decodedPacket.Length != 6)
                     {
                         throw new Exception("Invalid number of bytes for packet header.");
                     }
-                    return new CalBattThermData(FixedFloat.FixedToFloat(Concat(decodedPacket[1], decodedPacket[2]), Qvals.CalibratedBatt),
-                                                FixedFloat.FixedToFloat(Concat(decodedPacket[3], decodedPacket[4]), Qvals.CalibratedTherm));
-                case ((byte)PacketHeaders.RawInertialMagneticData):
+                    return new CalBatteryAndThermometerData(FixedFloat.FixedToFloat(Concat(decodedPacket[1], decodedPacket[2]), Qvals.CalibratedBattery),
+                                                FixedFloat.FixedToFloat(Concat(decodedPacket[3], decodedPacket[4]), Qvals.CalibratedThermometer));
+                case ((byte)PacketHeaders.RawInertialAndMagneticData):
                     if (decodedPacket.Length != 20)
                     {
                         throw new Exception("Invalid number of bytes for packet header.");
                     }
-                    return new RawInertialMagneticData(new short[] { Concat(decodedPacket[1], decodedPacket[2]), Concat(decodedPacket[3], decodedPacket[4]), Concat(decodedPacket[5], decodedPacket[6]) },
+                    return new RawInertialAndMagneticData(new short[] { Concat(decodedPacket[1], decodedPacket[2]), Concat(decodedPacket[3], decodedPacket[4]), Concat(decodedPacket[5], decodedPacket[6]) },
                                                   new short[] { Concat(decodedPacket[7], decodedPacket[8]), Concat(decodedPacket[9], decodedPacket[10]), Concat(decodedPacket[11], decodedPacket[12]) },
                                                   new short[] { Concat(decodedPacket[13], decodedPacket[14]), Concat(decodedPacket[15], decodedPacket[16]), Concat(decodedPacket[17], decodedPacket[18]) });
-                case ((byte)PacketHeaders.CalInertialMagneticData):
+                case ((byte)PacketHeaders.CalInertialAndMagneticData):
                     if (decodedPacket.Length != 20)
                     {
                         throw new Exception("Invalid number of bytes for packet header.");
                     }
-                    return new CalInertialMagneticData(new float[] { FixedFloat.FixedToFloat(Concat(decodedPacket[1], decodedPacket[2]), Qvals.CalibratedGyro), FixedFloat.FixedToFloat(Concat(decodedPacket[3], decodedPacket[4]), Qvals.CalibratedGyro), FixedFloat.FixedToFloat(Concat(decodedPacket[5], decodedPacket[6]), Qvals.CalibratedGyro) },
-                                                  new float[] { FixedFloat.FixedToFloat(Concat(decodedPacket[7], decodedPacket[8]), Qvals.CalibratedAccel), FixedFloat.FixedToFloat(Concat(decodedPacket[9], decodedPacket[10]), Qvals.CalibratedAccel), FixedFloat.FixedToFloat(Concat(decodedPacket[11], decodedPacket[12]), Qvals.CalibratedAccel) },
-                                                  new float[] { FixedFloat.FixedToFloat(Concat(decodedPacket[13], decodedPacket[14]), Qvals.CalibratedMag), FixedFloat.FixedToFloat(Concat(decodedPacket[15], decodedPacket[16]), Qvals.CalibratedMag), FixedFloat.FixedToFloat(Concat(decodedPacket[17], decodedPacket[18]), Qvals.CalibratedMag) });
+                    return new CalInertialAndMagneticData(new float[] { FixedFloat.FixedToFloat(Concat(decodedPacket[1], decodedPacket[2]), Qvals.CalibratedGyroscope), FixedFloat.FixedToFloat(Concat(decodedPacket[3], decodedPacket[4]), Qvals.CalibratedGyroscope), FixedFloat.FixedToFloat(Concat(decodedPacket[5], decodedPacket[6]), Qvals.CalibratedGyroscope) },
+                                                       new float[] { FixedFloat.FixedToFloat(Concat(decodedPacket[7], decodedPacket[8]), Qvals.CalibratedAccelerometer), FixedFloat.FixedToFloat(Concat(decodedPacket[9], decodedPacket[10]), Qvals.CalibratedAccelerometer), FixedFloat.FixedToFloat(Concat(decodedPacket[11], decodedPacket[12]), Qvals.CalibratedAccelerometer) },
+                                                       new float[] { FixedFloat.FixedToFloat(Concat(decodedPacket[13], decodedPacket[14]), Qvals.CalibratedMagnetometer), FixedFloat.FixedToFloat(Concat(decodedPacket[15], decodedPacket[16]), Qvals.CalibratedMagnetometer), FixedFloat.FixedToFloat(Concat(decodedPacket[17], decodedPacket[18]), Qvals.CalibratedMagnetometer) });
                 case ((byte)PacketHeaders.QuaternionData):
                     if (decodedPacket.Length != 10)
                     {
@@ -280,12 +276,12 @@ namespace x_IMU_API
                     }
                     return new QuaternionData(new float[] { FixedFloat.FixedToFloat(Concat(decodedPacket[1], decodedPacket[2]), Qvals.Quaternion), FixedFloat.FixedToFloat(Concat(decodedPacket[3], decodedPacket[4]), Qvals.Quaternion),
                                                             FixedFloat.FixedToFloat(Concat(decodedPacket[5], decodedPacket[6]), Qvals.Quaternion), FixedFloat.FixedToFloat(Concat(decodedPacket[7], decodedPacket[8]), Qvals.Quaternion)});
-                case((byte)PacketHeaders.DigitalIOdata):
+                case ((byte)PacketHeaders.DigitalIOdata):
                     if (decodedPacket.Length != 4)
                     {
                         throw new Exception("Invalid number of bytes for packet header.");
                     }
-                    return new DigitalIOdata(new DigitalPortBits(decodedPacket[1]), new DigitalPortBits(decodedPacket[2]));
+                    return new DigitalIOdata(decodedPacket[1], decodedPacket[2]);
                 case ((byte)PacketHeaders.RawAnalogueInputData):
                     if (decodedPacket.Length != 18)
                     {
@@ -298,15 +294,14 @@ namespace x_IMU_API
                     {
                         throw new Exception("Invalid number of bytes for packet header.");
                     }
-                    return new CalAnalogueInputData(FixedFloat.FixedToFloat(Concat(decodedPacket[1], decodedPacket[2]), Qvals.CalibratedAnalogueInput), FixedFloat.FixedToFloat(Concat(decodedPacket[3], decodedPacket[4]), Qvals.CalibratedAnalogueInput), FixedFloat.FixedToFloat(Concat(decodedPacket[5], decodedPacket[6]),Qvals.CalibratedAnalogueInput), FixedFloat.FixedToFloat(Concat(decodedPacket[7], decodedPacket[8]),Qvals.CalibratedAnalogueInput),
-                                                    FixedFloat.FixedToFloat(Concat(decodedPacket[9], decodedPacket[10]),Qvals.CalibratedAnalogueInput), FixedFloat.FixedToFloat(Concat(decodedPacket[11], decodedPacket[12]), Qvals.CalibratedAnalogueInput), FixedFloat.FixedToFloat(Concat(decodedPacket[13], decodedPacket[14]),Qvals.CalibratedAnalogueInput), FixedFloat.FixedToFloat(Concat(decodedPacket[15], decodedPacket[16]),Qvals.CalibratedAnalogueInput));
+                    return new CalAnalogueInputData(FixedFloat.FixedToFloat(Concat(decodedPacket[1], decodedPacket[2]), Qvals.CalibratedAnalogueInput), FixedFloat.FixedToFloat(Concat(decodedPacket[3], decodedPacket[4]), Qvals.CalibratedAnalogueInput), FixedFloat.FixedToFloat(Concat(decodedPacket[5], decodedPacket[6]), Qvals.CalibratedAnalogueInput), FixedFloat.FixedToFloat(Concat(decodedPacket[7], decodedPacket[8]), Qvals.CalibratedAnalogueInput),
+                                                    FixedFloat.FixedToFloat(Concat(decodedPacket[9], decodedPacket[10]), Qvals.CalibratedAnalogueInput), FixedFloat.FixedToFloat(Concat(decodedPacket[11], decodedPacket[12]), Qvals.CalibratedAnalogueInput), FixedFloat.FixedToFloat(Concat(decodedPacket[13], decodedPacket[14]), Qvals.CalibratedAnalogueInput), FixedFloat.FixedToFloat(Concat(decodedPacket[15], decodedPacket[16]), Qvals.CalibratedAnalogueInput));
                 case ((byte)PacketHeaders.PWMoutputData):
                     if (decodedPacket.Length != 10)
                     {
                         throw new Exception("Invalid number of bytes for packet header.");
                     }
-                    return new PWMoutputData(FixedFloat.FixedToFloat(Concat(decodedPacket[1], decodedPacket[2]), Qvals.PWMoutput), FixedFloat.FixedToFloat(Concat(decodedPacket[3], decodedPacket[4]), Qvals.PWMoutput),
-                                             FixedFloat.FixedToFloat(Concat(decodedPacket[5], decodedPacket[6]), Qvals.PWMoutput), FixedFloat.FixedToFloat(Concat(decodedPacket[7], decodedPacket[8]), Qvals.PWMoutput));
+                    return new PWMoutputData((ushort)Concat(decodedPacket[1], decodedPacket[2]), (ushort)Concat(decodedPacket[3], decodedPacket[4]), (ushort)Concat(decodedPacket[5], decodedPacket[6]), (ushort)Concat(decodedPacket[7], decodedPacket[8]));
                 case ((byte)PacketHeaders.RawADXL345busData):
                     if (decodedPacket.Length != 26)
                     {

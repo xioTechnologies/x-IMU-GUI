@@ -12,46 +12,25 @@ namespace x_IMU_API
     /// </summary>
     public class PortScanner
     {
-        #region Variables
-
-        private bool privFirstResultOnly;
-        private bool privDontGiveUp;
+        /// <summary>
+        /// Private BackgroundWorker to run process in new thread.
+        /// </summary>
         private BackgroundWorker backgroundWorker;
+
+        /// <summary>
+        /// Private received device ID.
+        /// </summary>
         private string receivedDeviceID;
-
-        #endregion
-
-        #region Properties
 
         /// <summary>
         /// Gets or sets a value that controls whether the scan will end on finding the first x-IMU.
         /// </summary>
-        public bool FirstResultOnly
-        {
-            get
-            {
-                return privFirstResultOnly;
-            }
-            set
-            {
-                privFirstResultOnly = value;
-            }
-        }
+        public bool FirstResultOnly { get; set; }
 
         /// <summary>
         /// Gets or sets a value that controls whether the scan will continue indefinitely until at least one x-IMU has been found.
         /// </summary>
-        public bool DontGiveUp
-        {
-            get
-            {
-                return privDontGiveUp;
-            }
-            set
-            {
-                privDontGiveUp = value;
-            }
-        }
+        public bool DontGiveUp { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether the application has requested cancelation of asynchronous port scan process.
@@ -75,10 +54,6 @@ namespace x_IMU_API
             }
         }
 
-        #endregion
-
-        #region Constructor
-
         /// <summary>
         /// Initialises a new instance of the <see cref="PortScanner"/> class.
         /// </summary>
@@ -98,22 +73,18 @@ namespace x_IMU_API
         /// </param>
         public PortScanner(bool firstResultOnly, bool dontGiveUp)
         {
-            privFirstResultOnly = firstResultOnly;
-            privDontGiveUp = dontGiveUp;
+            FirstResultOnly = firstResultOnly;
+            DontGiveUp = dontGiveUp;
             backgroundWorker = new BackgroundWorker();
             backgroundWorker.WorkerSupportsCancellation = true;
             backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
         }
 
-        #endregion
-
-        #region Methods
-
         /// <summary>
         /// Scans ports for x-IMUs.
         /// </summary>
         /// <returns>
-        /// Array of <see cref="PortAssignments"/> found during the scan.
+        /// Array of <see cref="PortAssignment"/> found during the scan.
         /// </returns>
         public PortAssignment[] Scan()
         {
@@ -121,7 +92,7 @@ namespace x_IMU_API
         }
 
         /// <summary>
-        /// Runs asynchronous scans ports for x-IMUs.  Progress and results provided in OnAsyncScanProgressChanged and OnAsyncScanCompleted events.
+        /// Runs asynchronous scans ports for x-IMUs. Progress and results provided in OnAsyncScanProgressChanged and OnAsyncScanCompleted events.
         /// </summary>
         public void RunAsynsScan()
         {
@@ -160,7 +131,7 @@ namespace x_IMU_API
         /// Enables OnAsyncScanProgressChanged event for use when called within background worker.
         /// </param>
         /// <returns>
-        /// Array of <see cref="PortAssignments"/> found during the scan.
+        /// Array of <see cref="PortAssignment"/> found during the scan.
         /// </returns>
         private PortAssignment[] DoScan(bool isAsync)
         {
@@ -305,7 +276,7 @@ namespace x_IMU_API
         /// </summary>
         private void xIMUserialobj_RegisterDataReceived(object sender, RegisterData e)
         {
-            if (e.Address == (ushort)RegisterAddresses.DeviceID)
+            if (e.Address == RegisterAddresses.DeviceID)
             {
                 receivedDeviceID = string.Format("{0:X4}", e.Value);
             }
@@ -318,7 +289,5 @@ namespace x_IMU_API
         public delegate void onAsyncScanCompleted(object sender, AsyncScanCompletedEventArgs e);
         public event onAsyncScanCompleted AsyncScanCompleted;
         protected virtual void OnAsyncScanCompleted(AsyncScanCompletedEventArgs e) { if (AsyncScanCompleted != null) AsyncScanCompleted(this, e); }
-
-        #endregion
     }
 }

@@ -9,99 +9,32 @@ namespace x_IMU_API
     /// PWM output data class.
     /// </summary>
     public class PWMoutputData : xIMUdata
-    {
-        #region Variables
-
-        private float privAX0;
-        private float privAX2;
-        private float privAX4;
-        private float privAX6;
-        
-        #endregion
-
-        #region Properties
+    {       
+        /// <summary>
+        /// Gets or sets PWM channel AX0 duty cycle. 0 to 65535 = 0% to 100%.
+        /// </summary>
+        public ushort AX0 { get; set; }
 
         /// <summary>
-        /// Gets or sets PWM channel AX0 duty cycle as a percentage.  Value must be between 0 and 1.
+        /// Gets or sets PWM channel AX2 duty cycle. 0 to 65535 = 0% to 100%.
         /// </summary>
-        public float AX0 {
-            get
-            { 
-                return privAX0; 
-            }
-            set 
-            {
-                ExceptionIfInvalidDutyCycle(value);
-                privAX0 = value; 
-            }
-        }
+        public ushort AX2 { get; set; }
 
         /// <summary>
-        /// Gets or sets PWM channel AX2 duty cycle as a percentage.  Value must be between 0 and 1.
+        /// Gets or sets PWM channel AX4 duty cycle. 0 to 65535 = 0% to 100%.
         /// </summary>
-        public float AX2 {
-            get
-            { 
-                return privAX2; 
-            }
-            set 
-            {
-                ExceptionIfInvalidDutyCycle(value);
-                privAX2 = value; 
-            }
-        }
+        public ushort AX4 { get; set; }
 
         /// <summary>
-        /// Gets or sets PWM channel AX4 duty cycle as a percentage.  Value must be between 0 and 1.
+        /// Gets or sets PWM channel AX6 duty cycle. 0 to 65535 = 0% to 100%.
         /// </summary>
-        public float AX4 {
-            get
-            { 
-                return privAX4; 
-            }
-            set 
-            {
-                ExceptionIfInvalidDutyCycle(value);
-                privAX4 = value; 
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets PWM channel AX6 duty cycle as a percentage.  Value must be between 0 and 1.
-        /// </summary>
-        public float AX6 {
-            get
-            { 
-                return privAX6; 
-            }
-            set 
-            {
-                ExceptionIfInvalidDutyCycle(value);
-                privAX6 = value; 
-            }
-        }
-
-        /// <summary>
-        /// Throws exception if duty cycle less than 0% or more than 100%.
-        /// </summary>
-        /// <param name="dutyCycle">
-        /// Duty cycle value.
-        /// </param>
-        private void ExceptionIfInvalidDutyCycle(float dutyCycle) {
-            if((dutyCycle < 0f) || (dutyCycle > 1f)) {
-                throw new Exception("Invalid duty cycle value");
-            }
-        }
-
-        #endregion
-
-        #region Constructors
+        public ushort AX6 { get; set; }
 
         /// <summary>
         /// Initialises a new instance of the <see cref="PWMoutputData"/> class.
         /// </summary>
         public PWMoutputData()
-            : this(0f, 0f, 0f, 0f)
+            : this(0, 0, 0, 0)
         {
         }
 
@@ -109,40 +42,34 @@ namespace x_IMU_API
         /// Initialises a new instance of the <see cref="PWMoutputData"/> class.
         /// </summary>
         /// <param name="AX0">
-        /// PWM channel AX0 duty cycle as a percentage
+        /// Gets or sets PWM channel AX0 duty cycle. 0 to 65535 = 0% to 100%.
         /// </param>
         /// <param name="AX2">
-        /// PWM channel AX2 duty cycle as a percentage
+        /// Gets or sets PWM channel AX2 duty cycle. 0 to 65535 = 0% to 100%.
         /// </param>
         /// <param name="AX4">
-        /// PWM channel AX4 duty cycle as a percentage
+        /// Gets or sets PWM channel AX4 duty cycle. 0 to 65535 = 0% to 100%.
         /// </param>
         /// <param name="AX6">
-        /// PWM channel AX6 duty cycle as a percentage
+        /// Gets or sets PWM channel AX6 duty cycle. 0 to 65535 = 0% to 100%.
         /// </param>
-        public PWMoutputData(float _AX0, float _AX2, float _AX4, float _AX6)
+        public PWMoutputData(ushort AX0, ushort AX2, ushort AX4, ushort AX6)
         {
-            AX0 = _AX0;
-            AX2 = _AX2;
-            AX4 = _AX4;
-            AX6 = _AX6;
+            this.AX0 = AX0;
+            this.AX2 = AX2;
+            this.AX4 = AX4;
+            this.AX6 = AX6;
         }
-
-        #endregion
-
-        #region Methods
 
         /// <summary>
         /// Converts data to string of Comma Separated Variables.
         /// </summary>
         /// <returns>
-        /// CSV line.
+        /// CSV text line.
         /// </returns>
-        public string ConvertToCSV()
+        public string ConvertToCSVstring()
         {
-            return Convert.ToString(AX0) + "," + Convert.ToString(AX2) + "," + Convert.ToString(AX4) + "," + Convert.ToString(AX6);
+            return AX0.ToString() + "," + AX2.ToString() + "," + AX4.ToString() + "," + AX6.ToString();
         }
-
-        #endregion
     }
 }

@@ -5,19 +5,13 @@ using System.Text;
 
 namespace x_IMU_API
 {
-    #region Compatible firmware versions
-
     /// <summary>
-    /// Compatible firmware versions.  Only major number required.
+    /// Compatible firmware versions. Only major number required.
     /// </summary>
     public enum CompatibleFirmwareVersions
     {
-        v7_x = 7
+        v8_x = 8
     }
-
-    #endregion
-
-    #region Packet headers
 
     /// <summary>
     /// Packet headers.
@@ -25,18 +19,18 @@ namespace x_IMU_API
     /// <remarks>
     /// A matching enumeration exists in firmware source.
     /// </remarks>
-    internal enum PacketHeaders
+    public enum PacketHeaders
     {
-        ErrorMessage,
+        Error,
         Command,
         ReadRegister,
         WriteRegister,
         ReadDateTime,
         WriteDateTime,
-        RawBattThermData,
-        CalBattThermData,
-        RawInertialMagneticData,
-        CalInertialMagneticData,
+        RawBatteryAndThermometerData,
+        CalBatteryAndThermometerData,
+        RawInertialAndMagneticData,
+        CalInertialAndMagneticData,
         QuaternionData,
         DigitalIOdata,
         RawAnalogueInputData,
@@ -45,10 +39,6 @@ namespace x_IMU_API
         RawADXL345busData,
         CalADXL345busData,
     }
-
-    #endregion
-
-    #region Error codes
 
     /// <summary>
     /// Error codes.
@@ -82,10 +72,6 @@ namespace x_IMU_API
         IncorrectAuxillaryPortMode
     }
 
-    #endregion
-
-    #region Command codes
-
     /// <summary>
     /// Command codes.
     /// </summary>
@@ -100,22 +86,18 @@ namespace x_IMU_API
         Sleep,
         ResetSleepTimer,
         SampleGyroscopeAxisAt200dps,
-        CalcGyroscopeSensitivity,
+        CalculateGyroscopeSensitivity,
         SampleGyroscopeBiasTemp1,
         SampleGyroscopeBiasTemp2,
-        CalcGyroscopeBiasParameters,
+        CalculateGyroscopeBiasParameters,
         SampleAccelerometerAxisAt1g,
-        CalcAccelerometerBiasAndSens,
-        MeasureMagnetometerBiasAndSens,
+        CalculateAccelerometerBiasAndSensitivity,
+        MeasureMagnetometerBiasAndSensitivity,
         AlgorithmInitialise,
         AlgorithmTare,
         AlgorithmClearTare,
         AlgorithmInitialiseThenTare
     }
-
-    #endregion
-
-    #region Fixed-point Q values
 
     /// <summary>
     /// Number of fractional bits used by fixed-point representations.
@@ -125,27 +107,27 @@ namespace x_IMU_API
     /// </remarks> 
     internal enum Qvals
     {
-        CalibratedBatt = 12,
-        CalibratedTherm = 8,
-        CalibratedGyro = 4,
-        CalibratedAccel = 11,
-        CalibratedMag = 11,
+        CalibratedBattery = 12,
+        CalibratedThermometer = 8,
+        CalibratedGyroscope = 4,
+        CalibratedAccelerometer = 11,
+        CalibratedMagnetometer = 11,
         Quaternion = 15,
-        BattSensitivity = 5,
-        BattBias = 8,
-        ThermSensitivity = 6,
-        ThermBias = 0,
-        GyroSensitivity = 7,
-        GyroSampled200dps = 0,
-        GyroBiasAt25degC = 3,
-        GyroBiasTempSensitivity = 11,
-        GyroSampledBias = 3,
-        AccelSensitivity = 4,
-        AccelBias = 8,
-        AccelSampled1g = 4,
-        MagSensitivity = 4,
-        MagBias = 8,
-        MagHardIronBias = 11,
+        BatterySensitivity = 5,
+        BatteryBias = 8,
+        ThermometerSensitivity = 6,
+        ThermometerBias = 0,
+        GyroscopeSensitivity = 7,
+        GyroscopeSampled200dps = 0,
+        GyroscopeBiasAt25degC = 3,
+        GyroscopeBiasTempSensitivity = 11,
+        GyroscopeSampledBias = 3,
+        AccelerometerSensitivity = 4,
+        AccelerometerBias = 8,
+        AccelerometerSampled1g = 4,
+        MagnetometerSensitivity = 4,
+        MagnetometerBias = 8,
+        MagnetometerHardIronBias = 11,
         AlgorithmKp = 11,
         AlgorithmKi = 15,
         AlgorithmInitKp = 11,
@@ -153,15 +135,10 @@ namespace x_IMU_API
         CalibratedAnalogueInput = 12,
         AnalogueInputSensitivity = 4,
         AnalogueInputBias = 8,
-        PWMoutput = 15,
         CalibratedADXL345 = 10,
         ADXL345busSensitivity = 6,
         ADXL345busBias = 8,
     }
-
-    #endregion
-
-    #region Register addresses
 
     /// <summary>
     /// Register addresses.
@@ -171,61 +148,61 @@ namespace x_IMU_API
     /// </remarks> 
     public enum RegisterAddresses
     {
-        FirmVersionMajorNum,
-        FirmVersionMinorNum,
+        FirmwareVersionMajorNum,
+        FirmwareVersionMinorNum,
         DeviceID,
         ButtonMode,
-        BattSensitivity,
-        BattBias,
-        ThermSensitivity,
-        ThermBias,
-        GyroFullScale,
-        GyroSensitivityX,
-        GyroSensitivityY,
-        GyroSensitivityZ,
-        GyroSampledPlus200dpsX,
-        GyroSampledPlus200dpsY,
-        GyroSampledPlus200dpsZ,
-        GyroSampledMinus200dpsX,
-        GyroSampledMinus200dpsY,
-        GyroSampledMinus200dpsZ,
-        GyroBiasAt25degCX,
-        GyroBiasAt25degCY,
-        GyroBiasAt25degCZ,
-        GyroBiasTempSensitivityX,
-        GyroBiasTempSensitivityY,
-        GyroBiasTempSensitivityZ,
-        GyroSample1Temp,
-        GyroSample1BiasX,
-        GyroSample1BiasY,
-        GyroSample1BiasZ,
-        GyroSample2Temp,
-        GyroSample2BiasX,
-        GyroSample2BiasY,
-        GyroSample2BiasZ,
-        AccelFullScale,
-        AccelSensitivityX,
-        AccelSensitivityY,
-        AccelSensitivityZ,
-        AccelBiasX,
-        AccelBiasY,
-        AccelBiasZ,
-        AccelSampledPlus1gX,
-        AccelSampledPlus1gY,
-        AccelSampledPlus1gZ,
-        AccelSampledMinus1gX,
-        AccelSampledMinus1gY,
-        AccelSampledMinus1gZ,
-        MagFullScale,
-        MagSensitivityX,
-        MagSensitivityY,
-        MagSensitivityZ,
-        MagBiasX,
-        MagBiasY,
-        MagBiasZ,
-        MagHardIronBiasX,
-        MagHardIronBiasY,
-        MagHardIronBiasZ,
+        BatterySensitivity,
+        BatteryBias,
+        ThermometerSensitivity,
+        ThermometerBias,
+        GyroscopeFullScale,
+        GyroscopeSensitivityX,
+        GyroscopeSensitivityY,
+        GyroscopeSensitivityZ,
+        GyroscopeSampledPlus200dpsX,
+        GyroscopeSampledPlus200dpsY,
+        GyroscopeSampledPlus200dpsZ,
+        GyroscopeSampledMinus200dpsX,
+        GyroscopeSampledMinus200dpsY,
+        GyroscopeSampledMinus200dpsZ,
+        GyroscopeBiasAt25degCX,
+        GyroscopeBiasAt25degCY,
+        GyroscopeBiasAt25degCZ,
+        GyroscopeBiasTempSensitivityX,
+        GyroscopeBiasTempSensitivityY,
+        GyroscopeBiasTempSensitivityZ,
+        GyroscopeSample1Temp,
+        GyroscopeSample1BiasX,
+        GyroscopeSample1BiasY,
+        GyroscopeSample1BiasZ,
+        GyroscopeSample2Temp,
+        GyroscopeSample2BiasX,
+        GyroscopeSample2BiasY,
+        GyroscopeSample2BiasZ,
+        AccelerometerFullScale,
+        AccelerometerSensitivityX,
+        AccelerometerSensitivityY,
+        AccelerometerSensitivityZ,
+        AccelerometerBiasX,
+        AccelerometerBiasY,
+        AccelerometerBiasZ,
+        AccelerometerSampledPlus1gX,
+        AccelerometerSampledPlus1gY,
+        AccelerometerSampledPlus1gZ,
+        AccelerometerSampledMinus1gX,
+        AccelerometerSampledMinus1gY,
+        AccelerometerSampledMinus1gZ,
+        MagnetometerFullScale,
+        MagnetometerSensitivityX,
+        MagnetometerSensitivityY,
+        MagnetometerSensitivityZ,
+        MagnetometerBiasX,
+        MagnetometerBiasY,
+        MagnetometerBiasZ,
+        MagnetometerHardIronBiasX,
+        MagnetometerHardIronBiasY,
+        MagnetometerHardIronBiasZ,
         AlgorithmMode,
         AlgorithmKp,
         AlgorithmKi,
@@ -238,18 +215,18 @@ namespace x_IMU_API
         AlgorithmTareQuat2,
         AlgorithmTareQuat3,
         SensorDataMode,
-        DateTimeOutputRate,
-        BattThermOutputRate,
-        InertialMagOutputRate,
-        QuatOutputRate,
+        DateTimeDataRate,
+        BatteryAndThermometerDataRate,
+        InertialAndMagneticDataRate,
+        QuaternionDataRate,
         SDcardNewFileName,
-        BattShutdownVoltage,
+        BatteryShutdownVoltage,
         SleepTimer,
         MotionTrigWakeUp,
         BluetoothPower,
         AuxiliaryPortMode,
         DigitalIOdirection,
-        DigitalIOoutputRate,
+        DigitalIOdataRate,
         AnalogueInputDataMode,
         AnalogueInputDataRate,
         AnalogueInputSensitivity,
@@ -283,8 +260,6 @@ namespace x_IMU_API
         ADXL345DbiasZ,
         NumRegisters
     }
-
-    #endregion
 
     #region Register values
 

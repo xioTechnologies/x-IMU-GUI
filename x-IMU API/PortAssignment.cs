@@ -10,30 +10,15 @@ namespace x_IMU_API
     /// </summary>
     public class PortAssignment
     {
-        private string privPortName;
-        private string privDeviceID;
-
         /// <summary>
         /// Gets the port name assigned the x-IMU.
         /// </summary>
-        public string PortName
-        {
-            get
-            {
-                return privPortName;
-            }
-        }
+        public string PortName { get; private set; }
 
         /// <summary>
         /// Gets the device ID of x-IMU.
         /// </summary>
-        public string DeviceID
-        {
-            get
-            {
-                return privDeviceID;
-            }
-        }
+        public string DeviceID { get; private set; }
 
         /// <summary>
         /// Initialises a new instance of the <see cref="PortAssignment"/> class.
@@ -46,8 +31,8 @@ namespace x_IMU_API
         /// </param>
         public PortAssignment(string portName, string deviceID)
         {
-            privPortName = portName;
-            privDeviceID = deviceID;
+            PortName = portName;
+            DeviceID = deviceID;
         }
     }
 }

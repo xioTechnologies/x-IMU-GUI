@@ -6,243 +6,120 @@ using System.Text;
 namespace x_IMU_API
 {
     /// <summary>
-    /// Packet count class tracks number of packets read and written.
+    /// Packet count class to count number of packets read/written.
     /// </summary>
     public class PacketCount
     {
-        #region Variables
-
-        private enum index
-        {
-            PacketsReadErrors,
-            TotalPacketsRead,
-            ErrorPacketsRead,
-            CommandPacketsRead,
-            RegisterPacketsRead,
-            DateTimePacketsRead,
-            RawBattThermPacketsRead,
-            CalBattThermPacketsRead,
-            RawInertialMagPacketsRead,
-            CalInertialMagPacketsRead,
-            QuaternionPacketsRead,
-            DigitalIOPacketsRead,
-            RawAnalogueInputPacketsRead,
-            CalAnalogueInputPacketsRead,
-            PWMoutputPacketsRead,
-            RawADXL345busPacketsRead,
-            CalADXL345busPacketsRead,
-            TotalPacketsWritten,
-            CommandPacketsWritten,
-            ReadRegisterPacketsWritten,
-            WriteRegisterPacketsWritten,
-            ReadDateTimePacketsWritten,
-            WriteDateTimePacketsWritten,
-            DigitalIOPacketsWritten,
-            PWMoutputPacketsWritten,
-            NumIndexes
-        }
-
-        private int[] array;
-
-        #endregion
-
-        #region Properties
-
-        #region Packet read counters
-
         /// <summary>
-        /// Gets or sets the number of packet read errors.
+        /// Private array of packet counts.
         /// </summary>
-        public int PacketsReadErrors { get { return array[(int)index.PacketsReadErrors]; } set { array[(int)index.PacketsReadErrors] = value; } }
+        private int[] packetCounts;
 
         /// <summary>
-        /// Gets or sets the total number of packets read.
+        /// Gets or sets the total number of packet count.
         /// </summary>
-        public int TotalPacketsRead { get { return array[(int)index.TotalPacketsRead]; } set { array[(int)index.TotalPacketsRead] = value; } }
+        public int TotalPackets { get { return packetCounts.Sum(); } }
 
         /// <summary>
-        /// Gets or sets the number of error data packets read.
+        /// Gets or sets the error Error packet count.
         /// </summary>
-        public int ErrorPacketsRead { get { return array[(int)index.ErrorPacketsRead]; } set { array[(int)index.ErrorPacketsRead] = value; } }
+        public int ErrorPackets { get { return packetCounts[(int)PacketHeaders.Error]; } set { packetCounts[(int)PacketHeaders.Error] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of command data packets read.
+        /// Gets or sets the Command packet count.
         /// </summary>
-        public int CommandPacketsRead { get { return array[(int)index.CommandPacketsRead]; } set { array[(int)index.CommandPacketsRead] = value; } }
+        public int CommandPackets { get { return packetCounts[(int)PacketHeaders.Command]; } set { packetCounts[(int)PacketHeaders.Command] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of register data packets read.
+        /// Gets or sets the ReadRegister packet count.
         /// </summary>
-        public int RegisterPacketsRead { get { return array[(int)index.RegisterPacketsRead]; } set { array[(int)index.RegisterPacketsRead] = value; } }
+        public int ReadRegisterPackets { get { return packetCounts[(int)PacketHeaders.ReadRegister]; } set { packetCounts[(int)PacketHeaders.ReadRegister] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of date/time data packets read.
+        /// Gets or sets the WriteRegister packet count.
         /// </summary>
-        public int DateTimePacketsRead { get { return array[(int)index.DateTimePacketsRead]; } set { array[(int)index.DateTimePacketsRead] = value; } }
+        public int WriteRegisterPackets { get { return packetCounts[(int)PacketHeaders.WriteRegister]; } set { packetCounts[(int)PacketHeaders.WriteRegister] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of raw battery and thermometer data packets read.
+        /// Gets or sets the ReadDateTime packet count.
         /// </summary>
-        public int RawBattThermPacketsRead { get { return array[(int)index.RawBattThermPacketsRead]; } set { array[(int)index.RawBattThermPacketsRead] = value; } }
+        public int ReadDateTimePackets { get { return packetCounts[(int)PacketHeaders.ReadDateTime]; } set { packetCounts[(int)PacketHeaders.ReadDateTime] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of calibration battery and thermometer data packets read.
+        /// Gets or sets the WriteDateTime packet count.
         /// </summary>
-        public int CalBattThermPacketsRead { get { return array[(int)index.CalBattThermPacketsRead]; } set { array[(int)index.CalBattThermPacketsRead] = value; } }
+        public int WriteDateTimePackets { get { return packetCounts[(int)PacketHeaders.WriteDateTime]; } set { packetCounts[(int)PacketHeaders.WriteDateTime] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of raw inertial/magnetic data packets read.
+        /// Gets or sets the RawBatteryAndThermometerData packet count.
         /// </summary>
-        public int RawInertialMagPacketsRead { get { return array[(int)index.RawInertialMagPacketsRead]; } set { array[(int)index.RawInertialMagPacketsRead] = value; } }
+        public int RawBatteryAndThermometerDataPackets { get { return packetCounts[(int)PacketHeaders.RawBatteryAndThermometerData]; } set { packetCounts[(int)PacketHeaders.RawBatteryAndThermometerData] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of calibrated inertial/magnetic data packets read.
+        /// Gets or sets the CalBatteryAndThermometerData packet count.
         /// </summary>
-        public int CalInertialMagPacketsRead { get { return array[(int)index.CalInertialMagPacketsRead]; } set { array[(int)index.CalInertialMagPacketsRead] = value; } }
+        public int CalBatteryAndThermometerDataPackets { get { return packetCounts[(int)PacketHeaders.CalBatteryAndThermometerData]; } set { packetCounts[(int)PacketHeaders.CalBatteryAndThermometerData] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of quaternion packets read.
+        /// Gets or sets the RawInertialAndMagneticData packet count.
         /// </summary>
-        public int QuaternionPacketsRead { get { return array[(int)index.QuaternionPacketsRead]; } set { array[(int)index.QuaternionPacketsRead] = value; } }
+        public int RawInertialAndMagneticDataPackets { get { return packetCounts[(int)PacketHeaders.RawInertialAndMagneticData]; } set { packetCounts[(int)PacketHeaders.RawInertialAndMagneticData] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of digital I/O data packets read.
+        /// Gets or sets the CalInertialAndMagneticData packet count.
         /// </summary>
-        public int DigitalIOPacketsRead { get { return array[(int)index.DigitalIOPacketsRead]; } set { array[(int)index.DigitalIOPacketsRead] = value; } }
+        public int CalInertialAndMagneticDataPackets { get { return packetCounts[(int)PacketHeaders.CalInertialAndMagneticData]; } set { packetCounts[(int)PacketHeaders.CalInertialAndMagneticData] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of digital I/O data packets received.
+        /// Gets or sets the QuaternionData packet count.
         /// </summary>
-        public int RawAnalogueInputPacketsRead { get { return array[(int)index.RawAnalogueInputPacketsRead]; } set { array[(int)index.RawAnalogueInputPacketsRead] = value; } }
+        public int QuaternionDataPackets { get { return packetCounts[(int)PacketHeaders.QuaternionData]; } set { packetCounts[(int)PacketHeaders.QuaternionData] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of digital I/O data packets received.
+        /// Gets or sets the DigitalIOdata packet count.
         /// </summary>
-        public int CalAnalogueInputPacketsRead { get { return array[(int)index.CalAnalogueInputPacketsRead]; } set { array[(int)index.CalAnalogueInputPacketsRead] = value; } }
+        public int DigitalIOdataPackets { get { return packetCounts[(int)PacketHeaders.DigitalIOdata]; } set { packetCounts[(int)PacketHeaders.DigitalIOdata] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of PWM output data packets received.
+        /// Gets or sets the RawAnalogueInputData packet count.
         /// </summary>
-        public int PWMoutputPacketsRead { get { return array[(int)index.PWMoutputPacketsRead]; } set { array[(int)index.PWMoutputPacketsRead] = value; } }
+        public int RawAnalogueInputDataPackets { get { return packetCounts[(int)PacketHeaders.RawAnalogueInputData]; } set { packetCounts[(int)PacketHeaders.RawAnalogueInputData] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of digital I/O data packets received.
+        /// Gets or sets the CalAnalogueInputData packet count.
         /// </summary>
-        public int RawADXL345busPacketsRead { get { return array[(int)index.RawADXL345busPacketsRead]; } set { array[(int)index.RawADXL345busPacketsRead] = value; } }
+        public int CalAnalogueInputDataPackets { get { return packetCounts[(int)PacketHeaders.CalAnalogueInputData]; } set { packetCounts[(int)PacketHeaders.CalAnalogueInputData] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of digital I/O data packets received.
+        /// Gets or sets the PWMoutputData packet count.
         /// </summary>
-        public int CalADXL345busPacketsRead { get { return array[(int)index.CalADXL345busPacketsRead]; } set { array[(int)index.CalADXL345busPacketsRead] = value; } }
-
-        #endregion
-
-        #region Packet write counters
+        public int PWMoutputDataPackets { get { return packetCounts[(int)PacketHeaders.PWMoutputData]; } set { packetCounts[(int)PacketHeaders.PWMoutputData] = value; } }
 
         /// <summary>
-        /// Gets or sets the total number of packets written.
-        /// </summary>  
-        public int TotalPacketsWritten { get { return array[(int)index.TotalPacketsWritten]; } set { array[(int)index.TotalPacketsWritten] = value; } }
-
-        /// <summary>
-        /// Gets or sets the number of command packets written.
-        /// </summary>  
-        public int CommandPacketsWritten { get { return array[(int)index.CommandPacketsWritten]; } set { array[(int)index.CommandPacketsWritten] = value; } }
-
-        /// <summary>
-        /// Gets or sets the number of read register packets written.
-        /// </summary>  
-        public int ReadRegisterPacketsWritten { get { return array[(int)index.ReadRegisterPacketsWritten]; } set { array[(int)index.ReadRegisterPacketsWritten] = value; } }
-
-        /// <summary>
-        /// Gets or sets the number of write register packets written.
-        /// </summary>  
-        public int WriteRegisterPacketsWritten { get { return array[(int)index.WriteRegisterPacketsWritten]; } set { array[(int)index.WriteRegisterPacketsWritten] = value; } }
-
-        /// <summary>
-        /// Gets or sets the number of read date/time packets written.
-        /// </summary>  
-        public int ReadDateTimePacketsWritten { get { return array[(int)index.ReadDateTimePacketsWritten]; } set { array[(int)index.ReadDateTimePacketsWritten] = value; } }
-
-        /// <summary>
-        /// Gets or sets the number of write date/time packets written.
-        /// </summary>  
-        public int WriteDateTimePacketsWritten { get { return array[(int)index.WriteDateTimePacketsWritten]; } set { array[(int)index.WriteDateTimePacketsWritten] = value; } }
-
-        /// <summary>
-        /// Gets or sets the number of digital I/O data packets written.
+        /// Gets or sets the RawADXL345busData packet count.
         /// </summary>
-        public int DigitalIOPacketsWritten { get { return array[(int)index.DigitalIOPacketsWritten]; } set { array[(int)index.DigitalIOPacketsWritten] = value; } }
+        public int RawADXL345busDataPackets { get { return packetCounts[(int)PacketHeaders.RawADXL345busData]; } set { packetCounts[(int)PacketHeaders.RawADXL345busData] = value; } }
 
         /// <summary>
-        /// Gets or sets the number of PWM output data packets received.
+        /// Gets or sets the CalADXL345busData packet count.
         /// </summary>
-        public int PWMoutputPacketsWritten { get { return array[(int)index.PWMoutputPacketsWritten]; } set { array[(int)index.PWMoutputPacketsWritten] = value; } }
-
-        #endregion
-
-        #endregion
-
-        #region Constructors
+        public int CalADXL345busDataPackets { get { return packetCounts[(int)PacketHeaders.CalADXL345busData]; } set { packetCounts[(int)PacketHeaders.CalADXL345busData] = value; } }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PacketCount"/> class.
         /// </summary>
         public PacketCount()
         {
-            array = new int[(int)index.NumIndexes];
+            packetCounts = new int[Enum.GetValues(typeof(PacketHeaders)).Length];
             Reset();
         }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PacketCount"/> class.
-        /// </summary>
-        /// <param name="packetCount">
-        /// Existing instance of <see cref="PacketCount"/> to copy.
-        /// </param>
-        public PacketCount(PacketCount packetCount)
-        {
-            array = new int[(int)index.NumIndexes];
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = packetCount.array[i];
-            }
-        }
-
-        #endregion
-
-        #region Methods
 
         /// <summary>
         /// Resets all packet counts to zero.
         /// </summary>
         internal void Reset()
         {
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = 0;
-            }
+            Array.Clear(packetCounts, 0, packetCounts.Length);
         }
-
-        /// <summary>
-        /// Returns the difference between the current and previous packet count.
-        /// </summary>
-        /// <param name="previousPacketCount">
-        /// Previous packet count.
-        /// </param>
-        /// <returns>
-        /// Difference between the current and previous packet count.
-        /// </returns>
-        public PacketCount Difference(PacketCount previousPacketCount)
-        {
-            PacketCount packetCountDiff = new PacketCount(this);
-            for (int i = 0; i < array.Length; i++)
-            {
-                packetCountDiff.array[i] -= previousPacketCount.array[i];
-            }
-            return packetCountDiff;
-        }
-
-        #endregion
     }
 }

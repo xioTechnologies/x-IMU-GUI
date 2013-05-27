@@ -10,82 +10,51 @@ namespace x_IMU_API
     /// </summary>
     public class CalAnalogueInputData : xIMUdata
     {
-        #region Variables
-
-        private float[] privAnaloguePort;
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets calibrated analogue port data in V.  Elements 0 to 7 correspond to channels AX0 to AX7.
-        /// </summary>
-        public float[] AnaloguePort
-        {
-            get
-            {
-                return privAnaloguePort;
-            }
-            set
-            {
-                if (value.Length != 8)
-                {
-                    throw new Exception("Array must be of length 8.");
-                }
-                privAnaloguePort = value;
-            }
-        }
-
         /// <summary>
         /// Gets or sets calibrated channel AX0 voltage data in V.
         /// </summary>
-        public float AX0 { get { return AnaloguePort[0]; } set { AnaloguePort[0] = value; } }
+        public float AX0 { get; set; }
 
         /// <summary>
         /// Gets or sets calibrated channel AX1 voltage data in V.
         /// </summary>
-        public float AX1 { get { return AnaloguePort[1]; } set { AnaloguePort[1] = value; } }
+        public float AX1 { get; set; }
 
         /// <summary>
         /// Gets or sets calibrated channel AX2 voltage data in V.
         /// </summary>
-        public float AX2 { get { return AnaloguePort[2]; } set { AnaloguePort[2] = value; } }
+        public float AX2 { get; set; }
 
         /// <summary>
         /// Gets or sets calibrated channel AX3 voltage data in V.
         /// </summary>
-        public float AX3 { get { return AnaloguePort[3]; } set { AnaloguePort[3] = value; } }
+        public float AX3 { get; set; }
 
         /// <summary>
         /// Gets or sets calibrated channel AX4 voltage data in V.
         /// </summary>
-        public float AX4 { get { return AnaloguePort[4]; } set { AnaloguePort[4] = value; } }
+        public float AX4 { get; set; }
 
         /// <summary>
         /// Gets or sets calibrated channel AX5 voltage data in V.
         /// </summary>
-        public float AX5 { get { return AnaloguePort[5]; } set { AnaloguePort[5] = value; } }
+        public float AX5 { get; set; }
 
         /// <summary>
         /// Gets or sets calibrated channel AX6 voltage data in V.
         /// </summary>
-        public float AX6 { get { return AnaloguePort[6]; } set { AnaloguePort[6] = value; } }
+        public float AX6 { get; set; }
 
         /// <summary>
         /// Gets or sets calibrated channel AX7 voltage data in V.
         /// </summary>
-        public float AX7 { get { return AnaloguePort[7]; } set { AnaloguePort[7] = value; } }
-
-        #endregion
-
-        #region Constructors
+        public float AX7 { get; set; }
 
         /// <summary>
         /// Initialises a new instance of the <see cref="CalAnalogueInputData"/> class.
         /// </summary>
         public CalAnalogueInputData()
-            : this(new float[8] { 0, 0, 0, 0, 0, 0, 0, 0 })
+            : this(0, 0, 0, 0, 0, 0, 0, 0)
         {
         }
 
@@ -117,37 +86,26 @@ namespace x_IMU_API
         /// Calibrated channel AX7 voltage ADC data in V.
         /// </param>
         public CalAnalogueInputData(float AX0, float AX1, float AX2, float AX3, float AX4, float AX5, float AX6, float AX7)
-            : this(new float[8] { AX0, AX1, AX2, AX3, AX4, AX5, AX6, AX7 })
         {
+            this.AX0 = AX0;
+            this.AX1 = AX1;
+            this.AX2 = AX2;
+            this.AX3 = AX3;
+            this.AX4 = AX4;
+            this.AX5 = AX5;
+            this.AX6 = AX6;
+            this.AX7 = AX7;
         }
-
-        /// <summary>
-        /// Initialises a new instance of the <see cref="CalAnalogueInputData"/> class.
-        /// </summary>
-        /// <param name="analoguePort">
-        /// Calibrated analogue port data in V.  Elements 0 to 7 correspond to channels AX0 to AX7.
-        /// </param>
-        public CalAnalogueInputData(float[] analoguePort)
-        {
-            AnaloguePort = analoguePort;
-        }
-
-        #endregion
-
-        #region Methods
 
         /// <summary>
         /// Converts data to string of Comma Separated Variables.
         /// </summary>
         /// <returns>
-        /// CSV line.
+        /// CSV text line.
         /// </returns>
-        public string ConvertToCSV()
+        public string ConvertToCSVstring()
         {
-            return Convert.ToString(AnaloguePort[0]) + "," + Convert.ToString(AnaloguePort[1]) + "," + Convert.ToString(AnaloguePort[2]) + "," + Convert.ToString(AnaloguePort[3]) + "," +
-                   Convert.ToString(AnaloguePort[4]) + "," + Convert.ToString(AnaloguePort[5]) + "," + Convert.ToString(AnaloguePort[6]) + "," + Convert.ToString(AnaloguePort[7]);
+            return AX0.ToString() + "," + AX1.ToString() + "," + AX2.ToString() + "," + AX3.ToString() + "," + AX4.ToString() + "," + AX5.ToString() + "," + AX6.ToString() + "," + AX7.ToString();
         }
-
-        #endregion
     }
 }

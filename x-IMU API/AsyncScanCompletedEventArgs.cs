@@ -10,30 +10,15 @@ namespace x_IMU_API
     /// </summary>
     public class AsyncScanCompletedEventArgs
     {
-        private PortAssignment[] privPortAssignments;
-        private bool privCancelled;
-
         /// <summary>
         /// Gets an array of <see cref="PortAssignments"/> found during the scan.
         /// </summary>
-        public PortAssignment[] PortAssignments
-        {
-            get
-            {
-                return privPortAssignments;
-            }
-        }
+        public PortAssignment[] PortAssignments { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether the asynchronous scan was cancelled.
         /// </summary>
-        public bool Cancelled
-        {
-            get
-            {
-                return privCancelled;
-            }
-        }
+        public bool Cancelled { get; private set; }
 
         /// <summary>
         /// Initialises a new instance of the <see cref="AsyncScanCompletedEventArgs"/> class.
@@ -46,8 +31,8 @@ namespace x_IMU_API
         /// </param>
         public AsyncScanCompletedEventArgs(PortAssignment[] portAssignments, bool cancelled)
         {
-            privPortAssignments = portAssignments;
-            privCancelled = cancelled;
+            PortAssignments = portAssignments;
+            Cancelled = cancelled;
         }
     }
 }
