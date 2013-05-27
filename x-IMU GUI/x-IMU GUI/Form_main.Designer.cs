@@ -1993,7 +1993,7 @@
             registerTreeNodeComboBox_algorithmMode.ComboBox.Items.Add("IMU");
             registerTreeNodeComboBox_algorithmMode.ComboBox.Items.Add("AHRS");
             registerTreeNodeTextBox_algorithmGainKp = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmKp, "Kp:");
-            registerTreeNodeTextBox_algorithmGainKi = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmKi, "Ki (1/1024):");
+            registerTreeNodeTextBox_algorithmGainKi = new RegisterTreeNodeTextBox(x_IMU_API.RegisterAddresses.AlgorithmKi, "Ki:");
             System.Windows.Forms.TreeNode treeNode_algorithmGains = new System.Windows.Forms.TreeNode("Algorithm Gains", new System.Windows.Forms.TreeNode[] {
             registerTreeNodeTextBox_algorithmGainKp,
             registerTreeNodeTextBox_algorithmGainKi});

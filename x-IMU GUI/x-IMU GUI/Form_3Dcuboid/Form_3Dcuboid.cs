@@ -134,6 +134,93 @@ namespace x_IMU_GUI
         /// <summary>
         /// Initializes a new instance of the <see cref="Form_3Dcuboid"/> class.
         /// </summary>
+        /// <param name="imageFilePaths">
+        /// File paths of images used for 6 faces of cuboid. Index order is: Right (+X), Left (-X), Back (+Y), Front (-Y), Top (+Z), and Bottom (-Z).
+        /// </param>
+        public Form_3Dcuboid(string[] imageFilePaths)
+            : this(imageFilePaths, new float[] { 6, 4, 2 }, CameraViews.Front, 50.0f)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form_3Dcuboid"/> class.
+        /// </summary>
+        /// <param name="imageFilePaths">
+        /// File paths of images used for 6 faces of cuboid. Index order is: Right (+X), Left (-X), Back (+Y), Front (-Y), Top (+Z), and Bottom (-Z).
+        /// </param>
+        /// <param name="dimensions">
+        /// Dimensions of the cuboid.
+        /// </param>
+        public Form_3Dcuboid(string[] imageFilePaths, float[] dimensions)
+            : this(imageFilePaths, dimensions, CameraViews.Front, 50.0f)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form_3Dcuboid"/> class.
+        /// </summary>
+        /// <param name="imageFilePaths">
+        /// File paths of images used for 6 faces of cuboid. Index order is: Right (+X), Left (-X), Back (+Y), Front (-Y), Top (+Z), and Bottom (-Z).
+        /// </param>
+        /// <param name="dimensions">
+        /// Dimensions of the cuboid.
+        /// </param>
+        /// <param name="cameraView">
+        /// Value describing the camera view of the cuboid.
+        /// </param>
+        public Form_3Dcuboid(string[] imageFilePaths, float[] dimensions, CameraViews cameraView)
+            : this(imageFilePaths, dimensions, cameraView, 50.0f)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form_3Dcuboid"/> class.
+        /// </summary>
+        /// <param name="imageFilePaths">
+        /// File paths of images used for 6 faces of cuboid. Index order is: Right (+X), Left (-X), Back (+Y), Front (-Y), Top (+Z), and Bottom (-Z).
+        /// </param>
+        /// <param name="cameraView">
+        /// Value describing the camera view of the cuboid.
+        /// </param>
+        public Form_3Dcuboid(string[] imageFilePaths, CameraViews cameraView)
+            : this(imageFilePaths, new float[] { 6, 4, 2 }, cameraView, 50.0f)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form_3Dcuboid"/> class.
+        /// </summary>
+        /// <param name="imageFilePaths">
+        /// File paths of images used for 6 faces of cuboid. Index order is: Right (+X), Left (-X), Back (+Y), Front (-Y), Top (+Z), and Bottom (-Z).
+        /// </param>
+        /// <param name="cameraView">
+        /// Value describing the camera view of the cuboid.
+        /// </param>
+        /// <param name="cameraDistance">
+        /// Distance of the camera from the world origin.
+        /// </param>
+        public Form_3Dcuboid(string[] imageFilePaths, CameraViews cameraView, float cameraDistance)
+            : this(imageFilePaths, new float[] { 6, 4, 2 }, cameraView, cameraDistance)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form_3Dcuboid"/> class.
+        /// </summary>
+        /// <param name="imageFilePaths">
+        /// File paths of images used for 6 faces of cuboid. Index order is: Right (+X), Left (-X), Back (+Y), Front (-Y), Top (+Z), and Bottom (-Z).
+        /// </param>
+        /// <param name="cameraDistance">
+        /// Distance of the camera from the world origin.
+        /// </param>
+        public Form_3Dcuboid(string[] imageFilePaths, float cameraDistance)
+            : this(imageFilePaths, new float[] { 6, 4, 2 }, CameraViews.Front, cameraDistance)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form_3Dcuboid"/> class.
+        /// </summary>
         /// <param name="dimensions">
         /// Dimensions of the cuboid.
         /// </param>
@@ -170,6 +257,20 @@ namespace x_IMU_GUI
         /// </param>
         public Form_3Dcuboid(float[] dimensions, CameraViews cameraView, float cameraDistance)
             : this(new string[] { "Form_3Dcuboid/Right.png", "Form_3Dcuboid/Left.png", "Form_3Dcuboid/Back.png", "Form_3Dcuboid/Front.png", "Form_3Dcuboid/Top.png", "Form_3Dcuboid/Bottom.png" }, dimensions, cameraView, cameraDistance)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form_3Dcuboid"/> class.
+        /// </summary>
+        /// <param name="dimensions">
+        /// Dimensions of the cuboid.
+        /// </param>
+        /// <param name="cameraDistance">
+        /// Distance of the camera from the world origin.
+        /// </param>
+        public Form_3Dcuboid(float[] dimensions, float cameraDistance)
+            : this(new string[] { "Form_3Dcuboid/Right.png", "Form_3Dcuboid/Left.png", "Form_3Dcuboid/Back.png", "Form_3Dcuboid/Front.png", "Form_3Dcuboid/Top.png", "Form_3Dcuboid/Bottom.png" }, dimensions, CameraViews.Front, cameraDistance)
         {
         }
 
