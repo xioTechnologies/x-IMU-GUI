@@ -10,7 +10,7 @@ namespace x_IMU_API
     /// <summary>
     /// x-IMU file class.
     /// </summary>
-    public class xIMUfile
+    public class xIMUfile : IDisposable
     {
         /// <summary>
         /// Private FileStream handles file read/writes.
@@ -75,6 +75,15 @@ namespace x_IMU_API
         }
 
         /// <summary>
+        /// IDisposable method: closes the filestream.
+        /// Allows xIMUfile to be used in a 'using' statement.
+        /// </summary>
+        public void Dispose()
+        {
+            Close();
+        }
+
+        /// <summary>
         /// Closes the file.
         /// </summary>
         public void Close()
@@ -116,7 +125,7 @@ namespace x_IMU_API
         /// </summary>
         public void Read()
         {
-            DoRead(false);
+            DoIncrimentalRead(false);
         }
 
         /// <summary>
@@ -149,7 +158,7 @@ namespace x_IMU_API
         {
             try
             {
-                DoRead(true);
+                DoIncrimentalRead(true);
                 OnAsyncReadCompleted(new AsyncReadCompletedEventArgs(PacketsReadCounter, null, backgroundWorker.CancellationPending));
             }
             catch (Exception ex)
@@ -164,83 +173,100 @@ namespace x_IMU_API
         /// <param name="isAsync">
         /// Enables OnAsyncReadProgressChanged event for use when called within background worker.
         /// </param>
-        private void DoRead(bool isAsync)
+        /// <remarks>
+        /// Modified by Jon Robson to incrimentally splits a binary file into packets while decoded.
+        /// </remarks>
+        private void DoIncrimentalRead(bool isAsync)
         {
             int previousProgressPercentage = 0;
-            byte[] readBuffer = new byte[256];
-            byte readBufferIndex = 0;
+            int newProgressPercentage = 0;
+            const int chunkSize = 100000;
+            List<Byte> packets = new List<byte>();
 
-            // Read the source file into a byte array.
-            byte[] fileBuffer = new byte[fileStream.Length];
-            int numBytesToRead = (int)fileStream.Length;
-            int numBytesRead = 0;
+            fileStream.Position = 0;
+
+            
+
             if (isAsync)
             {
                 OnAsyncReadProgressChanged(new AsyncReadProgressChangedEventArgs(0, "Reading file..."));
             }
-            while (numBytesToRead > 0)
-            {
-                int n = fileStream.Read(fileBuffer, numBytesRead, numBytesToRead);  // Read may return anything from 0 to numBytesToRead.
-                if (n == 0) break;                                                  // Break when the end of the file is reached.
-                numBytesRead += n;
-                numBytesToRead -= n;
-            }
 
-            // Process each byte one-by-one
-            for (int i = 0; i < numBytesRead; i++)
+            //until the end of the file
+            while (fileStream.Length > fileStream.Position)
             {
                 if (isAsync)
                 {
-                    int newProgressPercentage = (int)(Math.Round(100d * ((double)i / (double)numBytesRead)));
                     if (backgroundWorker.CancellationPending)
                     {
                         break;
                     }
-                    if (newProgressPercentage != previousProgressPercentage)
+
+                }
+
+                byte[] chunk = new byte[chunkSize];
+                fileStream.Read(chunk, 0, chunkSize);
+
+                var packetBoundaries = chunk.Select(x => new { Test = ((x & 0x80) == 0x80), ByteValue = x });
+
+                foreach (var i in packetBoundaries)
+                {
+                    //stack up the byte values
+                    packets.Add(i.ByteValue);
+
+                    if (i.Test && packets.Count > 0)
                     {
-                        OnAsyncReadProgressChanged(new AsyncReadProgressChangedEventArgs(newProgressPercentage, "Processed " + string.Format("{0:n0}", i / 1024) + " KB of " + string.Format("{0:n0}", numBytesRead / 1024) + " KB"));
-                        previousProgressPercentage = newProgressPercentage;
+                        DecodePacket(packets.ToArray());
+                        packets.Clear();
                     }
                 }
 
-                // Process byte
-                readBuffer[readBufferIndex++] = fileBuffer[i];                      // add to buffer
-                if ((fileBuffer[i] & 0x80) == 0x80)                                 // if packet framing char 
+                newProgressPercentage = (int)(Math.Round(100d * ((double)fileStream.Position / (double)fileStream.Length)));
+                if (newProgressPercentage != previousProgressPercentage)
                 {
-                    xIMUdata dataObject = null;
-                    try
-                    {
-                        byte[] encodedPacket = new byte[readBufferIndex];
-                        Array.Copy(readBuffer, encodedPacket, encodedPacket.Length);
-                        dataObject = PacketConstruction.DeconstructPacket(encodedPacket);
-                    }
-                    catch
-                    {
-                        ReadErrors++;                                               // invalid packet
-                    }
-                    if (dataObject != null)                                         // if packet successfully deconstructed
-                    {
-                        OnxIMUdataRead(dataObject);
-                        if (dataObject is ErrorData) { OnErrorDataRead((ErrorData)dataObject); PacketsReadCounter.ErrorPackets++; }
-                        else if (dataObject is CommandData) { OnCommandDataRead((CommandData)dataObject); PacketsReadCounter.CommandPackets++; }
-                        else if (dataObject is RegisterData) { OnRegisterDataRead((RegisterData)dataObject); PacketsReadCounter.WriteRegisterPackets++; }
-                        else if (dataObject is DateTimeData) { OnDateTimeDataRead((DateTimeData)dataObject); PacketsReadCounter.WriteDateTimePackets++; }
-                        else if (dataObject is RawBatteryAndThermometerData) { OnRawBatteryAndThermometerDataRead((RawBatteryAndThermometerData)dataObject); PacketsReadCounter.RawBatteryAndThermometerDataPackets++; }
-                        else if (dataObject is CalBatteryAndThermometerData) { OnCalBatteryAndThermometerDataRead((CalBatteryAndThermometerData)dataObject); PacketsReadCounter.CalBatteryAndThermometerDataPackets++; }
-                        else if (dataObject is RawInertialAndMagneticData) { OnRawInertialAndMagneticDataRead((RawInertialAndMagneticData)dataObject); PacketsReadCounter.RawInertialAndMagneticDataPackets++; }
-                        else if (dataObject is CalInertialAndMagneticData) { OnCalInertialAndMagneticDataRead((CalInertialAndMagneticData)dataObject); PacketsReadCounter.CalInertialAndMagneticDataPackets++; }
-                        else if (dataObject is QuaternionData) { OnQuaternionDataRead((QuaternionData)dataObject); PacketsReadCounter.QuaternionDataPackets++; }
-                        else if (dataObject is DigitalIOdata) { OnDigitalIODataRead((DigitalIOdata)dataObject); PacketsReadCounter.DigitalIOdataPackets++; }
-                        else if (dataObject is RawAnalogueInputData) { OnRawAnalogueInputDataRead((RawAnalogueInputData)dataObject); PacketsReadCounter.RawInertialAndMagneticDataPackets++; }
-                        else if (dataObject is CalAnalogueInputData) { OnCalAnalogueInputDataRead((CalAnalogueInputData)dataObject); PacketsReadCounter.CalAnalogueInputDataPackets++; }
-                        else if (dataObject is PWMoutputData) { OnPWMoutputDataRead((PWMoutputData)dataObject); PacketsReadCounter.PWMoutputDataPackets++; }
-                        else if (dataObject is RawADXL345busData) { OnRawADXL345busDataRead((RawADXL345busData)dataObject); PacketsReadCounter.RawADXL345busDataPackets++; }
-                        else if (dataObject is CalADXL345busData) { OnCalADXL345busDataRead((CalADXL345busData)dataObject); PacketsReadCounter.CalADXL345busDataPackets++; }
-                    }
-                    readBufferIndex = 0;                                         // reset buffer.
+                    OnAsyncReadProgressChanged(new AsyncReadProgressChangedEventArgs(newProgressPercentage, "Processed " + string.Format("{0:n0}", (fileStream.Position) / 1024) + " KB of " + string.Format("{0:n0}", (fileStream.Length) / 1024) + " KB"));
+                    previousProgressPercentage = newProgressPercentage;
                 }
             }
+
         }
+
+        /// <summary>
+        /// Decodes a complete packet
+        /// </summary>
+        /// <param name="packet"></param>
+        public void DecodePacket(byte[] packet)
+        {
+            xIMUdata dataObject = null;
+            try
+            {
+                dataObject = PacketConstruction.DeconstructPacket(packet);
+            }
+            catch
+            {
+                ReadErrors++;                                               // invalid packet
+            }
+            if (dataObject != null)                                         // if packet successfully deconstructed
+            {
+                OnxIMUdataRead(dataObject);
+                if (dataObject is ErrorData) { OnErrorDataRead((ErrorData)dataObject); PacketsReadCounter.ErrorPackets++; }
+                else if (dataObject is CommandData) { OnCommandDataRead((CommandData)dataObject); PacketsReadCounter.CommandPackets++; }
+                else if (dataObject is RegisterData) { OnRegisterDataRead((RegisterData)dataObject); PacketsReadCounter.WriteRegisterPackets++; }
+                else if (dataObject is DateTimeData) { OnDateTimeDataRead((DateTimeData)dataObject); PacketsReadCounter.WriteDateTimePackets++; }
+                else if (dataObject is RawBatteryAndThermometerData) { OnRawBatteryAndThermometerDataRead((RawBatteryAndThermometerData)dataObject); PacketsReadCounter.RawBatteryAndThermometerDataPackets++; }
+                else if (dataObject is CalBatteryAndThermometerData) { OnCalBatteryAndThermometerDataRead((CalBatteryAndThermometerData)dataObject); PacketsReadCounter.CalBatteryAndThermometerDataPackets++; }
+                else if (dataObject is RawInertialAndMagneticData) { OnRawInertialAndMagneticDataRead((RawInertialAndMagneticData)dataObject); PacketsReadCounter.RawInertialAndMagneticDataPackets++; }
+                else if (dataObject is CalInertialAndMagneticData) { OnCalInertialAndMagneticDataRead((CalInertialAndMagneticData)dataObject); PacketsReadCounter.CalInertialAndMagneticDataPackets++; }
+                else if (dataObject is QuaternionData) { OnQuaternionDataRead((QuaternionData)dataObject); PacketsReadCounter.QuaternionDataPackets++; }
+                else if (dataObject is DigitalIOdata) { OnDigitalIODataRead((DigitalIOdata)dataObject); PacketsReadCounter.DigitalIOdataPackets++; }
+                else if (dataObject is RawAnalogueInputData) { OnRawAnalogueInputDataRead((RawAnalogueInputData)dataObject); PacketsReadCounter.RawInertialAndMagneticDataPackets++; }
+                else if (dataObject is CalAnalogueInputData) { OnCalAnalogueInputDataRead((CalAnalogueInputData)dataObject); PacketsReadCounter.CalAnalogueInputDataPackets++; }
+                else if (dataObject is PWMoutputData) { OnPWMoutputDataRead((PWMoutputData)dataObject); PacketsReadCounter.PWMoutputDataPackets++; }
+                else if (dataObject is RawADXL345busData) { OnRawADXL345busDataRead((RawADXL345busData)dataObject); PacketsReadCounter.RawADXL345busDataPackets++; }
+                else if (dataObject is CalADXL345busData) { OnCalADXL345busDataRead((CalADXL345busData)dataObject); PacketsReadCounter.CalADXL345busDataPackets++; }
+            }
+        }
+
 
         public delegate void onAsyncReadProgressChanged(object sender, AsyncReadProgressChangedEventArgs e);
         public event onAsyncReadProgressChanged AsyncReadProgressChanged;
@@ -315,5 +341,6 @@ namespace x_IMU_API
         protected virtual void OnCalADXL345busDataRead(CalADXL345busData e) { if (CalADXL345busDataRead != null) CalADXL345busDataRead(this, e); }
 
         #endregion
+
     }
 }

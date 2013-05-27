@@ -356,12 +356,12 @@ namespace x_IMU_API
         {
             if (writesEnabled)
             {
-                if (streamWriter == null)
+                if (streamWriters[(int)fileIndex] == null)
                 {
-                    streamWriter = new System.IO.StreamWriter(FileBasePath + "_" + fileIndex.ToString(CultureInfo.InvariantCulture) + ".csv", false);
-                    streamWriter.WriteLine(CSVheading);
+                    streamWriters[(int)fileIndex] = new System.IO.StreamWriter(FileBasePath + "_" + fileIndex.ToString(CultureInfo.InvariantCulture) + ".csv", false);
+                    streamWriters[(int)fileIndex].WriteLine(CSVheadings[(int)fileIndex]);
                 }
-                streamWriter.WriteLine(PacketsWrittenCounter.TotalPackets.ToString(CultureInfo.InvariantCulture) + "," + CSVline);
+                streamWriters[(int)fileIndex].WriteLine(PacketsWrittenCounter.TotalPackets.ToString(CultureInfo.InvariantCulture) + "," + CSVline);
             }
         }
     }
