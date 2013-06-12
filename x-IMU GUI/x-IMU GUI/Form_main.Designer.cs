@@ -2126,6 +2126,7 @@
             registerTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("PWM output");
             registerTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("ADXL345 bus");
             registerTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("UART");
+            registerTreeNodeComboBox_auxiliaryPortMode.ComboBox.Items.Add("Sleep/Wake");
 
             #region Digital I/O
 

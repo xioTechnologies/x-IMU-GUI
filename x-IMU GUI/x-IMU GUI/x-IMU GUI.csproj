@@ -26,8 +26,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>x-IMU GUI</ProductName>
     <PublisherName>x-io Technologies</PublisherName>
-    <ApplicationRevision>24</ApplicationRevision>
-    <ApplicationVersion>12.3.0.24</ApplicationVersion>
+    <ApplicationRevision>25</ApplicationRevision>
+    <ApplicationVersion>13.3.0.25</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -84,7 +84,7 @@
     </Reference>
     <Reference Include="x-IMU API, Version=13.3.4763.4672, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>x-IMU API\x-IMU API.dll</HintPath>
+      <HintPath>..\..\x-IMU API\bin\Release\x-IMU API.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

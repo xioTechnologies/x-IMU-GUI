@@ -124,9 +124,9 @@ namespace x_IMU_API
             for (int i = 0; i < portNames.Length; i++)
             {
                 portNames[i] = "COM" + new string(portNames[i].Where(ch => char.IsDigit(ch)).ToArray());
-                if (portNames[i].Length > "COMxxx".Length)
+                if (portNames[i].Length > "COMxxxx".Length)
                 {
-                    portNames[i] = portNames[i].Substring(0, "COMxxx".Length);
+                    portNames[i] = portNames[i].Substring(0, "COMxxxx".Length);
                 }
             }
             return portNames;

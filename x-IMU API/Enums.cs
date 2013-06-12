@@ -10,7 +10,7 @@ namespace x_IMU_API
     /// </summary>
     public enum CompatibleFirmwareVersions
     {
-        v9_x = 9
+        v10_x = 10
     }
 
     /// <summary>
@@ -410,7 +410,8 @@ namespace x_IMU_API
         DigitalIO,
         AnalogueInput,
         PWMoutput,
-        ADXL345bus
+        ADXL345bus,
+        SleepWake
     }
 
     /// <summary>

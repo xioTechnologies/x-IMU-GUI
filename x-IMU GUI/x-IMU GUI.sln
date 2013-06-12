@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x-IMU GUI", "x-IMU GUI\x-IMU GUI.csproj", "{3E0BC381-CC15-4F3D-9373-6A65814DAD6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x-IMU API", "..\x-IMU API\x-IMU API.csproj", "{73229026-45DB-444C-963C-963D8E755FFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,16 @@ Global
 		{3E0BC381-CC15-4F3D-9373-6A65814DAD6E}.Release|Mixed Platforms.Build.0 = Release|x86
 		{3E0BC381-CC15-4F3D-9373-6A65814DAD6E}.Release|x86.ActiveCfg = Release|x86
 		{3E0BC381-CC15-4F3D-9373-6A65814DAD6E}.Release|x86.Build.0 = Release|x86
+		{73229026-45DB-444C-963C-963D8E755FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73229026-45DB-444C-963C-963D8E755FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73229026-45DB-444C-963C-963D8E755FFB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{73229026-45DB-444C-963C-963D8E755FFB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{73229026-45DB-444C-963C-963D8E755FFB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{73229026-45DB-444C-963C-963D8E755FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73229026-45DB-444C-963C-963D8E755FFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73229026-45DB-444C-963C-963D8E755FFB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{73229026-45DB-444C-963C-963D8E755FFB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{73229026-45DB-444C-963C-963D8E755FFB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
