@@ -105,17 +105,17 @@ namespace x_IMU_GUI
             this.Text = Assembly.GetExecutingAssembly().GetName().Name + " " + Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString();
 
             // Create peripheral GUIs and assign to ShowHideButton
-            batteryOscilloscope = new SimpleOscilloscope("Battery Data", "Oscilloscope/batteryOscilloscope_settings.ini");
+            batteryOscilloscope = new SimpleOscilloscope("Battery Data (V)", "Oscilloscope/batteryOscilloscope_settings.ini");
             showHideButton_batteryGraph.Object = batteryOscilloscope;
-            thermometerOscilloscope = new SimpleOscilloscope("Thermometer Data", "Oscilloscope/thermometerOscilloscope_settings.ini");
+            thermometerOscilloscope = new SimpleOscilloscope("Thermometer Data (°C)", "Oscilloscope/thermometerOscilloscope_settings.ini");
             showHideButton_thermometerGraph.Object = thermometerOscilloscope;
-            gyroscopeOscilloscope = new SimpleOscilloscope("Gyroscope Data", "Oscilloscope/gyroscopeOscilloscope_settings.ini");
+            gyroscopeOscilloscope = new SimpleOscilloscope("Gyroscope Data (°/s)", "Oscilloscope/gyroscopeOscilloscope_settings.ini");
             showHideButton_gyroscopeGraph.Object = gyroscopeOscilloscope;
-            accelerometerOscilloscope = new SimpleOscilloscope("Accelerometer Data", "Oscilloscope/accelerometerOscilloscope_settings.ini");
+            accelerometerOscilloscope = new SimpleOscilloscope("Accelerometer Data (g)", "Oscilloscope/accelerometerOscilloscope_settings.ini");
             showHideButton_accelerometerGraph.Object = accelerometerOscilloscope;
-            magnetometerOscilloscope = new SimpleOscilloscope("Magnetometer Data", "Oscilloscope/magnetometerOscilloscope_settings.ini");
+            magnetometerOscilloscope = new SimpleOscilloscope("Magnetometer Data (Gauss)", "Oscilloscope/magnetometerOscilloscope_settings.ini");
             showHideButton_magnetometerGraph.Object = magnetometerOscilloscope;
-            eulerAnglesOscilloscope = new SimpleOscilloscope("Euler Angles Data", "Oscilloscope/eulerAnglesOscilloscope_settings.ini");
+            eulerAnglesOscilloscope = new SimpleOscilloscope("Euler Angles Data (°)", "Oscilloscope/eulerAnglesOscilloscope_settings.ini");
             showHideButton_eulerAnglesGraph.Object = eulerAnglesOscilloscope;
             form_3Dcuboid = new Form_3Dcuboid();
             form_3Dcuboid.MinimizeInsteadOfClose = true;
@@ -123,13 +123,13 @@ namespace x_IMU_GUI
             form_digitalIOpanel = new Form_digitalIOpanel();
             form_digitalIOpanel.OutputChanged += new Form_digitalIOpanel.onOutputChanged(digitalIOpanel_OutputChanged);
             showHideButton_digitalIOpanel.Object = form_digitalIOpanel;
-            analogueInputAX0AX1oscilloscope = new SimpleOscilloscope("Analogue Input AX0 AX1 Data", "Oscilloscope/analogueInputAX0AX1oscilloscope_settings.ini");
+            analogueInputAX0AX1oscilloscope = new SimpleOscilloscope("Analogue Input AX0 AX1 Data (lsb)", "Oscilloscope/analogueInputAX0AX1oscilloscope_settings.ini");
             showHideButton_AX0andAX1graph.Object = analogueInputAX0AX1oscilloscope;
-            analogueInputAX2AX3oscilloscope = new SimpleOscilloscope("Analogue Input AX2 AX3 Data", "Oscilloscope/analogueInputAX2AX3oscilloscope_settings.ini");
+            analogueInputAX2AX3oscilloscope = new SimpleOscilloscope("Analogue Input AX2 AX3 Data (lsb)", "Oscilloscope/analogueInputAX2AX3oscilloscope_settings.ini");
             showHideButton_AX2andAX3graph.Object = analogueInputAX2AX3oscilloscope;
-            analogueInputAX4AX5oscilloscope = new SimpleOscilloscope("Analogue Input AX4 AX5 Data", "Oscilloscope/analogueInputAX4AX5oscilloscope_settings.ini");
+            analogueInputAX4AX5oscilloscope = new SimpleOscilloscope("Analogue Input AX4 AX5 Data (lsb)", "Oscilloscope/analogueInputAX4AX5oscilloscope_settings.ini");
             showHideButton_AX4andAX5graph.Object = analogueInputAX4AX5oscilloscope;
-            analogueInputAX6AX7oscilloscope = new SimpleOscilloscope("Analogue Input AX6 AX7 Data", "Oscilloscope/analogueInputAX6AX7oscilloscope_settings.ini");
+            analogueInputAX6AX7oscilloscope = new SimpleOscilloscope("Analogue Input AX6 AX7 Data (lsb)", "Oscilloscope/analogueInputAX6AX7oscilloscope_settings.ini");
             showHideButton_AX6andAX7graph.Object = analogueInputAX6AX7oscilloscope;
             form_PWMoutputPanel = new Form_PWMoutputPanel();
             form_PWMoutputPanel.ValuesChanged += new Form_PWMoutputPanel.onValuesChanged(PWMoutputPanel_ValuesChanged);
